@@ -311,7 +311,7 @@ How AI changes developer careers - key insights from the 2026 future-of-work res
     - VS Code harnesses: **Local** (Extension Host, default chat) vs **Agent Host** (separate process running Copilot SDK, Claude and Codex harnesses; needed for Assisted permissions, shared sessions, remote hosts). Connected to WSL/SSH, the agent runs inside that environment: [Agent Host](https://code.visualstudio.com/docs/agents/concepts/agent-host), [Agent harnesses](https://code.visualstudio.com/docs/agents/run/agent-harnesses)
     - For a Windows-native Agent Host, a trusted Dev Drive is the storage alternative to WSL; it improves the Windows filesystem path, while WSL provides a Linux runtime. [Dev Drive details](Research/codex-cli-desktop-projects-wsl-2026-10-14.md#native-windows-performance-alternative-dev-drive).
     - Session history synced to your GitHub account: enable from the Copilot status bar icon (bottom right) > `Session Sync: Enable`: [Session history](https://code.visualstudio.com/docs/agents/run/sessions/session-history)
-    - Answers to participants' Copilot questions (rewind, permissions, Autopilot, skills in JetBrains, nested AGENTS.md, hooks, CI/CD): [Copilot Q&A page](https://devpowers.com/szkolenia/COURSE-SITE/pytania.html)
+    - Answers to participants' Copilot questions (rewind, permissions, Autopilot, skills in JetBrains, nested AGENTS.md, hooks, CI/CD): [Copilot Q&A page](https://devpowers.com/szkolenia/jsystems/claude-code-2026-10/pytania.html)
   - [Google Antigravity IDE](https://antigravity.google/product/antigravity-ide)
   - [Junie | IntelliJ IDEA Documentation](https://www.jetbrains.com/help/idea/junie.html)
   - [Cline - AI Coding, Open Source and Uncompromised](https://cline.bot/)
@@ -323,7 +323,7 @@ How AI changes developer careers - key insights from the 2026 future-of-work res
   - ... list can go on...
 - **Desktop apps:**
   - [Claude Desktop](https://code.claude.com/docs/en/desktop-quickstart)
-    - [Linux - Claude Desktop Debian](https://github.com/aaddrick/claude-desktop-debian) (unofficial re-packaged Electron app - works well)
+    - **Linux update, 2026-10-18:** [official Claude Desktop](https://support.claude.com/en/articles/10065433-install-claude-desktop) supports Linux in beta. Cowork requires KVM/QEMU, virtualization permissions and extra disk/RAM; support inside prepared course VMs is unverified. Hyper-V is a Windows topic. The earlier [community Debian packaging](https://github.com/aaddrick/claude-desktop-debian) is a historical alternative, no longer the sole Linux route.
   - [Codex App](https://developers.openai.com/codex/app)
     - Linux [Codex Desktop Linux](https://github.com/ilysenko/codex-desktop-linux), [Codex App Linux](https://github.com/better-slop/codex-app-linux) (both unofficial, re-packaged from source = build is required)
   - [Google Antigravity 2.0](https://antigravity.google/product/antigravity-2)

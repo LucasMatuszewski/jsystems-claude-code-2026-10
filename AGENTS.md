@@ -2,9 +2,9 @@
 
 ## Project
 
-This is a **course project** for the "COURSE-NAME" training organized by COURSE-ORGANIZER, COURSE-DURATION (COURSE-DATES), remote on cloud VMs. The primary taught agent is OpenAI Codex CLI, with Claude Code and GitHub Copilot as covered alternatives. The group selects the actual application and change. Greenfield work starts from the empty scaffold and defines the product live; legacy work uses a separate clone of the original application. Its domain, stack and architecture come from the real task and inspected sources, not historical course examples: research → application or feature PRD → ADR → implementation with agents.
+This is a **course project** for the "Claude Code - od zera do zespołu agentów AI" training organized by JSystems, 3 days (19-21 October 2026), remote on cloud VMs. The primary taught tool is Claude Code CLI on prepared Ubuntu Linux VMs (8 GB RAM, 4 cores). Claude Desktop and Claude Code on the web are covered modes; Codex and GitHub Copilot are comparisons. The course project is AI Chat: TypeScript, Vercel AI SDK, streamed replies and React useChat. Participants agree detailed requirements live in docs/PRD.md and technical choices in docs/ADR/. Greenfield work starts from the empty scaffold and defines the product live; legacy work uses a separate clone of the original application. Its domain, stack and architecture come from the real task and inspected sources, not historical course examples: research → application or feature PRD → ADR → implementation with agents.
 
-This is only the **base starting repository** for the course; concrete decisions are made live with the group.
+This is the **unsolved starting repository** for the course; implementation and detailed decisions are made live with the group. The course hub is https://devpowers.com/szkolenia/jsystems/claude-code-2026-10/. The agreement in AGENDA.md has 12 numbered modules and two homework blocks. The be-developer, fe-developer and qa-engineer examples under course-materials/agent-configs/claude/ are inert; participants define their own agents in module 2.3.
 
 Chat in Polish unless the user asks for another language. Repository documentation uses English unless another project language is agreed. The trainer chooses the teaching language separately. This is a greenfield scaffold, not an agreed product specification. For a legacy-led course, keep materials separate and work in the original application clone; adapt these instructions to its actual stack and verification commands.
 
@@ -80,7 +80,7 @@ Verify only the scope relevant to your change. If the change affects runtime beh
 
 **Verification:** For runtime changes, start the real application and finish with Manual QA. Record compilation/build, test execution and startup as separate checks, including discovery counts and skips. A successful build or E2E run alone does not establish that the app works. Documentation-only changes use diff, link and consistency checks and do not require application startup. Fix errors and warnings introduced by the change; report pre-existing failures without hiding them.
 
-**Env Vars:** See `.env.example` (OPENROUTER_API_KEY required)
+**Env Vars:** See `.env.example`. Configure only the provider chosen in the ADR (OpenRouter or Anthropic); credentials remain server-side. The CLI subscription and application API credentials are separate.
 
 ### Commit Rules
 - Commit only after verification passes and the changed scope is in a working state.

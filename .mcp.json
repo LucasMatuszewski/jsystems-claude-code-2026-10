@@ -2,22 +2,17 @@
   "mcpServers": {
     "context7": {
       "type": "http",
-      "url": "https://mcp.context7.com/mcp",
-      "headers": {
-        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
-      }
+      "url": "https://mcp.context7.com/mcp"
     },
     "playwright": {
       "type": "stdio",
-      "command": "cmd",
+      "command": "npx",
       "args": [
-        "/c",
-        "npx",
         "-y",
-        "@playwright/mcp@latest"
-      ],
-      "env": {},
-      "enabled": false
+        "@playwright/mcp@latest",
+        "--browser",
+        "chrome"
+      ]
     }
   }
 }

@@ -1,0 +1,29 @@
+# Inactive workshop example. Review repository permissions and secrets before activation.
+# Requires the Claude GitHub App installed for this repository (default OIDC GitHub auth).
+# Use only a trusted branch. This workflow never executes untrusted PR code.
+name: AI Chat review example
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: >-
+            Read the AI Chat PRD, relevant ADRs and current changes.
+            Review for confirmed bugs and security risks. Do not change files,
+            run application code, publish comments or merge. Return findings
+            with file, line, scenario, impact and evidence.
+          claude_args: >-
+            --allowedTools "Read,Glob,Grep,Bash(git diff *),Bash(git log *)"
+            --disallowedTools "Edit,Write,Agent"
+            --max-turns 5 --max-budget-usd 1
