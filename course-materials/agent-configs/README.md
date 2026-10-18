@@ -11,6 +11,26 @@ Each folder has the shape of that tool's own config folder.
 | `copilot/` | start scripts with allowed and denied tools, a custom agent in `agents/` | run the script from the repository root; `.github/agents/` in your project for the agent |
 | `opencode/` | `opencode.jsonc` with a default model, MCP servers and Bash push permissions | `~/.config/opencode/` or your project root |
 
+## Claude Code statusline and cache hit rate
+
+The updated [statusline.sh](claude/statusline.sh) shows the model, context usage, cost estimate, subscription usage and `Cache: 88%`. Copy it to `~/.claude/statusline.sh` when using the shipped Claude configuration. It requires Bash and `jq`.
+
+Cache data requires Claude Code **2.1.251+** and appears after the main conversation receives an API response. The script displays `prompt_cache.hit_ratio * 100`, rounded to a whole percent. This is the share of input tokens read from cache across the main conversation, including cache reads, writes and uncached input in the denominator; subagents are excluded. It is not the percentage of requests served from cache or a percentage discount on the whole bill. See the [official prompt-cache fields](https://code.claude.com/docs/en/statusline#prompt-cache-fields).
+
+A high hit rate is green, a medium one orange and a low one red. Missing or null data hides the cache segment; a real zero is shown as `Cache: 0%`. Check `/usage` and its `Prompt cache (main)` line if the segment is absent. Earlier Claude Code versions do not provide this field.
+
+Run the script with a synthetic payload to see the output without starting a paid model request:
+
+```bash
+printf '%s' '{"model":{"id":"claude-sonnet-example","display_name":"Sonnet"},"workspace":{"current_dir":"/tmp/course-demo"},"context_window":{"used_percentage":25},"prompt_cache":{"hit_ratio":0.88}}' | bash course-materials/agent-configs/claude/statusline.sh
+```
+
+Run the regression checks with:
+
+```bash
+python3 -m unittest discover -s course-materials/agent-configs -p 'test_*.py' -v
+```
+
 ## Protected-branch push policy
 
 Participants may push their own branches and open PRs. The examples deny the covered pushes to `main`, `master` and `prod` and force-push forms; Claude, Copilot and OpenCode may still ask before ordinary pushes, while curated Codex rules leave them to sandbox permissions and `on-request` escalation. These patterns cover common spellings, not every Git invocation.

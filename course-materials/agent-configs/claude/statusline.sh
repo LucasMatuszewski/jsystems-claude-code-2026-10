@@ -67,14 +67,14 @@ if ! command -v jq >/dev/null 2>&1; then
 fi
 if [ "$jq_missing" -eq 0 ]; then
     parsed=$(printf '%s' "$input" | jq -r '
-      def dash(v): if v == null then "-" else v end;
+      def dash(v): if v == null or v == "" then "-" else v end;
       def pct(v):  if v == null then "-" else (v | floor) end;
       # Normalize Windows separators HERE, before @tsv: @tsv escapes a literal
       # backslash as \\, which would otherwise turn C:\Users into C://Users and
       # blank out the parent folder. Only real Windows paths (drive letter or
       # UNC) are touched, so a Linux name containing a backslash survives.
       def winnorm(p):
-        if p == null then "-"
+        if p == null or p == "" then "-"
         elif (p | test("^[A-Za-z]:[\\\\/]")) or (p | startswith("\\\\"))
         then (p | gsub("\\\\"; "/"))
         else p end;
@@ -102,6 +102,9 @@ if [ -n "$parsed" ]; then
     IFS=$'\t' read -r model_id model_display context_used cost_mills current_dir \
         effort_level fast_mode five_h_pct five_h_reset week_pct week_reset cache_pct \
         <<< "$parsed"
+    # @tsv doubles literal backslashes. Restore those pairs without printf %b,
+    # which would interpret a Linux directory named test\name as a newline.
+    current_dir=${current_dir//\\\\/\\}
 else
     # No jq (or malformed input): recover just the directory from the raw JSON so
     # line 1 still says something useful. Allows optional spaces after the colon
@@ -296,4 +299,3 @@ printf '%s\n%s\n' "$line1" "$line2"
 
 # Always succeed - a non-zero exit blanks the status line.
 exit 0
-
