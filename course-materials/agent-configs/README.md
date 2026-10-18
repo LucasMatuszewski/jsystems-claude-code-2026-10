@@ -1,0 +1,57 @@
+# Agent config examples
+
+Example configurations for the agents used in the course. The repository root holds project settings (filesystem/network permissions, MCP servers) and curated command rules. Provider profiles and sub-agents live here: copy the ones you need and adapt them. Writing your own sub-agent from one of these is a course exercise.
+
+Each folder has the shape of that tool's own config folder.
+
+| Folder | What it holds | Where it goes |
+|---|---|---|
+| `codex/` | `config.toml`, `permissions.toml`, `PERMISSIONS.md`, curated `rules/` and inactive comparison in `examples/`, provider profiles `<name>.config.toml` for Ollama, OpenRouter and Z.ai with `models.zai.json`, sub-agents in `agents/` | `~/.codex/` for the config and the profiles; `.codex/agents/` in your project for the sub-agents |
+| `claude/` | `settings.json` (and a commented `settings.jsonc`), `CLAUDE.md`, `statusline.sh`, sub-agents in `agents/`, `mcp-jetbrains.json` (JetBrains MCP server for a default Windows install of IntelliJ IDEA 2025.3.3; set the path of your own IDE) | `~/.claude/` for settings, `CLAUDE.md` and the status line; `.claude/agents/` in your project for the sub-agents |
+| `copilot/` | start scripts with allowed and denied tools, a custom agent in `agents/` | run the script from the repository root; `.github/agents/` in your project for the agent |
+| `opencode/` | `opencode.jsonc` with a default model, MCP servers and Bash push permissions | `~/.config/opencode/` or your project root |
+
+## Protected-branch push policy
+
+Participants may push their own branches and open PRs. The examples deny the covered pushes to `main`, `master` and `prod` and force-push forms; Claude, Copilot and OpenCode may still ask before ordinary pushes, while curated Codex rules leave them to sandbox permissions and `on-request` escalation. These patterns cover common spellings, not every Git invocation.
+
+| Tool | Example file | Block push to main/master/prod | Block force push | What the tool cannot match with these rules |
+|---|---|---|---|---|
+| Claude Code | [settings.json](claude/settings.json), [settings.jsonc](claude/settings.jsonc) | `Bash(git push * main)` / `Bash(git push * main *)` and `Bash(git push *:main)` / `Bash(git push *:main *)`, repeated for `master`/`prod` | `Bash(git push --force:*)`, `Bash(git push -f:*)`, `Bash(git push --force-with-lease:*)` and later-position force globs | Bare `git push` on a checked-out protected branch; aliases, wrappers, full refs, global options and `+` force refspecs |
+| Codex | [rules/course.rules](codex/rules/course.rules) | `prefix_rule(pattern=[["git","git.exe"],"push",["origin","upstream"],["main","master","prod"]], decision="forbidden", ...)`, plus upstream-option variants | Forbidden prefixes for `--force`, `-f`, `--force-with-lease` in documented positions | Bare protected-branch push; token prefixes cannot match `HEAD:main` refspecs, other remotes/options, arbitrary later force flags or `--force-with-lease=<value>` |
+| Copilot CLI | [start-copilot.sh](copilot/start-copilot.sh), [start-copilot.ps1](copilot/start-copilot.ps1) | `--deny-tool='shell(git push origin main:*)'`, repeated for `upstream`, `master`/`prod` and upstream-option variants | `shell(git push --force:*)`, `shell(git push -f:*)`, `shell(git push --force-with-lease:*)` and known-position variants | Bare protected-branch push; trailing command-stem prefixes miss refspec destinations, other remotes/options and arbitrary later force flags |
+| OpenCode | [opencode.jsonc](opencode/opencode.jsonc) | `permission.bash` entries `"git push * main": "deny"` / `"git push * main *": "deny"` and `"git push *:main": "deny"` / `"git push *:main *": "deny"`, repeated for `master`/`prod` | `"git push --force*": "deny"`, standalone `-f` patterns and later-position force globs | Bare protected-branch push only asks; aliases, wrappers, full refs, global options and `+` force refspecs can escape the globs |
+
+GitHub/Bitbucket branch protection is the real guard for protected branches and force pushes; the headless review agent retains its blanket push denial.
+
+## Codex permissions
+
+See [Claude-to-Codex permission mapping](codex/PERMISSIONS.md) for annotated TOML filesystem profiles, command `allow` / `prompt` / `forbidden` rules, and their limits. `codex/config.toml` includes these permissions directly in the main Codex example; `codex/permissions.toml` provides the same profiles as a minimal standalone example. Copy the configuration together with the reviewed `codex/rules/` files. `codex/examples/claude-command-parity.rules` is an inactive syntax comparison with broad allowances; use `codex/rules/course.rules` for the curated course policy.
+
+The active project `.codex/config.toml` deliberately leaves `features.network_proxy` unset. Enable it in `~/.codex/config.toml` using the [user-level example](codex/config.toml), so project and background daemon threads agree. Domain rules require that user-level activation; without it, do not assume the configured domain list is enforced. See the [activation prerequisite](codex/PERMISSIONS.md#project-and-user-proxy-activation) and [Windows sandbox troubleshooting](../Research/codex-windows-sandbox-troubleshooting-2026-10-15.md).
+
+## Codex profiles
+
+Codex reads profile files only from `~/.codex/`. Copy them there, then choose one:
+
+```bash
+cp course-materials/agent-configs/codex/*.config.toml course-materials/agent-configs/codex/models.zai.json ~/.codex/
+```
+
+```bash
+codex --profile ollama-lfm
+```
+
+Check the `model:` and `provider:` lines Codex prints at startup: a profile name without a file is not an error, Codex just runs the default model.
+
+Shell shortcuts: [Bash Codex section](../.bashrc) and [PowerShell functions and aliases](../codex-aliases.ps1). Dot-source the PowerShell file from `$PROFILE` using its installation comment. The same names cover all six shipped provider profiles: `cdxz` (also `codexz`), `cdxor`, `cdxoc`, `cdxlfm`, `cdxsql`, `cdxgemma`. Copy the profile files to `~/.codex/` first, including `models.zai.json` for Z.ai; the scripts contain no real keys.
+
+Mode aliases, checked against local `codex --help` and `codex resume --help` on 0.162.1 (2026-10-16): `cdxauto` (automatic approval review with workspace-write), `cdxro` (read-only), `cdxnd` (no shared daemon), `cdxwt` (new managed worktree), `cdxlast` (resume last). Combine a mode with `--profile <name>`. `cdxwt` requires worktree authorization under this repository's rules. `cdxyolo` disables both approvals and sandbox: use only inside external disposable isolation without secrets, never as a permissions workaround. [CLI reference](https://developers.openai.com/codex/cli/reference/).
+
+## Sub-agents
+
+- TypeScript and Node.js: `claude/agents/be-developer.md`, `fe-developer.md`, `qa-engineer.md`; `codex/agents/frontend-nextjs-developer.toml`, `e2e-qa-engineer.toml`.
+- Java and Spring Boot: `claude/agents/java-be-developer.md` (short) and `java-be-developer-long.md`, `java-fe-developer.md`, `java-qa-engineer.md`; `codex/agents/java-springboot-developer.toml`.
+- Code review in Copilot: `copilot/agents/CodeReview.agent.md`.
+
+To use one, copy it into your project (`.claude/agents/`, `.codex/agents/` or `.github/agents/`), replace the stack-specific parts (build tool, test runner, framework) with yours, and adjust the list of skills to the ones you have installed.
