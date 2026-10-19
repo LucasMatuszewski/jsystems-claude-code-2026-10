@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "prompts": [
+    {
+      "id": "P01-prd-serwis",
+      "version": "3",
+      "source": "P01-prd-serwis.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_05_Implementacja.html"
+      ]
+    },
+    {
+      "id": "P02-adr-serwis",
+      "version": "3",
+      "source": "P02-adr-serwis.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_05_Implementacja.html"
+      ]
+    },
+    {
+      "id": "P03-zasady-repo-jakosc",
+      "version": "3",
+      "source": "P03-zasady-repo-jakosc.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_04_Workflow.html"
+      ]
+    },
+    {
+      "id": "P04-plan-podzial-pracy",
+      "version": "4",
+      "source": "P04-plan-podzial-pracy.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_05_Implementacja.html"
+      ]
+    },
+    {
+      "id": "P05-system-designu",
+      "version": "2",
+      "source": "P05-system-designu.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_04_Workflow.html"
+      ]
+    },
+    {
+      "id": "P06-dane-syntetyczne",
+      "version": "3",
+      "source": "P06-dane-syntetyczne.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_05_Implementacja.html"
+      ]
+    },
+    {
+      "id": "P07-legacy-charakterystyka",
+      "version": "2",
+      "source": "P07-legacy-charakterystyka.md",
+      "targets": [
+        "prompty.html"
+      ]
+    },
+    {
+      "id": "P08-testy-przeglad-zmian",
+      "version": "2",
+      "source": "P08-testy-przeglad-zmian.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_07_Legacy.html"
+      ]
+    },
+    {
+      "id": "P09-sql-weryfikacja",
+      "version": "3",
+      "source": "P09-sql-weryfikacja.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_05_Implementacja.html"
+      ]
+    },
+    {
+      "id": "P17-policy",
+      "version": "2",
+      "source": "P17-policy.md",
+      "targets": [
+        "prompty.html"
+      ]
+    },
+    {
+      "id": "P19-plan-matryca",
+      "version": "5",
+      "source": "P19-plan-matryca.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_05_Implementacja.html"
+      ]
+    },
+    {
+      "id": "P18-jftp-legacy",
+      "version": "5",
+      "source": "P18-jftp-legacy.md",
+      "targets": [
+        "prompty.html"
+      ]
+    },
+    {
+      "id": "P20-legacy-inventory",
+      "version": "1",
+      "source": "P20-legacy-inventory.md",
+      "targets": [
+        "prompty.html"
+      ]
+    },
+    {
+      "id": "P21-legacy-context",
+      "version": "1",
+      "source": "P21-legacy-context.md",
+      "targets": [
+        "prompty.html"
+      ]
+    },
+    {
+      "id": "P22-legacy-workers",
+      "version": "1",
+      "source": "P22-legacy-workers.md",
+      "targets": [
+        "prompty.html"
+      ]
+    },
+    {
+      "id": "P23-legacy-api-cards",
+      "version": "1",
+      "source": "P23-legacy-api-cards.md",
+      "targets": [
+        "prompty.html"
+      ]
+    },
+    {
+      "id": "P24-legacy-skill-handoff",
+      "version": "1",
+      "source": "P24-legacy-skill-handoff.md",
+      "targets": [
+        "prompty.html"
+      ]
+    },
+    {
+      "id": "P25-legacy-tests-startup",
+      "version": "2",
+      "source": "P25-legacy-tests-startup.md",
+      "targets": [
+        "prompty.html"
+      ]
+    },
+    {
+      "id": "P26-legacy-feature",
+      "version": "1",
+      "source": "P26-legacy-feature.md",
+      "targets": [
+        "prompty.html"
+      ]
+    },
+    {
+      "id": "P27-legacy-retrieval",
+      "version": "2",
+      "source": "P27-legacy-retrieval.md",
+      "targets": [
+        "prompty.html"
+      ]
+    },
+    {
+      "id": "P28-subagenci",
+      "version": "1",
+      "source": "P28-subagenci.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_05_Implementacja.html"
+      ]
+    },
+    {
+      "id": "P29-tdd-chat",
+      "version": "1",
+      "source": "P29-tdd-chat.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_05_Implementacja.html"
+      ]
+    },
+    {
+      "id": "P30-e2e-chat",
+      "version": "1",
+      "source": "P30-e2e-chat.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_06_Review_CI.html"
+      ]
+    },
+    {
+      "id": "P31-review-chat",
+      "version": "1",
+      "source": "P31-review-chat.md",
+      "targets": [
+        "prompty.html",
+        "Prezentacja_06_Review_CI.html"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,681 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Implementacja aplikacji | Claude Code - od zera do zespołu agentów AI</title><style>
+:root{
+  /* Slajdy tytulowe (granat/biel/zloto) - identyczne w obu motywach */
+  --dark-bg:#0f172a;--dark-bg2:#1e293b;--dark-text:#f1f5f9;
+  /* Motyw domyslny: dark (Tokyo Night) */
+  --bg:#1a1b26;--bg2:#24283b;--bg3:#2f3549;
+  --text:#c0caf5;--heading:#e6ecff;
+  --accent:#e0af68;--accent2:#7aa2f7;--accent3:#9ece6a;
+  --muted:#7d84a8;--danger:#f7768e;
+  --code-bg:#16161e;--code-text:#a9b1d6;
+  --note-bg:rgba(224,175,104,.09);--note-bd:rgba(224,175,104,.35);--note-text:#e6c187;
+
+}
+body.light{
+  --bg:#ffffff;--bg2:#f1f5f9;--bg3:#e2e8f0;
+  --text:#1e293b;--heading:#0f172a;
+  --accent:#d97706;--accent2:#2563eb;--accent3:#059669;
+  --muted:#64748b;--danger:#dc2626;
+  --code-bg:#1e293b;--code-text:#e2e8f0;
+  --note-bg:#fef9c3;--note-bd:#facc15;--note-text:#92400e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:clamp(13px,1.4vw,19px)}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#000;overflow:hidden}
+#deck{position:relative;width:100vw;height:100vh}
+.slide{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background:var(--bg);color:var(--text);
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+  overflow-y:auto;overflow-x:hidden;
+}
+.slide.on{opacity:1;pointer-events:auto}
+.slide.dark{background:var(--dark-bg);color:var(--dark-text)}
+.slide a{color:var(--accent2);text-decoration:underline;text-underline-offset:3px}
+.slide.dark a{color:var(--accent)}
+.slide h1,.slide h2,.slide h3{color:var(--heading)}
+.slide.dark h1,.slide.dark h2,.slide.dark h3{color:var(--dark-text)}
+.slide-body{
+  max-width:min(1680px,95vw);margin:0 auto;
+  padding:clamp(2rem,4vh,3rem) clamp(1.6rem,3vw,3.5rem) clamp(1.6rem,3.5vh,2.6rem);
+  min-height:100%;display:flex;flex-direction:column;justify-content:center;
+}
+.title-body{align-items:center;text-align:center}
+.kicker{
+  font-size:.8rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.15em;color:var(--accent);margin-bottom:.5rem;
+}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.15;margin-bottom:1rem}
+h2{font-size:clamp(1.4rem,3vw,2.1rem);font-weight:700;line-height:1.2;margin-bottom:.9rem}
+h3{font-size:clamp(1.1rem,2.2vw,1.6rem);font-weight:600;margin-bottom:.8rem}
+h4{font-size:1rem;font-weight:600;margin-bottom:.4rem}
+p{font-size:clamp(.95rem,1.6vw,1.15rem);line-height:1.6;margin-bottom:.6rem}
+.subtitle{font-size:clamp(1rem,1.9vw,1.3rem);opacity:.8;margin-bottom:1rem}
+.accent{color:var(--accent)}
+.accent2{color:var(--accent2)}
+.accent3{color:var(--accent3)}
+.danger{color:var(--danger)}
+.title-meta{
+  display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;
+  font-size:1.1rem;opacity:.85;margin-bottom:1.5rem;
+}
+.title-meta div{padding:.3rem .8rem;background:rgba(255,255,255,.08);border-radius:8px}
+.break-badge{
+  background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);
+  border-radius:12px;padding:1rem 1.5rem;margin-top:1rem;display:inline-block;
+}
+.break-badge .bb-label{
+  font-size:.75rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--accent);margin-bottom:.5rem;
+}
+.break-badge .bb-items{display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center;font-size:.9rem}
+.break-badge .bb-items span::before{content:"\25CF";color:var(--accent);margin-right:.4rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:.5rem}
+/* Symetryczne siatki: 4 kafle = 2x2, 5-6 kafli = 3 kolumny (zamiast 3+1 / 4+1) */
+.cards:has(> :nth-child(4):last-child){grid-template-columns:repeat(2,1fr)}
+.cards:has(> :nth-child(5):last-child),.cards:has(> :nth-child(6):last-child){grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.cards:has(> :nth-child(5):last-child),.cards:has(> :nth-child(6):last-child){grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.cards{grid-template-columns:1fr !important}}
+.card{
+  background:var(--bg2);border-radius:10px;padding:1rem 1.2rem;
+  border-left:4px solid var(--accent2);
+}
+.card.warn{border-left-color:var(--danger)}
+.card.ok{border-left-color:var(--accent3)}
+.card.amber{border-left-color:var(--accent)}
+.card-title{font-weight:700;color:var(--accent);margin-bottom:.4rem;font-size:1rem}
+.slide.dark .card{background:var(--dark-bg2)}
+.slide.dark .card-title{color:var(--accent)}
+.feature-list{list-style:none;padding:0}
+.feature-list li{padding:.32rem 0 .32rem 1.6rem;position:relative;font-size:clamp(.9rem,1.5vw,1.05rem);line-height:1.5}
+.feature-list li::before{content:"\25B8";position:absolute;left:.3rem;color:var(--accent);font-weight:700}
+.feature-list.check li::before{content:"\2713";color:var(--accent3)}
+.feature-list.cross li::before{content:"\2717";color:var(--danger)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:.5rem}
+@media(max-width:768px){.two-col{grid-template-columns:1fr}}
+.code-block{
+  background:var(--code-bg);color:var(--code-text);padding:.8rem 1.2rem;border-radius:8px;
+  font-family:Consolas,Monaco,"Courier New",monospace;font-size:.85rem;
+  overflow-x:auto;line-height:1.5;margin:.5rem 0;white-space:pre-wrap;
+  position:relative;border:1px solid rgba(125,132,168,.25);
+}
+.copy-btn{
+  position:absolute;top:.4rem;right:.4rem;
+  background:var(--bg3);color:var(--text);border:1px solid var(--muted);
+  border-radius:6px;font-size:.65rem;padding:.2rem .55rem;cursor:pointer;
+  opacity:.65;transition:opacity .15s;font-family:inherit;
+}
+.copy-btn:hover{opacity:1}
+.copy-btn.ok{background:var(--accent3);color:#0f172a;border-color:var(--accent3);opacity:1}
+.code-inline{
+  background:var(--bg2);padding:.1rem .4rem;border-radius:4px;
+  font-family:Consolas,Monaco,monospace;font-size:.9em;color:var(--accent2);
+}
+.slide.dark .code-inline{background:rgba(255,255,255,.1)}
+.badge{
+  display:inline-block;padding:.2rem .7rem;border-radius:999px;
+  font-size:.75rem;font-weight:700;background:var(--accent);color:#fff;
+}
+.badge.blue{background:var(--accent2)}
+.badge.green{background:var(--accent3)}
+.badge.red{background:var(--danger)}
+.badge.lab{background:var(--accent);color:#1a1b26;font-size:.85rem;padding:.3rem 1rem}
+.note-box{
+  background:var(--note-bg);border:1px solid var(--note-bd);border-radius:8px;
+  padding:.8rem 1.2rem;margin:.5rem 0;font-size:.9rem;color:var(--note-text);
+}
+.slide.dark .note-box{background:rgba(250,204,21,.1);border-color:rgba(250,204,21,.3);color:#fef3c7}
+/* Process map */
+.proc-map{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1rem}
+.proc-step{
+  background:var(--bg2);border-radius:10px;padding:1rem;
+  position:relative;text-align:center;border:2px solid transparent;
+}
+.proc-step .ps-num{
+  width:32px;height:32px;border-radius:50%;background:var(--accent2);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;
+  margin:0 auto .5rem;font-size:.9rem;
+}
+.proc-step.active{border-color:var(--accent);background:rgba(224,175,104,.1)}
+.proc-step.active .ps-num{background:var(--accent)}
+.proc-step.optional{opacity:.6}
+.proc-step.optional .ps-num{background:var(--muted)}
+.proc-step .ps-title{font-weight:600;font-size:.85rem;margin-bottom:.2rem}
+.proc-step .ps-desc{font-size:.75rem;color:var(--muted)}
+.slide.dark .proc-step{background:var(--dark-bg2)}
+.slide.dark .proc-step .ps-desc{color:#94a3b8}
+@media(max-width:900px){.proc-map{grid-template-columns:repeat(2,1fr)}}
+/* Footer */
+.slide-footer{
+  position:fixed;bottom:.4rem;right:1.5rem;font-size:.85rem;
+  color:var(--muted);opacity:.7;z-index:50;pointer-events:none;
+}
+.slide.dark .slide-footer{color:rgba(255,255,255,.3)}
+/* HUD */
+#hud{position:fixed;top:0;left:0;right:0;height:4px;background:rgba(0,0,0,.1);z-index:200}
+#bar{height:100%;width:1%;background:var(--accent);transition:width .3s ease;border-radius:0 3px 3px 0}
+#num{
+  position:fixed;top:.5rem;left:1rem;font-size:.95rem;color:var(--muted);
+  z-index:200;font-variant-numeric:tabular-nums;font-weight:600;
+}
+#clock{
+  position:fixed;top:.5rem;right:3.9rem;font-size:.95rem;color:var(--muted);
+  z-index:200;font-variant-numeric:tabular-nums;
+}
+#theme-btn{
+  position:fixed;top:.3rem;right:1rem;width:34px;height:34px;z-index:210;
+  background:transparent;border:1px solid var(--muted);border-radius:50%;
+  color:var(--muted);cursor:pointer;font-size:1rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;opacity:.7;
+}
+#theme-btn:hover{opacity:1;color:var(--accent)}
+#trainer-credit{
+  position:fixed;bottom:.4rem;left:1.5rem;font-size:.85rem;
+  color:var(--muted);opacity:.7;z-index:50;pointer-events:none;
+}
+.slide.dark #trainer-credit{color:rgba(255,255,255,.3)}
+#shortcut-hint{
+  position:fixed;top:.5rem;left:50%;transform:translateX(-50%);
+  z-index:200;color:var(--muted);pointer-events:none;font-size:.8rem;
+}
+@media(max-width:900px){#shortcut-hint{display:none}}
+#theme-btn .icon-sun,#theme-btn .icon-moon{width:18px;height:18px;display:block}
+#theme-btn .icon-moon{display:none}
+body.light #theme-btn .icon-sun{display:none}
+body.light #theme-btn .icon-moon{display:block}
+/* Nav arrows */
+.nav-arrow{
+  position:fixed;top:50%;transform:translateY(-50%);
+  background:rgba(0,0,0,.25);color:#fff;border:none;width:44px;height:44px;
+  border-radius:50%;font-size:1.3rem;cursor:pointer;z-index:200;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.nav-arrow:hover{background:rgba(0,0,0,.5);transform:translateY(-50%) scale(1.1)}
+.nav-left{left:12px}
+.nav-right{right:12px}
+/* Break banner */
+#breakbar{
+  position:fixed;top:20px;left:50%;
+  transform:translateX(-50%) translateY(-200%);
+  background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;
+  padding:1.2rem 2rem;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.35);
+  z-index:10000;transition:transform .4s ease;min-width:340px;text-align:center;
+}
+#breakbar.show{transform:translateX(-50%) translateY(0)}
+.bb-icon{font-size:1.5rem;margin-bottom:.3rem}
+.bb-title{font-size:1.3rem;font-weight:700}
+.bb-sub{font-size:1rem;opacity:.9;margin-top:.2rem}
+#bb-x{
+  position:absolute;top:.5rem;right:.8rem;background:rgba(255,255,255,.2);
+  border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;
+  font-size:1rem;line-height:1;
+}
+#bb-x:hover{background:rgba(255,255,255,.35)}
+/* Nawigacja klikiem obslugiwana na .slide (linki i przyciski maja priorytet) */
+/* Misc */
+.big-num{font-size:3rem;font-weight:800;color:var(--accent);line-height:1}
+.timeline{display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem}
+.timeline-item{display:flex;gap:1rem;align-items:flex-start;padding:.6rem 1rem;background:var(--bg2);border-radius:8px;border-left:4px solid var(--accent2)}
+.timeline-item.break{border-left-color:var(--accent)}
+.timeline-time{font-weight:700;color:var(--accent);min-width:80px;font-size:.9rem}
+.slide.dark .timeline-item{background:var(--dark-bg2)}
+hr.sep{border:none;border-top:1px solid var(--muted);opacity:.2;margin:1rem 0}
+.slide.dark hr.sep{border-top-color:var(--dark-text);opacity:.15}
+.strike{text-decoration:line-through;opacity:.5}
+.demo-flow{display:flex;flex-direction:column;gap:.6rem;margin-top:.5rem}
+.demo-flow .df-step{display:flex;gap:1rem;align-items:center}
+.df-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0}
+.df-text{font-size:clamp(.85rem,1.4vw,1rem)}
+</style><style>body{overflow:hidden}#deck{height:100vh}.slide{overflow:auto}.slide-body{padding-top:4.5rem;padding-bottom:5rem}.slide h2{max-width:100%}.prompt-full{width:100%;max-width:1000px;text-align:left}.prompt-full pre{max-height:45vh!important}.prompt-full h3{margin:.25rem 0}.prompt-full p{margin:.25rem 0 .5rem}.course-note{border-left:4px solid #e0af68;padding:1rem;background:rgba(224,175,104,.1);border-radius:6px}.recap-breaks{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem .8rem;margin-top:clamp(1.5rem,4vh,2.5rem);padding:.7rem .9rem;border-left:3px solid var(--accent);border-radius:6px;background:var(--accent-soft);font-size:clamp(.8rem,1.3vw,.95rem)}.recap-breaks-label{color:var(--muted);font-weight:600}.recap-breaks time{color:var(--heading);font-weight:700;font-variant-numeric:tabular-nums}#page-count{position:fixed;bottom:18px;right:18px;color:#d7dff8;z-index:101;background:#182334;padding:4px 9px;border-radius:6px}#deck .slide:not(.on){display:none}@media print{html,body[data-page-type="slides"]{overflow:visible!important;height:auto!important;background:#fff!important}body[data-page-type="slides"] #deck{position:static!important;width:auto!important;height:auto!important;overflow:visible!important}body[data-page-type="slides"] #deck .slide,body[data-page-type="slides"] #deck .slide:not(.on){display:block!important;position:relative!important;inset:auto!important;width:auto!important;height:auto!important;min-height:0!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;overflow:visible!important;break-after:page;page-break-after:always}body[data-page-type="slides"] #deck .slide-body{min-height:0!important;max-width:none!important;padding:1.2rem!important;display:block!important}body[data-page-type="slides"] #deck pre[data-prompt-id]{max-height:none!important;overflow:visible!important;white-space:pre-wrap!important;word-break:break-word!important}body[data-page-type="slides"] .course-tools,body[data-page-type="slides"] #hud,body[data-page-type="slides"] #num,body[data-page-type="slides"] #clock,body[data-page-type="slides"] #shortcut-hint,body[data-page-type="slides"] .nav-arrow,body[data-page-type="slides"] #breakbar,body[data-page-type="slides"] .copy-prompt{display:none!important}body[data-page-type="slides"] #deck .slide,body[data-page-type="slides"] #deck .slide.dark{background:#fff!important;color:#111!important}body[data-page-type="slides"] #deck .slide h1,body[data-page-type="slides"] #deck .slide h2,body[data-page-type="slides"] #deck .slide h3{color:#111!important}body[data-page-type="slides"] #deck pre,body[data-page-type="slides"] #deck .code-block{background:#f4f4f4!important;color:#111!important;border:1px solid #aaa!important}}.slide-body ol,.slide-body ul{margin-top:.5rem}.slide-body li{margin:.25rem 0}.slide-body a{color:#9dc8ff}</style><style>.course-tools{position:fixed;z-index:1000;right:16px;top:12px;display:flex;gap:8px;align-items:center}.course-tools a,.course-tools button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 12px;border:1px solid #7890ac;border-radius:9px;background:#182334;color:#fff;text-decoration:none;font:600 14px system-ui;cursor:pointer}.course-tools button svg{width:20px;height:20px}.course-tools .icon-sun{display:none}[data-theme-toggle] .icon-sun,[data-theme-toggle] .icon-moon{width:20px;height:20px}body[data-theme="dark"] [data-theme-toggle] .icon-sun{display:block}body[data-theme="dark"] [data-theme-toggle] .icon-moon{display:none}body[data-theme="light"] [data-theme-toggle] .icon-sun{display:none}body[data-theme="light"] [data-theme-toggle] .icon-moon{display:block}.course-tools button:focus-visible,.course-tools a:focus-visible{outline:3px solid #f7c26d}body[data-course-audience="developer"] pre[data-prompt-id]{white-space:pre-wrap;overflow:auto;max-height:56vh;line-height:1.5;font-size:clamp(12px,1.1vw,15px);padding:1rem;background:#101827;color:#eff5ff;border:1px solid #61799b;border-radius:10px;text-align:left}.copy-prompt{padding:.55rem .9rem;border:1px solid #a9c8ee;border-radius:8px;background:#183252;color:white;font:700 14px system-ui;cursor:pointer}@media print{.course-tools,.copy-prompt{display:none!important}pre[data-prompt-id]{max-height:none!important}}</style><link rel="stylesheet" href="course.css?v=20261017-brand-slots-2"><link rel="icon" type="image/png" href="assets/favicon-32x32.png"></head><body data-course-audience="developer" data-page-type="slides" data-theme="dark">
+<div class="organizer-deck-brand"><img class="course-brand-logo course-brand-logo--header course-brand-logo--light-surface" src="assets/course-organizer.svg" alt="JSystems"></div><div class="course-tools"><a href="index.html">Strona główna</a><button type="button" data-theme-toggle aria-label="Przełącz na jasny motyw"><svg aria-hidden="true" class="icon-sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><line x1="12" x2="12" y1="2" y2="4"></line><line x1="12" x2="12" y1="20" y2="22"></line><line x1="2" x2="4" y1="12" y2="12"></line><line x1="20" x2="22" y1="12" y2="12"></line><line x1="4.93" x2="6.34" y1="4.93" y2="6.34"></line><line x1="17.66" x2="19.07" y1="17.66" y2="19.07"></line><line x1="4.93" x2="6.34" y1="19.07" y2="17.66"></line><line x1="17.66" x2="19.07" y1="6.34" y2="4.93"></line></svg><svg aria-hidden="true" class="icon-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></div><div id="hud"><div id="bar"></div></div><div id="num" aria-live="polite"></div><div id="clock"></div><div id="shortcut-hint">← → nawigacja · F pełny ekran · D motyw</div><button id="prev" class="nav-arrow nav-left" type="button" aria-label="Poprzedni slajd">‹</button><button id="next" class="nav-arrow nav-right" type="button" aria-label="Następny slajd">›</button><div id="breakbar" role="status"><div id="bb-t" class="bb-title"></div><div id="bb-s" class="bb-sub"></div><button id="bb-x" type="button" aria-label="Zamknij komunikat">×</button></div><div id="deck"><section class="slide"><div class="slide-body"><div class="kicker">Wspólny projekt</div><h2>PRD aplikacji AI Chat</h2><p>Zaczynamy od <a href="https://github.com/LucasMatuszewski/jsystems-claude-code-2026-10/blob/main/course-materials/Prompt%20examples/PRD-electronics-returns-complains-app.md">promptu opisującego aplikację</a> i ograniczamy zakres do tego, co przećwiczymy w ciągu kursu. Funkcje opcjonalne odkładamy.</p><p>Możesz też rozwijać własny pomysł, tą samą metodą.</p></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">PRD</div><h2>Co i dla kogo budujemy</h2><div class="two-col"><div><h3>PRD opisuje problem</h3><ul><li>Użytkownik, jego zadanie i miara sukcesu.</li><li>Zakres pierwszej wersji i elementy poza zakresem.</li><li>Przepływy, błędy i kryteria akceptacji.</li></ul></div><div><h3>Przypadek kursowy</h3><ul><li>AI Chat: rozmowa z modelem na danych syntetycznych.</li><li>Pole wiadomości z walidacją, historią bieżącej rozmowy i obsługą błędów.</li><li>Streaming odpowiedzi do interfejsu React i możliwość kontynuacji rozmowy.</li></ul></div></div><p>Publiczny skill <code>write-prd</code> prowadzi metodę; prompt PRD (P01) opisuje naszą aplikację.</p></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">ADR</div><h2>Dlaczego wybraliśmy rozwiązanie</h2><div class="two-col"><div><h3>ADR zapisuje decyzję</h3><ul><li>Kontekst i siły działające na wybór.</li><li>Realistyczne opcje oraz konsekwencje.</li><li>Decyzję, którą można później ponownie ocenić.</li></ul></div><div><h3>Przypadek kursowy</h3><ul><li>Biblioteka AI i dostawca modeli.</li><li>Protokół streamingu, stany useChat i błędy dostawcy.</li><li>Pamięć rozmowy w sesji; trwała historia tylko po rozszerzeniu PRD.</li></ul></div></div><p>Publiczny skill <code>write-adr</code> prowadzi metodę; prompt ADR (P02) podaje decyzje do podjęcia.</p></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">PRD / pełny prompt</div><h2>Zadanie: AI Chat ze streamingiem</h2><div class="prompt-full"><h3>PRD aplikacji AI Chat</h3><p>Skopiuj prompt poniżej lub otwórz go <a href="prompts/P01-prd-serwis.md">jako plik Markdown</a> albo <a href="prompty.html#P01-prd-serwis">w bibliotece promptów</a>.</p><div class="prompt-full"><button type="button" class="copy-prompt" data-copy-prompt="prompt-P01-prd-serwis">Kopiuj prompt</button><pre id="prompt-P01-prd-serwis" data-prompt-id="P01-prd-serwis" data-prompt-version="3">Użyj zainstalowanego publicznego skilla `write-prd`, aby przygotować `docs/PRD.md` dla aplikacji **AI Chat**. To aplikacja budowana od pustego szkieletu na trzydniowym warsztacie. Skill prowadzi rozmowę o wymaganiach i sposób zapisu dokumentu; poniższe informacje są pełnym kontekstem produktu, a nie gotową specyfikacją architektury. Nie implementuj teraz aplikacji i nie zastępuj rozmowy o brakujących wymaganiach własnymi założeniami.
+
+## Problem i użytkownik
+
+Użytkownik chce prowadzić rozmowę z modelem AI w prostej aplikacji webowej. Nie chce czekać na całą odpowiedź bez informacji o postępie ani tracić wpisanego tekstu, gdy dostawca zwróci błąd. Potrzebuje czytelnej historii bieżącej rozmowy, rozróżnienia wiadomości użytkownika i modelu oraz jasnego stanu wysyłania, generowania i błędu. Interfejs ma działać na komputerze i telefonie. Używamy wyłącznie danych syntetycznych i krótkich, nieszkodliwych pytań testowych.
+
+Główny użytkownik wpisuje wiadomość, wysyła ją i widzi stopniowo dopisywaną odpowiedź. Druga persona to osoba rozwijająca aplikację: musi móc odtworzyć błąd, sprawdzić kontrakt i uruchomić testy bez ujawniania poświadczeń. Rozdziel jej potrzeby od funkcji samego czatu. Określ, po czym poznamy, że pierwszy przepływ jest gotowy, zamiast mierzyć sukces liczbą wygenerowanych plików.
+
+## Przepływy i zachowanie do uzgodnienia
+
+- Rozpoczęcie nowej rozmowy: pusty widok ma objaśniać następny krok, mieć etykietę pola wiadomości i przycisk wysłania. Ustal z uczestnikiem przykładowe teksty po polsku i dostępność klawiaturą.
+- Wysłanie wiadomości: walidujemy pusty tekst oraz białe znaki. Przed implementacją uzgodnij granicę długości wiadomości i sposób pokazania błędu. Nie wymyślaj arbitralnego limitu.
+- Streaming: po wysłaniu użytkownik widzi swoją wiadomość, stan pracy i przyrost odpowiedzi. Ustal zachowanie przy drugiej próbie wysłania podczas generowania. Nie akceptuj jedynie animacji udającej strumień gotowej odpowiedzi.
+- Kontynuacja: kolejne pytanie korzysta z kontekstu bieżącej rozmowy. Uzgodnij, jak duża historia jest przekazywana i jak użytkownik zaczyna nową rozmowę. Nie dodawaj automatycznie bazy danych.
+- Błąd dostawcy lub sieci: czytelny komunikat, zachowany wpisany tekst i możliwość świadomej ponownej próby. Nie pokazuj klucza, surowego stack trace ani pełnych poufnych żądań.
+- Przerwanie odpowiedzi i ponawianie: zapytaj, czy należą do pierwszego zakresu. Jeśli tak, opisz widoczny stan częściowej odpowiedzi i warunki ponowienia. Nie zakładaj takiego samego zachowania dla przerwania i awarii.
+- Odpowiedź zawierająca kod lub Markdown: uzgodnij, czy pierwsza wersja wyświetla tekst, czy bezpiecznie renderuje Markdown. Surowy HTML i skrypty z modelu nie mogą wykonywać się w przeglądarce.
+
+Techniczne ramy szkolenia to TypeScript, backend i frontend, streaming oraz Vercel AI SDK z React `useChat`. W PRD zapisz je jako znane ograniczenia, lecz wybór Next.js albo Vite z osobnym API, dostawcy i wersji SDK zostaw do ADR. Klucz modelu pozostaje po stronie serwera. Subskrypcja do pracy z Claude Code nie jest automatycznie kluczem API do budowanej aplikacji.
+
+## Zakres pierwszej wersji i dowody
+
+Zaproponuj najmniejszą spójną wersję: jedna rozmowa w bieżącej sesji, wiadomości tekstowe, prawdziwy streaming, obsługa błędu i czytelny interfejs. Poza tym zakresem pozostają płatności, konta użytkowników, RAG, upload plików, narzędzia wykonywane przez model i trwała historia, chyba że świadomie zmienimy zakres. Historia wielu rozmów i Markdown mogą być rozszerzeniem po działającym minimum.
+
+Przygotuj co najmniej cztery przypadki demonstracyjne: poprawna wiadomość z przyrostem tekstu, kontynuacja rozmowy, pusty input oraz awaria usługi. Dla każdego zapisz widoczny wynik i numerowane kryteria akceptacji, z których tester może wyprowadzić uczciwy test. Dodaj mapowanie kryterium -&gt; scenariusz -&gt; dowód. Nie wymagaj dokładnego brzmienia odpowiedzi probabilistycznego modelu; sprawdzamy zachowanie aplikacji i kontrakt.
+
+Najpierw przeczytaj instrukcje repozytorium i rzeczywisty stan szkieletu. Zadawaj tylko pytania, których odpowiedzi brakuje i które zmieniają zachowanie produktu. Oddziel ustalone fakty od propozycji i otwartych pytań. Po rozmowie zapisz dokument według skilla, pokaż zakres do przeglądu i zakończ. Implementacja, delegowanie oraz tworzenie gałęzi nie należą do tego zadania.
+</pre></div></div></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">ADR / pełny prompt</div><h2>Decyzja: architektura i kontrakt streamingu</h2><div class="prompt-full"><h3>ADR: SDK, transport i dostawca</h3><p>Skopiuj prompt poniżej lub otwórz go <a href="prompts/P02-adr-serwis.md">jako plik Markdown</a> albo <a href="prompty.html#P02-adr-serwis">w bibliotece promptów</a>.</p><div class="prompt-full"><button type="button" class="copy-prompt" data-copy-prompt="prompt-P02-adr-serwis">Kopiuj prompt</button><pre id="prompt-P02-adr-serwis" data-prompt-id="P02-adr-serwis" data-prompt-version="3">Użyj zainstalowanego publicznego skilla `write-adr`, aby opisać architekturę **AI Chat** z aktualnego `docs/PRD.md`. Przeczytaj cały PRD, instrukcje repozytorium i istniejący szkielet. Zastosuj sposób pracy skilla, a dokumenty zapisz w `docs/ADR/`. Nie implementuj kodu. Zachowanie produktu wynika z PRD; ADR ustala techniczne decyzje i ich konsekwencje.
+
+To greenfield w TypeScripcie na przygotowanej VM Ubuntu Linux (8 GB RAM, 4 rdzenie). Wspólne ramy kursu to Vercel AI SDK po stronie serwera, React z `useChat` i rzeczywiste strumieniowanie odpowiedzi. Porównaj dwa sensowne warianty: Next.js z endpointem w tej samej aplikacji oraz Vite + React z osobnym API Hono albo Express. Nie wybieraj stosu tylko dlatego, że występuje w historycznym przykładzie. Nie wprowadzaj Docker ani bazy, jeśli PRD ich nie potrzebuje.
+
+## Biblioteki i źródła do porównania
+
+- Vercel AI SDK: https://ai-sdk.dev/docs/introduction i przewodnik streamingu https://ai-sdk.dev/docs/ai-sdk-ui/chatbot . Zweryfikowany Context7 ID: `/websites/ai-sdk_dev`.
+- AI SDK UI i React `useChat`: https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat . Ustal aktualne importy, sposób wysyłania i strukturę wiadomości zamiast kopiować nieaktualny interfejs `ai/react`.
+- Anthropic provider: https://ai-sdk.dev/providers/ai-sdk-providers/anthropic oraz oficjalne dokumenty API https://platform.claude.com/docs/ .
+- OpenRouter provider: https://openrouter.ai/docs/community/vercel-ai-sdk i https://openrouter.ai/docs/ . Sprawdź dostępność modelu, obsługę streamingu, limity i trasę danych.
+- Next.js: https://nextjs.org/docs .
+- Vite: https://vite.dev/guide/ ; Hono: https://hono.dev/docs/ ; Express: https://expressjs.com/ .
+- Playwright: https://playwright.dev/docs/intro .
+
+Agent pobiera aktualną dokumentację przez Context7 lub z oficjalnych stron, porównuje opcje i podaje źródła z datą oraz wersjami. Uczestnik ocenia dowody i zatwierdza wybór. Nie zakładaj, że dostęp do Claude Code zapewnia środki na API aplikacji; sposób uwierzytelniania i model ustalamy osobno, bez odczytu wartości sekretów.
+
+## Decyzje wymagające uzasadnienia
+
+- Granica UI/API: odpowiedzialność za walidację, limit wiadomości z PRD, format żądania, model błędu oraz reprezentacja historii rozmowy. Nie narzucaj nieuzgodnionego limitu.
+- Kontrakt streamingu: jak backend zamienia wiadomości UI na wiadomości modelu, jak wysyła strumień zgodny z używaną wersją AI SDK UI i jak frontend składa części odpowiedzi. Uwzględnij anulowanie, zamknięcie połączenia, timeout i niepełną odpowiedź.
+- Dostawca: porównaj Anthropic i OpenRouter pod kątem potrzeb PRD, zgodności protokołu, dostępu, kosztów i ograniczeń danych. Zapisz nazwę wybranego modelu i wersję biblioteki dopiero po sprawdzeniu źródła.
+- Stan rozmowy: czy wystarcza pamięć bieżącej sesji, co dzieje się po odświeżeniu i jaki zakres kontekstu wraca do modelu. Jeżeli trwała historia jest poza PRD, odłóż bazę danych i migracje.
+- Sekrety i logi: klucz wyłącznie na serwerze, nazwy w `.env.example`, bez wartości w kodzie klienta, logach, screenshotach i Git. Przedstaw czytelny błąd dla braku konfiguracji.
+- Bezpieczny rendering: tekst albo Markdown według PRD; treść modelu jest niezaufana, surowy HTML nie może wykonywać kodu. Opisz dostępność pola, przycisku i stanu generowania.
+- Podział pracy: kontrakt i manifest zależności mają właściciela; `be-developer` i `fe-developer` dostają rozłączne obszary, a `qa-engineer` przygotowuje scenariusze i uruchamia E2E po integracji.
+
+Dla każdego istotnego wyboru podaj realistyczną alternatywę, powód odrzucenia, konsekwencje i warunek ponownej oceny. Diagram komponentów i sekwencji ma objąć wysłanie wiadomości, przyrost strumienia, kontynuację i awarię. Opisz kontrakty, modele danych na poziomie pojęć oraz strategię testów powiązaną z kryteriami PRD. Oddziel testy jednostkowe, integracyjne i E2E. Integracyjne mogą zastąpić zewnętrzny model; E2E obejmuje prawdziwy stos i ograniczoną liczbę rzeczywistych żądań. Mock kontraktu powstaje z bezpiecznego, świeżego capture, nie z domysłu.
+
+Zweryfikuj polecenia startu i testów w wybranym szkielecie, zanim wpiszesz je jako działające. Jeśli szkielet jeszcze nie istnieje, oznacz tę zależność i zaplanuj weryfikację po jego utworzeniu. Zachowaj źródła i wersje tak, aby następny agent mógł ponownie pobrać dokumentację. Niezależne decyzje rozdziel na odpowiednie ADR-y zgodnie ze skillem. Zakończ listą decyzji do zatwierdzenia, bez scaffoldingu i bez uruchamiania subagentów.
+</pre></div></div></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">Praktyka</div><h2>Kryteria akceptacji są testowalne</h2><ul><li><strong>Wejście:</strong> zgłoszenie zawiera identyfikator produktu, opis, kanał i priorytet.</li><li><strong>Walidacja:</strong> błędny identyfikator i puste pola są odrzucane w przewidywalny sposób.</li><li><strong>Ślad:</strong> status może być odtworzony z danych, a nie jedynie z opisu agenta.</li><li><strong>Dowód:</strong> test automatyczny i ręczny przechodzą.</li></ul></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">Ćwiczenie</div><h2>Przeprowadź rozmowę PRD i ADR</h2><ol><li>Użyj promptu P01 z zainstalowanym <code>write-prd</code>.</li><li>Sprawdź, czy agent pyta o brakujące wymagania i oddziela hipotezy od decyzji.</li><li>Użyj P02 z <code>write-adr</code>; rozważ koszty i możliwość zmiany wyboru.</li><li>Przejrzyj dokumenty i wróć do testu startera.</li></ol></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">PRD / kryteria</div><h2>Numerowane AC dają się testować</h2><div class="two-col"><div><h3>Życzenie</h3><p>Czat poprawnie obsługuje błędną wiadomość.</p><p>Nie ma mierzalnego wyniku ani granicy.</p></div><div><h3>Kryterium AC-L1.2</h3><p>Wiadomość zawierająca wyłącznie białe znaki nie wywołuje modelu; interfejs pokazuje walidację i zachowuje treść pola.</p><p>Test ma wejście, oczekiwany wynik i numer AC w nazwie.</p></div></div><p>W PRD oznacz osobno fakt, założenie i pytanie. Każde AC połącz z testem i śladem zmiany.</p></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">Plan / zależności</div><h2>Zatwierdź kolejność zanim kod powstanie</h2><ol><li>Zapisz kontrakt wejścia/wyjścia oraz kryteria AC.</li><li>Wskaż konkretne pliki i testy, które się zmienią.</li><li>Zaznacz zadania równoległe tylko wtedy, gdy nie współdzielą plików ani niezdecydowanego interfejsu.</li><li>Podaj warunek ukończenia i granice zadania.</li></ol><div class="course-note">Przykład: test reguły klasyfikacji i dokument PRD można przygotować niezależnie; implementacja reguły zależy od zatwierdzonego AC.</div></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">Research / ADR</div><h2>Oddziel dowód od pewnego tonu modelu</h2><ul><li>Wybierz opcje i sprawdź oficjalną dokumentację z datą lub wersją.</li><li>Każdą tezę techniczną oznacz jako zweryfikowaną albo niepewną.</li><li>W ADR pokaż konsekwencje dla testowania, utrzymania, migracji i kosztu.</li><li>Brak źródła lub wersji przy bardzo konkretnej nazwie API to sygnał do zatrzymania.</li></ul></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">01 / architektura</div><h2>Agent porównuje, Ty wybierasz</h2><ul>
+  <li>Wyodrębnij z PRD decyzje o architekturze, bibliotekach, modelu danych i środowisku.</li>
+  <li><strong>Agent sprawdza</strong> aktualną dokumentację i porównuje opcje - <strong>Ty oceniasz dowody</strong> i wybierasz.</li>
+  <li>Zapisz każdą decyzję w ADR przez <code>write-adr</code> z <a href="https://github.com/EdukeyTeam/agent-toolbox">EdukeyTeam/agent-toolbox</a>. Przykład: jeden ADR dla bazy danych i modelu danych, drugi dla frameworka lub biblioteki agenta AI.</li>
+  <li><strong>Podaj linki do bibliotek, które rozważasz</strong>, np. <a href="https://chat-sdk.dev/">Chat SDK</a>, <a href="https://openrouter.ai/docs/api_reference/responses/overview">OpenRouter Responses API</a>, <a href="https://openrouter.ai/docs/guides/community/vercel-ai-sdk">OpenRouter z Vercel AI SDK</a>. Bez nich agent często ich nie znajdzie i wybierze starsze wzorce. <a href="https://github.com/LucasMatuszewski/jsystems-claude-code-2026-10/blob/main/course-materials/Prompt%20examples/ADR-generation-typescript-vercel-ai-sdk.md">Przykładowy prompt</a></li>
+</ul></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">02 / planowanie</div><h2>Z PRD i ADR do planu i macierzy zależności</h2><p>Agent tworzy plan: lista zadań, kolejność, właściciele plików, testy i punkty kontroli. Ty sprawdzasz i zatwierdzasz zakres przed implementacją.</p>
+<ul>
+  <li><strong>Tryb Plan</strong> - agent opracowuje plan i zatrzymuje się przed edycją plików.</li>
+  <li><strong>Zwykła sesja</strong> - też może przygotować plan; wyraźnie poproś o zatrzymanie przed implementacją.</li>
+</ul></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">02 / prompt planu</div><h2>Prompt planu z macierzą zależności</h2><p>Podaj agentowi ścieżki do aktualnego PRD i ADR-ów. Jeśli ich brakuje, agent zapyta przed przygotowaniem planu.</p>
+<p><a href="prompty.html#P19-plan-matryca">Biblioteka promptów</a> · <a href="prompts/P19-plan-matryca.md">Markdown</a></p><div class="prompt-full"><button type="button" class="copy-prompt" data-copy-prompt="slide-prompt-P19-plan-matryca">Kopiuj prompt</button><pre id="slide-prompt-P19-plan-matryca" data-prompt-id="P19-plan-matryca" data-prompt-version="5"># Plan pracy nad aplikacją na podstawie PRD
+
+Pracuję nad projektem opisanym w aktualnym PRD. Zapytaj mnie o ścieżkę do PRD i istniejących ADR-ów, jeśli ich nie podałem. Źródłem wymagań jest **aktualny PRD mojego projektu**, nie przykładowy prompt z materiałów kursowych. Jeśli pracuję nad grupową aplikacją AI Chat z backendem TypeScript, streamingiem i React useChat, pomiń funkcje opcjonalne usunięte z PRD podczas zajęć.
+
+Najpierw ustal stan faktyczny. Przeczytaj wskazany przeze mnie PRD, istniejące ADR-y, wytyczne projektu, README i bieżący kod. Wskaż pliki, które rzeczywiście udało Ci się otworzyć, oraz polecenia uruchomienia i testów, które da się potwierdzić. Katalog `course-materials/` zawiera materiały dydaktyczne i przykłady; nie przeszukuj go ani nie traktuj jego PRD/ADR jako dokumentacji aplikacji, chyba że wskażę konkretny plik. Nie zakładaj, że projekt już działa ani że każdy uczestnik ma ten sam stan repozytorium.
+
+Jeśli wybór bibliotek, architektury lub sposobu uruchomienia nie został jeszcze rozstrzygnięty, wypisz potrzebne decyzje. Sprawdź aktualną dokumentację oficjalną z datą lub wersją, porównaj rozsądne opcje i zaproponuj użycie zainstalowanej umiejętności `write-adr`. Oddziel fakty potwierdzone od założeń. Dla niezależnych decyzji zaproponuj oddzielne ADR-y; nie wymyślaj ich treści przed moją decyzją.
+
+Przygotuj **plan, bez implementowania go teraz**. Podczas warsztatu chcemy przejść cały proces na jednym niewielkim fragmencie, bez obietnicy ukończenia całej aplikacji. Pokaż, jak użyłbyś trybu Plan, i czym różni się plan zapisany w zwykłej sesji: co możesz tam tylko opisać, a co wymaga mojej zgody przed edycją. Jeśli brakuje kluczowych danych, zadaj najpierw kilka konkretnych pytań zamiast zgadywać.
+
+Zwróć:
+1. Jednozdaniowy cel najbliższego fragmentu z PRD, zakres poza zadaniem i kryteria akceptacji możliwe do sprawdzenia.
+2. Fazy: rozpoznanie stanu → ewentualne ADR → plan → test, który początkowo nie przechodzi → niewielka implementacja → testy i kontrola ręczna w przeglądarce, jeśli jest UI → pokaz grupie → poprawka rzeczywistego problemu → niezależny przegląd → pull request tylko dla gotowego fragmentu.
+3. **Macierz zadań i zależności**. Dla każdego wiersza podaj: identyfikator, wynik, zależności, właściciela, pliki lub obszar własności, kryterium ukończenia, test albo inny dowód, punkt kontroli człowieka i możliwy następny krok. Oznacz, co da się robić równolegle, a co trzeba wykonać po kolei.
+4. Propozycję delegowania wyłącznie niezależnych zadań. Porównaj jednego agenta z subagentami domyślnymi, doraźnymi i własnymi; dla każdego delegowanego zadania przygotuj krótki, wystarczający brief i granice plików. Nie zakładaj, że wszystkie rodzaje subagentów są dostępne w moim wydaniu Claude Code. Wskaż ryzyko konfliktów przy wspólnym katalogu i kiedy osobne worktree lub sesje byłyby użyteczne, a kiedy zwiększają narzut.
+5. Jeden wspólny sposób śledzenia stanu pracy w zespole (np. GitHub Issues, Jira, Linear albo Beads, jeśli już go używamy). Nie twórz równoległych źródeł prawdy bez potrzeby. Pokaż przekazanie zadania między agentami i sposób scalenia wyników przed testami całości.
+6. Plan kontroli jakości: testy lokalne, kontrola działania aplikacji przez agenta i człowieka, przegląd zmian, reakcja na uwagi z code review, dokumentacja wyników. Oddziel wynik faktycznie sprawdzony od deklaracji agenta.
+7. Plan awaryjny, jeśli zabraknie czasu, dostępu, przeglądarki lub kredytów AI: najmniejszy pokaz możliwy do wykonania z istniejącym kodem i jasny zapis pracy do dokończenia.
+
+Zapisz plan jako dokument tylko w miejscu, które wskażę lub zatwierdzę. Poza tym dokumentem nie modyfikuj plików; nie implementuj funkcji, nie twórz gałęzi, issue ani pull requesta i nie uruchamiaj delegowanych agentów, dopóki nie przejrzę planu. Nie narzucaj z góry konkretnego języka, frameworka, liczby agentów ani nazw plików, których nie ma w projekcie. Na końcu wskaż trzy najważniejsze decyzje, które mam zatwierdzić przed rozpoczęciem pracy.
+
+
+Kontekst AI Chat: kontrakt endpointu i streamingu ustalamy przed równoległą pracą. Role to `be-developer`, `fe-developer` oraz `qa-engineer`; uczestnik definiuje je w module 2.3. Przykłady w `course-materials/agent-configs/claude/` są nieaktywne. Podaj właściciela wspólnego kontraktu i lockfile. QA może przygotować scenariusze równolegle, lecz E2E uruchamia po integracji. Nie zakładaj istniejącej autoryzacji ani bazy historii, jeśli PRD ich nie wymaga.
+</pre></div></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">03 / podział pracy</div><h2>Deleguj według macierzy zależności</h2><ul>
+  <li>Zlecaj równolegle tylko zadania z <strong>oddzielnymi plikami i jasnym wynikiem</strong>. Każdy agent dostaje cel, zakres, sposób sprawdzenia i informację o pracy pozostałych.</li>
+  <li><strong>Jeden katalog:</strong> przypisz właścicieli plików i ustal kolejność zależności. Jeden agent integruje wyniki i uruchamia testy całości.</li>
+  <li><strong>Worktree:</strong> ogranicza konflikty, ale wymaga osobnych zależności, serwera i późniejszego scalenia.</li>
+</ul></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">03 / sesje i role</div><h2>Równoległość wymaga wspólnego stanu</h2><ul>
+  <li><strong>Porównanie: Copilot CLI:</strong> <code>←</code> otwiera panel sesji (przy pustym polu), a <code>/session</code> kartę wszystkich sesji (<a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/work-with-multiple-sessions">dokumentacja</a>).</li>
+  <li><strong>Subagenci:</strong> zacznij od roli doraźnej; własną konfigurację utwórz dla powtarzalnych zadań lub innych uprawnień.</li>
+  <li>Do zarządzania wieloma trwałymi procesami agentów możesz użyć <a href="https://github.com/herdrdev/herdr">Herdr</a>.</li>
+  <li><strong>Wspólny stan:</strong> <a href="https://github.com/gastownhall/beads">Beads</a> lub plik Markdown/JSON; <a href="https://linear.app/">Linear</a> do zadań zespołu.</li>
+</ul></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">Moduł 2.3</div><h2>Orkiestracja: zadania z jasnym właścicielem</h2><div class="cards"><div class="card ok"><div class="card-title">Plan</div><p>Główny agent wyznacza zadania i zależności.</p></div><div class="card amber"><div class="card-title">Delegowanie</div><p>Każdy wykonawca dostaje cel, pliki i kryteria odbioru.</p></div><div class="card"><div class="card-title">Kontrola</div><p>Agent prowadzący sprawdza wyniki i testy.</p></div><div class="card warn"><div class="card-title">Integracja</div><p>Jedna osoba lub agent odpowiada za końcowy diff.</p></div></div></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">Porównanie: Copilot / rozszerzenie</div><h2>Wiele ról przy jednym pull requeście</h2><ul>
+  <li>Rozdziel specyfikację, implementację i review jako <strong>osobne punkty kontroli</strong>.</li>
+  <li>Jedna osoba odpowiada za finalny diff, testy i decyzję o przyjęciu zmiany.</li>
+  <li>Dodatkowym agentom dawaj tylko <strong>niezależne pliki</strong> i sprawdzaj ich wyniki.</li>
+  <li>Gdy brak tej funkcji, wykonaj te same role kolejno w Copilot Chat/Agent.</li>
+</ul></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">Porównanie: Copilot / opcjonalnie</div><h2>Delegowanie tylko przy niezależnych zadaniach</h2><p>Najpierw ustal kontrakt, właściciela plików i test dla każdej części.</p>
+<ul>
+  <li>Nie przypisuj dwóch wykonawców do tego samego pliku.</li>
+  <li>Każdy wynik wymaga weryfikacji w głównej zmianie.</li>
+</ul></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">Dodatkowy prompt / plan</div><h2>Krótszy plan dla małego zadania</h2><p>Dla małej zmiany możesz użyć <a href="prompts/P04-plan-podzial-pracy.md">krótszego promptu do planowania</a>: 3-5 zadań na podstawie aktualnego PRD. Przy większym projekcie skorzystaj z <a href="prompty.html#P19-plan-matryca">planu z macierzą zależności</a>.</p><div class="prompt-full"><h3>Plan zespołu agentów</h3><div class="prompt-full"><button type="button" class="copy-prompt" data-copy-prompt="prompt-P04-plan-podzial-pracy">Kopiuj prompt</button><pre id="prompt-P04-plan-podzial-pracy" data-prompt-id="P04-plan-podzial-pracy" data-prompt-version="4">Zaplanuj jeden mały fragment funkcjonalności z zatwierdzonego PRD aplikacji AI Chat. Każde zadanie musi mieć właściciela, granice plików, sposób przekazania wyniku i sprawdzenie. Zanim zaproponujesz pracę równoległą, potwierdź możliwości bieżącej wersji Claude Code i przyjęte zasady repozytorium.
+
+Znajdź aktualny zatwierdzony PRD tej aplikacji. Jeśli istnieje kilka kandydatów, zapytaj, który rozstrzyga wymagania. Przeczytaj właściwe ADR-y i wytyczne wizualne, a następnie obejrzyj kod i testy. Nie traktuj przykładów PRD lub ADR z `course-materials/` jako decyzji projektu, chyba że użytkownik jawnie wskaże konkretny plik. Wybierz jeden pionowy fragment, którego działanie można pokazać użytkownikowi albo wywołaniem API. Nie planuj całej aplikacji naraz.
+
+Ustal kryterium akceptacji, stan początkowy, najmniejszy zbiór plików i polecenia lub obserwowalne kontrole dowodzące ukończenia. Jeżeli któregokolwiek elementu nie da się potwierdzić, wypisz konkretne pytania przed rozpoczęciem pracy. W AI Chat sprawdź zwłaszcza kontrakt wiadomości, protokół streamingu, stany React useChat i sposób obsługi awarii dostawcy. Nie dodawaj autoryzacji ani bazy historii, jeśli PRD ich nie wymaga.
+
+Przygotuj tabelę 3-5 zadań. Dla każdego wiersza podaj: ID, wynik, pliki wejściowe i kontekst, rolę właściciela, pliki do edycji, zależności, polecenie lub sposób sprawdzenia oraz konkretną definicję ukończenia. Oznacz zadania sekwencyjne i te, które mogą postępować niezależnie. Jeżeli subagenci i izolowane worktrees są dostępne i uzasadnione, opisz przypisanie rozłącznych zadań. Gdy jeden agent wystarcza, ta sama tabela służy mu za plan; nie wymyślaj komend delegowania innego produktu.
+
+Role AI Chat to `be-developer`, `fe-developer` i `qa-engineer`; uczestnik definiuje je w module 2.3. Przykłady `course-materials/agent-configs/claude/` pozostają nieaktywne. Najpierw ustal właściciela wspólnego kontraktu oraz manifestu i lockfile. Dopiero potem planuj niezależną pracę BE i FE. QA może przygotować scenariusze wcześniej, lecz wykonuje E2E na połączonej i uruchomionej aplikacji. Samo utworzenie worktree nie uruchamia eksperymentalnych Agent Teams.
+
+Test jest rzeczywistą zależnością: zachowanie ze specyfikacji i nieprzechodzący test poprzedzają implementację, kontrola integracji następuje po zmianie komponentów, a końcowy diff i review po całości. Planuj małe commity dopiero po zielonej fazie. Zapisz sposób obsługi nieudanego testu, niespodziewanej cudzej zmiany, niezgodności wersji/API i niedostępnego modelu zewnętrznego. Chroń istniejącą pracę; bez destrukcyjnego resetu i bez osłabiania asercji.
+
+Zatrzymaj się na planie. Zwróć macierz zależności, jeden akapit opisujący ścieżkę krytyczną oraz pierwsze ograniczone zadanie gotowe dla wykonawcy. Jeżeli użytkownik zatwierdził ścieżkę zapisu, zachowaj tam cały plan jako dokument do przeglądu. W przeciwnym razie zaproponuj ścieżkę i zapytaj przed zapisem, nadal przedstawiając treść planu w odpowiedzi. Utworzenie zatwierdzonego dokumentu planu jest dozwolone; implementacja, uruchomienie delegacji, otwarcie PR i merge wymagają osobnego polecenia po przeglądzie planu.
+</pre></div></div></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">Zespół agentów</div><h2>Kiedy delegować, kiedy zostać przy jednym</h2><ul>
+  <li>Rozdziel zadania z <strong>niezależnymi plikami i kryteriami wyniku</strong>.</li>
+  <li>Główny agent uzgadnia interfejsy, zbiera wyniki i uruchamia testy całego przepływu.</li>
+  <li>Nie deleguj współdzielonego pliku dwóm wykonawcom bez kontraktu.</li>
+  <li>Każdy wynik ma listę zmian, testów i ryzyk.</li>
+</ul></div></section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Moduł 2.3</div>
+    <h2>Architektura sub-agentów</h2>
+    <div class="two-col">
+      <div>
+        <h3 class="accent2">Agent tool (dawniej Task)</h3>
+        <div class="card"><ul class="feature-list">
+          <li>Mechanizm uruchamiania sub-agenta przez głównego agenta</li>
+          <li>Główny agent <strong>deleguje</strong> zadanie, sub-agent <strong>wykonuje</strong></li>
+          <li>Sub-agent ma własny kontekst i cele</li>
+          <li>Wynik wraca do głównego agenta</li>
+        </ul></div>
+      </div>
+      <div>
+        <h3 class="accent">Typy agentów</h3>
+        <div class="card amber"><ul class="feature-list">
+          <li><strong>Explore</strong> - szybki, tylko do odczytu, badanie kodu</li>
+          <li><strong>Plan</strong> - planowanie, analiza, strategia</li>
+          <li><strong>Custom</strong> - specjaliści: be-dev, fe-dev, qa, itd.</li>
+        </ul></div>
+        <div class="note-box" style="margin-top:.6rem"><strong>Izolacja kontekstu:</strong> każdy sub-agent ma własny kontekst. Główny agent nie jest zanieczyszczony detalami wykonania.</div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Moduł 2.3</div>
+    <h2>Orkiestracja - główny agent kontroluje</h2>
+    <div class="cards">
+      <div class="card ok"><div class="card-title">Rola głównego agenta</div>
+        <p>Orchestrator. Rozumie całe zadanie, dzieli na podzadania, deleguje do odpowiednich specjalistów, zbiera wyniki.</p>
+      </div>
+      <div class="card amber"><div class="card-title">Delegowanie</div>
+        <p>Główny agent wybiera odpowiedniego sub-agenta do zadania. be-dev do backendu, fe-dev do frontendu, qa do testów.</p>
+      </div>
+      <div class="card"><div class="card-title">Monitorowanie</div>
+        <p>Główny agent śledzi postępy sub-agentów, weryfikuje wyniki, reaguje na błędy i problemy.</p>
+      </div>
+      <div class="card warn"><div class="card-title">Feedback loop</div>
+        <p>Wyniki sub-agenta wracają do głównego agenta. Jeśli coś nie działa, główny agent może poprosić o poprawkę lub przedelegować.</p>
+      </div>
+    </div>
+    <div class="note-box" style="margin-top:.8rem"><strong>Metafora:</strong> główny agent to tech lead. Sub-agenci to członkowie zespołu. Tech lead nie pisze całego kodu - deleguje i weryfikuje.</div>
+  </div>
+  
+</section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Moduł 2.3</div>
+    <h2>Typy sub-agentów w praktyce</h2>
+    <div class="two-col">
+      <div>
+        <h3 class="accent2">Wbudowane typy</h3>
+        <div class="card"><ul class="feature-list">
+          <li><strong>Explore</strong> - badanie kodu, szukanie plików, odpowiadanie na pytania o codebase. Szybki, tylko do odczytu.</li>
+          <li><strong>Plan</strong> - planowanie zadań, analiza wymagań, strategia implementacji.</li>
+        </ul></div>
+      </div>
+      <div>
+        <h3 class="accent">Custom specjaliści</h3>
+        <div class="card amber"><ul class="feature-list">
+          <li><strong>be-developer</strong> - TypeScript, backend, API</li>
+          <li><strong>fe-developer</strong> - React, Vercel AI SDK, UI czatu</li>
+          <li><strong>qa-engineer</strong> - testy, code review, E2E</li>
+          <li>Dowolne inne: data, devops, security, itd.</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="note-box" style="margin-top:1rem"><strong>Konfiguracja:</strong> każdy custom sub-agent ma swój plik instrukcji (podobnie jak CLAUDE.md), określający jego rolę, stack, zasady i ograniczenia.</div>
+  </div>
+  
+</section>
+<section class="slide"><div class="slide-body"><div class="kicker">2.3 / konfiguracja</div><h2>Definicja, pamięć i odpowiedzialność specjalisty</h2><pre class="code-block">---
+name: be-developer
+description: Backend TypeScript i streaming AI Chat
+tools: Read, Glob, Grep, Bash, Edit, Write
+model: sonnet
+permissionMode: default
+memory: project
+---</pre><p>Pod frontmatter zapisz odpowiedzialność, wejścia, pliki, testy i raport. <code>memory</code> jest opcjonalna; bez sekretów i prywatnych treści. Definicje tworzycie samodzielnie w <code>.claude/agents/</code>. Nieaktywne przykłady są w bibliotece konfiguracji.</p><p class="source"><a href="https://code.claude.com/docs/en/sub-agents">Dokumentacja</a> · sprawdzono 18.10.2026</p></div></section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Moduł 2.3 | Zaawansowane</div>
+    <h2>Nested sub-agents - delegowanie dalej</h2>
+    <div class="two-col">
+      <div>
+        <h3 class="accent2">Subagent może uruchamiać własnych subagentów</h3>
+        <div class="card ok"><ul class="feature-list">
+          <li>W bieżących wersjach subagent może delegować dalej w granicach konfiguracji</li>
+          <li>Warunek: subagent ma <code>Agent</code> na liście <code>tools</code> w swojej definicji</li>
+          <li>Limit głębokości jest konfigurowalny przez <code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code>; wartość 1 wyłącza dalsze delegowanie</li>
+          <li>Do głównej rozmowy wraca tylko podsumowanie subagenta najwyższego poziomu</li>
+        </ul></div>
+      </div>
+      <div>
+        <h3 class="accent">Kiedy używać, kiedy nie</h3>
+        <div class="card amber"><ul class="feature-list">
+          <li>Użyj, gdy delegowane zadanie samo dzieli się na podzadania (np. reviewer odpala weryfikatora per finding)</li>
+          <li>Prostsza alternatywa: sekwencja subagentów sterowana z głównej sesji</li>
+          <li>Skills dla powtarzalnej procedury, workflow/skrypt dla złożonej orkiestracji</li>
+          <li>Zawsze jawne limity równoległości, czasu i kosztu</li>
+        </ul></div>
+        <div class="note-box" style="margin-top:.6rem"><strong>Praktyka:</strong> zagnieżdżenie zwiększa autonomię, ale utrudnia kontrolę i debugowanie - zaczynaj od płaskiego łańcucha z orkiestratorem, zagnieżdżaj dopiero gdy pośrednie wyniki naprawdę nie powinny trafiać do głównego kontekstu.</div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Moduł 2.3 | Poza Claude</div>
+    <h2>Porównanie narzędzi: wzorzec subagentów</h2>
+    <div class="two-col">
+      <div>
+        <h3 class="accent2">Wzorzec zespołu specjalistów</h3>
+        <div class="card ok"><ul class="feature-list">
+          <li>Ten sam wzorzec <strong>zespołu specjalistów</strong> działa poza Claude</li>
+          <li>To nie jest funkcja unikalna dla jednego narzędzia</li>
+          <li>Przenosi się wzorzec ról (be-dev, fe-dev, qa), ale definicje wymagają adaptacji do harnessu</li>
+          <li>Koncept orkiestratora + wykonawców jest uniwersalny</li>
+        </ul></div>
+      </div>
+      <div>
+        <h3 class="accent">Gdzie działa ten sam wzorzec</h3>
+        <div class="card amber"><ul class="feature-list">
+          <li><strong>Codex</strong> (OpenAI)</li>
+          <li><strong>Antigravity</strong></li>
+          <li><strong>Cursor</strong></li>
+          <li><strong>Copilot</strong></li>
+          <li><strong>OpenCode</strong></li>
+          <li><strong>Goose</strong></li>
+        </ul></div>
+        <div class="note-box" style="margin-top:.6rem"><strong>Praktyka:</strong> nie przenoś plików konfiguracyjnych 1:1. Składnia narzędzi, uprawnienia i model komunikacji różnią się między harnessami.</div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<section class="slide"><div class="slide-body"><div class="kicker">2.3 / praktyka</div><h2>Pierwsze zadania dla trzech specjalistów</h2><div class="cards"><div class="card"><h3>be-developer</h3><p>Kontrakt <code>/api/chat</code>, walidacja i prawdziwy streaming. Najpierw test odpowiedzi i błędu, potem implementacja.</p></div><div class="card"><h3>fe-developer</h3><p>React <code>useChat</code>, pole wiadomości, historia bieżącej rozmowy i stany UI. Pracuje według uzgodnionego kontraktu.</p></div><div class="card"><h3>qa-engineer</h3><p>Scenariusze, review diffu i testy. E2E uruchamia po integracji backendu i frontendu.</p></div></div><p>Główny agent otrzymuje raporty, sprawdza diff i wyniki, a Ty akceptujesz zachowanie. Jeden właściciel kontraktu i lockfile. <a href="prompty.html#P28-subagenci">Pełny prompt definicji i briefów</a>.</p></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">3.1 / zespoły agentów</div><h2>Subagenci, Agent Teams i osobne sesje</h2><ul><li>Subagent: zadanie w oddzielnym kontekście, raport wraca do wywołującego. Narzędzie <code>Agent</code>, dawniej <code>Task</code>; stary zapis pozostaje aliasem.</li><li>Agent Teams: eksperymentalna koordynacja zadań i komunikacja między agentami. Domyślnie wyłączona; wymaga <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code>.</li><li>W bieżącej dokumentacji teammate wymaga sesji interaktywnej. <code>-p</code> uruchamia zwykłą delegację, nie teammate.</li><li>Osobne sesje w worktrees: izolacja plików Git. Sama obecność worktree nie uruchamia Agent Teams.</li><li>W ćwiczeniu kontrolujesz plan, właścicieli plików, dowody, integrację i sprzątanie katalogów. Nie włączaj eksperymentu bez sprawdzenia wersji.</li></ul><p class="source"><a href="https://code.claude.com/docs/en/agent-teams">Dokumentacja</a> · sprawdzono 18.10.2026</p></div></section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">3.1 - narzędzie</div>
+    <h2>Git worktrees - równoległe środowiska</h2>
+    <p>Git worktree pozwala mieć wiele checkout-ów tego samego repozytorium w osobnych katalogach. Każdy agent pracuje w swoim katalogu bez blokowania innych.</p>
+    <div class="code-block"># Tworzenie worktree dla agenta backend
+git worktree add -b feature/chat-stream ../project-be</div>
+    <div class="code-block"># Tworzenie worktree dla agenta frontend
+git worktree add -b feature/frontend-chat ../project-fe</div>
+    <div class="code-block"># Tworzenie worktree dla agenta testów E2E
+git worktree add -b feature/e2e-tests ../project-e2e</div>
+    <div class="code-block"># Lista aktywnych worktrees
+git worktree list</div>
+    <div class="two-col">
+      <div>
+        <div class="card ok">
+          <div class="card-title">Zalety worktrees</div>
+          <ul class="feature-list check">
+            <li>Każdy agent ma izolowane środowisko plików</li>
+            <li>Nie trzeba klonować repo wielokrotnie</li>
+            <li>Współdzielona historia git (jeden .git)</li>
+            <li>Scalenie do gałęzi integracyjnej po review i testach</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card warn">
+          <div class="card-title">Na co uważać</div>
+          <ul class="feature-list">
+            <li>Ten sam branch nie może być checkout w dwóch worktrees</li>
+            <li>Należy czyścić worktrees po merge (<span class="code-inline">git worktree remove</span>)</li>
+            <li>Każdy worktree potrzebuje właściwych zależności; uwzględnij dysk, RAM i osobne porty</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<section class="slide"><div class="slide-body"><div class="kicker">3.1 / plan zależności</div><h2>Task Plan Matrix dla AI Chat</h2><div class="cards"><div class="card"><h3>1. Backend</h3><p>Wynik: wybrane rozszerzenie endpointu zgodne z PRD. Zależność: zatwierdzony kontrakt. Własny worktree i testy integracyjne.</p></div><div class="card"><h3>2. Frontend</h3><p>Wynik: obsługa rozszerzenia w UI. Zależność: ten sam kontrakt. Inny worktree i pliki; bez równoległej edycji lockfile.</p></div><div class="card"><h3>3. QA</h3><p>Równolegle przygotowuje scenariusze i testy. Uruchomienie E2E zależy od scalenia BE/FE i startu aplikacji.</p></div></div><p>Każdy wiersz: ID, rezultat, zależności, właściciel, ścieżki, test, kontrola człowieka i stan. Po integracji rozwiąż konflikt, przeczytaj wynik i ponownie sprawdź całość. <a href="prompty.html#P19-plan-matryca">Pełny prompt macierzy</a>.</p></div></section>
+<section class="slide dark">
+  <div class="slide-body title-body">
+    <div class="kicker">Dodatek do modułu 3.1</div>
+    <h2>Workflows<br><span class="accent">nowoczesna orkiestracja</span></h2>
+    <div class="subtitle">Naturalna ewolucja sesji w worktrees: zamiast uruchamiać agentów ręcznie, piszesz skrypt, który orkiestruje ich pracę</div>
+  </div>
+  
+  
+</section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">3.1 - taksonomia automatyzacji</div>
+    <h2>Workflow - cztery mechanizmy</h2>
+    <p>Workflow to szerokie pojęcie: może być batchem sub-agentów, hookiem, pętlą celu albo zadaniem cyklicznym - wybierz mechanizm do charakteru pracy.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-title">Batch scripts</div>
+        <p>Skrypt orkiestruje wielu sub-agentów naraz, np. CSV z listą zadań - każdy wiersz to osobne uruchomienie z własnym kontekstem.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Hooks</div>
+        <p>Deterministyczne zdarzenia: agent reaguje na moment, np. po zapisie pliku lub przed committem - powtarzalnie i bez ręcznego startu.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Goals / loops</div>
+        <p>Agent dostaje cel wysokiego poziomu, sam planuje kroki i działa w pętli aż cel zostanie osiągnięty - najbardziej autonomiczny wariant.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Schedules / cron</div>
+        <p>Zadanie cykliczne uruchamiane bez ręcznego startu - np. codzienny review zmian albo nocne odpalenie batcha.</p>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>Skalowanie:</strong> to kontrolowany batch i limit współbieżności, nie bezwarunkowe uruchomienie setek agentów naraz. Limituj też głębokość zagnieżdżenia sub-agentów.
+    </div>
+  </div>
+  
+  
+</section>
+<section class="slide"><div class="slide-body"><div class="kicker">3.1 / kontrola pracy</div><h2>Orkiestracja, którą potrafisz sprawdzić</h2><ul><li>Jeden koordynator utrzymuje zakres z PRD i plan zależności; wykonawcy dostają kompletne, ograniczone briefy.</li><li>Raport wykonawcy nie zamyka zadania: potrzebujesz diffu, wyników testów i uruchomienia właściwego przepływu.</li><li>Wspólny stan zapisz w uzgodnionym planie lub systemie zadań. Kolejna sesja odtwarza decyzje z dokumentów i bieżącego repozytorium.</li><li>W AI Chat porównaj czas jednego wykonawcy i dwóch niezależnych ról. Uwzględnij koszt integracji, poprawki oraz sprzątanie worktrees.</li></ul></div></section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Akt 1</div>
+    <h2>Konstytucja orkiestratora</h2>
+    <div class="demo-flow">
+      <div class="df-step"><div class="df-num">1</div><div class="df-text"><strong>Plik globalnych instrukcji orkiestratora</strong> - tabela modeli: koszt, inteligencja, taste, rola. Orkiestrator NIE robi pracy masowej - deleguje i weryfikuje.</div></div>
+      <div class="df-step"><div class="df-num">2</div><div class="df-text"><strong>Plik STATE.md misji</strong> - wzorzec "single source of truth". Każda nowa sesja (inne konto, inny dzień) czyta ten plik i kontynuuje bez pytania od zera.</div></div>
+      <div class="df-step"><div class="df-num">3</div><div class="df-text"><strong>Sekcja SUCCESSOR QUICKSTART</strong> i Progress log w STATE.md - następcy wiedzą co już zrobiono i co dalej.</div></div>
+      <div class="df-step"><div class="df-num">4</div><div class="df-text"><strong>Zasada kluczowa:</strong> markdown (instrukcje) to prośba, permissions (uprawnienia systemowe) to prawo. Nawiązanie do slajdu o hookach.</div></div>
+    </div>
+  </div>
+  
+  
+</section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Akt 2</div>
+    <h2>Delegacja na żywo</h2>
+    <div class="demo-flow">
+      <div class="df-step"><div class="df-num">1</div><div class="df-text"><strong>Wzorzec "wrappera":</strong> tani model uruchamia CLI innego, tańszego modelu i wraca z krótkim raportem zamiast surowych plików. Dlaczego wrapper? Kontekst orkiestratora jest drogi - raport, nie surowe pliki.</div></div>
+      <div class="df-step"><div class="df-num">2</div><div class="df-text"><strong>Odpal coś małego (2-3 min):</strong> np. drugi model czytający README i wypisujący 3 ryzyka. W trakcie oczekiwania omów dlaczego wrapper, a nie bezpośrednio.</div></div>
+      <div class="df-step"><div class="df-num">3</div><div class="df-text"><strong>Pokaż raporty z nocnej pracy agentów</strong> (katalog <span class="code-inline">reports/</span> w repozytorium misji - pokazuję je na żywo) - w tym raport z budowy tych slajdów.</div></div>
+      <div class="df-step"><div class="df-num">4</div><div class="df-text"><strong>Pokaż historię commitów repozytorium misji</strong> (<span class="code-inline">git log --oneline</span>) - pełny audit trail misji. Każdy strumień pracy miał osobny branch, ale commity wykonywał orkiestrator lub skrypt, nigdy model w sandboxie.</div></div>
+    </div>
+  </div>
+  
+</section>
+<section class="slide"><div class="slide-body"><div class="kicker">Ćwiczenie / dane</div><h2>Praca na syntetycznym zbiorze</h2><p>W <a href="https://github.com/LucasMatuszewski/jsystems-claude-code-2026-10/tree/main/course-materials/exercise-data">danych ćwiczeniowych</a> znajdziesz syntetyczne pliki <code>csv/complaints.csv</code> i <code>csv/products.csv</code>. Korzystają z nich prompty na kolejnych slajdach.</p>
+<ul>
+  <li>Zdefiniuj regułę jakości danych, a potem zleć agentowi mały skrypt kontrolny.</li>
+  <li>Najpierw pokaż oczekiwane wiersze i przypadek błędny. Następnie uruchom kontrolę na pełnym zbiorze.</li>
+</ul></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">Dane / pełny prompt</div><h2>Syntetyczne dane i testy</h2><p>Skopiuj prompt poniżej lub otwórz <a href="prompts/P06-dane-syntetyczne.md">plik Markdown</a> albo <a href="prompty.html#P06-dane-syntetyczne">bibliotekę promptów</a>.</p><div class="prompt-full"><h3>Analiza danych syntetycznych</h3><div class="prompt-full"><button type="button" class="copy-prompt" data-copy-prompt="prompt-P06-dane-syntetyczne">Kopiuj prompt</button><pre id="prompt-P06-dane-syntetyczne" data-prompt-id="P06-dane-syntetyczne" data-prompt-version="3">Pracuj wyłącznie na syntetycznych plikach z repozytorium kursowego: `course-materials/exercise-data/csv/complaints.csv` i `course-materials/exercise-data/csv/products.csv`. Otwórz tylko te wskazane materiały ćwiczeniowe; nie traktuj innych plików w `course-materials/` jako wymagań aplikacji. Nie używaj danych klientów ani produkcyjnych baz.
+
+Najpierw pokaż nagłówki, liczbę wierszy i sposób połączenia `complaints.product_id` z `products.id`. Rozróżnij reklamacje (`type=complaint`) od zwrotów (`type=return`). Wybierz jedną ścieżkę:
+
+- **SQL:** zbuduj lokalną bazę SQLite z tych CSV. Policz reklamacje według kategorii produktu. Pokaż zapytanie i wynik. Sprawdź go niezależnie w Pythonie lub ręcznie na próbce.
+- **Python:** sprawdź brakujące wartości, duplikaty identyfikatorów i zgłoszenia bez odpowiadającego produktu. Napisz test funkcji liczącej reklamacje według kategorii, uwzględniając produkt bez zgłoszeń i błędny `product_id`. Pokaż czerwony test, najmniejszą implementację i zielony wynik.
+
+Zapisz polecenia, wyniki i rozbieżności. Sama liczba reklamacji nie jest &quot;wskaźnikiem reklamacji&quot;: w danych brakuje liczby sprzedanych sztuk.
+</pre></div></div></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">SQL / pełny prompt</div><h2>Weryfikacja wyników drugim sposobem</h2><p>Skopiuj prompt poniżej lub otwórz <a href="prompts/P09-sql-weryfikacja.md">plik Markdown</a> albo <a href="prompty.html#P09-sql-weryfikacja">bibliotekę promptów</a>.</p><div class="prompt-full"><h3>Analiza na danych syntetycznych</h3><div class="prompt-full"><button type="button" class="copy-prompt" data-copy-prompt="prompt-P09-sql-weryfikacja">Kopiuj prompt</button><pre id="prompt-P09-sql-weryfikacja" data-prompt-id="P09-sql-weryfikacja" data-prompt-version="3">Pracuj wyłącznie na syntetycznych plikach `course-materials/exercise-data/csv/complaints.csv` i `course-materials/exercise-data/csv/products.csv` z repozytorium kursowego. Otwórz tylko te wskazane materiały ćwiczeniowe. Nie łącz się z produkcyjną bazą ani zewnętrzną usługą.
+
+Najpierw sprawdź nagłówki, liczbę wierszy, puste wartości, duplikaty `id` i powiązanie `complaints.product_id` z `products.id`. Zbuduj lokalną bazę SQLite lub użyj narzędzia, które już masz. Zapisz sposób importu bez zmieniania danych wejściowych.
+
+Przygotuj zapytanie pokazujące liczbę reklamacji (`type=complaint`) według produktu i kategorii. Uwzględnij produkty bez reklamacji. Pokaż pełny SQL oraz wynik. Nie nazywaj liczby zgłoszeń &quot;wskaźnikiem reklamacji&quot;, bo nie znamy liczby sprzedanych sztuk.
+
+Zweryfikuj wynik drugim sposobem: niezależną agregacją w Pythonie albo innym zapytaniem SQL, nie kopią tego samego `SELECT`. Porównaj wyniki wiersz po wierszu. Dodaj test z nieistniejącym `product_id` i pokaż, czy kontrola integralności go wykrywa.
+
+Zapisz `docs/analysis-report.md`: definicję metryki, zapytania, wyniki obu metod, rozbieżności i ograniczenia interpretacji. Przed edycją pokaż plan plików i testów; po pracy pokaż polecenia, wynik i diff.
+</pre></div></div></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">05 / sprawdzenie w praktyce</div><h2>Pokaż działanie i napraw prawdziwy błąd</h2><p>Poproś agenta o przejście rzeczywistego przepływu. Jeśli aplikacja ma UI, niech użyje Playwright lub Chrome DevTools i pokaże zrzut oraz wynik nawigacji klawiaturą.</p>
+<ul>
+  <li>Sprawdź też <strong>ręcznie</strong> najważniejszą ścieżkę użytkownika.</li>
+  <li>Wybierz błąd lub rozbieżność z PRD, zlec poprawkę agentowi i uruchom testy ponownie.</li>
+  <li>Jeśli skończy się czas lub kredyty - zapisz stan, testy i następny krok.</li>
+</ul></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">AI Chat / pełny prompt</div><h2>Własny zespół subagentów AI Chat</h2><p>Pełne zadanie do pracy na własnym AI Chat, z kryteriami i dowodami.</p><details><summary>Otwórz pełny prompt</summary><button type="button" class="copy-prompt" data-copy-prompt="slide-P28-subagenci">Kopiuj pełny prompt</button><pre id="slide-P28-subagenci" data-prompt-id="P28-subagenci" data-prompt-version="1">Na podstawie aktualnego `docs/PRD.md`, właściwych ADR-ów i instrukcji repozytorium pomóż mi zdefiniować zespół Claude Code do budowy AI Chat. Najpierw przeczytaj strukturę aplikacji, sprawdź kontrakt streamingu i polecenia testów. Nie uruchamiaj agentów ani implementacji w tym zadaniu.
+
+Przygotuj własne definicje `.claude/agents/be-developer.md`, `.claude/agents/fe-developer.md` i `.claude/agents/qa-engineer.md`. Porównaj je z nieaktywnymi przykładami `course-materials/agent-configs/claude/agents/`, otwierając tylko te trzy wskazane pliki. Każda definicja ma poprawny frontmatter `name`, `description`, `tools`, `model` oraz świadomie dobrany `permissionMode`. Opcjonalne `memory: project` uzasadnij i wskaż, jak zapobiec zapisaniu sekretów lub danych rozmów. Zweryfikuj składnię w bieżących dokumentach Claude Code i wersji CLI; nie odtwarzaj kreatora `/agents` ze starego kursu.
+
+Backend odpowiada za walidację wiadomości, integrację dostawcy i endpoint zgodny z protokołem streamingu AI SDK UI. Frontend odpowiada za React `useChat`, wyświetlanie `parts`, stany wysyłania, błędu i kontynuacji rozmowy. QA sprawdza kryteria PRD, testy, działanie rzeczywistej aplikacji i ryzyka bezpieczeństwa. Każda rola ma zacząć od wymagań, zapisać dowód nieprzechodzącego testu, a następnie najkrótszą poprawną implementację. Nie nadaj automatycznie uprawnień do push, deploy, sekretów ani dalszej delegacji.
+
+Dla każdej roli zapisz: kiedy ją wywołać, wejścia i zależności, dozwolone pliki, obszary poza zadaniem, narzędzia, oczekiwany raport i moment zatrzymania. Wspólny kontrakt API, `package.json` i lockfile muszą mieć jednego wskazanego właściciela. BE i FE mogą pracować równolegle dopiero po ustaleniu kontraktu; QA może wcześniej przygotować scenariusze, lecz test całej aplikacji wymaga integracji.
+
+Zaproponuj po jednym małym pierwszym zadaniu, z jasnym kryterium i testem. Pokaż prompt delegowania przez `Agent` (starsza nazwa: `Task`) i sposób weryfikacji raportu. Główny agent ma odczytać diff i uruchomić właściwe sprawdzenie, a człowiek zatwierdza zachowanie. Rozróżnij zwykłych subagentów od eksperymentalnych Agent Teams; nie włączaj Teams w tle. Jeśli brakuje kontraktu lub ścieżek, zapytaj zamiast je wymyślać. Zakończ po przeglądzie definicji i briefów; delegowanie zlecę osobno.
+</pre></details><p><a href="prompty.html#P28-subagenci">Biblioteka promptów</a></p></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">AI Chat / pełny prompt</div><h2>Streaming AI Chat metodą TDD</h2><p>Pełne zadanie do pracy na własnym AI Chat, z kryteriami i dowodami.</p><details><summary>Otwórz pełny prompt</summary><button type="button" class="copy-prompt" data-copy-prompt="slide-P29-tdd-chat">Kopiuj pełny prompt</button><pre id="slide-P29-tdd-chat" data-prompt-id="P29-tdd-chat" data-prompt-version="1">Pracujemy nad AI Chat opisanym w aktualnym PRD i ADR. Zaimplementuj tylko najbliższy zatwierdzony pionowy fragment: wysłanie wiadomości z React do backendu i stopniowe wyświetlenie odpowiedzi. Najpierw sprawdź stan repozytorium, istniejące testy, wersje AI SDK oraz faktyczne polecenia z manifestu. Jeśli kontrakt endpointu albo zakres PRD jest niejasny, zatrzymaj zależną część i zadaj konkretne pytanie.
+
+Zastosuj Red -&gt; Green -&gt; Refactor. Wyprowadź testy z kryteriów akceptacji: poprawne wysłanie, pusta wiadomość, przyrost odpowiedzi i awaria dostawcy. Uruchom nowe testy przed kodem produkcyjnym i zachowaj ich dokładny wynik. Nie uznawaj braku zależności, błędu importu lub niedziałającej infrastruktury za oczekiwany Red. Implementuj minimum, uruchom ten sam test i dopiero potem refaktoryzuj przy zielonej weryfikacji. Nie zmieniaj asercji tylko po to, aby uzyskać sukces.
+
+Rozdziel pracę zgodnie z przyjętą macierzą. `be-developer` otrzymuje endpoint i integrację dostawcy, `fe-developer` otrzymuje UI i `useChat`; `qa-engineer` przegląda scenariusze i dowody. Nie uruchamiaj pracy równoległej nad tym samym plikiem, kontraktem ani lockfile. Gdy jeden agent wystarcza do tego fragmentu, uzasadnij to zamiast mnożyć procesy.
+
+Przed odtworzeniem mocka odpowiedzi usługi wykonaj świeże, autoryzowane żądanie w środowisku testowym na danych syntetycznych. Zachowaj pełny, bezpieczny status, nagłówki i body oraz datę, wersję i żądanie bez poświadczeń. Jeśli nie można uzyskać bezpiecznego capture, zgłoś brak warunku zamiast wymyślać protokół. Unit może zastępować zależności; integration zastępuje tylko zewnętrzny model; końcowe E2E działa na prawdziwym stosie.
+
+Sprawdź aktualne API `useChat` i serwerowego streamingu przez Context7. Nie mieszaj przykładów starszego `ai/react` z nowym transportem. Sekret dostawcy pozostaje wyłącznie na serwerze. Treść modelu traktuj jako niezaufaną. Nie dodawaj logowania, bazy ani nowych funkcji poza PRD.
+
+Po zielonych testach osobno potwierdź uruchomienie aplikacji. Przejdź rzeczywisty przepływ w przeglądarce: wpisz wiadomość, wyślij, zobacz przyrost odpowiedzi, zadaj drugie pytanie i sprawdź zachowanie po błędzie. Zachowaj screenshot oraz błędy konsoli. Raportuj pliki, kryteria, Red i Green, wyniki ze zliczeniem pominięć oraz ograniczenia. Commit wykonuj dopiero po przejrzeniu diffu, dodając jawne ścieżki plików; publikację i merge uzgadniamy osobno.
+</pre></details><p><a href="prompty.html#P29-tdd-chat">Biblioteka promptów</a></p></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">1.4 / scaffold i kontrakt</div><h2>Od ADR do działającego szkieletu AI Chat</h2><ul><li>Zatwierdź PRD i ADR przed scaffoldem. Agent dobiera szablon z oficjalnych przykładów Vercel AI SDK, bez gotowej aplikacji w materiałach.</li><li>Zapisz wybrane wersje i rzeczywiste polecenia w README. Sprawdź osobno kompilację, start oraz pierwszą stronę.</li><li>Aktualny kierunek API: <code>useChat</code> z <code>@ai-sdk/react</code>, transport do endpointu, wiadomości z <code>parts</code>; serwer <code>streamText</code> i odpowiedź zgodna z UI message stream.</li><li>To punkty do sprawdzenia w dokumentacji wersji projektu, nie kod do skopiowania z innej generacji SDK. Klucz modelu zostaje na serwerze.</li></ul><p class="source"><a href="https://ai-sdk.dev/docs/ai-sdk-ui/chatbot">Dokumentacja</a> · sprawdzono 18.10.2026</p></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">2.4 / TDD i integracja</div><h2>Integracja: backend i useChat muszą mówić tym samym protokołem</h2><ul><li>Ustal wejście wiadomości, format UI message stream i zachowanie końca lub przerwania strumienia.</li><li>FE: wiadomość trafia do listy, tekst przyrasta, błędy są czytelne, druga wiadomość zachowuje kontekst.</li><li>BE: walidacja przed wywołaniem modelu, poprawne przekazanie strumienia, obsługa błędu dostawcy i rozłączenia.</li><li>W Red -> Green -> Refactor zachowaj wynik pierwszego nieprzechodzącego testu. Zielony test nie zastępuje rzeczywistego uruchomienia.</li><li>Po integracji uruchom UI i wyślij prawdziwą wiadomość. Commituj małą sprawdzoną fazę, jawnie dodając pliki do stagingu.</li></ul><p><a href="prompty.html#P29-tdd-chat">Pełny prompt implementacji TDD</a> · <a href="cwiczenia.html#modul-2-4">Ćwiczenie integracji</a></p></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">3.1 / integracja</div><h2>Merge, konflikt i sprzątanie worktrees</h2><ul><li>Zatrzymaj zapisy obu agentów. Sprawdź ich raporty i commity, a potem scal do własnej gałęzi integracyjnej.</li><li>Konflikt rozwiązuj według PRD i kontraktu, nie przez przyjęcie całego pliku jednej strony. Uruchom testy obu obszarów oraz E2E.</li><li>Zatrzymaj serwery i procesy w ukończonych katalogach. Sprawdź <code>git status</code> oraz <code>git worktree list</code>.</li><li>Usuń wyłącznie własne ukończone worktrees przez <code>git worktree remove ŚCIEŻKA</code>, następnie <code>git worktree prune</code>. Nie kasuj katalogów z cudzą lub niezatwierdzoną pracą.</li></ul><p><a href="https://git-scm.com/docs/git-worktree">Git worktree</a> · <a href="cwiczenia.html#modul-3-1">Ćwiczenie pracy równoległej</a></p></div></section>
+</div><script src="materialy/schedule.js"></script><script src="materialy/deck-runtime.js"></script><script>(function(){const KEY='developer-course-theme';function setTheme(value){const t=value==='light'?'light':'dark';document.body.dataset.theme=t;document.body.classList.toggle('light',t==='light');document.querySelectorAll('[data-theme-toggle]').forEach(b=>{const label=t==='dark'?'Przełącz na jasny motyw':'Przełącz na ciemny motyw';b.setAttribute('aria-label',label);b.setAttribute('title',label)})}try{setTheme(localStorage.getItem(KEY)||'dark')}catch(_){setTheme('dark')}document.querySelectorAll('[data-theme-toggle]').forEach(b=>b.addEventListener('click',()=>{const next=document.body.dataset.theme==='dark'?'light':'dark';setTheme(next);try{localStorage.setItem(KEY,next)}catch(_){}}));document.querySelectorAll('[data-copy-prompt]').forEach(b=>{const target=document.getElementById(b.dataset.copyPrompt);if(target?.dataset.promptId)b.setAttribute('aria-label','Kopiuj prompt '+target.dataset.promptId);const live=document.createElement('span');live.className='copy-status-live';live.setAttribute('role','status');live.setAttribute('aria-live','polite');b.after(live);b.addEventListener('click',async()=>{const pre=document.getElementById(b.dataset.copyPrompt);if(!pre)return;const txt=pre.textContent;let copied=false;try{await navigator.clipboard.writeText(txt);copied=true}catch(_){}if(!copied){const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{copied=document.execCommand('copy')===true}catch(_){}ta.remove()}if(!copied){const range=document.createRange();range.selectNodeContents(pre);const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range)}const old=b.dataset.copyLabel||b.textContent;b.dataset.copyLabel=old;b.dataset.copyState=copied?'success':'manual';b.textContent=copied?'Skopiowano':'Zaznaczono - Ctrl+C';live.textContent=copied?'Prompt skopiowany do schowka.':'Nie udało się skopiować. Tekst zaznaczono; naciśnij Ctrl+C.';clearTimeout(b._copyReset);b._copyReset=setTimeout(()=>{b.textContent=old;delete b.dataset.copyState;live.textContent=''},2200)})})})();</script><footer class="course-trainer-credit" aria-label="Trener i profile"><span>JSystems</span><span>Trener: Łukasz Matuszewski</span><span class="trainer-socials"><a href="https://www.linkedin.com/in/lukaszmatuszewski/" aria-label="Łukasz Matuszewski na LinkedIn">LinkedIn</a> · <a href="https://x.com/mrLumatic" aria-label="Łukasz Matuszewski na X">X</a></span></footer>
+</body></html>

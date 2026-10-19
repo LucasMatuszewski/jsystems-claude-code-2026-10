@@ -1,0 +1,407 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Narzędzia | Claude Code - od zera do zespołu agentów AI</title><style>
+:root{
+  /* Slajdy tytulowe (granat/biel/zloto) - identyczne w obu motywach */
+  --dark-bg:#0f172a;--dark-bg2:#1e293b;--dark-text:#f1f5f9;
+  /* Motyw domyslny: dark (Tokyo Night) */
+  --bg:#1a1b26;--bg2:#24283b;--bg3:#2f3549;
+  --text:#c0caf5;--heading:#e6ecff;
+  --accent:#e0af68;--accent2:#7aa2f7;--accent3:#9ece6a;
+  --muted:#7d84a8;--danger:#f7768e;
+  --code-bg:#16161e;--code-text:#a9b1d6;
+  --note-bg:rgba(224,175,104,.09);--note-bd:rgba(224,175,104,.35);--note-text:#e6c187;
+
+}
+body.light{
+  --bg:#ffffff;--bg2:#f1f5f9;--bg3:#e2e8f0;
+  --text:#1e293b;--heading:#0f172a;
+  --accent:#d97706;--accent2:#2563eb;--accent3:#059669;
+  --muted:#64748b;--danger:#dc2626;
+  --code-bg:#1e293b;--code-text:#e2e8f0;
+  --note-bg:#fef9c3;--note-bd:#facc15;--note-text:#92400e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:clamp(13px,1.4vw,19px)}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#000;overflow:hidden}
+#deck{position:relative;width:100vw;height:100vh}
+.slide{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background:var(--bg);color:var(--text);
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+  overflow-y:auto;overflow-x:hidden;
+}
+.slide.on{opacity:1;pointer-events:auto}
+.slide.dark{background:var(--dark-bg);color:var(--dark-text)}
+.slide a{color:var(--accent2);text-decoration:underline;text-underline-offset:3px}
+.slide.dark a{color:var(--accent)}
+.slide h1,.slide h2,.slide h3{color:var(--heading)}
+.slide.dark h1,.slide.dark h2,.slide.dark h3{color:var(--dark-text)}
+.slide-body{
+  max-width:min(1680px,95vw);margin:0 auto;
+  padding:clamp(2rem,4vh,3rem) clamp(1.6rem,3vw,3.5rem) clamp(1.6rem,3.5vh,2.6rem);
+  min-height:100%;display:flex;flex-direction:column;justify-content:center;
+}
+.title-body{align-items:center;text-align:center}
+.kicker{
+  font-size:.8rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.15em;color:var(--accent);margin-bottom:.5rem;
+}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.15;margin-bottom:1rem}
+h2{font-size:clamp(1.4rem,3vw,2.1rem);font-weight:700;line-height:1.2;margin-bottom:.9rem}
+h3{font-size:clamp(1.1rem,2.2vw,1.6rem);font-weight:600;margin-bottom:.8rem}
+h4{font-size:1rem;font-weight:600;margin-bottom:.4rem}
+p{font-size:clamp(.95rem,1.6vw,1.15rem);line-height:1.6;margin-bottom:.6rem}
+.subtitle{font-size:clamp(1rem,1.9vw,1.3rem);opacity:.8;margin-bottom:1rem}
+.accent{color:var(--accent)}
+.accent2{color:var(--accent2)}
+.accent3{color:var(--accent3)}
+.danger{color:var(--danger)}
+.title-meta{
+  display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;
+  font-size:1.1rem;opacity:.85;margin-bottom:1.5rem;
+}
+.title-meta div{padding:.3rem .8rem;background:rgba(255,255,255,.08);border-radius:8px}
+.break-badge{
+  background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);
+  border-radius:12px;padding:1rem 1.5rem;margin-top:1rem;display:inline-block;
+}
+.break-badge .bb-label{
+  font-size:.75rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--accent);margin-bottom:.5rem;
+}
+.break-badge .bb-items{display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center;font-size:.9rem}
+.break-badge .bb-items span::before{content:"\25CF";color:var(--accent);margin-right:.4rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:.5rem}
+/* Symetryczne siatki: 4 kafle = 2x2, 5-6 kafli = 3 kolumny (zamiast 3+1 / 4+1) */
+.cards:has(> :nth-child(4):last-child){grid-template-columns:repeat(2,1fr)}
+.cards:has(> :nth-child(5):last-child),.cards:has(> :nth-child(6):last-child){grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.cards:has(> :nth-child(5):last-child),.cards:has(> :nth-child(6):last-child){grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.cards{grid-template-columns:1fr !important}}
+.card{
+  background:var(--bg2);border-radius:10px;padding:1rem 1.2rem;
+  border-left:4px solid var(--accent2);
+}
+.card.warn{border-left-color:var(--danger)}
+.card.ok{border-left-color:var(--accent3)}
+.card.amber{border-left-color:var(--accent)}
+.card-title{font-weight:700;color:var(--accent);margin-bottom:.4rem;font-size:1rem}
+.slide.dark .card{background:var(--dark-bg2)}
+.slide.dark .card-title{color:var(--accent)}
+.feature-list{list-style:none;padding:0}
+.feature-list li{padding:.32rem 0 .32rem 1.6rem;position:relative;font-size:clamp(.9rem,1.5vw,1.05rem);line-height:1.5}
+.feature-list li::before{content:"\25B8";position:absolute;left:.3rem;color:var(--accent);font-weight:700}
+.feature-list.check li::before{content:"\2713";color:var(--accent3)}
+.feature-list.cross li::before{content:"\2717";color:var(--danger)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:.5rem}
+@media(max-width:768px){.two-col{grid-template-columns:1fr}}
+.code-block{
+  background:var(--code-bg);color:var(--code-text);padding:.8rem 1.2rem;border-radius:8px;
+  font-family:Consolas,Monaco,"Courier New",monospace;font-size:.85rem;
+  overflow-x:auto;line-height:1.5;margin:.5rem 0;white-space:pre-wrap;
+  position:relative;border:1px solid rgba(125,132,168,.25);
+}
+.copy-btn{
+  position:absolute;top:.4rem;right:.4rem;
+  background:var(--bg3);color:var(--text);border:1px solid var(--muted);
+  border-radius:6px;font-size:.65rem;padding:.2rem .55rem;cursor:pointer;
+  opacity:.65;transition:opacity .15s;font-family:inherit;
+}
+.copy-btn:hover{opacity:1}
+.copy-btn.ok{background:var(--accent3);color:#0f172a;border-color:var(--accent3);opacity:1}
+.code-inline{
+  background:var(--bg2);padding:.1rem .4rem;border-radius:4px;
+  font-family:Consolas,Monaco,monospace;font-size:.9em;color:var(--accent2);
+}
+.slide.dark .code-inline{background:rgba(255,255,255,.1)}
+.badge{
+  display:inline-block;padding:.2rem .7rem;border-radius:999px;
+  font-size:.75rem;font-weight:700;background:var(--accent);color:#fff;
+}
+.badge.blue{background:var(--accent2)}
+.badge.green{background:var(--accent3)}
+.badge.red{background:var(--danger)}
+.badge.lab{background:var(--accent);color:#1a1b26;font-size:.85rem;padding:.3rem 1rem}
+.note-box{
+  background:var(--note-bg);border:1px solid var(--note-bd);border-radius:8px;
+  padding:.8rem 1.2rem;margin:.5rem 0;font-size:.9rem;color:var(--note-text);
+}
+.slide.dark .note-box{background:rgba(250,204,21,.1);border-color:rgba(250,204,21,.3);color:#fef3c7}
+/* Process map */
+.proc-map{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1rem}
+.proc-step{
+  background:var(--bg2);border-radius:10px;padding:1rem;
+  position:relative;text-align:center;border:2px solid transparent;
+}
+.proc-step .ps-num{
+  width:32px;height:32px;border-radius:50%;background:var(--accent2);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;
+  margin:0 auto .5rem;font-size:.9rem;
+}
+.proc-step.active{border-color:var(--accent);background:rgba(224,175,104,.1)}
+.proc-step.active .ps-num{background:var(--accent)}
+.proc-step.optional{opacity:.6}
+.proc-step.optional .ps-num{background:var(--muted)}
+.proc-step .ps-title{font-weight:600;font-size:.85rem;margin-bottom:.2rem}
+.proc-step .ps-desc{font-size:.75rem;color:var(--muted)}
+.slide.dark .proc-step{background:var(--dark-bg2)}
+.slide.dark .proc-step .ps-desc{color:#94a3b8}
+@media(max-width:900px){.proc-map{grid-template-columns:repeat(2,1fr)}}
+/* Footer */
+.slide-footer{
+  position:fixed;bottom:.4rem;right:1.5rem;font-size:.85rem;
+  color:var(--muted);opacity:.7;z-index:50;pointer-events:none;
+}
+.slide.dark .slide-footer{color:rgba(255,255,255,.3)}
+/* HUD */
+#hud{position:fixed;top:0;left:0;right:0;height:4px;background:rgba(0,0,0,.1);z-index:200}
+#bar{height:100%;width:1%;background:var(--accent);transition:width .3s ease;border-radius:0 3px 3px 0}
+#num{
+  position:fixed;top:.5rem;left:1rem;font-size:.95rem;color:var(--muted);
+  z-index:200;font-variant-numeric:tabular-nums;font-weight:600;
+}
+#clock{
+  position:fixed;top:.5rem;right:3.9rem;font-size:.95rem;color:var(--muted);
+  z-index:200;font-variant-numeric:tabular-nums;
+}
+#theme-btn{
+  position:fixed;top:.3rem;right:1rem;width:34px;height:34px;z-index:210;
+  background:transparent;border:1px solid var(--muted);border-radius:50%;
+  color:var(--muted);cursor:pointer;font-size:1rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;opacity:.7;
+}
+#theme-btn:hover{opacity:1;color:var(--accent)}
+#trainer-credit{
+  position:fixed;bottom:.4rem;left:1.5rem;font-size:.85rem;
+  color:var(--muted);opacity:.7;z-index:50;pointer-events:none;
+}
+.slide.dark #trainer-credit{color:rgba(255,255,255,.3)}
+#shortcut-hint{
+  position:fixed;top:.5rem;left:50%;transform:translateX(-50%);
+  z-index:200;color:var(--muted);pointer-events:none;font-size:.8rem;
+}
+@media(max-width:900px){#shortcut-hint{display:none}}
+#theme-btn .icon-sun,#theme-btn .icon-moon{width:18px;height:18px;display:block}
+#theme-btn .icon-moon{display:none}
+body.light #theme-btn .icon-sun{display:none}
+body.light #theme-btn .icon-moon{display:block}
+/* Nav arrows */
+.nav-arrow{
+  position:fixed;top:50%;transform:translateY(-50%);
+  background:rgba(0,0,0,.25);color:#fff;border:none;width:44px;height:44px;
+  border-radius:50%;font-size:1.3rem;cursor:pointer;z-index:200;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.nav-arrow:hover{background:rgba(0,0,0,.5);transform:translateY(-50%) scale(1.1)}
+.nav-left{left:12px}
+.nav-right{right:12px}
+/* Break banner */
+#breakbar{
+  position:fixed;top:20px;left:50%;
+  transform:translateX(-50%) translateY(-200%);
+  background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;
+  padding:1.2rem 2rem;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.35);
+  z-index:10000;transition:transform .4s ease;min-width:340px;text-align:center;
+}
+#breakbar.show{transform:translateX(-50%) translateY(0)}
+.bb-icon{font-size:1.5rem;margin-bottom:.3rem}
+.bb-title{font-size:1.3rem;font-weight:700}
+.bb-sub{font-size:1rem;opacity:.9;margin-top:.2rem}
+#bb-x{
+  position:absolute;top:.5rem;right:.8rem;background:rgba(255,255,255,.2);
+  border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;
+  font-size:1rem;line-height:1;
+}
+#bb-x:hover{background:rgba(255,255,255,.35)}
+/* Nawigacja klikiem obslugiwana na .slide (linki i przyciski maja priorytet) */
+/* Misc */
+.big-num{font-size:3rem;font-weight:800;color:var(--accent);line-height:1}
+.timeline{display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem}
+.timeline-item{display:flex;gap:1rem;align-items:flex-start;padding:.6rem 1rem;background:var(--bg2);border-radius:8px;border-left:4px solid var(--accent2)}
+.timeline-item.break{border-left-color:var(--accent)}
+.timeline-time{font-weight:700;color:var(--accent);min-width:80px;font-size:.9rem}
+.slide.dark .timeline-item{background:var(--dark-bg2)}
+hr.sep{border:none;border-top:1px solid var(--muted);opacity:.2;margin:1rem 0}
+.slide.dark hr.sep{border-top-color:var(--dark-text);opacity:.15}
+.strike{text-decoration:line-through;opacity:.5}
+.demo-flow{display:flex;flex-direction:column;gap:.6rem;margin-top:.5rem}
+.demo-flow .df-step{display:flex;gap:1rem;align-items:center}
+.df-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0}
+.df-text{font-size:clamp(.85rem,1.4vw,1rem)}
+</style><style>body{overflow:hidden}#deck{height:100vh}.slide{overflow:auto}.slide-body{padding-top:4.5rem;padding-bottom:5rem}.slide h2{max-width:100%}.prompt-full{width:100%;max-width:1000px;text-align:left}.prompt-full pre{max-height:45vh!important}.prompt-full h3{margin:.25rem 0}.prompt-full p{margin:.25rem 0 .5rem}.course-note{border-left:4px solid #e0af68;padding:1rem;background:rgba(224,175,104,.1);border-radius:6px}.recap-breaks{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem .8rem;margin-top:clamp(1.5rem,4vh,2.5rem);padding:.7rem .9rem;border-left:3px solid var(--accent);border-radius:6px;background:var(--accent-soft);font-size:clamp(.8rem,1.3vw,.95rem)}.recap-breaks-label{color:var(--muted);font-weight:600}.recap-breaks time{color:var(--heading);font-weight:700;font-variant-numeric:tabular-nums}#page-count{position:fixed;bottom:18px;right:18px;color:#d7dff8;z-index:101;background:#182334;padding:4px 9px;border-radius:6px}#deck .slide:not(.on){display:none}@media print{html,body[data-page-type="slides"]{overflow:visible!important;height:auto!important;background:#fff!important}body[data-page-type="slides"] #deck{position:static!important;width:auto!important;height:auto!important;overflow:visible!important}body[data-page-type="slides"] #deck .slide,body[data-page-type="slides"] #deck .slide:not(.on){display:block!important;position:relative!important;inset:auto!important;width:auto!important;height:auto!important;min-height:0!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;overflow:visible!important;break-after:page;page-break-after:always}body[data-page-type="slides"] #deck .slide-body{min-height:0!important;max-width:none!important;padding:1.2rem!important;display:block!important}body[data-page-type="slides"] #deck pre[data-prompt-id]{max-height:none!important;overflow:visible!important;white-space:pre-wrap!important;word-break:break-word!important}body[data-page-type="slides"] .course-tools,body[data-page-type="slides"] #hud,body[data-page-type="slides"] #num,body[data-page-type="slides"] #clock,body[data-page-type="slides"] #shortcut-hint,body[data-page-type="slides"] .nav-arrow,body[data-page-type="slides"] #breakbar,body[data-page-type="slides"] .copy-prompt{display:none!important}body[data-page-type="slides"] #deck .slide,body[data-page-type="slides"] #deck .slide.dark{background:#fff!important;color:#111!important}body[data-page-type="slides"] #deck .slide h1,body[data-page-type="slides"] #deck .slide h2,body[data-page-type="slides"] #deck .slide h3{color:#111!important}body[data-page-type="slides"] #deck pre,body[data-page-type="slides"] #deck .code-block{background:#f4f4f4!important;color:#111!important;border:1px solid #aaa!important}}.slide-body ol,.slide-body ul{margin-top:.5rem}.slide-body li{margin:.25rem 0}.slide-body a{color:#9dc8ff}</style><style>.course-tools{position:fixed;z-index:1000;right:16px;top:12px;display:flex;gap:8px;align-items:center}.course-tools a,.course-tools button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 12px;border:1px solid #7890ac;border-radius:9px;background:#182334;color:#fff;text-decoration:none;font:600 14px system-ui;cursor:pointer}.course-tools button svg{width:20px;height:20px}.course-tools .icon-sun{display:none}[data-theme-toggle] .icon-sun,[data-theme-toggle] .icon-moon{width:20px;height:20px}body[data-theme="dark"] [data-theme-toggle] .icon-sun{display:block}body[data-theme="dark"] [data-theme-toggle] .icon-moon{display:none}body[data-theme="light"] [data-theme-toggle] .icon-sun{display:none}body[data-theme="light"] [data-theme-toggle] .icon-moon{display:block}.course-tools button:focus-visible,.course-tools a:focus-visible{outline:3px solid #f7c26d}body[data-course-audience="developer"] pre[data-prompt-id]{white-space:pre-wrap;overflow:auto;max-height:56vh;line-height:1.5;font-size:clamp(12px,1.1vw,15px);padding:1rem;background:#101827;color:#eff5ff;border:1px solid #61799b;border-radius:10px;text-align:left}.copy-prompt{padding:.55rem .9rem;border:1px solid #a9c8ee;border-radius:8px;background:#183252;color:white;font:700 14px system-ui;cursor:pointer}@media print{.course-tools,.copy-prompt{display:none!important}pre[data-prompt-id]{max-height:none!important}}</style><link rel="stylesheet" href="course.css?v=20261017-brand-slots-2"><link rel="icon" type="image/png" href="assets/favicon-32x32.png"></head><body data-course-audience="developer" data-page-type="slides" data-theme="dark">
+<div class="organizer-deck-brand"><img class="course-brand-logo course-brand-logo--header course-brand-logo--light-surface" src="assets/course-organizer.svg" alt="JSystems"></div><div class="course-tools"><a href="index.html">Strona główna</a><button type="button" data-theme-toggle aria-label="Przełącz na jasny motyw"><svg aria-hidden="true" class="icon-sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><line x1="12" x2="12" y1="2" y2="4"></line><line x1="12" x2="12" y1="20" y2="22"></line><line x1="2" x2="4" y1="12" y2="12"></line><line x1="20" x2="22" y1="12" y2="12"></line><line x1="4.93" x2="6.34" y1="4.93" y2="6.34"></line><line x1="17.66" x2="19.07" y1="17.66" y2="19.07"></line><line x1="4.93" x2="6.34" y1="19.07" y2="17.66"></line><line x1="17.66" x2="19.07" y1="6.34" y2="4.93"></line></svg><svg aria-hidden="true" class="icon-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></div><div id="hud"><div id="bar"></div></div><div id="num" aria-live="polite"></div><div id="clock"></div><div id="shortcut-hint">← → nawigacja · F pełny ekran · D motyw</div><button id="prev" class="nav-arrow nav-left" type="button" aria-label="Poprzedni slajd">‹</button><button id="next" class="nav-arrow nav-right" type="button" aria-label="Następny slajd">›</button><div id="breakbar" role="status"><div id="bb-t" class="bb-title"></div><div id="bb-s" class="bb-sub"></div><button id="bb-x" type="button" aria-label="Zamknij komunikat">×</button></div><div id="deck"><section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Moduł 1.1</div>
+    <h2>Pierwsze uruchomienie Claude Code</h2>
+    <div class="two-col">
+      <div>
+        <h3 class="accent2">Co się dzieje przy starcie</h3>
+        <ul class="feature-list">
+          <li>Agent wczytuje <span class="code-inline">CLAUDE.md</span> z katalogu (jeśli istnieje)</li>
+          <li>Może sprawdzić strukturę projektu narzędziami</li>
+          <li>Sprawdzi uprawnienia i konfigurację</li>
+          <li>Pokaże prompt interaktywny</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="accent">Pierwsza interakcja</h3>
+        <div class="code-block">Sprawdź wersje Node.js i Git oraz procesor, RAM i wolne miejsce na tej VM Ubuntu. Nie instaluj niczego.</div>
+        <div class="code-block" style="margin-top:.4rem">policz tokeny pliku README.md wg różnych
+tokenizerów. Wyjaśnij czym jest token
+i tokenizer oraz dlaczego polski tekst
+zajmuje więcej kontekstu niż angielski</div>
+        <div class="code-block" style="margin-top:.4rem">/model</div>
+        <div class="code-block" style="margin-top:.4rem">/context</div>
+        <p style="margin-top:.8rem">Agent sam uruchamia komendy systemowe i czyta pliki projektu - to różni go od zwykłego chatu. Więcej komend <span class="code-inline">/</span> poznamy w module 1.2.</p>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Moduł 1.2 | Tryby pracy</div>
+    <h2>CLI interaktywny vs tryb <span class="code-inline">-p</span></h2>
+    <div class="two-col">
+      <div>
+        <h3 class="accent2">CLI interaktywny</h3>
+        <div class="card"><ul class="feature-list check">
+          <li>Sesja dwukierunkowa, agent pamięta kontekst</li>
+          <li>Komendy <span class="code-inline">/</span> dostępne (<span class="code-inline">/model</span>, <span class="code-inline">/compact</span> itd.)</li>
+          <li>Można wglądać w pliki, edytować, iterować</li>
+          <li>Idealny do codziennej pracy i developmentu</li>
+        </ul></div>
+        <div class="code-block" style="margin-top:.8rem">claude</div>
+      </div>
+      <div>
+        <h3 class="accent">Tryb <span class="code-inline">-p</span> (print)</h3>
+        <div class="card"><ul class="feature-list check">
+          <li>Nieinteraktywna praca, wynik do stdout</li>
+          <li>Domyślnie nowe zapytanie; <code>--resume</code> lub <code>--continue</code> pozwala kontynuować sesję</li>
+          <li>Można pipe'ować (wejście/wyjście)</li>
+          <li>Idealny do skryptów, CI/CD, automatyzacji</li>
+        </ul></div>
+        <div class="code-block" style="margin-top:.8rem">claude -p "przetłumacz README.md na angielski"</div>
+        <div class="code-block" style="margin-top:.4rem">cat error.log | claude -p "wyjaśnij błąd"</div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Moduł 1.2</div>
+    <h2>Kiedy który tryb - podsumowanie</h2>
+    <div class="cards">
+      <div class="card ok"><div class="card-title">CLI interaktywny</div>
+        <p class="accent3"><strong>Codzienna praca - i główny tryb na kursie</strong></p>
+        <ul class="feature-list">
+          <li>Development, refaktoryzacja</li>
+          <li>Debugowanie z pełnym kontekstem</li>
+          <li>Praca z repozytorium</li>
+        </ul>
+      </div>
+      <div class="card amber"><div class="card-title">CLI <span class="code-inline">-p</span></div>
+        <p class="accent"><strong>Skrypty i automatyzacja</strong></p>
+        <ul class="feature-list">
+          <li>CI/CD pipelines</li>
+          <li>Przetwarzanie batchowe</li>
+          <li>Generowanie dokumentacji</li>
+        </ul>
+      </div>
+      <div class="card"><div class="card-title">Desktop App</div>
+        <p class="accent2"><strong>Wizualna praca</strong></p>
+        <ul class="feature-list">
+          <li>Prezentacje i dema</li>
+          <li>Praca z sandbox</li>
+          <li>Gdy wolisz GUI nad terminalem</li>
+        </ul>
+      </div>
+      <div class="card warn"><div class="card-title">Claude Web</div>
+        <p class="danger"><strong>Praca na repozytorium w chmurze</strong></p>
+        <ul class="feature-list">
+          <li>Izolowana maszyna z repozytorium GitHub</li>
+          <li>Osobny branch i praca asynchroniczna</li>
+          <li>Dostęp z przeglądarki</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<section class="slide"><div class="slide-body"><div class="kicker">1.2 / Desktop</div><h2>Claude Desktop: Chat, Code i Cowork</h2><div class="two-col"><div><h3>Na przygotowanej VM Linux</h3><ul><li>Desktop jest zainstalowany; oficjalna wersja Linux ma status beta.</li><li>Chat służy rozmowie, Code pracy programistycznej; nie utożsamiaj czatu z uruchomieniem kodu w repozytorium.</li><li>Do ćwiczeń używamy przede wszystkim Claude Code CLI. Dostępne zakładki i uprawnienia sprawdź na swoim koncie.</li></ul></div><div><h3>Sandbox zależy od systemu</h3><ul><li>Cowork uruchamia zadania w osobnej VM. Na Linuxie potrzebuje KVM, QEMU i uprawnień do wirtualizacji.</li><li>Na maszynach kursowych (8 GB RAM) Cowork nie jest włączony. Nie instaluj ani nie zmieniaj hypervisora podczas ćwiczenia.</li><li>Hyper-V z programu dotyczy Windows. Sandbox poleceń Claude Code na Linuxie to osobny mechanizm.</li></ul></div></div><p class="source"><a href="https://support.claude.com/en/articles/10065433-install-claude-desktop">Dokumentacja</a> · sprawdzono 18.10.2026</p></div></section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Moduł 1.2 | Tryby pracy</div>
+    <h2>Claude Web i remote environments</h2>
+    <div class="two-col">
+      <div>
+        <h3 class="accent2">Praca w przeglądarce</h3>
+        <ul class="feature-list">
+          <li>Chmurowa sesja pracująca na repozytorium GitHub</li>
+          <li>Repo jest klonowane do izolowanej maszyny Anthropic</li>
+          <li>Zmiany trafiają na osobny branch i mogą zakończyć się pull requestem</li>
+          <li>Przydatne, gdy pracujesz na wielu maszynach</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="accent">Remote Control i SSH</h3>
+        <ul class="feature-list">
+          <li>Remote Control pozwala sterować działającą sesją z innego urządzenia</li>
+          <li>SSH uruchamia sesję na wskazanym serwerze lub VM</li>
+          <li>To osobne mechanizmy od Claude Code Web</li>
+          <li>Uprawnienia i dostęp wynikają ze środowiska, w którym działa sesja</li>
+        </ul>
+        <div class="note-box" style="margin-top:.8rem">Na tym kursie pracujemy głównie w <strong>CLI</strong> na lokalnej VM. Web i Desktop jako uzupełnienie.</div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<section class="slide"><div class="slide-body"><div class="kicker">1.2 / tryby uprawnień</div><h2>Plan i wykonanie: kontrolujesz zakres</h2><ul><li>W CLI wpisz <code>/plan</code> albo wybierz tryb Plan. Agent bada projekt i proponuje kroki przed edycją.</li><li>W zwykłej sesji poproś o konkretną zmianę i dowód: test, wynik i diff. Sama prośba o plan nie zastępuje uprawnień.</li><li>Zatwierdź wymagania i kontrakt, zanim zlecisz streaming lub zmiany UI.</li><li>Porównanie: podpowiedzi Copilota w IDE uzupełniają fragmenty. Claude Code CLI wykonuje zadania narzędziami w przyjętych granicach.</li></ul><p class="source"><a href="https://code.claude.com/docs/en/permissions">Dokumentacja</a> · sprawdzono 18.10.2026</p></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">1.3 / konfiguracja</div><h2>Instrukcje Claude Code w repozytorium</h2><ul><li><code>CLAUDE.md</code> jest natywnym plikiem instrukcji Claude Code. Sprawdź treść i zakres przed pierwszą zmianą.</li><li>W tym repozytorium <code>CLAUDE.md</code> importuje <code>@AGENTS.md</code>: wspólne reguły mają jedno źródło. Sam <code>AGENTS.md</code> nie jest automatycznie odczytywany jako pamięć Claude Code.</li><li>Reguły dla ścieżek zapisz w <code>.claude/rules/*.md</code> z frontmatter <code>paths</code>; szczegóły katalogu mogą trafić do nested <code>CLAUDE.md</code>.</li><li>Porównanie: <code>.github/copilot-instructions.md</code> dotyczy Copilota, nie zastępuje <code>CLAUDE.md</code>.</li></ul><p class="source"><a href="https://code.claude.com/docs/en/memory">Dokumentacja</a> · sprawdzono 18.10.2026</p></div></section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Moduł 1.2 | Kluczowe komendy (1/2)</div>
+    <h2>Zarządzanie sesją i kontekstem</h2>
+    <div class="cards">
+      <div class="card"><div class="card-title"><span class="code-inline">/resume</span></div>
+        <p>Wznawia poprzednią sesję. Agent odtwarza kontekst, historię rozmowy i stan projektu.</p>
+        <p style="margin-top:.5rem">Przydatne, gdy przerwałeś pracę i chcesz wrócić lub gdy przypadkowo zamknąłeś CLI.</p>
+      </div>
+      <div class="card amber"><div class="card-title"><span class="code-inline">/compact</span></div>
+        <p>Kompresuje kontekst sesji. Agent streszcza dotychczasową rozmowę, zachowując kluczowe informacje, a pomijając detale.</p>
+        <p style="margin-top:.5rem">Stosuj, gdy sesja robi się długa i agent zaczyna gubić wątki (context rot).</p>
+      </div>
+      <div class="card ok"><div class="card-title"><span class="code-inline">/rewind</span></div>
+        <p>Cofa rozmowę (i opcjonalnie stan) do wybranego wcześniejszego punktu - użyj go, gdy Ty albo agent popełnił błąd i chcesz wrócić do momentu sprzed niego.</p>
+      </div>
+    </div>
+    <div class="note-box" style="margin-top:1rem"><strong>Wskazówka:</strong> <span class="code-inline">/rewind</span> Claude Code: przywraca rozmowę, pliki albo jedno i drugie (checkpointy obejmują zmiany z narzędzi edycji, nie efekty komend z Basha) - <a href="https://code.claude.com/docs/en/checkpointing">docs: checkpointing</a>. GitHub Copilot CLI: <span class="code-inline">/undo</span> albo <span class="code-inline">/rewind</span> - rozmowa albo rozmowa i pliki zmienione przez Copilota - <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/roll-back-changes">docs: roll-back</a>. <span class="code-inline">/compact</span> skraca historię sesji. Codex ma <span class="code-inline">/resume</span> i <span class="code-inline">/fork</span> (rozmowa), bez cofania plików - <a href="https://developers.openai.com/codex/cli/">docs: Codex CLI</a>. Kod cofasz gitem w każdym narzędziu.</div>
+  </div>
+  
+</section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Moduł 1.2 | Kluczowe komendy (2/2)</div>
+    <h2>Diagnostyka, modele i uprawnienia</h2>
+    <div class="cards">
+      <div class="card ok"><div class="card-title"><span class="code-inline">/context</span></div>
+        <p>Pokazuje strukturę kontekstu agenta: co widzi (system prompt, CLAUDE.md, otwarte pliki, historia sesji).</p>
+        <p style="margin-top:.5rem"><strong>Używaj</strong>, gdy agent dziwnie odpowiada - sprawdź, co naprawdę wie.</p>
+      </div>
+      <div class="card amber"><div class="card-title"><span class="code-inline">/model</span></div>
+        <p>Przełącza model (Opus / Sonnet / Haiku i inne dostępne modele). Porównaj jakość na własnym zadaniu, czas i zużycie; większy model nie gwarantuje poprawności.</p>
+        <p style="margin-top:.5rem"><strong>Używaj</strong>, gdy potrzebujesz innej jakości lub innego kosztu do konkretnego zadania.</p>
+      </div>
+      <div class="card warn"><div class="card-title"><span class="code-inline">/permissions</span></div>
+        <p>Reguły uprawnień: <span class="code-inline">allow</span> (bez pytania), <span class="code-inline">ask</span> (zawsze pyta), <span class="code-inline">deny</span> (nigdy). Zapisywane w <span class="code-inline">settings.json</span>.</p>
+        <p style="margin-top:.5rem"><strong>Używaj</strong>, gdy chcesz kontrolować, co agent może robić z Twoim systemem.</p>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<section class="slide"><div class="slide-body"><div class="kicker">1.2 / ściąga</div><h2>Komendy, których użyjesz na kursie</h2><ul><li><code>/help</code> - lista komend Twojej wersji. <code>/resume</code> - powrót do zapisanej rozmowy, bez cofania repozytorium.</li><li><code>/context</code> - wykorzystanie kontekstu; <code>/compact</code> - streszczenie rozmowy. Zapisz wcześniej decyzje w dokumentach.</li><li><code>/model</code> - wybór modelu; <code>/permissions</code> - reguły narzędzi; <code>/sandbox</code> - izolacja poleceń.</li><li><code>/init</code> - propozycja CLAUDE.md; <code>/memory</code> - pamięć; <code>/mcp</code> - serwery i zaufanie; <code>/hooks</code> - hooki.</li><li><code>/plan</code> - planowanie; <code>/agents</code> w 2.1.302 wskazuje tworzenie definicji w plikach. Starszy kreator nie jest stałym interfejsem.</li><li><code>/doctor</code> - diagnostyka. Własne komendy zapiszesz w <code>.claude/commands/</code>, np. <code>git/commit.md</code> jako <code>/git:commit</code>.</li></ul><p class="source"><a href="https://code.claude.com/docs/en/interactive-mode">Dokumentacja</a> · sprawdzono 18.10.2026</p></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">1.2 / modele i alternatywy</div><h2>Alternatywne modele: GLM i lokalna Gemma 4</h2><ul><li>Opus: złożone decyzje i analiza; Sonnet: punkt startu do implementacji; Haiku: krótkie, dobrze ograniczone zadania. Weryfikuj wynik każdej rodziny.</li><li>Z.AI dokumentuje podłączenie GLM-5.3 do Claude Code przez zgodny endpoint Anthropic i mapowanie modeli. To inny dostawca, limity i warunki przetwarzania danych.</li><li>Ollama może udostępnić model przez API zgodne z Anthropic. Dla Gemma 4 sprawdź wariant, narzędzia, streaming i zasoby; sama zgodność formatu API nie dowodzi jakości całego agenta.</li><li>VM z 8 GB RAM nie jest obietnicą komfortowej lokalnej inferencji. To ścieżka dalszej nauki; nie pobieramy dużych modeli na kursie.</li></ul><p><a href="https://docs.z.ai/devpack/tool/claude">GLM w Claude Code</a> · <a href="https://docs.ollama.com/integrations/claude-code">Ollama</a> · <a href="https://deepmind.google/models/gemma/gemma-4/">Gemma 4</a> · 18.10.2026</p></div></section>
+<section class="slide"><div class="slide-body"><div class="kicker">1.1 / środowisko</div><h2>Ubuntu VM: pracuj w jednym środowisku</h2><ul><li>Terminal, Git, Node.js i katalog projektu są na przygotowanej VM. Nie przenoś ćwiczeń do przypadkowego folderu Windows.</li><li>Sprawdź <code>pwd</code>, <code>git status</code>, wersje narzędzi i dostęp do konta. Nie pokazuj zmiennych środowiskowych ani tokenów.</li><li>CLI działa w bieżącym katalogu z jego uprawnieniami. Przed zgodą na polecenie przeczytaj, jaki ma cel i jakie pliki zmieni.</li><li>Desktop i Web są alternatywnymi trybami. Sesja w chmurze ma osobny checkout, środowisko, sieć oraz poświadczenia.</li><li>Porównanie z Windows: Hyper-V/Cowork i WSL nie są wymaganiami Ubuntu VM. Zagnieżdżona wirtualizacja wymaga wsparcia administratora.</li></ul><p><a href="preflight.html">Lista sprawdzeń na VM</a></p></div></section>
+</div><script src="materialy/schedule.js"></script><script src="materialy/deck-runtime.js"></script><script>(function(){const KEY='developer-course-theme';function setTheme(value){const t=value==='light'?'light':'dark';document.body.dataset.theme=t;document.body.classList.toggle('light',t==='light');document.querySelectorAll('[data-theme-toggle]').forEach(b=>{const label=t==='dark'?'Przełącz na jasny motyw':'Przełącz na ciemny motyw';b.setAttribute('aria-label',label);b.setAttribute('title',label)})}try{setTheme(localStorage.getItem(KEY)||'dark')}catch(_){setTheme('dark')}document.querySelectorAll('[data-theme-toggle]').forEach(b=>b.addEventListener('click',()=>{const next=document.body.dataset.theme==='dark'?'light':'dark';setTheme(next);try{localStorage.setItem(KEY,next)}catch(_){}}));document.querySelectorAll('[data-copy-prompt]').forEach(b=>{const target=document.getElementById(b.dataset.copyPrompt);if(target?.dataset.promptId)b.setAttribute('aria-label','Kopiuj prompt '+target.dataset.promptId);const live=document.createElement('span');live.className='copy-status-live';live.setAttribute('role','status');live.setAttribute('aria-live','polite');b.after(live);b.addEventListener('click',async()=>{const pre=document.getElementById(b.dataset.copyPrompt);if(!pre)return;const txt=pre.textContent;let copied=false;try{await navigator.clipboard.writeText(txt);copied=true}catch(_){}if(!copied){const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{copied=document.execCommand('copy')===true}catch(_){}ta.remove()}if(!copied){const range=document.createRange();range.selectNodeContents(pre);const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range)}const old=b.dataset.copyLabel||b.textContent;b.dataset.copyLabel=old;b.dataset.copyState=copied?'success':'manual';b.textContent=copied?'Skopiowano':'Zaznaczono - Ctrl+C';live.textContent=copied?'Prompt skopiowany do schowka.':'Nie udało się skopiować. Tekst zaznaczono; naciśnij Ctrl+C.';clearTimeout(b._copyReset);b._copyReset=setTimeout(()=>{b.textContent=old;delete b.dataset.copyState;live.textContent=''},2200)})})})();</script><footer class="course-trainer-credit" aria-label="Trener i profile"><span>JSystems</span><span>Trener: Łukasz Matuszewski</span><span class="trainer-socials"><a href="https://www.linkedin.com/in/lukaszmatuszewski/" aria-label="Łukasz Matuszewski na LinkedIn">LinkedIn</a> · <a href="https://x.com/mrLumatic" aria-label="Łukasz Matuszewski na X">X</a></span></footer>
+</body></html>

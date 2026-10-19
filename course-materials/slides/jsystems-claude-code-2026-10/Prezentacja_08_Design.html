@@ -1,0 +1,298 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Design i UX | Claude Code - od zera do zespołu agentów AI</title><style>
+:root{
+  /* Slajdy tytulowe (granat/biel/zloto) - identyczne w obu motywach */
+  --dark-bg:#0f172a;--dark-bg2:#1e293b;--dark-text:#f1f5f9;
+  /* Motyw domyslny: dark (Tokyo Night) */
+  --bg:#1a1b26;--bg2:#24283b;--bg3:#2f3549;
+  --text:#c0caf5;--heading:#e6ecff;
+  --accent:#e0af68;--accent2:#7aa2f7;--accent3:#9ece6a;
+  --muted:#7d84a8;--danger:#f7768e;
+  --code-bg:#16161e;--code-text:#a9b1d6;
+  --note-bg:rgba(224,175,104,.09);--note-bd:rgba(224,175,104,.35);--note-text:#e6c187;
+
+}
+body.light{
+  --bg:#ffffff;--bg2:#f1f5f9;--bg3:#e2e8f0;
+  --text:#1e293b;--heading:#0f172a;
+  --accent:#d97706;--accent2:#2563eb;--accent3:#059669;
+  --muted:#64748b;--danger:#dc2626;
+  --code-bg:#1e293b;--code-text:#e2e8f0;
+  --note-bg:#fef9c3;--note-bd:#facc15;--note-text:#92400e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:clamp(13px,1.4vw,19px)}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#000;overflow:hidden}
+#deck{position:relative;width:100vw;height:100vh}
+.slide{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background:var(--bg);color:var(--text);
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+  overflow-y:auto;overflow-x:hidden;
+}
+.slide.on{opacity:1;pointer-events:auto}
+.slide.dark{background:var(--dark-bg);color:var(--dark-text)}
+.slide a{color:var(--accent2);text-decoration:underline;text-underline-offset:3px}
+.slide.dark a{color:var(--accent)}
+.slide h1,.slide h2,.slide h3{color:var(--heading)}
+.slide.dark h1,.slide.dark h2,.slide.dark h3{color:var(--dark-text)}
+.slide-body{
+  max-width:min(1680px,95vw);margin:0 auto;
+  padding:clamp(2rem,4vh,3rem) clamp(1.6rem,3vw,3.5rem) clamp(1.6rem,3.5vh,2.6rem);
+  min-height:100%;display:flex;flex-direction:column;justify-content:center;
+}
+.title-body{align-items:center;text-align:center}
+.kicker{
+  font-size:.8rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.15em;color:var(--accent);margin-bottom:.5rem;
+}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.15;margin-bottom:1rem}
+h2{font-size:clamp(1.4rem,3vw,2.1rem);font-weight:700;line-height:1.2;margin-bottom:.9rem}
+h3{font-size:clamp(1.1rem,2.2vw,1.6rem);font-weight:600;margin-bottom:.8rem}
+h4{font-size:1rem;font-weight:600;margin-bottom:.4rem}
+p{font-size:clamp(.95rem,1.6vw,1.15rem);line-height:1.6;margin-bottom:.6rem}
+.subtitle{font-size:clamp(1rem,1.9vw,1.3rem);opacity:.8;margin-bottom:1rem}
+.accent{color:var(--accent)}
+.accent2{color:var(--accent2)}
+.accent3{color:var(--accent3)}
+.danger{color:var(--danger)}
+.title-meta{
+  display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;
+  font-size:1.1rem;opacity:.85;margin-bottom:1.5rem;
+}
+.title-meta div{padding:.3rem .8rem;background:rgba(255,255,255,.08);border-radius:8px}
+.break-badge{
+  background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);
+  border-radius:12px;padding:1rem 1.5rem;margin-top:1rem;display:inline-block;
+}
+.break-badge .bb-label{
+  font-size:.75rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--accent);margin-bottom:.5rem;
+}
+.break-badge .bb-items{display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center;font-size:.9rem}
+.break-badge .bb-items span::before{content:"\25CF";color:var(--accent);margin-right:.4rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:.5rem}
+/* Symetryczne siatki: 4 kafle = 2x2, 5-6 kafli = 3 kolumny (zamiast 3+1 / 4+1) */
+.cards:has(> :nth-child(4):last-child){grid-template-columns:repeat(2,1fr)}
+.cards:has(> :nth-child(5):last-child),.cards:has(> :nth-child(6):last-child){grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.cards:has(> :nth-child(5):last-child),.cards:has(> :nth-child(6):last-child){grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.cards{grid-template-columns:1fr !important}}
+.card{
+  background:var(--bg2);border-radius:10px;padding:1rem 1.2rem;
+  border-left:4px solid var(--accent2);
+}
+.card.warn{border-left-color:var(--danger)}
+.card.ok{border-left-color:var(--accent3)}
+.card.amber{border-left-color:var(--accent)}
+.card-title{font-weight:700;color:var(--accent);margin-bottom:.4rem;font-size:1rem}
+.slide.dark .card{background:var(--dark-bg2)}
+.slide.dark .card-title{color:var(--accent)}
+.feature-list{list-style:none;padding:0}
+.feature-list li{padding:.32rem 0 .32rem 1.6rem;position:relative;font-size:clamp(.9rem,1.5vw,1.05rem);line-height:1.5}
+.feature-list li::before{content:"\25B8";position:absolute;left:.3rem;color:var(--accent);font-weight:700}
+.feature-list.check li::before{content:"\2713";color:var(--accent3)}
+.feature-list.cross li::before{content:"\2717";color:var(--danger)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:.5rem}
+@media(max-width:768px){.two-col{grid-template-columns:1fr}}
+.code-block{
+  background:var(--code-bg);color:var(--code-text);padding:.8rem 1.2rem;border-radius:8px;
+  font-family:Consolas,Monaco,"Courier New",monospace;font-size:.85rem;
+  overflow-x:auto;line-height:1.5;margin:.5rem 0;white-space:pre-wrap;
+  position:relative;border:1px solid rgba(125,132,168,.25);
+}
+.copy-btn{
+  position:absolute;top:.4rem;right:.4rem;
+  background:var(--bg3);color:var(--text);border:1px solid var(--muted);
+  border-radius:6px;font-size:.65rem;padding:.2rem .55rem;cursor:pointer;
+  opacity:.65;transition:opacity .15s;font-family:inherit;
+}
+.copy-btn:hover{opacity:1}
+.copy-btn.ok{background:var(--accent3);color:#0f172a;border-color:var(--accent3);opacity:1}
+.code-inline{
+  background:var(--bg2);padding:.1rem .4rem;border-radius:4px;
+  font-family:Consolas,Monaco,monospace;font-size:.9em;color:var(--accent2);
+}
+.slide.dark .code-inline{background:rgba(255,255,255,.1)}
+.badge{
+  display:inline-block;padding:.2rem .7rem;border-radius:999px;
+  font-size:.75rem;font-weight:700;background:var(--accent);color:#fff;
+}
+.badge.blue{background:var(--accent2)}
+.badge.green{background:var(--accent3)}
+.badge.red{background:var(--danger)}
+.badge.lab{background:var(--accent);color:#1a1b26;font-size:.85rem;padding:.3rem 1rem}
+.note-box{
+  background:var(--note-bg);border:1px solid var(--note-bd);border-radius:8px;
+  padding:.8rem 1.2rem;margin:.5rem 0;font-size:.9rem;color:var(--note-text);
+}
+.slide.dark .note-box{background:rgba(250,204,21,.1);border-color:rgba(250,204,21,.3);color:#fef3c7}
+/* Process map */
+.proc-map{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1rem}
+.proc-step{
+  background:var(--bg2);border-radius:10px;padding:1rem;
+  position:relative;text-align:center;border:2px solid transparent;
+}
+.proc-step .ps-num{
+  width:32px;height:32px;border-radius:50%;background:var(--accent2);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;
+  margin:0 auto .5rem;font-size:.9rem;
+}
+.proc-step.active{border-color:var(--accent);background:rgba(224,175,104,.1)}
+.proc-step.active .ps-num{background:var(--accent)}
+.proc-step.optional{opacity:.6}
+.proc-step.optional .ps-num{background:var(--muted)}
+.proc-step .ps-title{font-weight:600;font-size:.85rem;margin-bottom:.2rem}
+.proc-step .ps-desc{font-size:.75rem;color:var(--muted)}
+.slide.dark .proc-step{background:var(--dark-bg2)}
+.slide.dark .proc-step .ps-desc{color:#94a3b8}
+@media(max-width:900px){.proc-map{grid-template-columns:repeat(2,1fr)}}
+/* Footer */
+.slide-footer{
+  position:fixed;bottom:.4rem;right:1.5rem;font-size:.85rem;
+  color:var(--muted);opacity:.7;z-index:50;pointer-events:none;
+}
+.slide.dark .slide-footer{color:rgba(255,255,255,.3)}
+/* HUD */
+#hud{position:fixed;top:0;left:0;right:0;height:4px;background:rgba(0,0,0,.1);z-index:200}
+#bar{height:100%;width:1%;background:var(--accent);transition:width .3s ease;border-radius:0 3px 3px 0}
+#num{
+  position:fixed;top:.5rem;left:1rem;font-size:.95rem;color:var(--muted);
+  z-index:200;font-variant-numeric:tabular-nums;font-weight:600;
+}
+#clock{
+  position:fixed;top:.5rem;right:3.9rem;font-size:.95rem;color:var(--muted);
+  z-index:200;font-variant-numeric:tabular-nums;
+}
+#theme-btn{
+  position:fixed;top:.3rem;right:1rem;width:34px;height:34px;z-index:210;
+  background:transparent;border:1px solid var(--muted);border-radius:50%;
+  color:var(--muted);cursor:pointer;font-size:1rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;opacity:.7;
+}
+#theme-btn:hover{opacity:1;color:var(--accent)}
+#trainer-credit{
+  position:fixed;bottom:.4rem;left:1.5rem;font-size:.85rem;
+  color:var(--muted);opacity:.7;z-index:50;pointer-events:none;
+}
+.slide.dark #trainer-credit{color:rgba(255,255,255,.3)}
+#shortcut-hint{
+  position:fixed;top:.5rem;left:50%;transform:translateX(-50%);
+  z-index:200;color:var(--muted);pointer-events:none;font-size:.8rem;
+}
+@media(max-width:900px){#shortcut-hint{display:none}}
+#theme-btn .icon-sun,#theme-btn .icon-moon{width:18px;height:18px;display:block}
+#theme-btn .icon-moon{display:none}
+body.light #theme-btn .icon-sun{display:none}
+body.light #theme-btn .icon-moon{display:block}
+/* Nav arrows */
+.nav-arrow{
+  position:fixed;top:50%;transform:translateY(-50%);
+  background:rgba(0,0,0,.25);color:#fff;border:none;width:44px;height:44px;
+  border-radius:50%;font-size:1.3rem;cursor:pointer;z-index:200;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.nav-arrow:hover{background:rgba(0,0,0,.5);transform:translateY(-50%) scale(1.1)}
+.nav-left{left:12px}
+.nav-right{right:12px}
+/* Break banner */
+#breakbar{
+  position:fixed;top:20px;left:50%;
+  transform:translateX(-50%) translateY(-200%);
+  background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;
+  padding:1.2rem 2rem;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.35);
+  z-index:10000;transition:transform .4s ease;min-width:340px;text-align:center;
+}
+#breakbar.show{transform:translateX(-50%) translateY(0)}
+.bb-icon{font-size:1.5rem;margin-bottom:.3rem}
+.bb-title{font-size:1.3rem;font-weight:700}
+.bb-sub{font-size:1rem;opacity:.9;margin-top:.2rem}
+#bb-x{
+  position:absolute;top:.5rem;right:.8rem;background:rgba(255,255,255,.2);
+  border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;
+  font-size:1rem;line-height:1;
+}
+#bb-x:hover{background:rgba(255,255,255,.35)}
+/* Nawigacja klikiem obslugiwana na .slide (linki i przyciski maja priorytet) */
+/* Misc */
+.big-num{font-size:3rem;font-weight:800;color:var(--accent);line-height:1}
+.timeline{display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem}
+.timeline-item{display:flex;gap:1rem;align-items:flex-start;padding:.6rem 1rem;background:var(--bg2);border-radius:8px;border-left:4px solid var(--accent2)}
+.timeline-item.break{border-left-color:var(--accent)}
+.timeline-time{font-weight:700;color:var(--accent);min-width:80px;font-size:.9rem}
+.slide.dark .timeline-item{background:var(--dark-bg2)}
+hr.sep{border:none;border-top:1px solid var(--muted);opacity:.2;margin:1rem 0}
+.slide.dark hr.sep{border-top-color:var(--dark-text);opacity:.15}
+.strike{text-decoration:line-through;opacity:.5}
+.demo-flow{display:flex;flex-direction:column;gap:.6rem;margin-top:.5rem}
+.demo-flow .df-step{display:flex;gap:1rem;align-items:center}
+.df-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0}
+.df-text{font-size:clamp(.85rem,1.4vw,1rem)}
+</style><style>body{overflow:hidden}#deck{height:100vh}.slide{overflow:auto}.slide-body{padding-top:4.5rem;padding-bottom:5rem}.slide h2{max-width:100%}.prompt-full{width:100%;max-width:1000px;text-align:left}.prompt-full pre{max-height:45vh!important}.prompt-full h3{margin:.25rem 0}.prompt-full p{margin:.25rem 0 .5rem}.course-note{border-left:4px solid #e0af68;padding:1rem;background:rgba(224,175,104,.1);border-radius:6px}.recap-breaks{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem .8rem;margin-top:clamp(1.5rem,4vh,2.5rem);padding:.7rem .9rem;border-left:3px solid var(--accent);border-radius:6px;background:var(--accent-soft);font-size:clamp(.8rem,1.3vw,.95rem)}.recap-breaks-label{color:var(--muted);font-weight:600}.recap-breaks time{color:var(--heading);font-weight:700;font-variant-numeric:tabular-nums}#page-count{position:fixed;bottom:18px;right:18px;color:#d7dff8;z-index:101;background:#182334;padding:4px 9px;border-radius:6px}#deck .slide:not(.on){display:none}@media print{html,body[data-page-type="slides"]{overflow:visible!important;height:auto!important;background:#fff!important}body[data-page-type="slides"] #deck{position:static!important;width:auto!important;height:auto!important;overflow:visible!important}body[data-page-type="slides"] #deck .slide,body[data-page-type="slides"] #deck .slide:not(.on){display:block!important;position:relative!important;inset:auto!important;width:auto!important;height:auto!important;min-height:0!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;overflow:visible!important;break-after:page;page-break-after:always}body[data-page-type="slides"] #deck .slide-body{min-height:0!important;max-width:none!important;padding:1.2rem!important;display:block!important}body[data-page-type="slides"] #deck pre[data-prompt-id]{max-height:none!important;overflow:visible!important;white-space:pre-wrap!important;word-break:break-word!important}body[data-page-type="slides"] .course-tools,body[data-page-type="slides"] #hud,body[data-page-type="slides"] #num,body[data-page-type="slides"] #clock,body[data-page-type="slides"] #shortcut-hint,body[data-page-type="slides"] .nav-arrow,body[data-page-type="slides"] #breakbar,body[data-page-type="slides"] .copy-prompt{display:none!important}body[data-page-type="slides"] #deck .slide,body[data-page-type="slides"] #deck .slide.dark{background:#fff!important;color:#111!important}body[data-page-type="slides"] #deck .slide h1,body[data-page-type="slides"] #deck .slide h2,body[data-page-type="slides"] #deck .slide h3{color:#111!important}body[data-page-type="slides"] #deck pre,body[data-page-type="slides"] #deck .code-block{background:#f4f4f4!important;color:#111!important;border:1px solid #aaa!important}}.slide-body ol,.slide-body ul{margin-top:.5rem}.slide-body li{margin:.25rem 0}.slide-body a{color:#9dc8ff}</style><style>.course-tools{position:fixed;z-index:1000;right:16px;top:12px;display:flex;gap:8px;align-items:center}.course-tools a,.course-tools button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 12px;border:1px solid #7890ac;border-radius:9px;background:#182334;color:#fff;text-decoration:none;font:600 14px system-ui;cursor:pointer}.course-tools button svg{width:20px;height:20px}.course-tools .icon-sun{display:none}[data-theme-toggle] .icon-sun,[data-theme-toggle] .icon-moon{width:20px;height:20px}body[data-theme="dark"] [data-theme-toggle] .icon-sun{display:block}body[data-theme="dark"] [data-theme-toggle] .icon-moon{display:none}body[data-theme="light"] [data-theme-toggle] .icon-sun{display:none}body[data-theme="light"] [data-theme-toggle] .icon-moon{display:block}.course-tools button:focus-visible,.course-tools a:focus-visible{outline:3px solid #f7c26d}body[data-course-audience="developer"] pre[data-prompt-id]{white-space:pre-wrap;overflow:auto;max-height:56vh;line-height:1.5;font-size:clamp(12px,1.1vw,15px);padding:1rem;background:#101827;color:#eff5ff;border:1px solid #61799b;border-radius:10px;text-align:left}.copy-prompt{padding:.55rem .9rem;border:1px solid #a9c8ee;border-radius:8px;background:#183252;color:white;font:700 14px system-ui;cursor:pointer}@media print{.course-tools,.copy-prompt{display:none!important}pre[data-prompt-id]{max-height:none!important}}</style><link rel="stylesheet" href="course.css?v=20261017-brand-slots-2"><link rel="icon" type="image/png" href="assets/favicon-32x32.png"></head><body data-course-audience="developer" data-page-type="slides" data-theme="dark">
+<div class="organizer-deck-brand"><img class="course-brand-logo course-brand-logo--header course-brand-logo--light-surface" src="assets/course-organizer.svg" alt="JSystems"></div><div class="course-tools"><a href="index.html">Strona główna</a><button type="button" data-theme-toggle aria-label="Przełącz na jasny motyw"><svg aria-hidden="true" class="icon-sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><line x1="12" x2="12" y1="2" y2="4"></line><line x1="12" x2="12" y1="20" y2="22"></line><line x1="2" x2="4" y1="12" y2="12"></line><line x1="20" x2="22" y1="12" y2="12"></line><line x1="4.93" x2="6.34" y1="4.93" y2="6.34"></line><line x1="17.66" x2="19.07" y1="17.66" y2="19.07"></line><line x1="4.93" x2="6.34" y1="19.07" y2="17.66"></line><line x1="17.66" x2="19.07" y1="6.34" y2="4.93"></line></svg><svg aria-hidden="true" class="icon-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></div><div id="hud"><div id="bar"></div></div><div id="num" aria-live="polite"></div><div id="clock"></div><div id="shortcut-hint">← → nawigacja · F pełny ekran · D motyw</div><button id="prev" class="nav-arrow nav-left" type="button" aria-label="Poprzedni slajd">‹</button><button id="next" class="nav-arrow nav-right" type="button" aria-label="Następny slajd">›</button><div id="breakbar" role="status"><div id="bb-t" class="bb-title"></div><div id="bb-s" class="bb-sub"></div><button id="bb-x" type="button" aria-label="Zamknij komunikat">×</button></div><div id="deck"><section class="slide">
+<div class="slide-body">
+<div class="kicker">Moduł 1.1 | Kierunki rozwoju</div>
+<h2>Multimodalność: screenshoty i HTML jako warstwa prezentacji</h2>
+<div class="two-col">
+<div>
+<h3 class="accent2">Screenshot jako kontekst</h3>
+<div class="card ok"><p>Screenshot bywa wygodniejszy do przekazania modelowi <strong>układu, kolorów i stanu UI</strong>; koszt i jakość zależą od rozdzielczości oraz modelu.</p>
+<ul class="feature-list" style="margin-top:.4rem">
+<li>Jeden obraz zastępuje akapit opisu UI</li>
+<li>Model widzi layout, a nie tylko tekst</li>
+<li>Model nie zawsze poprawnie odczyta drobne szczegóły interfejsu</li>
+<li>Przydatne przy debugowaniu UI i analizie błędów wizualnych</li>
+</ul></div>
+</div>
+<div>
+<h3 class="accent">HTML z Markdown</h3>
+<div class="card amber"><p>Markdown zostaje <strong>formatem źródłowym</strong>, a agent może wygenerować z niego czytelny, interaktywny HTML.</p>
+<ul class="feature-list" style="margin-top:.4rem">
+<li>PRD, ADR, plan - czytelne w przeglądarce</li>
+<li>Interaktywne diagramy zamiast statycznego tekstu</li>
+<li>Źródło w git (Markdown), prezentacja w HTML</li>
+<li>Dokumentacja żyje razem z kodem</li>
+</ul></div>
+</div>
+</div>
+<div class="note-box" style="margin-top:1rem"><strong>Na tym kursie:</strong> PRD i ADR piszemy w Markdown, a ta prezentacja jest generowanym HTML-em. Zobaczysz ten wzorzec wielokrotnie.</div>
+</div>
+
+</section>
+<section class="slide"><div class="slide-body"><div class="kicker">Interfejs / opcjonalnie</div><h2>Dowody wizualne i dostępność</h2><ul>
+  <li>Przekaż agentowi kontekst układu, stany interakcji i priorytety dostępności.</li>
+  <li>Porównuj zrzuty lub DOM z wymaganiami - nie z samym opisem.</li>
+  <li>Weryfikuj klawiaturę, fokus, kontrast i przepełnienie.</li>
+</ul></div></section>
+<section class="slide">
+  <div class="slide-body">
+    <div class="kicker">Moduł 2.1</div>
+    <h2><span class="badge lab">RAZEM</span> Design Guidelines przez Playwright MCP</h2>
+    <p class="subtitle">Robimy to razem - ja pokazuję, Ty powtarzasz u siebie (możesz na własnym pomyśle aplikacji)</p>
+    <div class="two-col">
+      <div>
+        <h3 class="accent">Zrób u siebie</h3>
+        <ul class="feature-list">
+          <li>Wybierz stronę (firmową uczestnika lub dowolną)</li>
+          <li>Użyj Playwright MCP do zbadania jej designu</li>
+          <li>Wyciągnij design tokens: kolory, typografia, spacing</li>
+          <li>Zrób zrzuty ekranu kluczowych komponentów</li>
+          <li>Zapisz notatkę: co warto przenieść do własnej aplikacji</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="accent3">Zanim ruszymy dalej, upewnij się, że</h3>
+        <ul class="feature-list check">
+          <li>Masz listę tokenów kolorów (paleta)</li>
+          <li>Masz tokeny typografii (fonty, rozmiary, wagi)</li>
+          <li>Masz min. 3 zrzuty ekranu kluczowych komponentów</li>
+          <li>Wynik jest zapisany w repo (<span class="code-inline">design/</span>), nie tylko w pamięci agenta</li>
+        </ul>
+        <div class="note-box" style="margin-top:.8rem">Prompty podsyłam na czacie - ale zachęcam do eksperymentowania z własną stroną.</div>
+      </div>
+    </div>
+    <div class="note-box" style="margin-top:.8rem"><strong>Wskazówka:</strong> poproś agenta: "Zbadaj design strony [URL] przez Playwright MCP. Wyciągnij design tokens i zrób zrzuty ekranu kluczowych elementów."</div>
+  </div>
+  
+  
+</section>
+</div><script src="materialy/schedule.js"></script><script src="materialy/deck-runtime.js"></script><script>(function(){const KEY='developer-course-theme';function setTheme(value){const t=value==='light'?'light':'dark';document.body.dataset.theme=t;document.body.classList.toggle('light',t==='light');document.querySelectorAll('[data-theme-toggle]').forEach(b=>{const label=t==='dark'?'Przełącz na jasny motyw':'Przełącz na ciemny motyw';b.setAttribute('aria-label',label);b.setAttribute('title',label)})}try{setTheme(localStorage.getItem(KEY)||'dark')}catch(_){setTheme('dark')}document.querySelectorAll('[data-theme-toggle]').forEach(b=>b.addEventListener('click',()=>{const next=document.body.dataset.theme==='dark'?'light':'dark';setTheme(next);try{localStorage.setItem(KEY,next)}catch(_){}}));document.querySelectorAll('[data-copy-prompt]').forEach(b=>{const target=document.getElementById(b.dataset.copyPrompt);if(target?.dataset.promptId)b.setAttribute('aria-label','Kopiuj prompt '+target.dataset.promptId);const live=document.createElement('span');live.className='copy-status-live';live.setAttribute('role','status');live.setAttribute('aria-live','polite');b.after(live);b.addEventListener('click',async()=>{const pre=document.getElementById(b.dataset.copyPrompt);if(!pre)return;const txt=pre.textContent;let copied=false;try{await navigator.clipboard.writeText(txt);copied=true}catch(_){}if(!copied){const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{copied=document.execCommand('copy')===true}catch(_){}ta.remove()}if(!copied){const range=document.createRange();range.selectNodeContents(pre);const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range)}const old=b.dataset.copyLabel||b.textContent;b.dataset.copyLabel=old;b.dataset.copyState=copied?'success':'manual';b.textContent=copied?'Skopiowano':'Zaznaczono - Ctrl+C';live.textContent=copied?'Prompt skopiowany do schowka.':'Nie udało się skopiować. Tekst zaznaczono; naciśnij Ctrl+C.';clearTimeout(b._copyReset);b._copyReset=setTimeout(()=>{b.textContent=old;delete b.dataset.copyState;live.textContent=''},2200)})})})();</script><footer class="course-trainer-credit" aria-label="Trener i profile"><span>JSystems</span><span>Trener: Łukasz Matuszewski</span><span class="trainer-socials"><a href="https://www.linkedin.com/in/lukaszmatuszewski/" aria-label="Łukasz Matuszewski na LinkedIn">LinkedIn</a> · <a href="https://x.com/mrLumatic" aria-label="Łukasz Matuszewski na X">X</a></span></footer>
+</body></html>
