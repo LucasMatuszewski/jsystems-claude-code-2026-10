@@ -73,6 +73,7 @@ For detailed benchmark comparisons, Word Error Rate (WER) metrics across Polish 
 
 ### Quick model recommendations for Handy:
 - **Polish Dictation (Fast & Zero Hallucination):** `Parakeet TDT 0.6B v3` (`Q8_0`) - 7.31% FLEURS WER, non-autoregressive transducer avoids pause loops.
+- **Polish Accuracy & Low WER:** `Canary 1B v2` (`Q5_K_M`) - **6.64% FLEURS WER** (beats Parakeet v3). In Handy catalog, speed score is **81** (slightly faster than Parakeet at 79). Features native Polish <-> English translation (`translate: true`) and excellent capitalization.
 - **Polish Literary / Punctuation-rich:** `Whisper Large v3 Turbo` (`Q8_0`) - ~6.2% FLEURS WER with rich syntax and diacritics at 3.5x legacy Whisper speed.
 - **English Dictation (Handy Recommended #1):** `Parakeet Unified EN 0.6B` (`Q8_0`) - ~1.6% clean WER, sub-200ms latency.
 - **Highest Accuracy English Benchmark:** `IBM Granite Speech 4.1 2B NAR` or `Cohere Transcribe (03-2026)` (1.25% clean WER).

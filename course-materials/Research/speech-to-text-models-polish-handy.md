@@ -18,16 +18,19 @@ This research analyzes Automatic Speech Recognition (ASR) models for the Polish 
 
 ### Top Recommendations at a Glance
 
-1. **Best Overall for Daily Dictation (Fast, Accurate, Hallucination-Free):**
+1. **Top Recommendation for Polish (Accuracy + Speed Champion):**
+   - **Model:** `Canary 1B v2` (`nvidia/canary-1b-v2`, default quant: `Q5_K_M`)
+   - **Why:** Delivers the lowest error rate among NVIDIA models at **6.64% WER on FLEURS Polish** (beating Parakeet TDT). In Handy catalog benchmarks, its speed score is **81** (slightly faster than Parakeet TDT at 79), while only taking ~836 MB VRAM. Also supports native direct translation into English (`translate: true`).
+2. **Top Alternative for Polish Dictation (Zero Hallucination Transducer):**
    - **Model:** `Parakeet TDT 0.6B v3` (`nvidia/parakeet-tdt-0.6b-v3`, default quant: `Q8_0`)
-   - **Why:** Uses NVIDIA FastConformer Token-and-Duration Transducer (non-autoregressive). It achieves **7.28% WER on MLS Polish** and **7.31% WER on FLEURS Polish**, runs at ~4x the speed of Whisper Large, and completely eliminates Whisper's notorious silence/pause hallucination loops. Memory footprint is only ~740 MB.
-2. **Best for Complex Syntax, Punctuation & Literary Polish:**
+   - **Why:** FastConformer-TDT non-autoregressive architecture achieves **7.28% MLS / 7.31% FLEURS WER** and completely avoids pause/silence hallucination loops.
+3. **Best for Complex Syntax, Punctuation & Literary Polish:**
    - **Model:** `Whisper Large v3 Turbo` (`openai/whisper-large-v3-turbo`, default quant: `Q8_0`)
    - **Why:** 809M parameters with 4 decoder layers instead of 32. Because Polish is a well-represented high-resource language in Whisper's corpus, Turbo preserves ~98% of Large-v3 accuracy while cutting latency by over 3x and using only ~809 MB VRAM.
-3. **Highest Raw Word-Level Accuracy (for clean, single-language dictation):**
+4. **Highest Raw Word-Level Accuracy (for clean, single-language dictation):**
    - **Model:** `Cohere Transcribe` (`CohereLabs/cohere-transcribe-03-2026`, default quant: `Q5_K_M`)
    - **Why:** 2.0B parameter enterprise Conformer architecture. Top-rated accuracy score in Handy's catalog (92/100). Requires setting the language explicitly to Polish (`pl`) because it lacks automatic language detection.
-4. **Best for Direct Polish-to-English Speech Translation (Single-Step):**
+5. **Best for Direct Polish-to-English Speech Translation (Single-Step):**
    - **Model:** `Canary 1B v2` (`nvidia/canary-1b-v2`, default quant: `Q5_K_M`)
    - **Why:** 6.64% WER on FLEURS Polish with native translation encoder-decoder heads. However, when using Handy's LLM post-processing feature, two-stage translation (Direct Polish ASR + LLM) outperforms native single-step speech translation.
 
