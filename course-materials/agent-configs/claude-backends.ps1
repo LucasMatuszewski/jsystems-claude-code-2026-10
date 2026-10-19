@@ -1,11 +1,18 @@
 # ============================================================================
-# Claude Code backend switchers — PowerShell equivalent of .bashrc (2026-06)
+# Claude Code aliases and backend switchers - PowerShell equivalent of
+# .bashrc-agents (2026-06). Not a full profile: dot-source it from $PROFILE.
 # ============================================================================
 # Install: dot-source this from your PowerShell profile so the functions/aliases
 # load in every session:
 #   notepad $PROFILE        # create it if missing
 #   # add this line (adjust the path):
-#   . "$HOME\path\to\claude-backends.ps1"
+#   . "$HOME\path\to\course-materials\agent-configs\claude-backends.ps1"
+#
+# Delegate the installation to your AI agent instead of editing $PROFILE by
+# hand, for example:
+#   "Dot-source course-materials/agent-configs/claude-backends.ps1 from my PowerShell
+#    $PROFILE, keep API keys in user environment variables and verify the
+#    functions load in a new PowerShell session."
 #
 # Set your provider keys as user env vars (PowerShell, persists across sessions):
 #   [Environment]::SetEnvironmentVariable("OPENROUTER_API_KEY","sk-or-...","User")

@@ -10,6 +10,9 @@ Each folder has the shape of that tool's own config folder.
 | `claude/` | `settings.json` (and a commented `settings.jsonc`), `CLAUDE.md`, `statusline.sh`, sub-agents in `agents/`, `mcp-jetbrains.json` (JetBrains MCP server for a default Windows install of IntelliJ IDEA 2025.3.3; set the path of your own IDE) | `~/.claude/` for settings, `CLAUDE.md` and the status line; `.claude/agents/` in your project for the sub-agents |
 | `copilot/` | start scripts with allowed and denied tools, a custom agent in `agents/` | run the script from the repository root; `.github/agents/` in your project for the agent |
 | `opencode/` | `opencode.jsonc` with a default model, MCP servers and Bash push permissions | `~/.config/opencode/` or your project root |
+| `.bashrc-agents`, `claude-backends.ps1`, `codex-aliases.ps1` | shell aliases and functions for Claude Code and Codex: permission modes, backend switchers, Codex profiles | source `.bashrc-agents` from `~/.bashrc`; dot-source the `.ps1` files from PowerShell `$PROFILE` |
+
+Install the shell aliases by delegating to your AI agent rather than editing `~/.bashrc` or `$PROFILE` by hand; each file has an example prompt in its header. Keep API keys out of these files.
 
 ## Claude Code statusline and cache hit rate
 
@@ -64,7 +67,7 @@ codex --profile ollama-lfm
 
 Check the `model:` and `provider:` lines Codex prints at startup: a profile name without a file is not an error, Codex just runs the default model.
 
-Shell shortcuts: [Bash Codex section](../.bashrc) and [PowerShell functions and aliases](../codex-aliases.ps1). Dot-source the PowerShell file from `$PROFILE` using its installation comment. The same names cover all six shipped provider profiles: `cdxz` (also `codexz`), `cdxor`, `cdxoc`, `cdxlfm`, `cdxsql`, `cdxgemma`. Copy the profile files to `~/.codex/` first, including `models.zai.json` for Z.ai; the scripts contain no real keys.
+Shell shortcuts: [Bash Codex section](.bashrc-agents) and [PowerShell functions and aliases](codex-aliases.ps1). Dot-source the PowerShell file from `$PROFILE` using its installation comment. The same names cover all six shipped provider profiles: `cdxz` (also `codexz`), `cdxor`, `cdxoc`, `cdxlfm`, `cdxsql`, `cdxgemma`. Copy the profile files to `~/.codex/` first, including `models.zai.json` for Z.ai; the scripts contain no real keys.
 
 Mode aliases, checked against local `codex --help` and `codex resume --help` on 0.162.1 (2026-10-16): `cdxauto` (automatic approval review with workspace-write), `cdxro` (read-only), `cdxnd` (no shared daemon), `cdxwt` (new managed worktree), `cdxlast` (resume last). Combine a mode with `--profile <name>`. `cdxwt` requires worktree authorization under this repository's rules. `cdxyolo` disables both approvals and sandbox: use only inside external disposable isolation without secrets, never as a permissions workaround. [CLI reference](https://developers.openai.com/codex/cli/reference/).
 

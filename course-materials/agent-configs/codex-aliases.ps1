@@ -1,6 +1,13 @@
-# Codex CLI profiles and modes - PowerShell (verified: codex-cli 0.162.1 help).
+# Codex CLI aliases, profiles and modes - PowerShell equivalent of the Codex
+# section in .bashrc-agents (verified: codex-cli 0.162.1 help).
 # Dot-source this file from $PROFILE, adjusting the path:
-#   . "$HOME\path\to\course-materials\codex-aliases.ps1"
+#   . "$HOME\path\to\course-materials\agent-configs\codex-aliases.ps1"
+#
+# Delegate the installation to your AI agent instead of editing $PROFILE by
+# hand, for example:
+#   "Dot-source course-materials/agent-configs/codex-aliases.ps1 from my PowerShell
+#    $PROFILE, keep API keys in user environment variables and verify the
+#    functions load in a new PowerShell session."
 # Copy chosen <name>.config.toml files from agent-configs/codex/ to
 # $HOME\.codex\ first (or $env:CODEX_HOME when explicitly configured).
 # Z.ai also needs models.zai.json beside zai.config.toml.

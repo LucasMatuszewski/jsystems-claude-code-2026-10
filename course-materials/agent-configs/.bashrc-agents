@@ -1,3 +1,23 @@
+# ============================================================================
+# .bashrc-agents: example aliases and functions for agent CLIs (Bash)
+# ============================================================================
+# Shortcuts for Claude Code and Codex: permission modes, backend switchers
+# (OpenRouter, Z.ai, Ollama) and Codex profiles. This is NOT a full .bashrc:
+# do not replace your ~/.bashrc with it. Copy it to ~/.bashrc-agents and
+# source it from your normal ~/.bashrc:
+#   [ -f ~/.bashrc-agents ] && . ~/.bashrc-agents
+# Keep API keys in a separate file (e.g. ~/.config/secrets.sh, chmod 600),
+# never in this file.
+#
+# Delegate the installation to your AI agent instead of editing files by hand,
+# for example:
+#   "Install course-materials/agent-configs/.bashrc-agents as ~/.bashrc-agents,
+#    source it from ~/.bashrc, put the env vars it needs as empty placeholders
+#    in ~/.config/secrets.sh (chmod 600), adjust EDITOR to an installed editor
+#    and verify the aliases load in a new shell."
+# PowerShell equivalents: claude-backends.ps1 and codex-aliases.ps1 (same folder).
+# ============================================================================
+
 # Set default editor for CLI tools
 export EDITOR=zed # or micro, nano, nvim, fresh, etc. (fast and lightweight TUI recommended)
 
@@ -45,7 +65,7 @@ alias claude-edits="claude --permission-mode acceptEdits"
 # Docs: https://code.claude.com/docs/en/headless
 
 # A PowerShell equivalent of the switchers below lives next to this file:
-#   course-materials/claude-backends.ps1   (dot-source it from your $PROFILE)
+#   course-materials/agent-configs/claude-backends.ps1   (dot-source it from your $PROFILE)
 
 # ============================================================================
 # Claude Code backend switchers (run Claude Code against non-Anthropic models)
