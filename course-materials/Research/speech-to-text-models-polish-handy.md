@@ -227,3 +227,13 @@ In English ASR, clean benchmarks like **LibriSpeech test-clean** are virtually s
 2. **Absolute Highest Accuracy (Challenging Accents / Technical Vocabulary):**
    - **`Granite Speech 4.1 2B NAR`** (`granite-speech-4.1-2b-nar`, Q5_K_M, ~1.6 GB): Non-autoregressive variant of IBM Granite. Leads the Open ASR leaderboard with sub-5% average real-world error rate.
    - **`Cohere Transcribe (03-2026)`** (Q5_K_M, ~1.77 GB): Best standalone 2B ASR model, 1.25% LibriSpeech clean WER.
+
+
+### 9.3. Canary 1B v2 as a Universal Bilingual Model (Polish + English)
+
+If you dictate in both Polish and English, **Canary 1B v2 is the recommended universal default** to keep loaded in Handy:
+
+- **Benchmark in English:** **2.18% LibriSpeech Clean**, **3.56% LibriSpeech Other**.
+- **The Multilingual Tradeoff:** Pure English-only models (Parakeet TDT 1.1B at 1.39% and Parakeet Unified EN 0.6B at 1.63%) have a slight edge (~0.5 - 0.7 p.p. lower WER) because 100% of their parameter capacity is dedicated to English phonemes.
+- **The Practical Advantage:** Canary 1B v2 shares its FastConformer encoder across 25 European languages. At speed score 81 and ~836 MB VRAM (Q5_K_M), it delivers sub-second transcription with low CPU usage and allows dictating in Polish and English without ever switching models in Handy settings.
+- **English-Only Champion:** If you work strictly in English with no Polish, **Parakeet TDT 1.1B** (1.39% clean WER, speed score 76) or **Cohere Transcribe (03-2026)** (1.25% clean WER, speed score 63) are the top accuracy performers.
