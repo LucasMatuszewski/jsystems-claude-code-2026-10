@@ -29,9 +29,9 @@ For developers and course participants who speak Polish (whether dictating in Po
 
 ---
 
-## 2. Real-World Hands-on Case Study & Test Findings
+## 2. Real-World Hands-on Case Study & Operational Rules
 
-A live empirical test on an NVIDIA GeForce GTX 1650 (Ubuntu 26.04, Handy Computer v0.9.8, `transcribe-cpp` GGUF engine) evaluated Canary 1B v2 in real dictation scenarios:
+A live empirical test on an NVIDIA GeForce GTX 1650 (Ubuntu 26.04, Handy Computer v0.9.8, `transcribe-cpp` GGUF engine) revealed key practical insights for daily workflow:
 
 ### Test A: Polish Speech Dictated with Language Set to English (Zero-Toggle Translation)
 - **Audio:** Spoken casually, fast, unscripted Polish without deliberate pronunciation.
@@ -55,10 +55,17 @@ A live empirical test on an NVIDIA GeForce GTX 1650 (Ubuntu 26.04, Handy Compute
   ```
 - **Result:** **100% accuracy, zero errors.** Every single diacritic, punctuation mark, casing, and technical model name was recognized flawlessly.
 
-### Caveat to Keep in Mind
-Canary 1B v2 in Handy does not support automatic language detection (`auto`). You must set the language explicitly:
-- Select **`pl`** when you want Polish transcription.
-- Select **`en`** when you want English transcription (or direct translation from Polish to English).
+### Operational Rules for Daily Dictation
+1. **Full-Time English Output:** If your target text is always English (e.g. for code, prompts, tickets, English documentation), **leave English (`en`) selected in Handy permanently**. You can speak English (for native transcription) or speak Polish (for direct speech-to-English translation).
+2. **When to Select Polish:** Only switch the selector to `pl` when you want the actual written text to come out in Polish.
+3. **Mid-Sentence Language Switching (Audio Boundary Rule):**
+   - Canary locks its acoustic-to-decoder alignment at the start of a recording.
+   - If you start speaking in English and switch to Polish in the *same* continuous audio stream, the attention alignment drops, causing an early `<|endoftranscript|>` token that drops the Polish portion.
+   - **Fix:** Simply release the push-to-talk key to end the recording, then press it again to start speaking the other language in a fresh audio burst.
+4. **Negation Nuances in Direct Translation:**
+   - In rapid Polish speech, swallowed single-syllable particles ("nie", "no", "jak") can occasionally flip modal verbs during direct translation (e.g. "will" vs "won't").
+   - Literal word translations also occur (e.g. Polish *"angielski zaznaczony"* translated literally as *"English marked"* by Canary, which Luna contextually smoothed to *"English selected"*).
+   - This makes the **Two-Stage pipeline (Canary ASR + LLM Post-Processing)** the safest strategy when strict technical precision is required.
 
 ---
 
@@ -116,7 +123,7 @@ The Handy Computer catalog contains 16 models with declared Polish (`pl`) suppor
 ### 7.1. English Benchmark Comparison
 
 | Model | Architecture | Parameters | LibriSpeech Clean | LibriSpeech Other | Open ASR Mean WER | Handy Speed / Acc | Best Used For |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| :--- | :--- | :---: | :---: | :---: | :--- | :---: | :--- |
 | **IBM Granite Speech 4.1 2B** | Conformer + LLM Backbone | 2.3B | **1.28%** | **2.45%** | **4.90% - 5.33%** | 37 / 92 | Absolute lowest real-world error rate |
 | **Cohere Transcribe (03-2026)** | Dedicated Audio Conformer | 2.0B | **1.25%** | **2.50%** | **5.40%** | 63 / 92 | Enterprise accuracy without LLM bloat |
 | **NVIDIA Parakeet TDT 1.1B** | FastConformer-TDT | 1.1B | **1.39%** | **2.80%** | ~5.20% (MLS: 4.8%) | 76 / 91 | Maximum throughput with near-SOTA WER |
