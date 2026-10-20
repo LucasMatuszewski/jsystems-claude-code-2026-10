@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Anonimizowany przykład raportu przedszkoleniowego dla zespołu programistycznego: wyniki ankiety, wykresy i decyzje o programie." />
+  <meta name="description" content="Zagregowane, anonimowe wyniki ankiety uczestników kursu Claude Code (JSystems, 19-21.10.2026): profil grupy, użycie AI, oczekiwania i wpływ na program." />
   <meta name="robots" content="noindex,nofollow,noarchive" />
-  <title>Raport przedszkoleniowy - AI dla programistów | Przykład anonimizowany</title>
+  <title>Raport z ankiety - Claude Code | JSystems 19-21.10.2026</title>
   <script src="materialy/vendor/chart.js-4.4.7/chart.umd.js"></script>
   <style>
     :root {
@@ -281,25 +281,24 @@
   <main>
     <div class="shell">
       <section class="hero" id="start">
-        <div class="eyebrow">Raport przedszkoleniowy · przykład anonimizowany</div>
-        <p class="eyebrow">Raport historyczny - nie opisuje uczestników kursu 19-21.10.2026</p><h1>AI dla programistów:<br><span class="gradient-text">od ankiety do programu warsztatu</span></h1>
-        <p class="lead">Historyczny, zanonimizowany raport z rzeczywistego dwudniowego kursu dla zespołu programistycznego. Pokazuje, jak wyniki ankiety i spotkania discovery prowadzą do decyzji o ćwiczeniach, środowisku i tempie pracy. Wszystkie liczby oraz opisy środowiska poniżej dotyczą tej poprzedniej grupy.</p>
+        <div class="eyebrow">Raport z ankiety uczestników · JSystems · 19-21.10.2026</div>
+        <h1>Claude Code w grupie:<br><span class="gradient-text">kim jesteśmy i czego potrzebujemy</span></h1>
+        <p class="lead">Zagregowane, anonimowe wyniki ankiety uczestników kursu "Claude Code - od zera do zespołu agentów AI". Raport pokazuje stos technologiczny grupy, obecne użycie AI i oczekiwania oraz to, jak wpływają one na ćwiczenia w dniach 2 i 3.</p>
         <div class="badges">
-          <span class="badge"><strong>Poprzedni kurs</strong> · historyczne dane grupy</span>
-          <span class="badge"><strong>Dwa dni</strong> · warsztat online</span>
-          <span class="badge"><strong>8 unikalnych odpowiedzi</strong> · 1 duplikat scalony</span>
-          <span class="badge"><strong>Przykład decyzji</strong> · ćwiczenia na kodzie</span>
+          <span class="badge"><strong>14 odpowiedzi</strong> · 4 przed kursem, 10 w pierwszym dniu</span>
+          <span class="badge"><strong>3 dni</strong> · zdalnie, VM w chmurze</span>
+          <span class="badge"><strong>Projekt</strong> · AI Chat z agentami</span>
+          <span class="badge"><strong>Stan na</strong> · 20.10.2026</span>
         </div>
       </section>
 
       <nav class="section-nav" aria-label="Sekcje raportu">
         <a class="nav-chip" href="#podsumowanie">Podsumowanie</a>
         <a class="nav-chip" href="#ankieta">Ankieta</a>
-        <a class="nav-chip" href="#discovery">Spotkanie</a>
-        <a class="nav-chip" href="#program">Kierunek programu</a>
+        <a class="nav-chip" href="#oczekiwania">Oczekiwania</a>
+        <a class="nav-chip" href="#program">Wpływ na program</a>
         <a class="nav-chip" href="#srodowisko">Środowisko</a>
         <a class="nav-chip" href="#rekomendacje">Rekomendacje</a>
-        <a class="nav-chip" href="#pytania">Pytania</a>
       </nav>
 
       <section id="podsumowanie">
@@ -307,200 +306,197 @@
           <div><div class="section-kicker">01 · Executive summary</div><h2>Najważniejsze sygnały</h2></div>
         </div>
         <div class="grid grid-4">
-          <article class="card metric cyan"><span class="label">Claude Code</span><span class="value">8/8</span><span class="label">deklarowany dostęp</span></article>
-          <article class="card metric violet"><span class="label">Kod generowany przez AI</span><span class="value">41,2%</span><span class="label">średnia w zespole</span></article>
-          <article class="card metric green"><span class="label">Wspólny język poprzedniej grupy</span><span class="value">100%</span><span class="label">uczestników wskazało ten sam język główny</span></article>
-          <article class="card metric amber"><span class="label">Dwa konteksty</span><span class="value">2</span><span class="label">legacy + rozwiązania wielousługowe</span></article>
+          <article class="card metric cyan"><span class="label">Claude Code</span><span class="value">12/14</span><span class="label">już korzysta, 11 ma płatny plan</span></article>
+          <article class="card metric violet"><span class="label">Kod generowany przez AI</span><span class="value">40%</span><span class="label">mediana z 11 odpowiedzi (0-90%)</span></article>
+          <article class="card metric green"><span class="label">Agent AI w codziennej pracy</span><span class="value">13/14</span><span class="label">używa AI jako agenta i do generowania kodu</span></article>
+          <article class="card metric amber"><span class="label">Poziom AI</span><span class="value">8/13</span><span class="label">ocenia się jako początkujący, 5 średnio zaawansowanych</span></article>
         </div>
         <div class="grid grid-2" style="margin-top:16px">
           <article class="card callout">
             <h3>Wniosek przewodni</h3>
-            <p class="muted">Zespół nie potrzebuje kolejnego przeglądu narzędzi AI. Największą wartość da <strong style="color:var(--text)">wspólny, powtarzalny standard pracy</strong>: od kontekstu i specyfikacji, przez plan i implementację, po testy, wieloagentowy przegląd i akceptację człowieka.</p>
+            <p class="muted">Grupa zna już Claude Code, ale większość ocenia swój poziom jako początkujący. Największą wartość daje <strong style="color:var(--text)">powtarzalny sposób pracy z agentem</strong>: kontekst i instrukcje, PRD i ADR, delegowanie do sub-agentów, testy i review, a nie kolejny przegląd funkcji.</p>
           </article>
           <article class="card callout amber">
-            <h3>Największe ryzyko organizacyjne</h3>
-            <p class="muted">W tym dwudniowym kursie dostęp administracyjny oraz instalacja Dockera, IDE i Claude Code wymagały sprawdzenia <strong style="color:var(--text)">przed szkoleniem</strong>. Dla nowej grupy plan środowiska wynika z jej własnego stosu i uprawnień.</p>
+            <h3>Różnorodny stos</h3>
+            <p class="muted">Python i SQL (po 6 osób), C#/.NET (3), Java i PHP (po 2) oraz pojedynczo C++, Go i TypeScript. Prowadzący pokazuje TypeScript, a <strong style="color:var(--text)">wzorce pracy przenoszą się na każdy stos</strong>. Cztery osoby pracują głównie z danymi (ETL, BI, Data Science).</p>
           </article>
         </div>
       </section>
 
       <section id="ankieta">
         <div class="section-head">
-          <div><div class="section-kicker">02 · Ankieta uczestników</div><h2>Zespół jest gotowy na praktykę</h2></div>
-          <p class="muted small">Wartości wielokrotnego wyboru mogą sumować się powyżej 8.</p>
+          <div><div class="section-kicker">02 · Ankieta uczestników</div><h2>Profil grupy</h2></div>
+          <p class="muted small">Pytania wielokrotnego wyboru mogą sumować się powyżej 14.</p>
         </div>
         <div class="grid grid-2">
           <article class="card chart-card">
             <h3>Poziom zaawansowania w AI</h3>
-            <p class="muted small">Grupa jest wyraźnie mieszana - potrzebne materiały z powtórzeniem podstaw.</p>
-            <div class="chart-wrap"><canvas id="maturityChart" role="img" aria-label="Poziom AI: 2 początkujących, 4 średnio zaawansowanych, 2 zaawansowanych"></canvas></div>
-            <table class="table-fallback"><tr><th>Poziom</th><th>Osoby</th></tr><tr><td>Początkujący</td><td>2</td></tr><tr><td>Średnio zaawansowani</td><td>4</td></tr><tr><td>Zaawansowani</td><td>2</td></tr></table>
+            <p class="muted small">Nikt nie wskazał poziomu zaawansowanego - podstawy i słownik pojęć zostają w programie.</p>
+            <div class="chart-wrap"><canvas id="maturityChart" role="img" aria-label="Poziom AI: 8 początkujących, 5 średnio zaawansowanych, 1 bez odpowiedzi"></canvas></div>
+            <table class="table-fallback"><tr><th>Poziom</th><th>Osoby</th></tr><tr><td>Początkujący</td><td>8</td></tr><tr><td>Średnio zaawansowani</td><td>5</td></tr><tr><td>Bez odpowiedzi</td><td>1</td></tr></table>
           </article>
           <article class="card chart-card">
-            <h3>Języki wykorzystywane przez uczestników</h3>
-            <p class="muted small">Nazwę języka głównego ukryto, żeby przykład nie sugerował stosu technologicznego nowej grupy. Liczby pozostają historyczne.</p>
-            <div class="chart-wrap"><canvas id="languagesChart" role="img" aria-label="Języki poprzedniej grupy: język główny 8, JavaScript lub TypeScript 4, Python 4, SQL 3"></canvas></div>
-            <table class="table-fallback"><tr><th>Język</th><th>Osoby</th></tr><tr><td>Język główny (anonimizowany)</td><td>8</td></tr><tr><td>JavaScript / TypeScript</td><td>4</td></tr><tr><td>Python</td><td>4</td></tr><tr><td>SQL</td><td>3</td></tr></table>
+            <h3>Języki programowania</h3>
+            <p class="muted small">Dwa największe obozy to Python i SQL; .NET to trzeci wyraźny stos.</p>
+            <div class="chart-wrap"><canvas id="languagesChart" role="img" aria-label="Języki: Python 6, SQL 6, C# i .NET 3, Java 2, PHP 2, C++ 1, Go 1, JavaScript lub TypeScript 1"></canvas></div>
+            <table class="table-fallback"><tr><th>Język</th><th>Osoby</th></tr><tr><td>Python</td><td>6</td></tr><tr><td>SQL</td><td>6</td></tr><tr><td>C# / .NET</td><td>3</td></tr><tr><td>Java</td><td>2</td></tr><tr><td>PHP</td><td>2</td></tr><tr><td>C++</td><td>1</td></tr><tr><td>Go</td><td>1</td></tr><tr><td>JavaScript / TypeScript</td><td>1</td></tr></table>
           </article>
           <article class="card chart-card">
             <h3>Obszary pracy</h3>
-            <p class="muted small">Backend dominuje; frontend powinien pozostać kontekstem, nie osobną ścieżką ćwiczeń.</p>
-            <div class="chart-wrap"><canvas id="rolesChart" role="img" aria-label="Role: backend 6, architektura 2, frontend 2, full stack 1"></canvas></div>
-            <table class="table-fallback"><tr><th>Obszar</th><th>Osoby</th></tr><tr><td>Back-end</td><td>6</td></tr><tr><td>Architektura</td><td>2</td></tr><tr><td>Front-end</td><td>2</td></tr><tr><td>Full-stack</td><td>1</td></tr></table>
+            <p class="muted small">Backend dominuje, ale co trzecia osoba pracuje z danymi albo infrastrukturą.</p>
+            <div class="chart-wrap"><canvas id="rolesChart" role="img" aria-label="Obszary: backend 6, full stack 3, DevOps 3, architektura 2, Data Science lub AI 2, Data Engineering lub ETL 2, Analytics lub BI 2"></canvas></div>
+            <table class="table-fallback"><tr><th>Obszar</th><th>Osoby</th></tr><tr><td>Back-end</td><td>6</td></tr><tr><td>Full-stack</td><td>3</td></tr><tr><td>DevOps</td><td>3</td></tr><tr><td>Architektura</td><td>2</td></tr><tr><td>Data Science / AI</td><td>2</td></tr><tr><td>Data Engineering / ETL</td><td>2</td></tr><tr><td>Analytics / BI</td><td>2</td></tr></table>
           </article>
           <article class="card chart-card">
-            <h3>Aktualnie używane narzędzia AI</h3>
-            <p class="muted small">Jedno wspólne narzędzie pozwala uczyć standardu zamiast wielu interfejsów.</p>
-            <div class="chart-wrap"><canvas id="toolsChart" role="img" aria-label="Narzędzia AI: Claude Code 8, ChatGPT 3, Junie lub JetBrains AI 2, Codex 1, n8n 1"></canvas></div>
-            <table class="table-fallback"><tr><th>Narzędzie</th><th>Osoby</th></tr><tr><td>Claude Code</td><td>8</td></tr><tr><td>ChatGPT</td><td>3</td></tr><tr><td>Junie / JetBrains AI</td><td>2</td></tr><tr><td>Codex</td><td>1</td></tr><tr><td>n8n</td><td>1</td></tr></table>
+            <h3>Używane narzędzia AI</h3>
+            <p class="muted small">Claude Code jest wspólnym mianownikiem; ChatGPT, Copilot i Codex to tło do porównań.</p>
+            <div class="chart-wrap"><canvas id="toolsChart" role="img" aria-label="Narzędzia AI: Claude Code 12, ChatGPT 7, GitHub Copilot 3, OpenAI Codex 2, inne 3"></canvas></div>
+            <table class="table-fallback"><tr><th>Narzędzie</th><th>Osoby</th></tr><tr><td>Claude Code</td><td>12</td></tr><tr><td>ChatGPT</td><td>7</td></tr><tr><td>GitHub Copilot</td><td>3</td></tr><tr><td>OpenAI Codex</td><td>2</td></tr><tr><td>Inne (Grok, Hermes, n8n)</td><td>3</td></tr></table>
+          </article>
+          <article class="card chart-card">
+            <h3>Zastosowania AI</h3>
+            <p class="muted small">Agent i generowanie kodu są powszechne; testy i review stosuje co najwyżej połowa grupy.</p>
+            <div class="chart-wrap"><canvas id="usesChart" role="img" aria-label="Zastosowania: agent AI 13, generowanie kodu 13, nauka 9, code review 7, analiza danych 7, dokumentacja 7, generowanie testów 6, research 6, automatyzacja pracy 4, autocomplete 4"></canvas></div>
+            <table class="table-fallback"><tr><th>Zastosowanie</th><th>Osoby</th></tr><tr><td>Agent AI</td><td>13</td></tr><tr><td>Generowanie kodu</td><td>13</td></tr><tr><td>Nauka</td><td>9</td></tr><tr><td>Code review</td><td>7</td></tr><tr><td>Analiza danych</td><td>7</td></tr><tr><td>Dokumentacja kodu</td><td>7</td></tr><tr><td>Generowanie testów</td><td>6</td></tr><tr><td>Research</td><td>6</td></tr><tr><td>Automatyzacja pracy</td><td>4</td></tr><tr><td>Autocomplete</td><td>4</td></tr></table>
+          </article>
+          <article class="card chart-card">
+            <h3>Kod generowany przez AI</h3>
+            <p class="muted small">Duży rozrzut: od braku użycia w kodzie do 90%. Każda osoba to jeden punkt.</p>
+            <div class="chart-wrap"><canvas id="aiCodeChart" role="img" aria-label="Udział kodu generowanego przez AI: 0-20 procent 3 osoby, 21-40 procent 3 osoby, 41-60 procent 3 osoby, 61-100 procent 2 osoby"></canvas></div>
+            <table class="table-fallback"><tr><th>Udział kodu AI</th><th>Osoby</th></tr><tr><td>0-20%</td><td>3</td></tr><tr><td>21-40%</td><td>3</td></tr><tr><td>41-60%</td><td>3</td></tr><tr><td>61-100%</td><td>2</td></tr></table>
           </article>
         </div>
 
         <div class="grid grid-3" style="margin-top:16px">
           <article class="card">
             <h3>Środowisko pracy</h3>
-            <div class="stack"><span class="tag">Windows 8/8</span><span class="tag">IntelliJ IDEA 4</span><span class="tag">Inne IDE JetBrains 2</span><span class="tag">VS Code 1</span><span class="tag">Claude Code jako edytor 1</span></div>
+            <div class="stack"><span class="tag">Windows 11/14</span><span class="tag">Linux 3</span><span class="tag">Visual Studio 4</span><span class="tag">VS Code 4</span><span class="tag">IntelliJ IDEA 4</span><span class="tag">Narzędzia bazodanowe i edytory tekstu 2</span></div>
           </article>
           <article class="card">
-            <h3>Dostarczenie oprogramowania</h3>
-            <div class="stack"><span class="tag">Bitbucket 8/8</span><span class="tag">Jira 5</span><span class="tag">Confluence 4</span><span class="tag">GitHub 2</span><span class="tag">Redmine 1</span></div>
+            <h3>Repozytoria, CI/CD i zadania</h3>
+            <div class="stack"><span class="tag">GitHub 9</span><span class="tag">GitLab 7</span><span class="tag">Jira 6</span><span class="tag">Confluence 5</span><span class="tag">Jenkins 2</span><span class="tag">Bitbucket, Redmine, Argo 1</span><span class="tag">On-premises: 3 osoby</span></div>
           </article>
           <article class="card">
-            <h3>Adopcja AI</h3>
-            <div class="stack"><span class="tag">Regularne użycie 6</span><span class="tag">Start wdrożenia 2</span><span class="tag">Mediana deklarowanego kodu AI: 45%</span><span class="tag">odpowiedzi od 0% do 70%</span></div>
+            <h3>Chmura</h3>
+            <div class="stack"><span class="tag">Azure 3</span><span class="tag">AWS 3</span><span class="tag">Google Cloud 3</span><span class="tag">Cloudflare 1</span><span class="tag">bez chmury lub brak odpowiedzi 5</span></div>
+          </article>
+          <article class="card">
+            <h3>Licencje AI</h3>
+            <div class="stack"><span class="tag">Claude płatny 11</span><span class="tag">ChatGPT płatny 5</span><span class="tag">Copilot płatny 3</span><span class="tag">firmowe 9</span><span class="tag">prywatne 8</span><span class="tag">obie 4</span><span class="tag">brak płatnych 1</span></div>
+          </article>
+          <article class="card">
+            <h3>AI w firmie</h3>
+            <div class="stack"><span class="tag">regularnie 7</span><span class="tag">dopiero zaczyna 4</span><span class="tag">w ograniczonym zakresie 2</span><span class="tag">bez odpowiedzi 1</span></div>
+          </article>
+          <article class="card">
+            <h3>Rodzaje projektów</h3>
+            <div class="stack"><span class="tag">narzędzia wewnętrzne 4</span><span class="tag">backend i mikroserwisy 3</span><span class="tag">SaaS 3</span><span class="tag">dashboardy 3</span><span class="tag">aplikacje desktopowe 3</span><span class="tag">eCommerce 1</span></div>
           </article>
         </div>
       </section>
 
-      <section id="discovery">
-        <div class="section-head"><div><div class="section-kicker">03 · Spotkanie discovery i notatki</div><h2>Rzeczywisty kontekst techniczny</h2></div></div>
+      <section id="oczekiwania">
+        <div class="section-head"><div><div class="section-kicker">03 · Oczekiwania i problemy</div><h2>Co ma zostać po kursie</h2></div>
+          <p class="muted small">Odpowiedzi otwarte podało 7 osób; streszczenie bez cytatów.</p></div>
         <div class="grid grid-2">
           <article class="card">
+            <h3>Oczekiwane rezultaty</h3>
             <ul class="insight-list">
-              <li><span class="insight-icon">01</span><div><strong>Dwa światy systemowe</strong><span>Starsze rozwiązania legacy oraz nowsze produkty oparte na wielu usługach i repozytoriach.</span></div></li>
-              <li><span class="insight-icon">02</span><div><strong>Architektura rozproszona</strong><span>Warstwa API/gateway, wiele usług backendowych i repozytoriów oraz rozwiązania w więcej niż jednym języku.</span></div></li>
-              <li><span class="insight-icon">03</span><div><strong>Kontekst jest rozproszony</strong><span>PRD i dokumentacja biznesowa w Confluence, zadania w Jira, Swagger i szczegóły techniczne w repozytoriach Bitbucket.</span></div></li>
-              <li><span class="insight-icon">04</span><div><strong>Backend-first</strong><span>Vue istnieje w stosie, ale główną potrzebą są przepływy backendowe, debugowanie, optymalizacja i praca między usługami.</span></div></li>
+              <li><span class="insight-icon">01</span><div><strong>Pełne wykorzystanie agentów</strong><span>Zaawansowane funkcje i sposoby pracy z Claude Code; agenci, którzy sami realizują wieloetapowe zadania, testują i poprawiają kod.</span></div></li>
+              <li><span class="insight-icon">02</span><div><strong>CI/CD i tickety</strong><span>Pełna integracja z pipeline, automatyczne rozwiązywanie zgłoszeń i dobór modeli do zadań: tańsze tam, gdzie wystarczą, najmocniejsze tam, gdzie są potrzebne.</span></div></li>
+              <li><span class="insight-icon">03</span><div><strong>Bezpieczne automatyzacje</strong><span>Powtarzalne automatyzacje w Pythonie, PowerShellu, SQL i API, także on-premises; agent wspierający administrację IT pod kontrolą człowieka.</span></div></li>
+              <li><span class="insight-icon">04</span><div><strong>Mniej ręcznego kodu</strong><span>Aplikacje webowe w chmurze, rozwiązania no-code oraz agent, który wypełnia formularze w przeglądarce.</span></div></li>
             </ul>
           </article>
           <article class="card">
+            <h3>Problemy i najbardziej czasochłonne zadania</h3>
             <ul class="insight-list">
-              <li><span class="insight-icon">05</span><div><strong>Duży potencjał w automatyzacji jakości</strong><span>W poprzednim zespole pipeline zawierał głównie healthcheck (HTTP 200), a testów automatycznych praktycznie nie było. Test-first, kryteria akceptacji i automatyczne bramki jakości stały się priorytetem.</span></div></li>
-              <li><span class="insight-icon">06</span><div><strong>Wspólny agent, różny poziom praktyki</strong><span>W poprzednim kursie Claude Code było dostępne, lecz doświadczenie zespołu rozciągało się od podstaw do zaawansowanych workflow.</span></div></li>
-              <li><span class="insight-icon">07</span><div><strong>Środowisko lokalne ma znaczenie</strong><span>Windows + Docker Desktop z backendem WSL2 + JetBrains odpowiadały sposobowi pracy poprzedniej grupy. Osobna dystrybucja Ubuntu była opcjonalna.</span></div></li>
-              <li><span class="insight-icon">08</span><div><strong>Domena ćwiczeń</strong><span>Przykłady oparto na zanonimizowanym procesie bliskim specjalizacji poprzedniego klienta.</span></div></li>
+              <li><span class="insight-icon">05</span><div><strong>Koszt i zapętlone agenty</strong><span>Marnowanie tokenów na agentach, które krążą w pętli. Potrzebne limity, checkpointy i kontrola kosztu.</span></div></li>
+              <li><span class="insight-icon">06</span><div><strong>Halucynacje i weryfikacja</strong><span>Ograniczanie błędów AI, weryfikacja generowanego kodu i bezpieczne wykonywanie operacji na produkcji.</span></div></li>
+              <li><span class="insight-icon">07</span><div><strong>Diagnostyka i logi</strong><span>Analiza logów i zdarzeń, powtarzające się problemy techniczne, ręczna weryfikacja usług, raporty i skrypty administracyjne.</span></div></li>
+              <li><span class="insight-icon">08</span><div><strong>Review i analizy</strong><span>Przegląd kodu oraz proste analizy dla biznesu zajmują najwięcej czasu; praca z bazami danych i systemami ERP.</span></div></li>
             </ul>
           </article>
         </div>
       </section>
 
       <section id="program">
-        <div class="section-head"><div><div class="section-kicker">04 · Przykład decyzji programowych</div><h2>Jeden przepływ end-to-end</h2></div></div>
+        <div class="section-head"><div><div class="section-kicker">04 · Wpływ na program</div><h2>Jak dopasowujemy dni 2 i 3</h2></div></div>
         <div class="grid grid-2">
           <article class="card">
-            <div class="timeline">
-              <div class="timeline-step"><span class="timeline-number">1</span><div class="timeline-content"><strong>PRD</strong><span>Analiza dokumentacji, wywiad, Q&amp;A, persony, przepływy, założenia nietechniczne od strony użytkownika.</span></div></div>
-              <div class="timeline-step"><span class="timeline-number">2</span><div class="timeline-content"><strong>ADR</strong><span>Research techniczny na podstawie PRD; decyzje zapisane w ADR z uzasadnieniem.</span></div></div>
-              <div class="timeline-step"><span class="timeline-number">3</span><div class="timeline-content"><strong>Plan</strong><span>Szczegółowy opis zadań dla agentów: zależności (dependency matrix), przypisanie do subagentów, decyzja co równoległe a co blokujące, wbudowane kroki QA.</span></div></div>
-              <div class="timeline-step"><span class="timeline-number">4</span><div class="timeline-content"><strong>Akceptacja</strong><span>Sprawdzenie planu przez człowieka przed realizacją; poprawki.</span></div></div>
-              <div class="timeline-step"><span class="timeline-number">5</span><div class="timeline-content"><strong>Wdrożenie z TDD</strong><span>Najpierw testy (fail), potem wdrożenie i pass; oddelegowane do subagentów.</span></div></div>
-              <div class="timeline-step"><span class="timeline-number">6</span><div class="timeline-content"><strong>QA z AI</strong><span>Główny agent koordynuje i kontroluje jakość przez cały czas wdrożenia: code review, akceptacja, poprawki.</span></div></div>
-              <div class="timeline-step"><span class="timeline-number">7</span><div class="timeline-content"><strong>Końcowe QA</strong><span>Końcowe lokalne code review przez AI i człowieka, debugging i poprawki; testy E2E i "manualne" wykonywane przez AI.</span></div></div>
-              <div class="timeline-step"><span class="timeline-number">8</span><div class="timeline-content"><strong>CI/CD</strong><span>PR, testy, analiza statyczna i AI Code Review w chmurze, poprawki.</span></div></div>
-            </div>
+            <h3>Priorytety</h3>
+            <div class="priority"><div class="priority-copy"><strong>Standard pracy z agentem</strong><span>Instrukcje repozytorium, plan, checkpointy i ślad decyzji w PRD i ADR (moduły 1.3-1.4, 2.2)</span></div><span class="pill high">krytyczne</span></div>
+            <div class="priority"><div class="priority-copy"><strong>Testy i review jako bramka</strong><span>TDD z agentem, code review i weryfikacja wyników, bo testy i review stosuje co najwyżej połowa grupy (2.4, 3.2)</span></div><span class="pill high">krytyczne</span></div>
+            <div class="priority"><div class="priority-copy"><strong>Delegowanie i praca równoległa</strong><span>Własne sub-agenty i Agent Teams z kontrolą jakości głównego agenta (2.3, 3.1)</span></div><span class="pill core">rdzeń</span></div>
+            <div class="priority"><div class="priority-copy"><strong>Koszt, modele i pętle</strong><span>Dobór modelu do zadania, limity, hooki i przerywanie zapętlonych agentów (3.1, 3.3)</span></div><span class="pill core">rdzeń</span></div>
+            <div class="priority"><div class="priority-copy"><strong>CI/CD: GitHub i GitLab</strong><span>Headless Claude w GitHub Actions oraz wariant GitLab CI, bo te dwie platformy dominują (3.3)</span></div><span class="pill core">rdzeń</span></div>
+            <div class="priority"><div class="priority-copy"><strong>Przykłady z danych i automatyzacji</strong><span>SQL, analiza danych, logi i skrypty administracyjne jako zadania własne poza wspólnym AI Chat</span></div><span class="pill next">ćwiczenia własne</span></div>
           </article>
           <article class="card">
-            <h3>Priorytety w dwóch dniach</h3>
-            <div class="priority"><div class="priority-copy"><strong>Standard pracy zespołu z agentem</strong><span>Instrukcje repozytorium, planowanie, checkpointy i ślady decyzji</span></div><span class="pill high">krytyczne</span></div>
-            <div class="priority"><div class="priority-copy"><strong>Testy przed zmianą kodu legacy</strong><span>Charakterystyka zachowania, regresja i bezpieczny refactoring</span></div><span class="pill high">krytyczne</span></div>
-            <div class="priority"><div class="priority-copy"><strong>Kontekst wielu usług i repozytoriów</strong><span>Mapa zależności, kontrakty API, ograniczanie kontekstu</span></div><span class="pill core">rdzeń</span></div>
-            <div class="priority"><div class="priority-copy"><strong>Multi-agent review</strong><span>Spec, QA, security i code review z finalną decyzją człowieka</span></div><span class="pill core">rdzeń</span></div>
-            <div class="priority"><div class="priority-copy"><strong>CI/CD z agentem</strong><span>Bezpieczny przykład syntetyczny i roadmapa, bez wdrażania do produkcji</span></div><span class="pill next">następny krok</span></div>
-            <div class="priority"><div class="priority-copy"><strong>Teoria LLM i porównanie narzędzi</strong><span>Krótki pre-work zamiast czasu warsztatowego</span></div><span class="pill next">pre-work</span></div>
+            <h3>Wpływ na sposób prowadzenia</h3>
+            <div class="timeline">
+              <div class="timeline-step"><span class="timeline-number">1</span><div class="timeline-content"><strong>Krótkie powtórzenia pojęć</strong><span>8 z 13 osób ocenia się jako początkujące: słownik AI i krótkie podsumowania przed każdym modułem.</span></div></div>
+              <div class="timeline-step"><span class="timeline-number">2</span><div class="timeline-content"><strong>Własny stos mile widziany</strong><span>Demo w TypeScript, a prompty i instrukcje agenta działają też w Pythonie, C#, Javie czy SQL.</span></div></div>
+              <div class="timeline-step"><span class="timeline-number">3</span><div class="timeline-content"><strong>Porównania tylko tam, gdzie pomagają</strong><span>Copilot i Codex jako krótkie porównanie; większość czasu na Claude Code, który chce poznać lepiej 7 osób.</span></div></div>
+              <div class="timeline-step"><span class="timeline-number">4</span><div class="timeline-content"><strong>Bezpieczeństwo przy realnych danych</strong><span>Uprawnienia, tryby zatwierdzania, sekrety i dane firmowe, zwłaszcza w środowiskach on-premises.</span></div></div>
+              <div class="timeline-step"><span class="timeline-number">5</span><div class="timeline-content"><strong>Artefakty do zabrania</strong><span>CLAUDE.md/AGENTS.md, definicje agentów, checklisty review i testów oraz przykład pipeline do wdrożenia w zespole.</span></div></div>
+            </div>
           </article>
         </div>
       </section>
 
       <section id="srodowisko">
-        <div class="section-head"><div><div class="section-kicker">05 · Środowisko poprzedniej grupy</div><h2>Jedna ścieżka dla całej grupy</h2></div></div>
+        <div class="section-head"><div><div class="section-kicker">05 · Środowisko</div><h2>VM na kursie, własna stacja po kursie</h2></div></div>
         <article class="card">
           <div class="decision">
             <div class="decision-option recommended">
-              <span class="pill core">rekomendowane</span>
-              <h3 style="margin-top:12px">Własne stacje robocze</h3>
-              <p class="muted">Największa szansa, że wypracowany sposób pracy zostanie z zespołem po szkoleniu. Do sprawdzenia, czy każdy może zainstalować:</p>
-              <ul><li>Windows + Docker Desktop z backendem WSL2</li><li>Obrazy testowe uruchamiane wspólnie na początku kursu</li><li>Git for Windows</li><li>Node.js LTS - dla narzędzi agentowych/MCP opartych na npm lub npx oraz awaryjnej pracy z frontendem</li><li>Claude Code CLI zainstalowany natywnie w Windows</li><li>IDE zgodne ze stosem poprzedniej grupy</li><li>Testowa organizacja Bitbucket z repozytorium</li></ul>
+              <span class="pill core">na kursie</span>
+              <h3 style="margin-top:12px">Ubuntu VM w chmurze dla wszystkich</h3>
+              <p class="muted">5 osób nie może instalować oprogramowania na swoim komputerze, a 1 potrzebuje zgody. Wspólna maszyna wirtualna usuwa tę blokadę i daje wszystkim to samo środowisko:</p>
+              <ul><li>Claude Code CLI, Node.js i Git gotowe do pracy</li><li>Ten sam projekt AI Chat i te same polecenia dla całej grupy</li><li>Brak wpływu na firmowe stacje robocze</li></ul>
             </div>
-            <div class="decision-arrow">LUB</div>
+            <div class="decision-arrow">POTEM</div>
             <div class="decision-option">
-              <span class="pill next">fallback</span>
-              <h3 style="margin-top:12px">Maszyny VM - dla wszystkich</h3>
-              <p class="muted">W poprzednim planie VM stanowiły wspólną ścieżkę awaryjną, z przygotowanym środowiskiem i połączeniem przez Pulpit Zdalny Windows. <strong style="color:var(--text)">Grupa nie dzieli się</strong> - albo VM dla wszystkich, albo dla nikogo.</p>
-              <ul><li>Wszystko zainstalowane i sprawdzone (IDE, oprogramowanie)</li><li>Dostępne do 17:00 w dniach kursu</li><li>Uczestnicy muszą odtwarzyć środowisko na swoich maszynach po kursie</li></ul>
+              <span class="pill next">po kursie</span>
+              <h3 style="margin-top:12px">Przeniesienie na własny komputer</h3>
+              <p class="muted">11 z 14 osób pracuje na Windows. Po kursie ten sam workflow trzeba odtworzyć lokalnie lub na firmowej VM:</p>
+              <ul><li>Claude Code natywnie w Windows albo w WSL2</li><li>Git, Node.js lub runtime własnego stosu</li><li>Zgoda IT na instalację i zasady przekazywania kodu do modelu</li><li>Konfiguracja agenta przeniesiona z repozytorium kursu</li></ul>
             </div>
           </div>
         </article>
         <div class="grid grid-2" style="margin-top:16px">
-          <article class="card callout green"><h3>Dlaczego laptopy wygrywają</h3><p class="muted">Uczestnicy uczą się w środowisku, którego będą używać później. To usuwa dodatkowy krok migracji z jednorazowej maszyny i zwiększa szansę wdrożenia praktyk po kursie.</p></article>
-          <article class="card callout amber"><h3>Warunek powodzenia</h3><p class="muted">W poprzednim kursie uczestnicy sprawdzali instalację Dockera i Claude Code przed szkoleniem. Repozytorium oraz obrazy aplikacji uruchamiano wspólnie na początku warsztatu.</p></article>
+          <article class="card callout green"><h3>Dlaczego VM teraz</h3><p class="muted">Ponad jedna trzecia grupy nie mogłaby zainstalować narzędzi samodzielnie. Jedna wspólna ścieżka pozwala pracować w tym samym tempie i pomagać sobie nawzajem.</p></article>
+          <article class="card callout amber"><h3>Warunek wdrożenia</h3><p class="muted">Dla osób bez prawa instalacji kluczowa jest rozmowa z IT o licencji, instalacji i polityce danych. Bez tego praktyki z kursu zostaną na VM.</p></article>
         </div>
       </section>
 
       <section id="rekomendacje">
-        <div class="section-head"><div><div class="section-kicker">06 · Przykładowe rekomendacje z poprzedniego kursu</div><h2>Co ustalono przed tamtym szkoleniem</h2></div></div>
+        <div class="section-head"><div><div class="section-kicker">06 · Rekomendacje</div><h2>Następne kroki dla uczestników</h2></div></div>
         <div class="grid grid-2" id="recommendationText">
           <article class="card">
-            <h3>1. Potwierdzić politykę instalacji i AI</h3>
-            <p class="muted">Ustalić prawa administratora, możliwość użycia WSL2/Dockera/Claude Code oraz zasady przekazywania kodu i dokumentacji do modelu. To blokuje wybór środowiska i zakres realnych przykładów.</p>
+            <h3>1. Ustal zasady z IT</h3>
+            <p class="muted">Potwierdź licencję, możliwość instalacji Claude Code (Windows lub WSL2) oraz zasady przekazywania kodu i danych firmowych do modelu.</p>
           </article>
           <article class="card">
-            <h3>2. Wybrać ścieżkę środowiskową - dla całej grupy</h3>
-            <p class="muted">W poprzednim planie wybrano jedną ścieżkę dla całej grupy: własne laptopy albo VM. Weryfikacja obejmowała Docker Desktop z Compose i backendem WSL2, Git for Windows, Node.js LTS, Claude Code CLI oraz IDE odpowiednie dla stosu. Osobna dystrybucja Ubuntu w WSL2 pozostawała opcjonalna. Obrazy testowe i repozytorium uruchamiano wspólnie na początku kursu.</p>
+            <h3>2. Przenieś konfigurację agenta</h3>
+            <p class="muted">Zabierz z repozytorium kursu instrukcje projektu, definicje agentów, skills i checklisty. Dopasuj je do własnego stosu i poleceń build/test.</p>
           </article>
           <article class="card">
-            <h3>3. Rozesłać instrukcję instalacji i weryfikację</h3>
-            <p class="muted">Dla poprzedniej grupy przygotowano listę wersji narzędzi i krótką kontrolę działania środowiska. Osobno sprawdzono backend WSL2 i czas na pomoc zespołu IT. Dostęp do repozytorium kursu oraz obrazy aplikacji uruchomiono razem na początku szkolenia.</p>
+            <h3>3. Zacznij od testów i review</h3>
+            <p class="muted">Pierwsze zadania w pracy: testy przed zmianą, review generowanego kodu i jasne kryteria akceptacji. To najszybciej ogranicza halucynacje.</p>
           </article>
           <article class="card">
-            <h3>4. Otrzymać zanonimizowane artefakty</h3>
-            <p class="muted">Przykład PRD/specyfikacji, ADR, fragment OpenAPI/Swagger, mapa usług, przykładowy pipeline i obecna checklista testów - bez danych klientów, sekretów i kodu produkcyjnego.</p>
+            <h3>4. Kontroluj koszt i pętle</h3>
+            <p class="muted">Dobieraj model do zadania, ustaw limity tur i budżetu, przerywaj agenta bez postępu i zapisuj checkpointy.</p>
           </article>
           <article class="card">
-            <h3>5. Uzgodnić jeden syntetyczny przypadek</h3>
-            <p class="muted">Dla poprzedniego kursu wybrano uproszczony, całkowicie syntetyczny proces bliski pracy uczestników: warstwę API i 1-2 usługi, z rolami, audytem i błędami do diagnozy.</p>
+            <h3>5. Podłącz CI/CD</h3>
+            <p class="muted">Użyj przykładu headless dla GitHub Actions lub GitLab CI na repozytorium testowym, zanim trafi do pipeline produkcyjnego.</p>
           </article>
           <article class="card">
-            <h3>6. Przygotować dwie ścieżki ćwiczeń</h3>
-            <p class="muted">Nowa funkcja w usługach oraz diagnostyka/refactoring legacy z testami charakteryzacyjnymi. Wspólny standard, inne punkty wejścia.</p>
+            <h3>6. Wybierz jedną własną automatyzację</h3>
+            <p class="muted">Jeden powtarzalny proces: analiza logów, raport, skrypt administracyjny lub zapytanie SQL. Opisz go w PRD i zrealizuj z agentem.</p>
           </article>
-          <article class="card">
-            <h3>7. Dostarczyć pre-work</h3>
-            <p class="muted">Krótki słownik pojęć, zasady kontekstu i bezpieczeństwa oraz 20-30 minut obowiązkowego przygotowania. Teoria nie powinna zabierać czasu na szkoleniu.</p>
-          </article>
-          <article class="card">
-            <h3>8. Dostarczyć instrukcje instalacji i testowe repozytorium</h3>
-            <p class="muted">Osobny plik z wersjami narzędzi oraz dostęp do testowego repozytorium na platformie używanej przez poprzednią grupę.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="pytania">
-        <div class="section-head"><div><div class="section-kicker">07 · Przykładowe pytania do potwierdzenia</div><h2>Informacje potrzebne do finalizacji</h2></div></div>
-        <div class="grid grid-2 question-grid">
-          <article class="card question"><h3>Instalacja i sprzęt</h3><p class="muted">Czy uczestnicy mogą zainstalować wymagane narzędzia i IDE? Czy mają lokalne uprawnienia administratora, odpowiedni sprzęt oraz działającą wirtualizację, jeśli ćwiczenia jej wymagają? Czy wszyscy mogą pracować w tej samej ścieżce środowiskowej?</p></article>
-          <article class="card question"><h3>Sieć i dostęp</h3><p class="muted">Czy proxy, VPN, EDR lub firewall ograniczają pobieranie zależności, logowanie do narzędzia AI albo klonowanie repozytorium warsztatowego?</p></article>
-          <article class="card question"><h3>Wersje stosu</h3><p class="muted">Jakie języki, frameworki i wersje narzędzi będą używane w ćwiczeniach? Jak lokalnie uruchomić przykładową aplikację i jej zależności?</p></article>
-          <article class="card question"><h3>Dokumentacja i przykład</h3><p class="muted">Czy możecie przesłać zanonimizowane szablony PRD/specyfikacji, ADR, fragment kontraktu API, uproszczoną mapę zależności oraz jeden proces lub ticket, który może zainspirować ćwiczenie?</p></article>
-          <article class="card question"><h3>Testy i krytyczne funkcjonalności</h3><p class="muted">Jakie testy i bramki jakości ma dziś zespół? Które funkcjonalności są krytyczne i wymagają pokrycia jednostkowego, integracyjnego lub E2E? Co jest testowane manualnie i mogłoby zostać zautomatyzowane?</p></article>
-          <article class="card question"><h3>Zakres architektury</h3><p class="muted">Które 1-2 usługi oraz fragment warstwy API najlepiej reprezentują typowe zależności, bez odwzorowywania całego środowiska? Które narzędzia pomocnicze są tylko kontekstem, a które mają być aktywnym tematem?</p></article>
-          <article class="card question"><h3>Organizacja grupy</h3><p class="muted">Ilu uczestników weźmie udział w kursie, a ilu odpowiedziało na ankietę? Jakie są ich role i poziomy doświadczenia? Czy konta oraz licencje do narzędzi szkoleniowych będą aktywne przed rozpoczęciem?</p></article>
-          <article class="card question"><h3>Efekt po szkoleniu</h3><p class="muted">Które artefakty mają największy priorytet: instrukcje repozytorium, szablon specyfikacji/ADR, role agentów, zasady MCP, checklisty testów/review czy przykład pipeline?</p></article>
-        </div>
-
-        <div class="card" style="margin-top:16px">
-          <h3>Zakres danych do bezpiecznego udostępnienia</h3>
-          <details open><summary>Materiały szczególnie pomocne</summary><div class="details-body"><ul><li>zanonimizowany PRD lub specyfikacja;</li><li>przykładowy ADR i fragment OpenAPI/Swagger;</li><li>uproszczona mapa monolitu, gateway i usług;</li><li>zanonimizowany ticket/problem utrzymaniowy;</li><li>syntetyczna lub oczyszczona konfiguracja pipeline CI;</li><li>obecna checklista manualnego testowania i code review.</li></ul></div></details>
-          <details><summary>Czego nie przesyłać</summary><div class="details-body"><ul><li>danych klientów, dostawców ani użytkowników;</li><li>sekretów, tokenów, kluczy, adresów wewnętrznych i konfiguracji produkcyjnej;</li><li>pełnych repozytoriów lub dokumentów bez wcześniejszej anonimizacji;</li><li>logów zawierających dane osobowe lub informacje poufne.</li></ul></div></details>
         </div>
       </section>
     </div>
@@ -508,8 +504,8 @@
 
   <footer class="footer">
     <div class="shell footer-grid">
-      <div class="privacy"><strong style="color:var(--text)">Metodologia i prywatność.</strong> Ten przykład zachowuje zagregowane wyniki ankiety z rzeczywistego kursu (9 zgłoszeń, 8 unikalnych osób po scaleniu duplikatu) oraz zanonimizowane wnioski ze spotkania discovery. Przed publikacją dla nowej grupy trzeba zastąpić wyniki i wnioski jej własnymi danymi. Nie zawiera nazwisk, odpowiedzi indywidualnych, danych kontaktowych, kodu, dokumentów ani szczegółów pozwalających odtworzyć środowisko produkcyjne. Strona ma ustawienie <code>noindex</code>. Dane wielokrotnego wyboru nie sumują się do 100%.</div>
-      <div class="small">Opracowanie: <strong style="color:var(--text)">DevPowers</strong><br>Anonimizowany przykład raportu z poprzedniego kursu dla programistów</div>
+      <div class="privacy"><strong style="color:var(--text)">Metodologia i prywatność.</strong> Raport agreguje 14 zgłoszeń ankiety (4 przed kursem, 10 w pierwszym dniu kursu, 19.10.2026). Nie zawiera imion, nazwisk, inicjałów, danych kontaktowych, nazw firm ani odpowiedzi indywidualnych; odpowiedzi otwarte są streszczone. Nie każda osoba odpowiedziała na każde pytanie, a dane wielokrotnego wyboru nie sumują się do 100%. Strona ma ustawienie <code>noindex</code>.</div>
+      <div class="small">Opracowanie: <strong style="color:var(--text)">DevPowers</strong><br>Ankieta uczestników kursu Claude Code, JSystems, 19-21.10.2026</div>
     </div>
   </footer>
 
@@ -527,7 +523,7 @@
     function gridColor() {
       return document.documentElement.dataset.theme === 'light' ? 'rgba(15,30,49,.10)' : 'rgba(148,163,184,.14)';
     }
-    function commonOptions(indexAxis = 'x') {
+    function commonOptions(indexAxis = 'x', max = 14) {
       return {
         responsive: true,
         maintainAspectRatio: false,
@@ -538,10 +534,18 @@
           tooltip: { backgroundColor: '#07111f', titleColor: '#fff', bodyColor: '#d7e8f7', padding: 12, cornerRadius: 10 }
         },
         scales: indexAxis === 'y' ? {
-          x: { beginAtZero: true, max: 8, ticks: { stepSize: 1, color: chartTextColor() }, grid: { color: gridColor() }, border: { display: false } },
+          x: { beginAtZero: true, max, ticks: { stepSize: 2, color: chartTextColor() }, grid: { color: gridColor() }, border: { display: false } },
           y: { ticks: { color: chartTextColor(), font: { weight: 700 } }, grid: { display: false }, border: { display: false } }
         } : undefined
       };
+    }
+    const barColors = [palette.cyan, palette.violet, palette.green, palette.amber, palette.red, palette.muted];
+    function bars(id, labels, data, max, label = 'liczba osób') {
+      charts.push(new Chart(document.getElementById(id), {
+        type: 'bar',
+        data: { labels, datasets: [{ label, data, backgroundColor: labels.map((_, i) => barColors[i % barColors.length]), borderRadius: 9, borderSkipped: false }] },
+        options: { ...commonOptions('y', max), plugins: { ...commonOptions('y').plugins, legend: { display: false } } }
+      }));
     }
 
     function buildCharts() {
@@ -556,31 +560,28 @@
 
       charts.push(new Chart(document.getElementById('maturityChart'), {
         type: 'doughnut',
-        data: { labels: ['Początkujący', 'Średnio zaawansowani', 'Zaawansowani'], datasets: [{ data: [2, 4, 2], backgroundColor: [palette.amber, palette.cyan, palette.violet], borderWidth: 0, hoverOffset: 8 }] },
+        data: { labels: ['Początkujący', 'Średnio zaawansowani', 'Bez odpowiedzi'], datasets: [{ data: [8, 5, 1], backgroundColor: [palette.amber, palette.cyan, palette.muted], borderWidth: 0, hoverOffset: 8 }] },
         options: { ...commonOptions(), cutout: '62%', plugins: { ...commonOptions().plugins, legend: { position: 'bottom', labels: { color: chartTextColor(), usePointStyle: true, padding: 18 } } } }
       }));
 
-      charts.push(new Chart(document.getElementById('languagesChart'), {
-        type: 'bar',
-        data: { labels: ['Język główny', 'JavaScript / TypeScript', 'Python', 'SQL'], datasets: [{ label: 'liczba osób', data: [8, 4, 4, 3], backgroundColor: [palette.cyan, palette.violet, palette.green, palette.amber], borderRadius: 9, borderSkipped: false }] },
-        options: commonOptions('y')
-      }));
+      bars('languagesChart', ['Python', 'SQL', 'C# / .NET', 'Java', 'PHP', 'C++', 'Go', 'JS / TS'], [6, 6, 3, 2, 2, 1, 1, 1], 8);
+      bars('rolesChart', ['Back-end', 'Full-stack', 'DevOps', 'Architektura', 'Data Science / AI', 'Data Eng. / ETL', 'Analytics / BI'], [6, 3, 3, 2, 2, 2, 2], 8, 'liczba wskazań');
+      bars('toolsChart', ['Claude Code', 'ChatGPT', 'GitHub Copilot', 'OpenAI Codex', 'Inne'], [12, 7, 3, 2, 3], 14);
+      bars('usesChart', ['Agent AI', 'Generowanie kodu', 'Nauka', 'Code review', 'Analiza danych', 'Dokumentacja', 'Testy', 'Research', 'Automatyzacja', 'Autocomplete'], [13, 13, 9, 7, 7, 7, 6, 6, 4, 4], 14, 'liczba wskazań');
 
-      charts.push(new Chart(document.getElementById('rolesChart'), {
+      charts.push(new Chart(document.getElementById('aiCodeChart'), {
         type: 'bar',
-        data: { labels: ['Back-end', 'Architektura', 'Front-end', 'Full-stack'], datasets: [{ label: 'liczba wskazań', data: [6, 2, 2, 1], backgroundColor: [palette.cyan, palette.violet, palette.green, palette.amber], borderRadius: 9, borderSkipped: false }] },
-        options: commonOptions('y')
-      }));
-
-      charts.push(new Chart(document.getElementById('toolsChart'), {
-        type: 'bar',
-        data: { labels: ['Claude Code', 'ChatGPT', 'Junie / JetBrains AI', 'Codex', 'n8n'], datasets: [{ label: 'liczba osób', data: [8, 3, 2, 1, 1], backgroundColor: [palette.cyan, palette.violet, palette.green, palette.amber, palette.red], borderRadius: 9, borderSkipped: false }] },
-        options: commonOptions('y')
+        data: { labels: ['0-20%', '21-40%', '41-60%', '61-100%'], datasets: [{ label: 'liczba osób', data: [3, 3, 3, 2], backgroundColor: [palette.muted, palette.cyan, palette.violet, palette.green], borderRadius: 9, borderSkipped: false }] },
+        options: { ...commonOptions(), plugins: { ...commonOptions().plugins, legend: { display: false } }, scales: {
+          x: { ticks: { color: chartTextColor(), font: { weight: 700 } }, grid: { display: false }, border: { display: false } },
+          y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, color: chartTextColor() }, grid: { color: gridColor() }, border: { display: false } }
+        } }
       }));
     }
 
     const themeBtn = document.getElementById('themeBtn');
-    const savedTheme = localStorage.getItem('developer-report-theme');
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('developer-report-theme'); } catch (_) {}
     if (savedTheme) document.documentElement.dataset.theme = savedTheme;
     const syncThemeLabel = () => {
       const light = document.documentElement.dataset.theme === 'light';
@@ -593,7 +594,7 @@
     themeBtn.addEventListener('click', () => {
       const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
       document.documentElement.dataset.theme = next;
-      localStorage.setItem('developer-report-theme', next);
+      try { localStorage.setItem('developer-report-theme', next); } catch (_) {}
       syncThemeLabel();
       buildCharts();
     });
@@ -613,18 +614,16 @@
     });
 
     const recommendations = [
-      'Potwierdzić uprawnienia, sprzęt i możliwość instalacji narzędzi wymaganych przez konkretny kurs.',
-      'Wybrać jedną ścieżkę środowiskową dla całej grupy — laptopy lub VM, bez dzielenia grupy.',
-      'Rozesłać instrukcję instalacji i weryfikacji narzędzi z terminem przed szkoleniem.',
-      'Przesłać zanonimizowane przykłady PRD/specyfikacji, ADR, kontraktu API, mapy zależności i pipeline.',
-      'Wybrać syntetyczny przypadek bliski pracy grupy, z niewielką liczbą usług i mierzalnym rezultatem.',
-      'Przygotować ścieżkę nowej funkcji oraz ścieżkę legacy z testami charakteryzacyjnymi.',
-      'Dostarczyć pre-work (słownik pojęć, zasady kontekstu i bezpieczeństwa, 20–30 min).',
-      'Dostarczyć instrukcje instalacji oraz dostęp do testowego repozytorium na platformie grupy.'
+      'Ustal z IT licencję, instalację Claude Code (Windows lub WSL2) i zasady przekazywania kodu oraz danych do modelu.',
+      'Przenieś z repozytorium kursu instrukcje projektu, definicje agentów, skills i checklisty; dopasuj je do własnego stosu.',
+      'Zacznij od testów przed zmianą, review generowanego kodu i jasnych kryteriów akceptacji.',
+      'Kontroluj koszt: model dobrany do zadania, limity tur i budżetu, przerywanie zapętlonego agenta, checkpointy.',
+      'Podłącz headless Claude do GitHub Actions lub GitLab CI na repozytorium testowym.',
+      'Wybierz jeden powtarzalny proces (logi, raport, skrypt, SQL), opisz go w PRD i zrealizuj z agentem.'
     ];
 
     document.getElementById('copyBtn').addEventListener('click', async () => {
-      const text = 'Historyczny przykład rekomendacji przed szkoleniem AI dla programistów (dopasuj do nowej grupy):\n\n' + recommendations.map((item, index) => `${index + 1}. ${item}`).join('\n');
+      const text = 'Rekomendacje po kursie Claude Code (JSystems, 19-21.10.2026):\n\n' + recommendations.map((item, index) => `${index + 1}. ${item}`).join('\n');
       try {
         await navigator.clipboard.writeText(text);
         const toast = document.getElementById('toast');
