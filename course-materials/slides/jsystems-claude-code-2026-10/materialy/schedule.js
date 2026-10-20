@@ -7,8 +7,9 @@
     start:'09:00', end:'16:00',
     breaks:[
       {time:'11:00', duration:15, label:'Przerwa poranna'},
-      {time:'13:00', duration:30, label:'Przerwa obiadowa'},
-      {time:'14:30', duration:15, label:'Przerwa popołudniowa'}
+      {time:'14:00', duration:30, label:'Przerwa obiadowa'},
+      // Optional, but confirmed so the deck still rings and the trainer decides on the spot.
+      {time:'15:30', duration:10, label:'Przerwa opcjonalna', optional:true, confirmed:true}
     ]
   };
   // One date per course day, by day number; a day without a date raises no break reminders.
