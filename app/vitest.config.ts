@@ -1,3 +1,4 @@
+import path from "node:path";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
@@ -6,6 +7,14 @@ const sharedSetupFiles = ["./tests/setup/vitest.setup.ts"];
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
+  resolve: {
+    alias: {
+      "server-only": path.resolve(
+        import.meta.dirname,
+        "tests/setup/server-only-stub.ts"
+      ),
+    },
+  },
   test: {
     exclude: ["node_modules", "tests/e2e/**", "tests/contract/**", ".next"],
     passWithNoTests: false,
