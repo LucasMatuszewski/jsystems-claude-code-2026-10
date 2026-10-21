@@ -80,6 +80,8 @@ Verify only the scope relevant to your change. If the change affects runtime beh
 
 **Verification:** For runtime changes, start the real application and finish with Manual QA. Record compilation/build, test execution and startup as separate checks, including discovery counts and skips. A successful build or E2E run alone does not establish that the app works. Documentation-only changes use diff, link and consistency checks and do not require application startup. Fix errors and warnings introduced by the change; report pre-existing failures without hiding them.
 
+**Commands** (run in `app/` once it is scaffolded): `npm run typecheck`, `npm run lint`, `npm test` (unit + integration), `npm run build`, `npm run start` (app on port 3000), `npm run test:contract`, `npm run test:e2e`.
+
 **Env Vars:** See `.env.example`. Configure only the provider chosen in the ADR (OpenRouter or Anthropic); credentials remain server-side. The CLI subscription and application API credentials are separate.
 
 ### Commit Rules
@@ -89,12 +91,12 @@ Verify only the scope relevant to your change. If the change affects runtime beh
 - Keep commits focused: one logical change per commit; split larger work into several commits (e.g. one per review theme).
 - Format: `Area: short summary` (e.g. `Backend:`, `Frontend:`, `Docs:`, `Design:`), with a body explaining what changed and why.
 - Documentation-only commits need only the diff, link and consistency checks from Verification.
-- Never commit secrets, `.env*` files or `.claude/worktrees/`.
+- Never commit secrets or `.env*` files (except `.env.example`).
 - List the created commit hashes and the branch in your final summary.
 - Do **not** push to remote unless the user explicitly asks.
 
 ### Git Worktrees
-- Avoid worktrees by default; work in this checkout. Create a worktree only when the user explicitly asks for one, or when parallel agent work makes it unavoidable — and in that case ask first.
+- Use this checkout by default. Create a worktree only when requested or needed for parallel agent work; ask first when not explicitly requested.
 - Remove worktrees with `git worktree remove <path>` and run `git worktree prune` when done.
 
 ### Completion Criteria
@@ -105,3 +107,6 @@ A task is complete only when:
 - Runtime changes passed Manual QA on the actual UI, CLI or API, with screenshots or command/request evidence and the application's own visual reference where applicable; documentation-only work passed its scoped checks
 - The commit message is focused and the repository is in a consistent, reviewable state
 - The work is committed on a non-`main` branch and the commit hashes are reported
+
+### Documentation IDs (Context7)
+Use these IDs directly with Context7 instead of resolving them: AI SDK `/vercel/ai` (check before writing any AI code — AI SDK 7 differs from v5/v6), Next.js `/vercel/next.js`, React `/reactjs/react.dev`, AI Elements `/vercel/ai-elements`, OpenRouter provider `/openrouterteam/ai-sdk-provider`, shadcn/ui `/shadcn-ui/ui`, Zod `/colinhacks/zod`, Vitest `/vitest-dev/vitest`, Playwright `/microsoft/playwright`.
