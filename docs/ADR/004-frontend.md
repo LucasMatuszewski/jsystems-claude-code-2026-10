@@ -98,7 +98,7 @@ app/layout.tsx                    <html lang="pl">, Instrument Sans, metadata, T
 
 1. **On select** (AC-10–13): reject > 10 MB with "Zdjęcie przekracza limit 10 MB"; read the first 12 bytes and sniff (shared with the server); `unknown` → "Dozwolone formaty: JPG, PNG, WebP". Accepted file replaces the previous one. Input `accept` is `image/jpeg,image/png,image/webp` (a hint only; sniffing is authoritative).
 2. **On submit** (AC-19): `createImageBitmap(file, { imageOrientation: 'from-image' })`; scale so the longer edge is ≤ 1568 px (no upscaling); draw on a canvas with a white background (PNG/WebP transparency); `toBlob('image/jpeg', q)` starting at q = 0.85 and decreasing by 0.1 down to 0.45 until ≤ 1 048 576 bytes; if still too large, scale by 0.85 and repeat (max 5 rounds); otherwise fail with `ANALYSIS_FAILED`-style banner. Aspect ratio is preserved.
-3. **Display**: the form thumbnail uses the original file's object URL; the chat summary thumbnail and overlay use the reduced JPEG (what the model saw).
+3. **Display**: the form thumbnail uses the original file's object URL; the chat summary thumbnail uses the reduced JPEG (what the model saw); the overlay (AC-39 "full photo") shows the original file at full resolution, falling back to the reduced JPEG if the browser cannot render the original. Both object URLs are revoked on `RESET`.
 
 ### 3.5 Rendering assistant messages
 
@@ -121,7 +121,8 @@ After the parts of the **first** assistant message, once that message is no long
 
 - **Form validation** (AC-15): validation runs on submit with `caseFormSchema` plus photo presence; errors appear under each invalid field (`aria-invalid`, `aria-describedby`); focus moves to the first invalid field in AC-01 order. After the first submit attempt, fields re-validate on change.
 - **Conditional fields**: reason label "Opisz problem" with required marker `*` for complaint, "Powód zwrotu (opcjonalnie)" for return (product copy); photo hint per AC-14; both hints hidden until a case type is chosen (PRD §9.1 empty state).
-- **Date**: native `<input type="date">` with `max` = today in Europe/Warsaw (disables future dates in Chrome, Edge, Firefox, Safari pickers); typed future dates are caught by validation (AC-06).
+- **Date**: native `<input type="date">` with `max` = today in Europe/Warsaw (disables future dates in Chrome, Edge, Firefox, Safari pickers); typed future dates are caught by validation (AC-06). Interpretation: "today" in AC-06 is the calendar date in Europe/Warsaw, the same zone the server uses for day counts, so client and server validation never disagree.
+- **Model name**: `maxLength = 100` on the input, so only the AC-05 minimum-length error can occur.
 - **Reason**: `maxLength = 2000`, counter "N / 2000" always visible (AC-09).
 - **Processing** (AC-17/18): all controls disabled (`fieldset disabled`); `ProcessingSteps` replaces the submit button, lists "Analizujemy zdjęcie…" and "Przygotowujemy decyzję…", highlights the active one, `aria-live="polite"`.
 - **Chat input** (AC-40): trimmed length 1–2000; send disabled when empty; Enter sends, Shift+Enter newline; counter "N / 2000" shown when length > 1800; no attachment control (AC-44).
@@ -190,7 +191,7 @@ All controls reachable by Tab in visual order; tiles and radios operable with ar
 | `submitCase → /api/analyze` | `FormData` with fields of ADR-003 §4.1 and `photo` = reduced JPEG named `photo.jpg` |
 | `ChatScreen ↔ useChat` | `messages`, `status`, `error`, `sendMessage`, `regenerate`, `stop` |
 | `DecisionCard` props | `DecisionView` |
-| `CaseSummary` props | `caseContext`, `reducedPhotoUrl`, `currentLabel` |
+| `CaseSummary` props | `caseContext`, `reducedPhotoUrl`, `originalPhotoUrl` (overlay), `currentLabel` |
 | Error codes → texts | Submission (form screen): `ANALYSIS_*`, `DECISION_*`, `VALIDATION_ERROR`, `PHOTO_REQUIRED`, `UNSUPPORTED_IMAGE_TYPE`, `PHOTO_TOO_LARGE`, `CONFIGURATION_ERROR`, network failure → AC-22 banner. Follow-up (chat): `DECISION_*`, `VALIDATION_ERROR`, `CONFIGURATION_ERROR`, network failure → "Nie wysłano" + "Ponów"; `CONVERSATION_LIMIT` → non-retryable notice with the ADR-003 §4.5 text, input disabled, pointing to "Nowe zgłoszenie" (no "Ponów"). For HTTP errors the `useChat` transport error carries the response body; the client parses `error.code` from it and falls back to "network failure" when it cannot. |
 
 ---

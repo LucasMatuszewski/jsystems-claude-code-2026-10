@@ -138,7 +138,7 @@ All models are in-memory only. Field names are the canonical names used in schem
 | `modelName` | string, trimmed, 2–100 | AC-05 |
 | `purchaseDate` | ISO date `YYYY-MM-DD`, not after today (Europe/Warsaw) | AC-06 |
 | `reason` | string ≤ 2000; ≥ 20 trimmed when `complaint`; may be empty for `return` | AC-07/08 |
-| `photo` | binary JPEG produced by client reduction, ≤ 1 MB, longer edge ≤ 1568 px | AC-10/19 |
+| `photo` | binary image ≤ 1 MB. The UI always sends its reduced JPEG (longer edge ≤ 1568 px); the server accepts JPEG, PNG or WebP detected by content and forwards the detected media type to the model | AC-10/19 |
 
 ### CaseContext (server → client, then client → `/api/chat` on every turn)
 
