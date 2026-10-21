@@ -1,71 +1,72 @@
-<a href="https://chatbot.ai-sdk.dev/demo">
-  <img alt="Chatbot" src="app/(chat)/opengraph-image.png">
-  <h1 align="center">Chatbot</h1>
-</a>
+# Hardware Service Decision Copilot
 
-<p align="center">
-    Chatbot (formerly AI Chatbot) is a free, open-source template built with Next.js and the AI SDK that helps you quickly build powerful chatbot applications.
-</p>
+An AI chat application that helps a customer decide what to do with a broken hardware device: it takes the case details and a photo, then answers in streamed replies under the return and complaint policies. The app is built with Next.js 16, the Vercel AI SDK 7 and React 19 for the streamed chat UI.
 
-<p align="center">
-  <a href="https://chatbot.ai-sdk.dev/docs"><strong>Read Docs</strong></a> ·
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#model-providers"><strong>Model Providers</strong></a> ·
-  <a href="#deploy-your-own"><strong>Deploy Your Own</strong></a> ·
-  <a href="#running-locally"><strong>Running locally</strong></a>
-</p>
-<br/>
+## Prerequisites
 
-## Features
+- Node.js 22 or newer
+- An OpenRouter API key and model IDs (see Environment)
 
-- [Next.js](https://nextjs.org) App Router
-  - Advanced routing for seamless navigation and performance
-  - React Server Components (RSCs) and Server Actions for server-side rendering and increased performance
-- [AI SDK](https://ai-sdk.dev/docs/introduction)
-  - Unified API for generating text, structured objects, and tool calls with LLMs
-  - Hooks for building dynamic chat and generative user interfaces
-  - Supports OpenAI, Anthropic, Google, xAI, and other model providers via AI Gateway
-- [shadcn/ui](https://ui.shadcn.com)
-  - Styling with [Tailwind CSS](https://tailwindcss.com)
-  - Component primitives from [Radix UI](https://radix-ui.com) for accessibility and flexibility
-- Data Persistence
-  - [Neon Serverless Postgres](https://vercel.com/marketplace/neon) for saving chat history and user data
-  - [Vercel Blob](https://vercel.com/storage/blob) for efficient file storage
-- [Auth.js](https://authjs.dev)
-  - Simple and secure authentication
-
-## Model Providers
-
-This template uses the [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) to access multiple AI models through a unified interface. Models are configured in `lib/ai/models.ts` with per-model provider routing. Included models: Mistral, Moonshot, DeepSeek, OpenAI, and xAI.
-
-### AI Gateway Authentication
-
-**For Vercel deployments**: Authentication is handled automatically via OIDC tokens.
-
-**For non-Vercel deployments**: You need to provide an AI Gateway API key by setting the `AI_GATEWAY_API_KEY` environment variable in your `.env.local` file.
-
-With the [AI SDK](https://ai-sdk.dev/docs/introduction), you can also switch to direct LLM providers like [OpenAI](https://openai.com), [Anthropic](https://anthropic.com), [Cohere](https://cohere.com/), and [many more](https://ai-sdk.dev/providers/ai-sdk-providers) with just a few lines of code.
-
-## Deploy Your Own
-
-You can deploy your own version of Chatbot to Vercel with one click:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/templates/next.js/chatbot)
-
-## Running locally
-
-You will need to use the environment variables [defined in `.env.example`](.env.example) to run Chatbot. It's recommended you use [Vercel Environment Variables](https://vercel.com/docs/projects/environment-variables) for this, but a `.env` file is all that is necessary.
-
-> Note: You should not commit your `.env` file or it will expose secrets that will allow others to control access to your various AI and authentication provider accounts.
-
-1. Install Vercel CLI: `npm i -g vercel`
-2. Link local instance with Vercel and GitHub accounts (creates `.vercel` directory): `vercel link`
-3. Download your environment variables: `vercel env pull`
+## Setup
 
 ```bash
-pnpm install
-pnpm db:migrate # Setup database or apply latest database changes
-pnpm dev
+cd app
+npm ci
+cp ../.env.example ../.env   # then fill in the values in the repository-root .env
 ```
 
-Your app template should now be running on [localhost:3000](http://localhost:3000).
+The app reads the repository-root `../.env`. Do not create `app/.env*` files.
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Starts the Next.js dev server on port 3000. |
+| `npm run build` | Produces a production build with `next build`. |
+| `npm run start` | Serves the production build with `next start`, on port 3000 by default. |
+| `npm run typecheck` | Runs `tsc --noEmit` for TypeScript checks. |
+| `npm run lint` | Runs Ultracite (Biome) checks. |
+| `npm run format` | Applies Ultracite (Biome) fixes. |
+| `npm test` | Runs unit and integration tests once with Vitest. |
+| `npm run test:watch` | Runs Vitest in watch mode. |
+| `npm run test:contract` | Runs the Playwright contract tests against the real stack. |
+| `npm run test:e2e` | Runs the Playwright E2E tests in Chromium, Firefox and WebKit. |
+| `npm run capture` | Records real API responses into `tests/fixtures/captures` (needs `AI_CAPTURE_DIR`). |
+
+## Environment
+
+Variables are described in `../.env.example`:
+
+- `OPENROUTER_API_KEY` (required): server-side provider key.
+- `LLM_MODEL` (required): OpenRouter model ID for the decision chat.
+- `VISION_MODEL` (optional): model ID for photo analysis; defaults to `LLM_MODEL`.
+- `POLICIES_DIR` (optional): policy documents directory; defaults to `../docs/policies`.
+- `PORT` (optional): app port; defaults to 3000.
+- `AI_CAPTURE_DIR` (optional): output directory, only for `npm run capture`.
+
+Credentials stay on the server.
+
+## Project layout
+
+- `app/`: App Router routes (`page.tsx`, `api/analyze`, `api/chat`) and global styles.
+- `components/`: `ai-elements` and `ui` (vendored, re-synced with the CLIs), `layout`; `case-form` and `chat` are planned.
+- `lib/`: `case` (schemas, constants, labels), `image` (content sniffing and size checks), `ai` (server-only provider, env and logging code).
+- `tests/`: shared setup, with integration, contract, E2E and captured fixtures planned.
+
+## Testing
+
+- Unit and integration tests (`npm test`) never call the network; the fetch guard and dummy env are in `tests/setup/vitest.setup.ts`.
+- Contract and E2E tests (`npm run test:contract`, `npm run test:e2e`) use the real stack with no mocks and no route interception.
+- Test photos come from `../assets/example-images/`.
+
+## Documentation
+
+- [Product requirements](../docs/PRD.md)
+- Architecture decisions: [000 main architecture](../docs/ADR/000-main-architecture.md), [001 project scaffold](../docs/ADR/001-project-scaffold.md), [002 AI integration](../docs/ADR/002-ai-integration.md), [003 backend API](../docs/ADR/003-backend-api.md), [004 frontend](../docs/ADR/004-frontend.md), [005 testing](../docs/ADR/005-testing.md)
+- [Design guidelines](../docs/design-guidelines.md)
+- [Implementation plan](../docs/plans/poc-implementation-plan.md)
+- Agent rules: [repository AGENTS.md](../AGENTS.md) and [app AGENTS.md](AGENTS.md)
+
+## License
+
+The application is based on the Chatbot template from vercel/chatbot, licensed under Apache-2.0 (Copyright 2024 Vercel, Inc.). See [LICENSE](LICENSE).
