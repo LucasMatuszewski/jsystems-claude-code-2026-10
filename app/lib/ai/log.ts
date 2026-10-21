@@ -8,7 +8,13 @@ export type AiCallLog = {
   outcome: string;
   msToFirstChunk?: number;
   totalMs?: number;
-  usage?: { inputTokens?: number; outputTokens?: number; cost?: number };
+  finishReason?: string;
+  usage?: {
+    inputTokens?: number;
+    outputTokens?: number;
+    reasoningTokens?: number;
+    cost?: number;
+  };
 };
 
 export function logAiCall(entry: AiCallLog): void {
@@ -25,6 +31,9 @@ export function logAiCall(entry: AiCallLog): void {
   if (entry.totalMs !== undefined) {
     record.totalMs = entry.totalMs;
   }
+  if (entry.finishReason !== undefined) {
+    record.finishReason = entry.finishReason;
+  }
   if (entry.usage) {
     const usage: Record<string, number> = {};
     if (entry.usage.inputTokens !== undefined) {
@@ -32,6 +41,9 @@ export function logAiCall(entry: AiCallLog): void {
     }
     if (entry.usage.outputTokens !== undefined) {
       usage.outputTokens = entry.usage.outputTokens;
+    }
+    if (entry.usage.reasoningTokens !== undefined) {
+      usage.reasoningTokens = entry.usage.reasoningTokens;
     }
     if (entry.usage.cost !== undefined) {
       usage.cost = entry.usage.cost;

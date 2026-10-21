@@ -35,4 +35,23 @@ describe("logAiCall", () => {
       expect(line).not.toContain(forbidden);
     }
   });
+
+  it("logs finishReason and reasoningTokens, dropping other keys", () => {
+    const spy = vi.spyOn(console, "info").mockImplementation(() => undefined);
+    logAiCall({
+      caseType: "complaint",
+      finishReason: "length",
+      modelId: "vendor/model",
+      outcome: "ok",
+      route: "chat",
+      usage: { inputTokens: 5, outputTokens: 4000, reasoningTokens: 3900 },
+    });
+    const parsed = JSON.parse(String(spy.mock.calls[0]?.[0]));
+    expect(parsed.finishReason).toBe("length");
+    expect(parsed.usage).toEqual({
+      inputTokens: 5,
+      outputTokens: 4000,
+      reasoningTokens: 3900,
+    });
+  });
 });

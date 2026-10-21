@@ -93,17 +93,22 @@ export async function streamDecisionTurn(
   let outcome = "ok";
   let logged = false;
 
-  const log = (usage?: {
-    inputTokens?: number;
-    outputTokens?: number;
-    cost?: number;
-  }) => {
+  const log = (
+    usage?: {
+      inputTokens?: number;
+      outputTokens?: number;
+      reasoningTokens?: number;
+      cost?: number;
+    },
+    finishReason?: string
+  ) => {
     if (logged) {
       return;
     }
     logged = true;
     logAiCall({
       caseType,
+      finishReason,
       modelId,
       msToFirstChunk: firstChunkMs,
       outcome,
@@ -144,11 +149,16 @@ export async function streamDecisionTurn(
         firstChunkMs ??= Math.round(performance.now() - startedAt);
       },
       onEnd: (event) => {
-        log({
-          cost: costFrom(event.providerMetadata),
-          inputTokens: event.totalUsage?.inputTokens,
-          outputTokens: event.totalUsage?.outputTokens,
-        });
+        log(
+          {
+            cost: costFrom(event.providerMetadata),
+            inputTokens: event.totalUsage?.inputTokens,
+            outputTokens: event.totalUsage?.outputTokens,
+            reasoningTokens:
+              event.totalUsage?.outputTokenDetails?.reasoningTokens,
+          },
+          event.finishReason
+        );
       },
       onError: ({ error }) => {
         outcome = toAiErrorCode(error, "decision");

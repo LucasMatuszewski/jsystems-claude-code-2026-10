@@ -30,7 +30,12 @@ const MAX_OUTPUT_TOKENS = 1500;
 const MAX_RETRIES = 1;
 const TOTAL_TIMEOUT_MS = 50_000;
 
-type Usage = { inputTokens?: number; outputTokens?: number; cost?: number };
+type Usage = {
+  inputTokens?: number;
+  outputTokens?: number;
+  reasoningTokens?: number;
+  cost?: number;
+};
 
 function modelIdOf(model: LanguageModel): string {
   if (typeof model === "string") {
@@ -94,6 +99,7 @@ export async function analyzeImage(
       cost: costFrom(result.providerMetadata),
       inputTokens: result.usage.inputTokens,
       outputTokens: result.usage.outputTokens,
+      reasoningTokens: result.usage.outputTokenDetails?.reasoningTokens,
     };
     const parsedOutput = { ...result.output, variant: caseType };
     const analysis: ImageAnalysis =
@@ -103,6 +109,7 @@ export async function analyzeImage(
 
     logAiCall({
       caseType,
+      finishReason: result.finishReason,
       modelId,
       outcome: "ok",
       route: "analyze",
