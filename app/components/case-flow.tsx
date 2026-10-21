@@ -3,12 +3,11 @@
 import { FormScreen } from "@/components/case-form/form-screen";
 import { AppHeader } from "@/components/layout/app-header";
 import { CaseSessionProvider, useCaseSession } from "@/lib/session/context";
-
-// P4-05: replace noop with useChat start
-const noop = (): void => undefined;
+import { useCaseChat } from "@/lib/session/use-case-chat";
 
 function CaseFlowScreens(): React.JSX.Element {
   const { state } = useCaseSession();
+  const chat = useCaseChat();
 
   return (
     <>
@@ -18,7 +17,10 @@ function CaseFlowScreens(): React.JSX.Element {
           <div data-testid="chat-screen" />
         ) : (
           <div data-screen={state.screen} data-testid="form-screen">
-            <FormScreen startChat={noop} />
+            <FormScreen
+              onDeadline={chat.abortFirstTurn}
+              startChat={chat.startChat}
+            />
           </div>
         )}
       </main>
