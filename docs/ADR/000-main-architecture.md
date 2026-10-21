@@ -81,7 +81,8 @@ Single Next.js App Router application (monolith) acting as both the frontend (on
 │   └── tests/            integration/, contract/, e2e/, fixtures/captures/
 ├── assets/               brand source files (read-only reference)
 ├── docs/                 PRD, ADR, design guidelines, policies (runtime input for the agent)
-└── .env.example          root example; the app uses app/.env.local
+├── .env.example          variable names (tracked)
+└── .env                  real values, created by the user, gitignored; loaded by the app
 ```
 
 The detailed `app/` tree is defined in ADR-001 §3.3.
@@ -180,7 +181,7 @@ Error body for non-stream errors: `{ "error": { "code": string, "message": strin
 
 ## 7. Environment Variables
 
-Stored in `app/.env.local` (gitignored). `app/.env.example` lists `OPENROUTER_API_KEY`, `LLM_MODEL`, `VISION_MODEL`, `POLICIES_DIR`, `PORT` and `AI_CAPTURE_DIR` (commented as capture-only) with empty values; `ANTHROPIC_API_KEY` is not listed there. The root `.env.example` gains the `VISION_MODEL` line.
+Real values live only in the repository-root `.env` (gitignored), which the user creates; agents never read, create or edit it (reads are denied in `.claude/settings.json`). The app loads it explicitly: `next.config.ts` calls `loadEnvConfig` from `@next/env` (a dependency of `next`) with the repository root (`..` relative to `app/`), and the Playwright configs call Node's `process.loadEnvFile('../.env')`. There is no `app/.env*` file. The root `.env.example` (tracked) lists every variable below with comments; optional variables have code defaults.
 
 | Variable | Purpose | Required | Example value |
 |---|---|---|---|

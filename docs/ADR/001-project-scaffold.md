@@ -59,7 +59,7 @@ Each step ends with the check in the last column. Steps 1–2 produce one pristi
 | 7 | shadcn primitives | Run `npx shadcn@latest add radio-group` (case channel). Keep the existing primitives listed in §3.4. | `components/ui/radio-group.tsx` exists |
 | 8 | Configuration | Apply §3.7 (`next.config.ts`, `tsconfig.json`, `biome.jsonc`, `playwright.config.ts`, `vitest.config.ts`, `.gitignore`). | `npx tsc --noEmit` |
 | 9 | Brand assets | Copy `assets/logo.svg` → `app/public/logo.svg`; `assets/favicon.ico` → `app/app/favicon.ico` (replaces template icon); `assets/fonts/instrument-sans/InstrumentSans-Variable.woff2` → `app/app/fonts/InstrumentSans-Variable.woff2`, loaded with `next/font/local` (weight range 400–700). Map tokens per ADR-004 §3.7. | Visual check in step 12 |
-| 10 | Environment | Create `app/.env.example` with the variables in ADR-000 §7 (empty values). Add `VISION_MODEL=` to the root `.env.example`. Create `app/.env.local` locally (gitignored) with real values. | `.env.local` not tracked |
+| 10 | Environment | Load the repository-root `.env` from `next.config.ts` via `loadEnvConfig` (`@next/env`) with the root directory; do not create any `app/.env*` file. Ensure the root `.env.example` lists all ADR-000 §7 variables. Never read or edit `.env` (the user creates it). | `ls app/.env*` finds nothing; `git check-ignore .env` succeeds |
 | 11 | Placeholder app | Replace the template routes with an empty `app/page.tsx` rendering the header (logo + "Asystent zwrotów i reklamacji") and stub route handlers returning `501` for `/api/analyze` and `/api/chat`. | `npm run build` passes |
 | 12 | Start and verify | `npm run dev`, open `http://localhost:3000` with Playwright CLI, take a screenshot. | HTTP 200, header visible, no console errors |
 | 13 | Nested agent guide | Create `app/AGENTS.md` with the verified commands (§3.5), stack facts and the rule to consult Context7 `/vercel/ai` before AI code (use the `write-agents-md` skill). | File exists, commands verified |
@@ -101,7 +101,6 @@ app/
 │   │   └── captures/              verbatim real responses (+ metadata); test photos stay in /assets/example-images
 │   └── README.md                  AC → test ID traceability table
 ├── public/logo.svg
-├── .env.example
 ├── AGENTS.md
 ├── LICENSE                        template license retained (Apache-2.0, Vercel)
 ├── README.md                      project README (commands, env, links to docs/)
@@ -164,7 +163,7 @@ Unit tests are colocated next to their source as `*.test.ts` / `*.test.tsx`.
 
 ### 3.6 Dependency changes
 
-**Remove:** `@ai-sdk/otel`, `@ai-sdk/provider` (unless a type import remains), `@codemirror/*`, `codemirror`, `@opentelemetry/*`, `@vercel/otel`, `@vercel/analytics`, `@vercel/blob`, `@vercel/functions`, `bcrypt-ts`, `botid`, `classnames`, `diff-match-patch`, `dotenv` (Next loads `.env.local`; Playwright config uses Node's `process.loadEnvFile`), `drizzle-orm`, `drizzle-kit`, `katex`, `@streamdown/cjk`, `@streamdown/code`, `@streamdown/math`, `@streamdown/mermaid`, `next-auth`, `next-themes`, `orderedmap`, `papaparse`, `@types/papaparse`, `@types/pdf-parse`, `@types/d3-scale`, `postgres`, `prosemirror-*`, `react-data-grid`, `redis`, `resumable-stream`, `swr`, `tsx`, `husky`, `lint-staged`. After implementation, also remove any remaining dependency with zero imports (verify by searching the source tree).
+**Remove:** `@ai-sdk/otel`, `@ai-sdk/provider` (unless a type import remains), `@codemirror/*`, `codemirror`, `@opentelemetry/*`, `@vercel/otel`, `@vercel/analytics`, `@vercel/blob`, `@vercel/functions`, `bcrypt-ts`, `botid`, `classnames`, `diff-match-patch`, `dotenv` (`next.config.ts` uses `@next/env`; Playwright configs use Node's `process.loadEnvFile`), `drizzle-orm`, `drizzle-kit`, `katex`, `@streamdown/cjk`, `@streamdown/code`, `@streamdown/math`, `@streamdown/mermaid`, `next-auth`, `next-themes`, `orderedmap`, `papaparse`, `@types/papaparse`, `@types/pdf-parse`, `@types/d3-scale`, `postgres`, `prosemirror-*`, `react-data-grid`, `redis`, `resumable-stream`, `swr`, `tsx`, `husky`, `lint-staged`. After implementation, also remove any remaining dependency with zero imports (verify by searching the source tree).
 
 **Add / upgrade** (latest within the stated major at install time; record exact versions in the scaffold commit message):
 
@@ -190,7 +189,7 @@ Unit tests are colocated next to their source as `*.test.ts` / `*.test.tsx`.
 - **`next.config.ts`**: remove `withBotId`, demo `basePath`/`assetPrefix`/redirect, `images.remotePatterns`, `cacheComponents` and all `experimental` flags; keep `reactCompiler: true` and `poweredByHeader: false`. Rationale: fewer moving parts; Cache Components brings no value to a client page plus two POST handlers.
 - **Route handlers**: `export const runtime = 'nodejs'` (policy file reads, Buffer handling); `/api/analyze` `maxDuration = 60`, `/api/chat` `maxDuration = 120`.
 - **`biome.jsonc`**: keep Ultracite preset; ignore `components/ai-elements/**` and `components/ui/**` from lint rules that would force edits to vendored code (format still applies).
-- **`playwright.config.ts`**: load `.env.local` with Node's `process.loadEnvFile`; projects `contract` (no browser, `tests/contract`), `chromium`, `firefox` and `webkit` (`tests/e2e`; Firefox/WebKit `grep` `@smoke`), `failure` (E-22); two `webServer` entries on the production build — port 3000 (`reuseExistingServer: true`, `AI_CAPTURE_DIR` unset) and port 3200 with invalid model IDs (ADR-005 §3.1); a global setup that aborts if `AI_CAPTURE_DIR` is set; **`playwright.capture.config.ts`**: own server on port 3100 with `AI_CAPTURE_DIR`, `reuseExistingServer: false`, `grep` `@capture`; test timeout 180 s, expect timeout 90 s (real LLM latency); `workers: 2`, `retries: 0` (flakiness must be visible); traces, screenshots and video retained on failure.
+- **`playwright.config.ts`**: load the repository-root `.env` with Node's `process.loadEnvFile('../.env')`; projects `contract` (no browser, `tests/contract`), `chromium`, `firefox` and `webkit` (`tests/e2e`; Firefox/WebKit `grep` `@smoke`), `failure` (E-22); two `webServer` entries on the production build — port 3000 (`reuseExistingServer: true`, `AI_CAPTURE_DIR` unset) and port 3200 with invalid model IDs (ADR-005 §3.1); a global setup that aborts if `AI_CAPTURE_DIR` is set; **`playwright.capture.config.ts`**: own server on port 3100 with `AI_CAPTURE_DIR`, `reuseExistingServer: false`, `grep` `@capture`; test timeout 180 s, expect timeout 90 s (real LLM latency); `workers: 2`, `retries: 0` (flakiness must be visible); traces, screenshots and video retained on failure.
 - **`vitest.config.ts`**: plugins React + tsconfig paths; `environment: 'jsdom'` for `components/**` and `lib/session/**`, `node` for `lib/case/**`, `lib/ai/**`, `tests/integration/**` (per-file environment comments or `projects`); setup file registers `@testing-library/jest-dom`; exclude `tests/e2e`, `tests/contract`.
 - **`.gitignore`**: keep template entries; ensure `.env*.local`, `test-results/`, `playwright-report/`, `.next/` are ignored; `tests/fixtures/captures/` is **tracked**.
 
@@ -200,7 +199,7 @@ Unit tests are colocated next to their source as `*.test.ts` / `*.test.tsx`.
 
 | Artifact | Content |
 |---|---|
-| `app/.env.example` | `OPENROUTER_API_KEY=`, `LLM_MODEL=`, `VISION_MODEL=`, `POLICIES_DIR=`, `PORT=`, `AI_CAPTURE_DIR=` (commented "capture runs only") with one-line comments |
+| Root `.env.example` | `OPENROUTER_API_KEY=`, `ANTHROPIC_API_KEY=` (unused by the app), `LLM_MODEL=` (required), `VISION_MODEL=`, `AI_CAPTURE_DIR=`, `POLICIES_DIR=`, `PORT=` with one-line comments |
 | Scaffold commit message | Lists exact installed versions of `next`, `react`, `ai`, `@ai-sdk/react`, `@openrouter/ai-sdk-provider`, `zod`, `vitest`, `@playwright/test` |
 
 ---
@@ -366,7 +365,7 @@ flowchart LR
 ### Technical acceptance criteria
 
 - TAC-001-01: `app/` contains no file from the §3.4 "Remove" list.
-- TAC-001-02: `npm ci && npm run typecheck && npm run lint && npm test && npm run build` exits 0 on a fresh VM with only `app/.env.local` configured.
+- TAC-001-02: `npm ci && npm run typecheck && npm run lint && npm test && npm run build` exits 0 on a fresh VM with only the repository-root `.env` configured.
 - TAC-001-03: `package.json` resolves `ai` ≥ 7.0.148, `@ai-sdk/react` 4.x, `@openrouter/ai-sdk-provider` ≥ 3.1.0, `next` 16.x, `react` 19.x.
 - TAC-001-04: The app starts without any of `AUTH_SECRET`, `POSTGRES_URL`, `BLOB_READ_WRITE_TOKEN`, `REDIS_URL`, `AI_GATEWAY_API_KEY` defined.
 - TAC-001-05: Git history contains a pristine import commit followed by a separate stripping commit.

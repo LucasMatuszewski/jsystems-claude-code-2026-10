@@ -45,7 +45,7 @@ The application has **no test mode**: no `isTestEnvironment`, no mock provider r
 
 | Port | Command | Env | Used by |
 |---|---|---|---|
-| 3000 | `npm run build && npm run start` (`reuseExistingServer: true`) | `app/.env.local`; `AI_CAPTURE_DIR` explicitly unset | `contract`, `chromium`, `firefox`, `webkit` |
+| 3000 | `npm run build && npm run start` (`reuseExistingServer: true`) | repository-root `.env`; `AI_CAPTURE_DIR` explicitly unset | `contract`, `chromium`, `firefox`, `webkit` |
 | 3200 | `npm run start -- -p 3200` (after the same build) | `LLM_MODEL` and `VISION_MODEL` set to a non-existent ID `invalid/model-does-not-exist` | `failure` project (E-22) |
 
 E2E and contract run against the production build so Turbopack compilation on first request does not count against the 60 s budget. `npm run dev` is used only for the TDD loop and is never the target of a measured run. A Playwright global setup fails the run if `AI_CAPTURE_DIR` is set in the test process.
@@ -105,7 +105,7 @@ Before creating or refreshing any mock of an endpoint or of the model, make a fr
 
 ### 3.6 Manual QA (no mocks)
 
-Driven with the Playwright CLI against `npm run build && npm run start`, real `app/.env.local`:
+Driven with the Playwright CLI against `npm run build && npm run start`, real repository-root `.env`:
 
 1. Record startup separately (command, port, time to ready, HTTP 200 on `/`).
 2. For each PRD flow 4.1–4.7 relevant to the change: fill the form by hand, upload each photo from `assets/example-images/`, submit, watch both step labels, follow the switch to the chat, read and note the model's actual assessment of each photo, send follow-ups (including one that changes the decision and one off-topic), use "Zatrzymaj", "Nowe zgłoszenie" (cancel and confirm), photo overlay (Esc, outside click, button).
