@@ -28,6 +28,8 @@ export default defineConfig({
             "lib/ai/**/*.test.ts",
             "lib/utils.test.ts",
             "tests/integration/**/*.test.ts",
+            "tests/helpers/**/*.test.ts",
+            "tests/fixtures/**/*.test.ts",
           ],
           name: "node",
           setupFiles: sharedSetupFiles,

@@ -1,8 +1,8 @@
-import { simulateReadableStream } from "ai";
 import { MockLanguageModelV4 } from "ai/test";
 import { describe, expect, it, vi } from "vitest";
 import type { CaseUIMessage } from "@/lib/case/messages";
 import type { CaseContext, ImageAnalysis } from "@/lib/case/schemas";
+import { decisionModelFromCaptures } from "../../tests/helpers/capture-model";
 import { detectTurn, streamDecisionTurn } from "./decision-agent";
 
 vi.mock("./log", () => ({ logAiCall: vi.fn() }));
@@ -69,68 +69,16 @@ const caseContext = {
 } as CaseContext;
 const imageAnalysis = { variant: "return" } as unknown as ImageAnalysis;
 
-const usage = {
-  inputTokens: {
-    cacheRead: undefined,
-    cacheWrite: undefined,
-    noCache: 10,
-    total: 10,
-  },
-  outputTokens: { reasoning: undefined, text: 20, total: 20 },
-};
-
-function streamOf(parts: unknown[]) {
-  return {
-    stream: simulateReadableStream({ chunks: parts as never[] }),
-  };
-}
-
-// TODO(P2-09): derive from capture — hand-written stream parts (bootstrap).
-function toolCallParts() {
-  return [
-    { type: "stream-start", warnings: [] },
-    {
-      input: JSON.stringify({
-        changeReason: null,
-        greeting: "Cześć!",
-        label: "accepted",
-      }),
-      toolCallId: "call-1",
-      toolName: "set_decision",
-      type: "tool-call",
-    },
-    {
-      finishReason: { raw: undefined, unified: "tool-calls" },
-      type: "finish",
-      usage,
-    },
-  ];
-}
-function textParts() {
-  return [
-    { type: "stream-start", warnings: [] },
-    { id: "t1", type: "text-start" },
-    { delta: "## Uzasadnienie ", id: "t1", type: "text-delta" },
-    { delta: "§2 ust. 1", id: "t1", type: "text-delta" },
-    { id: "t1", type: "text-end" },
-    {
-      finishReason: { raw: undefined, unified: "stop" },
-      type: "finish",
-      usage,
-    },
-  ];
-}
+// Stream parts replayed from the real decision captures (C-04 first turn:
+// step 0 forced set_decision tool call, step 1 text; C-05 follow-up: text).
+const FIRST_TURN_STEP_0 =
+  "provider/2026-10-21T13-09-24.198Z-0020-decision-stream.json";
+const FIRST_TURN_STEP_1 =
+  "provider/2026-10-21T13-09-29.123Z-0022-decision-stream.json";
+const FOLLOW_UP = "provider/2026-10-21T13-09-56.760Z-0030-decision-stream.json";
 
 function twoStepModel() {
-  let call = 0;
-  return new MockLanguageModelV4({
-    doStream: () => {
-      call += 1;
-      return Promise.resolve(
-        streamOf(call === 1 ? toolCallParts() : textParts())
-      );
-    },
-  });
+  return decisionModelFromCaptures([FIRST_TURN_STEP_0, FIRST_TURN_STEP_1]);
 }
 
 async function readChunks(response: Response) {
@@ -233,9 +181,7 @@ describe("streamDecisionTurn", () => {
   });
 
   it("follow-up converts the tool history and uses auto tool choice", async () => {
-    const model = new MockLanguageModelV4({
-      doStream: async () => streamOf(textParts()),
-    });
+    const model = decisionModelFromCaptures([FOLLOW_UP]);
     const response = await streamDecisionTurn({
       caseContext,
       imageAnalysis,

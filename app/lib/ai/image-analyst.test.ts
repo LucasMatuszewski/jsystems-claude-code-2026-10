@@ -2,6 +2,7 @@ import { MockLanguageModelV4 } from "ai/test";
 import { describe, expect, it } from "vitest";
 import type { CaseContext } from "@/lib/case/schemas";
 import { imageAnalysisSchema } from "@/lib/case/schemas";
+import { visionOutputFromCapture } from "../../tests/helpers/capture-model";
 import { AiError } from "./errors";
 import { analyzeImage } from "./image-analyst";
 
@@ -18,31 +19,10 @@ const caseContext: CaseContext = {
 
 const imageBytes = new Uint8Array([0x52, 0x49, 0x46, 0x46, 1, 2, 3, 4]);
 
-// TODO(P2-09): derive from capture — hand-written model output for unit tests
-// only (bootstrap; no capture exists yet).
-const validReturnOutput = {
-  accessoriesVisible: false,
-  confidence: "medium",
-  equipmentVisible: "Smartfon w etui, widok z przodu.",
-  imageUsable: "yes",
-  matchesCategory: "yes",
-  matchesModel: "uncertain",
-  observations: [
-    {
-      component: "ekran",
-      description: "Drobne rysy na szkle.",
-      location: "górna część ekranu",
-    },
-  ],
-  packagingVisible: false,
-  protectiveFilms: "absent",
-  resaleableAsNew: "uncertain",
-  resaleableReasons: ["Widoczne drobne rysy."],
-  safetyHazards: [],
-  seals: "not_visible",
-  signsOfUse: [{ location: "ekran", type: "scratches" }],
-  unusableReason: null,
-};
+// Model output replayed from the real vision capture of phone-1 (return case).
+const validReturnOutput = visionOutputFromCapture<Record<string, unknown>>(
+  "provider/2026-10-21T13-08-13.220Z-0002-vision-generate.json"
+);
 
 function textResult(text: string) {
   return {
