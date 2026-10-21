@@ -126,6 +126,22 @@ describe("CaseFlow", () => {
     ).not.toBeInTheDocument();
   });
 
+  it("constrains the form screen to max-w-3xl", () => {
+    render(<CaseFlow />);
+    const main = screen.getByRole("main");
+    expect(main).toHaveClass("max-w-3xl");
+    expect(main).not.toHaveClass("max-w-6xl");
+  });
+
+  it("widens the chat screen to max-w-6xl", async () => {
+    seed.chat = true;
+    render(<CaseFlow />);
+    await screen.findByTestId("chat-screen");
+    const main = screen.getByRole("main");
+    expect(main).toHaveClass("max-w-6xl");
+    expect(main).not.toHaveClass("max-w-3xl");
+  });
+
   it("registers no beforeunload guard on the form screen", () => {
     const addSpy = vi.spyOn(window, "addEventListener");
     render(<CaseFlow />);

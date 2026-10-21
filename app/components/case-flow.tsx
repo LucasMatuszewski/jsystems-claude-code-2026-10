@@ -23,7 +23,13 @@ function CaseFlowScreens(): React.JSX.Element {
           isChat ? <NewCaseDialog onConfirm={chat.confirmNewCase} /> : undefined
         }
       />
-      <main className="mx-auto w-full max-w-3xl px-4 py-6">
+      <main
+        className={
+          isChat
+            ? "mx-auto flex w-full max-w-6xl flex-col px-4 py-6"
+            : "mx-auto w-full max-w-3xl px-4 py-6"
+        }
+      >
         {isChat ? (
           <ChatView chat={chat} />
         ) : (
