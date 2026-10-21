@@ -281,4 +281,31 @@ describe("useSubmission", () => {
     expect(probe.state.screen).toBe("form");
     expect(probe.state.submissionError).toBe("ANALYSIS_TIMEOUT");
   });
+
+  it("calls the default global fetch unbound (a method call on deps would throw Illegal invocation in browsers)", async () => {
+    const startChat = vi.fn();
+    const strictFetch = vi.fn(function (this: unknown) {
+      if (this !== undefined && this !== globalThis) {
+        throw new TypeError(
+          "Failed to execute 'fetch' on 'Window': Illegal invocation"
+        );
+      }
+      return Promise.resolve(
+        new Response(JSON.stringify(analyzeResponseFromCapture), {
+          status: 200,
+        })
+      );
+    });
+    vi.stubGlobal("fetch", strictFetch);
+    renderHarness({ deps: passThroughDeps(), startChat });
+
+    await act(async () => {
+      await probe.submit();
+    });
+
+    expect(strictFetch).toHaveBeenCalledTimes(1);
+    expect(probe.state.submissionError).toBeNull();
+    expect(startChat).toHaveBeenCalledTimes(1);
+    vi.unstubAllGlobals();
+  });
 });

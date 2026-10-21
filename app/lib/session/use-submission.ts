@@ -100,7 +100,8 @@ export function useSubmission(opts: UseSubmissionOptions): {
       {
         createObjectURL:
           deps?.createObjectURL ?? ((blob: Blob) => URL.createObjectURL(blob)),
-        fetch: deps?.fetch ?? globalThis.fetch,
+        // Wrapped so fetch is not called with `deps` as `this` (Illegal invocation in browsers).
+        fetch: deps?.fetch ?? ((input, init) => globalThis.fetch(input, init)),
         reduce: deps?.reduce ?? reducePhoto,
       }
     );
