@@ -1,0 +1,81 @@
+{
+  "$source": "https://www.x-kom.pl/ (extracted 2026-10-20, desktop 1440px, after cookie consent)",
+  "colors": {
+    "brand": {
+      "primary": "#222222",
+      "accent": "#0082FA",
+      "link": "#0070CC",
+      "promo": "#6930F0",
+      "magenta": "#BE0064",
+      "error": "#BE0064",
+      "success": "#007D00",
+      "logoGradient": ["#0FD2FF", "#0082FA", "#8250FA", "#C382FA", "#FA0064", "#BE0064"]
+    },
+    "background": {
+      "default": "#FFFFFF",
+      "light": "#F7F7F7",
+      "input": "#F2F2F2",
+      "dark": "#222222",
+      "successLight": "#EEF7ED",
+      "promoLight": "#F4F0FF",
+      "infoLight": "#F0F8FF",
+      "glass": "rgba(255, 255, 255, 0.72)",
+      "overlay": "rgba(0, 0, 0, 0.08)"
+    },
+    "text": {
+      "primary": "#1A1A1A",
+      "secondary": "#444444",
+      "muted": "#6E6E6E",
+      "disabled": "#B3B2B2",
+      "onDark": "#FFFFFF"
+    },
+    "border": {
+      "default": "#DDDDDD",
+      "light": "#EBEBEB",
+      "strong": "rgba(0, 0, 0, 0.64)"
+    }
+  },
+  "typography": {
+    "fontFamily": { "primary": "\"Instrument Sans\", sans-serif" },
+    "fontFace": {
+      "family": "Instrument Sans",
+      "src": "assets/fonts/instrument-sans/InstrumentSans-Variable.woff2",
+      "format": "woff2",
+      "weightRange": "400 700",
+      "variationSettings": "\"wdth\" 100"
+    },
+    "fontWeights": { "regular": 400, "semibold": 600, "bold": 700 },
+    "fontSize": { "xs": "13px", "sm": "14px", "md": "16px", "lg": "20px", "xl": "26px", "2xl": "28px" },
+    "lineHeight": { "xs": "16px", "sm": "20px", "md": "22px", "xl": "32px", "normal": "normal" }
+  },
+  "spacing": {
+    "1": "4px", "2": "8px", "3": "12px", "4": "16px",
+    "5": "20px", "6": "24px", "8": "32px", "10": "40px"
+  },
+  "borderRadius": {
+    "none": "0px", "xs": "2px", "sm": "4px", "md": "8px", "lg": "12px", "circle": "50%"
+  },
+  "shadow": {
+    "header": "0px 2px 4px 0px rgba(0, 0, 0, 0.08), 0px 0px 2px 1px rgba(0, 0, 0, 0.08)"
+  },
+  "components": {
+    "button": {
+      "primary": { "backgroundColor": "#222222", "color": "#FFFFFF", "padding": "12px 24px", "borderRadius": "8px", "fontSize": "16px", "lineHeight": "22px", "fontWeight": 400, "height": "48px" },
+      "primarySmall": { "backgroundColor": "#222222", "color": "#FFFFFF", "padding": "8px 40px", "borderRadius": "8px", "fontSize": "14px", "lineHeight": "20px", "height": "40px" },
+      "outline": { "backgroundColor": "transparent", "color": "#1A1A1A", "border": "1px solid rgba(0, 0, 0, 0.64)", "padding": "7px 17px", "borderRadius": "8px", "fontSize": "14px", "height": "36px" },
+      "ghost": { "backgroundColor": "transparent", "color": "#444444", "padding": "8px 14px", "borderRadius": "8px", "fontSize": "14px", "height": "40px" },
+      "iconRound": { "backgroundColor": "#FFFFFF", "color": "#444444", "borderRadius": "8px", "size": "36px" }
+    },
+    "badge": {
+      "success": { "backgroundColor": "#EEF7ED", "color": "#007D00", "padding": "1.5px 6px 2.5px", "borderRadius": "4px", "fontSize": "13px" },
+      "promo": { "backgroundColor": "#F4F0FF", "color": "#6930F0", "borderRadius": "4px", "fontSize": "13px" }
+    },
+    "promoBar": { "backgroundColor": "#222222", "color": "#FFFFFF", "height": "40px", "fontSize": "14px" },
+    "header": { "backgroundColor": "#FFFFFF", "height": "72px", "fontSize": "14px", "boxShadow": "0px 2px 4px 0px rgba(0, 0, 0, 0.08), 0px 0px 2px 1px rgba(0, 0, 0, 0.08)", "logoSize": "218x40px" },
+    "search": { "backgroundColor": "#F2F2F2", "borderRadius": "8px", "height": "40px", "padding": "8px 0 8px 20px", "fontSize": "14px", "border": "none" },
+    "nav": { "color": "#1A1A1A", "fontSize": "16px", "lineHeight": "22px", "fontWeight": 400, "padding": "8px 12px", "height": "56px" },
+    "productCard": { "backgroundColor": "transparent", "borderRadius": "12px", "border": "1px solid transparent", "width": "216px", "titleSize": "14px/20px" },
+    "heading": { "section": { "fontSize": "26px", "lineHeight": "32px", "fontWeight": 600, "color": "#1A1A1A" }, "page": { "fontSize": "28px", "fontWeight": 700 } },
+    "footer": { "backgroundColor": "#F7F7F7", "color": "#1A1A1A" }
+  }
+}
