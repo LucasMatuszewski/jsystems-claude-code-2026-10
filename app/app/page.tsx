@@ -1,10 +1,10 @@
+import { AppHeader } from "@/components/layout/app-header";
+
 export default function Home() {
   return (
     <>
-      <header>
-        <h1>Asystent zwrotów i reklamacji</h1>
-      </header>
-      <main />
+      <AppHeader />
+      <main className="mx-auto w-full max-w-3xl px-4 py-6" />
     </>
   );
 }

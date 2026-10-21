@@ -1,12 +1,22 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { texts } from "@/lib/case/texts";
 
 import "./globals.css";
 
+const instrumentSans = localFont({
+  display: "swap",
+  src: "./fonts/InstrumentSans-Variable.woff2",
+  style: "normal",
+  variable: "--font-instrument-sans",
+  weight: "400 700",
+});
+
 export const metadata: Metadata = {
   description: "Asystent decyzji serwisowych dla zwrotów i reklamacji sprzętu",
-  title: "Asystent zwrotów i reklamacji",
+  title: texts.app.productName,
 };
 
 export default function RootLayout({
@@ -15,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl">
-      <body className="antialiased">
+    <html className={instrumentSans.variable} lang="pl">
+      <body className="font-sans antialiased">
         <TooltipProvider>
           {children}
           <Toaster />
