@@ -1,0 +1,82 @@
+{
+  "request": {
+    "fields": {
+      "caseType": "return",
+      "category": "laptop",
+      "modelName": "Testowy Model X1",
+      "purchaseChannel": "online",
+      "purchaseDate": "2026-10-12",
+      "reason": ""
+    },
+    "photo": {
+      "bytes": 165974,
+      "fileName": "laptop-2.webp",
+      "sha256": "ca694b473018e37af2b5d9fd27deccc2402240c95c41cc3a521e1d28b55dee73"
+    }
+  },
+  "response": {
+    "body": {
+      "caseContext": {
+        "caseType": "return",
+        "category": "laptop",
+        "modelName": "Testowy Model X1",
+        "purchaseChannel": "online",
+        "purchaseDate": "2026-10-12",
+        "reason": "",
+        "assessmentDate": "2026-10-21",
+        "daysSincePurchase": 9
+      },
+      "imageAnalysis": {
+        "confidence": "medium",
+        "equipmentVisible": "Otwarty laptop Lenovo z włączonym ekranem, klawiaturą z czerwonym manipulatorem i touchpadem.",
+        "imageUsable": "yes",
+        "matchesCategory": "yes",
+        "matchesModel": "uncertain",
+        "observations": [
+          {
+            "component": "Ekran",
+            "description": "Włączony, wyświetla niebieski pulpit i małe okno programu.",
+            "location": "Górna część urządzenia"
+          },
+          {
+            "component": "Klawiatura",
+            "description": "Widoczna klawiatura z czerwonym manipulatorem pośrodku.",
+            "location": "Środkowa część podstawy"
+          },
+          {
+            "component": "Obudowa",
+            "description": "Widoczne logo Lenovo oraz naklejki producenta podzespołów.",
+            "location": "Ramka ekranu i powierzchnia przy nadgarstkach"
+          }
+        ],
+        "safetyHazards": [],
+        "unusableReason": null,
+        "accessoriesVisible": false,
+        "packagingVisible": false,
+        "protectiveFilms": "not_visible",
+        "resaleableAsNew": "no",
+        "resaleableReasons": [
+          "Laptop jest włączony i widoczne są drobne zabrudzenia na powierzchni przy klawiaturze i touchpadzie."
+        ],
+        "seals": "not_visible",
+        "signsOfUse": [
+          {
+            "location": "Powierzchnia przy klawiaturze i touchpadzie",
+            "type": "dirt"
+          }
+        ],
+        "variant": "return"
+      }
+    },
+    "headers": {
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "cache-control": "no-store",
+      "content-type": "application/json",
+      "date": "Wed, 21 Oct 2026 13:09:11 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "status": 200
+  }
+}

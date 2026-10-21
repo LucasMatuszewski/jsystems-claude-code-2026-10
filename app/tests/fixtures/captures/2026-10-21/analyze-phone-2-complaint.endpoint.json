@@ -1,0 +1,74 @@
+{
+  "request": {
+    "fields": {
+      "caseType": "complaint",
+      "category": "smartphone",
+      "modelName": "Testowy Model X1",
+      "purchaseChannel": "online",
+      "purchaseDate": "2026-10-12",
+      "reason": "Urządzenie przestało działać poprawnie kilka dni temu, proszę o ocenę zgłoszenia."
+    },
+    "photo": {
+      "bytes": 14979,
+      "fileName": "phone-2.jpeg",
+      "sha256": "ed4df956aa26a579ac44df2dc8a3cb5e848b29ce5e3f8898a82b8202b39a4a27"
+    }
+  },
+  "response": {
+    "body": {
+      "caseContext": {
+        "caseType": "complaint",
+        "category": "smartphone",
+        "modelName": "Testowy Model X1",
+        "purchaseChannel": "online",
+        "purchaseDate": "2026-10-12",
+        "reason": "Urządzenie przestało działać poprawnie kilka dni temu, proszę o ocenę zgłoszenia.",
+        "assessmentDate": "2026-10-21",
+        "daysSincePurchase": 9
+      },
+      "imageAnalysis": {
+        "confidence": "high",
+        "equipmentVisible": "Smartfon w niebieskiej obudowie, widoczny od tyłu, z logo Apple i modułem aparatów.",
+        "imageUsable": "yes",
+        "matchesCategory": "yes",
+        "matchesModel": "uncertain",
+        "observations": [
+          {
+            "component": "Obudowa tylna",
+            "description": "Niebieska, gładka powierzchnia; nie widać wyraźnych uszkodzeń.",
+            "location": "Tył urządzenia"
+          },
+          {
+            "component": "Aparaty",
+            "description": "Widoczny moduł z dwoma obiektywami i lampą błyskową.",
+            "location": "Górny lewy róg tylnej obudowy"
+          },
+          {
+            "component": "Logo",
+            "description": "Widoczne logo Apple.",
+            "location": "Środkowa część tylnej obudowy"
+          }
+        ],
+        "safetyHazards": [],
+        "unusableReason": null,
+        "damages": [],
+        "damageVisible": "no",
+        "externalCauseTraces": [],
+        "likelyCause": "undetermined",
+        "likelyCauseRationale": "Na widocznej stronie urządzenia nie widać uszkodzeń ani śladów wskazujących na konkretną przyczynę.",
+        "manufacturingDefectTraces": [],
+        "variant": "complaint"
+      }
+    },
+    "headers": {
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "cache-control": "no-store",
+      "content-type": "application/json",
+      "date": "Wed, 21 Oct 2026 13:08:37 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "status": 200
+  }
+}

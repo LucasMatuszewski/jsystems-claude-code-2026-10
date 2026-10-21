@@ -1,0 +1,12 @@
+{
+  "appCommit": "b2513d3e9f78334db06a4cb131c17730988e7717",
+  "capturedAt": "2026-10-21T13:09:36.571Z",
+  "request": {},
+  "scenario": "chat-first-turn-phone-1-return",
+  "target": "http://localhost:3000",
+  "versions": {
+    "@openrouter/ai-sdk-provider": "3.1.0",
+    "ai": "7.0.148",
+    "next": "16.4.2"
+  }
+}

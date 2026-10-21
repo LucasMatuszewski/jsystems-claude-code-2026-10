@@ -1,0 +1,26 @@
+{
+  "appCommit": "b2513d3e9f78334db06a4cb131c17730988e7717",
+  "capturedAt": "2026-10-21T13:08:54.862Z",
+  "request": {
+    "fields": {
+      "caseType": "complaint",
+      "category": "smartphone",
+      "modelName": "Testowy Model X1",
+      "purchaseChannel": "online",
+      "purchaseDate": "2026-10-12",
+      "reason": "Urządzenie przestało działać poprawnie kilka dni temu, proszę o ocenę zgłoszenia."
+    },
+    "photo": {
+      "bytes": 32216,
+      "fileName": "phone-3.jpeg",
+      "sha256": "3d9a9718e659b1b758653eee37512d7370fdf474ec21034b3f2b8941d02ec33e"
+    }
+  },
+  "scenario": "analyze-phone-3-complaint",
+  "target": "http://localhost:3000",
+  "versions": {
+    "@openrouter/ai-sdk-provider": "3.1.0",
+    "ai": "7.0.148",
+    "next": "16.4.2"
+  }
+}

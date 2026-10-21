@@ -1,0 +1,83 @@
+{
+  "request": {
+    "fields": {
+      "caseType": "return",
+      "category": "smartphone",
+      "modelName": "Testowy Model X1",
+      "purchaseChannel": "online",
+      "purchaseDate": "2026-10-12",
+      "reason": ""
+    },
+    "photo": {
+      "bytes": 32216,
+      "fileName": "phone-3.jpeg",
+      "sha256": "3d9a9718e659b1b758653eee37512d7370fdf474ec21034b3f2b8941d02ec33e"
+    }
+  },
+  "response": {
+    "body": {
+      "caseContext": {
+        "caseType": "return",
+        "category": "smartphone",
+        "modelName": "Testowy Model X1",
+        "purchaseChannel": "online",
+        "purchaseDate": "2026-10-12",
+        "reason": "",
+        "assessmentDate": "2026-10-21",
+        "daysSincePurchase": 9
+      },
+      "imageAnalysis": {
+        "confidence": "medium",
+        "equipmentVisible": "Smartfon Samsung widoczny od tyłu, obok pudełka i elementów opakowania; na pudełku widnieje napis „Galaxy S24 Ultra”.",
+        "imageUsable": "yes",
+        "matchesCategory": "yes",
+        "matchesModel": "no",
+        "observations": [
+          {
+            "component": "Tył smartfona",
+            "description": "Jasna, jednolita obudowa z widocznym logo Samsung; nie widać wyraźnych śladów uszkodzeń.",
+            "location": "Środek zdjęcia"
+          },
+          {
+            "component": "Aparaty",
+            "description": "Kilka osobnych, okrągłych elementów obiektywów oraz dodatkowe czujniki.",
+            "location": "Górna lewa część tylnej obudowy"
+          },
+          {
+            "component": "Pudełko",
+            "description": "Ciemne pudełko z widocznym napisem „Galaxy S24 Ultra”.",
+            "location": "Prawa górna część zdjęcia"
+          },
+          {
+            "component": "Elementy opakowania",
+            "description": "Widoczne są wkładki opakowania oraz papierowy dokument.",
+            "location": "Dolna część zdjęcia i lewa strona"
+          }
+        ],
+        "safetyHazards": [],
+        "unusableReason": null,
+        "accessoriesVisible": false,
+        "packagingVisible": true,
+        "protectiveFilms": "not_visible",
+        "resaleableAsNew": "uncertain",
+        "resaleableReasons": [
+          "Widoczna obudowa wygląda na czystą i nie ma wyraźnych śladów użycia.",
+          "Ekran i plomby nie są widoczne, więc nie można ich ocenić."
+        ],
+        "seals": "not_visible",
+        "signsOfUse": [],
+        "variant": "return"
+      }
+    },
+    "headers": {
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "cache-control": "no-store",
+      "content-type": "application/json",
+      "date": "Wed, 21 Oct 2026 13:08:46 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "status": 200
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "request": {
+    "fields": {
+      "caseType": "complaint",
+      "category": "smartphone",
+      "modelName": "Testowy Model X1",
+      "purchaseChannel": "online",
+      "purchaseDate": "2026-10-12",
+      "reason": "Urządzenie przestało działać poprawnie kilka dni temu, proszę o ocenę zgłoszenia."
+    },
+    "photo": {
+      "bytes": 32216,
+      "fileName": "phone-3.jpeg",
+      "sha256": "3d9a9718e659b1b758653eee37512d7370fdf474ec21034b3f2b8941d02ec33e"
+    }
+  },
+  "response": {
+    "body": {
+      "caseContext": {
+        "caseType": "complaint",
+        "category": "smartphone",
+        "modelName": "Testowy Model X1",
+        "purchaseChannel": "online",
+        "purchaseDate": "2026-10-12",
+        "reason": "Urządzenie przestało działać poprawnie kilka dni temu, proszę o ocenę zgłoszenia.",
+        "assessmentDate": "2026-10-21",
+        "daysSincePurchase": 9
+      },
+      "imageAnalysis": {
+        "confidence": "medium",
+        "equipmentVisible": "Smartfon widoczny od tyłu, w srebrnoszarym kolorze, obok opakowania z oznaczeniem „Galaxy S24 Ultra”.",
+        "imageUsable": "yes",
+        "matchesCategory": "yes",
+        "matchesModel": "no",
+        "observations": [
+          {
+            "component": "Tylny panel",
+            "description": "Gładki, srebrnoszary panel bez widocznych uszkodzeń.",
+            "location": "Tył smartfona"
+          },
+          {
+            "component": "Aparaty",
+            "description": "Kilka czarnych obiektywów rozmieszczonych osobno.",
+            "location": "W górnej lewej części tylnego panelu"
+          },
+          {
+            "component": "Oznaczenie na opakowaniu",
+            "description": "Widoczny napis „Galaxy S24 Ultra”.",
+            "location": "Na opakowaniu po prawej stronie zdjęcia"
+          }
+        ],
+        "safetyHazards": [],
+        "unusableReason": null,
+        "damages": [],
+        "damageVisible": "no",
+        "externalCauseTraces": [],
+        "likelyCause": "undetermined",
+        "likelyCauseRationale": "Na zdjęciu nie widać uszkodzeń ani wyraźnej wady, dlatego nie można określić jej przyczyny.",
+        "manufacturingDefectTraces": [],
+        "variant": "complaint"
+      }
+    },
+    "headers": {
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "cache-control": "no-store",
+      "content-type": "application/json",
+      "date": "Wed, 21 Oct 2026 13:08:54 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "status": 200
+  }
+}

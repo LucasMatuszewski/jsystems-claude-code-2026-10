@@ -1,0 +1,851 @@
+{
+  "request": {
+    "body": {
+      "caseContext": {
+        "caseType": "return",
+        "category": "smartphone",
+        "modelName": "Testowy Model X1",
+        "purchaseChannel": "online",
+        "purchaseDate": "2026-10-12",
+        "reason": "",
+        "assessmentDate": "2026-10-21",
+        "daysSincePurchase": 9
+      },
+      "id": "chat-contract-1",
+      "imageAnalysis": {
+        "confidence": "high",
+        "equipmentVisible": "Smartfon z mocno pękniętym ekranem, wyświetlającym stronę ustawień.",
+        "imageUsable": "yes",
+        "matchesCategory": "yes",
+        "matchesModel": "uncertain",
+        "observations": [
+          {
+            "component": "Ekran",
+            "description": "Widoczne liczne pęknięcia i rozległe uszkodzenie szkła; ekran wyświetla treść.",
+            "location": "Przednia część urządzenia, na całej powierzchni ekranu, szczególnie w górnej poł"
+          }
+        ],
+        "safetyHazards": [],
+        "unusableReason": null,
+        "accessoriesVisible": true,
+        "packagingVisible": false,
+        "protectiveFilms": "not_visible",
+        "resaleableAsNew": "no",
+        "resaleableReasons": [
+          "Ekran jest mocno pęknięty."
+        ],
+        "seals": "not_visible",
+        "signsOfUse": [
+          {
+            "location": "Ekran, na całej powierzchni",
+            "type": "other"
+          }
+        ],
+        "variant": "return"
+      },
+      "messages": [
+        {
+          "id": "m-submit",
+          "metadata": {
+            "kind": "case-submission"
+          },
+          "parts": [
+            {
+              "text": "Przesłano zgłoszenie.",
+              "type": "text"
+            }
+          ],
+          "role": "user"
+        }
+      ]
+    },
+    "contentType": "application/json",
+    "method": "POST",
+    "path": "/api/chat"
+  },
+  "response": {
+    "body": {
+      "chunks": [
+        {
+          "type": "start"
+        },
+        {
+          "type": "start-step"
+        },
+        {
+          "type": "tool-input-start",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "toolName": "set_decision"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": ""
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "{\""
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "change"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "Reason"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "\":"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "null"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": ",\""
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "g"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "reeting"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "\":\""
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "D"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "zię"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "ku"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "ję"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": " za"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": " zg"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "łos"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "zenie"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": " —"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": " spraw"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "dzi"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "łem"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": " wid"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "oc"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "zne"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": " informacje"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": " o"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": " telefon"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "ie"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": ".\",\""
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "label"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "\":\""
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "es"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "calated"
+        },
+        {
+          "type": "tool-input-delta",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "inputTextDelta": "\"}"
+        },
+        {
+          "type": "tool-input-available",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "toolName": "set_decision",
+          "input": {
+            "changeReason": null,
+            "greeting": "Dziękuję za zgłoszenie — sprawdziłem widoczne informacje o telefonie.",
+            "label": "escalated"
+          },
+          "providerMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.encrypted",
+                  "data": "gAAAAABq2LmInR_O56ekhOpRVVVnzuej-urowYu0S-GssI9NNmcM1yyHIFRIGYDix0kwtj9vAUpSoTBB-79JHKZTe9lO7Dz1TKXKdrYxcMXGO2FKaG0-ErlxQqUmZpAlZwohVmzEDxczOvCTS0ZY126CJIaYr_YP8yFOlyjSWu-NIn8r1AaoOF1H7AVWoRZtQsEXj5qufwzx0OqFdHAuC9dRsksT8E2TRhxVbWLfRaWkpFmdvTlTeG_Bli8qk3aKAkJNBWA1NilB-_zMWiymjqhdZ6rxiuHt7ijYu2Ya4HG57mDKtZEzlqhRzpBwS6CGfj0jEaVsT7ouin3jRt3dI2986idvDKKTZ17e5SAMcBy4sX05V_w1H2nfZpIXREW4uQlnzXweThb3ZaUBBqg7Lzn7wwCr9eXkjcvRAMAwBr_bw2ZpBAOzEYymBx_qwXNRwHQM5VB5rvnUkdDh9ZPXsKODbDvqpWCPhHgTqtHFMKbJkLLHyx_obZMjOSZ6fizYCeSnbKArp8dDnRj7Rn8U5gK1a2oGXuTchmqakrAPMynStTTqaisqZ1BetbFqCXluIHFXXE2t-BGZh7EWTrmWdDwAXtmEbmqz7N18RQ21JJ1tJ4EDDvn0XhmX98eTPDrfKtr_WeuPs1cGgaer8IYfh-8ZSEhg5161eUfQjT5mDLWEJ68U1oagA44442QHTnJLWTUDD0l5vxprYYRwSs3AKNKYMdTFdIo49xxTdqGjE7YVEefBt0pZvxZO6HqJjZTa52ANQ_s_CgHMguBc8h-FfCo9cfU7cl1HwNuTIzcdm1eQcfiYOS-zBUi_70TG2CfdprvGZqd1O7_Ydlcts2ef8fc5IFx7hzS7NYCcCdadsVLnzvSISxxw8JpPhqn9OQdm2hynggE0QivpFXVxNzzBfTLqC253OUEUYO9CkSUjaVgW2v1UviZTrrJ7NommPRnOrP-4V187Fo7BhpOP1dD9htwojCcaA1r8ysS_cuMM2FY15B5AqLKaQXCSnJqzGSHVJpeW_gwYPDFJXlhEKh6x0P9n4MswmBkL6fr9KnaOujBWu7qj-45QOrtS5owf90G9H9k4jK4FxGqcJGDj0UgbqfX3cQGmirt8Y2CdTW7w2acXFVaadVxoroHV0W68cs-7S4NE1jxPv6aO2ci4dJuHyQnCfPlxElGZXcZMls8w0GdPi553Q5Sx4Ry2wR2tObEMvbf63tTHkSRz2fwYFiJyXYtH39UjfVreZ3Yg3aGfHR8JRv6QlvDkGfdh4n4oqs3M5polk4lYyYDsTlywHfSOQdvPAqIZauZIbAuc1cZMZgTUEpTIOcua-3bLIHWYJSvLI3CGhoo2VpODakKLP2SVw9cwtHboRs5wM5OBBioo4Pey8XSA6urRr2bMM2w5SGJdJb4pR3-qcaa3MPfp6BhV3HpP3X81Vfj-6rBL4xuH_qjcGErS-fClxrAdQ8CGOuPIxDK5y3kPfVTKhkwn3s6RzlJXWvW1VJ8kvf3z_g79T_eYe0VbACuJNd3shamCNobL8LqPQ4m1AQdnKKCXnO_qCKQGWw3Hckl3XZwOeH4QiIZw1FWxqF_1PNjnWCy5DvEyW1CgOxXFP0AV8Wd7nKsBBM6ae9xqZ6D4jNDDkRzUCoVBS-QtdhTXrVbnmpetRM9NL64CJqLulp8a3pZJtMW2KObKfCMCXwNGMO8YiIDjvdzJaBK4ydX3f1zzmvDgdHm206hb1GC87ZFuui0OiIL6SDw9lOxMZeKGCu1ImW7Zd2rYs_O1-w1WftNBsFgoGLl3H_3Qx1ngbyMy2-C_P4VObrFh5RZs_Tznp9Ria4yanOOFkWaD65Oc7HIieZJEB_1YNu9caEcAu78PeFIU_vjXDdMOaCrkzxz7VSvCKETI_a-lw7ahXVaSNPHz_pa9dl4bju5jbrcRg3Pt6v9Q6xRgadTObJGWb3yyPabUOTVgb8WYq1YtpPk2C8pXvlgNCsczZu9TxrTrv4_lDtO3iQjxajcuFWjzR2QvmEC8ECODuUKwxgNr09EIQrmL9TZ2dz3H4_leqqv-yX8QO5pAXE5M4Ej4_wxyTy3b-cu44VhtoijjxXR2V9JDYAjaWKvAaFW6e0-Oe74aDrJDTEfl5vyPmR9NXe1FEC2sNS-R9j--ZTSxCY4NNpRliFUk09JoAghjFd0nDmzSLy1aW3gG54AGFNp4V4RJp-pQyA==.eyJlbmRwb2ludF9zbHVnIjoib3BlbmFpL2dwdC02LWx1bmEtMjAyNjA5MjJ8YXp1cmUifQ",
+                  "id": "rs_0bfbf65b32472feb016ad8b98497e08195bb0baccce9029d24",
+                  "format": "azure-openai-responses-v1",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-output-available",
+          "toolCallId": "call_4zBIipY1JXOgSV4Gl9DnqYux",
+          "output": {
+            "previousLabel": null,
+            "reason": null,
+            "recorded": true
+          },
+          "providerMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.encrypted",
+                  "data": "gAAAAABq2LmInR_O56ekhOpRVVVnzuej-urowYu0S-GssI9NNmcM1yyHIFRIGYDix0kwtj9vAUpSoTBB-79JHKZTe9lO7Dz1TKXKdrYxcMXGO2FKaG0-ErlxQqUmZpAlZwohVmzEDxczOvCTS0ZY126CJIaYr_YP8yFOlyjSWu-NIn8r1AaoOF1H7AVWoRZtQsEXj5qufwzx0OqFdHAuC9dRsksT8E2TRhxVbWLfRaWkpFmdvTlTeG_Bli8qk3aKAkJNBWA1NilB-_zMWiymjqhdZ6rxiuHt7ijYu2Ya4HG57mDKtZEzlqhRzpBwS6CGfj0jEaVsT7ouin3jRt3dI2986idvDKKTZ17e5SAMcBy4sX05V_w1H2nfZpIXREW4uQlnzXweThb3ZaUBBqg7Lzn7wwCr9eXkjcvRAMAwBr_bw2ZpBAOzEYymBx_qwXNRwHQM5VB5rvnUkdDh9ZPXsKODbDvqpWCPhHgTqtHFMKbJkLLHyx_obZMjOSZ6fizYCeSnbKArp8dDnRj7Rn8U5gK1a2oGXuTchmqakrAPMynStTTqaisqZ1BetbFqCXluIHFXXE2t-BGZh7EWTrmWdDwAXtmEbmqz7N18RQ21JJ1tJ4EDDvn0XhmX98eTPDrfKtr_WeuPs1cGgaer8IYfh-8ZSEhg5161eUfQjT5mDLWEJ68U1oagA44442QHTnJLWTUDD0l5vxprYYRwSs3AKNKYMdTFdIo49xxTdqGjE7YVEefBt0pZvxZO6HqJjZTa52ANQ_s_CgHMguBc8h-FfCo9cfU7cl1HwNuTIzcdm1eQcfiYOS-zBUi_70TG2CfdprvGZqd1O7_Ydlcts2ef8fc5IFx7hzS7NYCcCdadsVLnzvSISxxw8JpPhqn9OQdm2hynggE0QivpFXVxNzzBfTLqC253OUEUYO9CkSUjaVgW2v1UviZTrrJ7NommPRnOrP-4V187Fo7BhpOP1dD9htwojCcaA1r8ysS_cuMM2FY15B5AqLKaQXCSnJqzGSHVJpeW_gwYPDFJXlhEKh6x0P9n4MswmBkL6fr9KnaOujBWu7qj-45QOrtS5owf90G9H9k4jK4FxGqcJGDj0UgbqfX3cQGmirt8Y2CdTW7w2acXFVaadVxoroHV0W68cs-7S4NE1jxPv6aO2ci4dJuHyQnCfPlxElGZXcZMls8w0GdPi553Q5Sx4Ry2wR2tObEMvbf63tTHkSRz2fwYFiJyXYtH39UjfVreZ3Yg3aGfHR8JRv6QlvDkGfdh4n4oqs3M5polk4lYyYDsTlywHfSOQdvPAqIZauZIbAuc1cZMZgTUEpTIOcua-3bLIHWYJSvLI3CGhoo2VpODakKLP2SVw9cwtHboRs5wM5OBBioo4Pey8XSA6urRr2bMM2w5SGJdJb4pR3-qcaa3MPfp6BhV3HpP3X81Vfj-6rBL4xuH_qjcGErS-fClxrAdQ8CGOuPIxDK5y3kPfVTKhkwn3s6RzlJXWvW1VJ8kvf3z_g79T_eYe0VbACuJNd3shamCNobL8LqPQ4m1AQdnKKCXnO_qCKQGWw3Hckl3XZwOeH4QiIZw1FWxqF_1PNjnWCy5DvEyW1CgOxXFP0AV8Wd7nKsBBM6ae9xqZ6D4jNDDkRzUCoVBS-QtdhTXrVbnmpetRM9NL64CJqLulp8a3pZJtMW2KObKfCMCXwNGMO8YiIDjvdzJaBK4ydX3f1zzmvDgdHm206hb1GC87ZFuui0OiIL6SDw9lOxMZeKGCu1ImW7Zd2rYs_O1-w1WftNBsFgoGLl3H_3Qx1ngbyMy2-C_P4VObrFh5RZs_Tznp9Ria4yanOOFkWaD65Oc7HIieZJEB_1YNu9caEcAu78PeFIU_vjXDdMOaCrkzxz7VSvCKETI_a-lw7ahXVaSNPHz_pa9dl4bju5jbrcRg3Pt6v9Q6xRgadTObJGWb3yyPabUOTVgb8WYq1YtpPk2C8pXvlgNCsczZu9TxrTrv4_lDtO3iQjxajcuFWjzR2QvmEC8ECODuUKwxgNr09EIQrmL9TZ2dz3H4_leqqv-yX8QO5pAXE5M4Ej4_wxyTy3b-cu44VhtoijjxXR2V9JDYAjaWKvAaFW6e0-Oe74aDrJDTEfl5vyPmR9NXe1FEC2sNS-R9j--ZTSxCY4NNpRliFUk09JoAghjFd0nDmzSLy1aW3gG54AGFNp4V4RJp-pQyA==.eyJlbmRwb2ludF9zbHVnIjoib3BlbmFpL2dwdC02LWx1bmEtMjAyNjA5MjJ8YXp1cmUifQ",
+                  "id": "rs_0bfbf65b32472feb016ad8b98497e08195bb0baccce9029d24",
+                  "format": "azure-openai-responses-v1",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "finish-step"
+        },
+        {
+          "type": "start-step"
+        },
+        {
+          "type": "text-start",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "##"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " U"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "zas"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "ad"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "nienie"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "\n\n"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "Zak"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "up"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " internet"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "owy"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " spr"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "zed"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " "
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "9"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " dni"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " mie"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "ści"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " się"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " w"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " termin"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "ie"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " "
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "14"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " dni"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " dla"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " zw"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "rot"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "u"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " ustaw"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "owego"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " (§"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "2"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " ust."
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " 1"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " Regulamin"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "u zw"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "rotów"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "). Na"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " zdjęciu"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " wida"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "ć lic"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "zne p"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "ęk"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "nięcia"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " i roz"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "ległe"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " uszk"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "odzenie szk"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "ła"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " ekranu"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": ". Same ś"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "lady używania"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " ani brak op"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "akowania nie"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " wyklucz"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "ają tej ś"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "cieżki"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " (§2 ust"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": ". 3"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "), ale pracownik"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " musi obejrzeć"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " urządzenie, by"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " ocenić,"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " czy korzystanie wp"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "łynęło"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " na jego wartość"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": ". Ewentualne"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " potr"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "ącenie ustala"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " pracownik po oględ"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "zinach; nie da"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " się go określić"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " na podstawie zdjęcia"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " (§2 ust. 4"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": ")."
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " Dlatego ocena wymaga"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " dalszej weryfikacji"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": ".\n\n## Co dalej\n\n1"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": ". To wstępna"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " ocena — samo zgłoszenie"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " nie jest o"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "świadczeniem o odstąpieniu"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " od umowy (§5 ust."
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " 4). Jeśli chcesz sk"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "orzystać ze zwrotu,"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " złóż oświadczenie zgodnie z"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " procedurą sklepu.\n2."
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " Po złożeniu oświadczenia możesz"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " odesłać telefon na adres do zw"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "rotów podany"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " w potwierdzeniu zamówienia albo"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " przynieść go do sklepu stac"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "jonarnego wraz z dowodem zakupu (§"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "5"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " ust. 2). Sprzęt należy o"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "desłać w ciągu 14 dni od"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " złożenia oświadczenia (§2 ust. "
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "6).\n3. Pracownik sprawdzi"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " telefon fizycznie, w tym zakres uszkod"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": "zenia i jego"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " wpływ na wartość, a następnie podejmie"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " ostateczną"
+        },
+        {
+          "type": "text-delta",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS",
+          "delta": " decyzję (§5 ust. 3)."
+        },
+        {
+          "type": "text-end",
+          "id": "gen-1792588168-CqaMPcI2owVoC8czDGQS"
+        },
+        {
+          "type": "finish-step"
+        },
+        {
+          "type": "finish",
+          "finishReason": "stop"
+        }
+      ],
+      "raw": "data: {\"type\":\"start\"}\n\ndata: {\"type\":\"start-step\"}\n\ndata: {\"type\":\"tool-input-start\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"toolName\":\"set_decision\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"{\\\"\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"change\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"Reason\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"\\\":\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"null\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\",\\\"\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"g\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"reeting\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"\\\":\\\"\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"D\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"zię\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"ku\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"ję\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\" za\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\" zg\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"łos\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"zenie\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\" —\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\" spraw\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"dzi\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"łem\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\" wid\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"oc\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"zne\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\" informacje\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\" o\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\" telefon\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"ie\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\".\\\",\\\"\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"label\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"\\\":\\\"\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"es\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"calated\"}\n\ndata: {\"type\":\"tool-input-delta\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"inputTextDelta\":\"\\\"}\"}\n\ndata: {\"type\":\"tool-input-available\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"toolName\":\"set_decision\",\"input\":{\"changeReason\":null,\"greeting\":\"Dziękuję za zgłoszenie — sprawdziłem widoczne informacje o telefonie.\",\"label\":\"escalated\"},\"providerMetadata\":{\"openrouter\":{\"reasoning_details\":[{\"type\":\"reasoning.encrypted\",\"data\":\"gAAAAABq2LmInR_O56ekhOpRVVVnzuej-urowYu0S-GssI9NNmcM1yyHIFRIGYDix0kwtj9vAUpSoTBB-79JHKZTe9lO7Dz1TKXKdrYxcMXGO2FKaG0-ErlxQqUmZpAlZwohVmzEDxczOvCTS0ZY126CJIaYr_YP8yFOlyjSWu-NIn8r1AaoOF1H7AVWoRZtQsEXj5qufwzx0OqFdHAuC9dRsksT8E2TRhxVbWLfRaWkpFmdvTlTeG_Bli8qk3aKAkJNBWA1NilB-_zMWiymjqhdZ6rxiuHt7ijYu2Ya4HG57mDKtZEzlqhRzpBwS6CGfj0jEaVsT7ouin3jRt3dI2986idvDKKTZ17e5SAMcBy4sX05V_w1H2nfZpIXREW4uQlnzXweThb3ZaUBBqg7Lzn7wwCr9eXkjcvRAMAwBr_bw2ZpBAOzEYymBx_qwXNRwHQM5VB5rvnUkdDh9ZPXsKODbDvqpWCPhHgTqtHFMKbJkLLHyx_obZMjOSZ6fizYCeSnbKArp8dDnRj7Rn8U5gK1a2oGXuTchmqakrAPMynStTTqaisqZ1BetbFqCXluIHFXXE2t-BGZh7EWTrmWdDwAXtmEbmqz7N18RQ21JJ1tJ4EDDvn0XhmX98eTPDrfKtr_WeuPs1cGgaer8IYfh-8ZSEhg5161eUfQjT5mDLWEJ68U1oagA44442QHTnJLWTUDD0l5vxprYYRwSs3AKNKYMdTFdIo49xxTdqGjE7YVEefBt0pZvxZO6HqJjZTa52ANQ_s_CgHMguBc8h-FfCo9cfU7cl1HwNuTIzcdm1eQcfiYOS-zBUi_70TG2CfdprvGZqd1O7_Ydlcts2ef8fc5IFx7hzS7NYCcCdadsVLnzvSISxxw8JpPhqn9OQdm2hynggE0QivpFXVxNzzBfTLqC253OUEUYO9CkSUjaVgW2v1UviZTrrJ7NommPRnOrP-4V187Fo7BhpOP1dD9htwojCcaA1r8ysS_cuMM2FY15B5AqLKaQXCSnJqzGSHVJpeW_gwYPDFJXlhEKh6x0P9n4MswmBkL6fr9KnaOujBWu7qj-45QOrtS5owf90G9H9k4jK4FxGqcJGDj0UgbqfX3cQGmirt8Y2CdTW7w2acXFVaadVxoroHV0W68cs-7S4NE1jxPv6aO2ci4dJuHyQnCfPlxElGZXcZMls8w0GdPi553Q5Sx4Ry2wR2tObEMvbf63tTHkSRz2fwYFiJyXYtH39UjfVreZ3Yg3aGfHR8JRv6QlvDkGfdh4n4oqs3M5polk4lYyYDsTlywHfSOQdvPAqIZauZIbAuc1cZMZgTUEpTIOcua-3bLIHWYJSvLI3CGhoo2VpODakKLP2SVw9cwtHboRs5wM5OBBioo4Pey8XSA6urRr2bMM2w5SGJdJb4pR3-qcaa3MPfp6BhV3HpP3X81Vfj-6rBL4xuH_qjcGErS-fClxrAdQ8CGOuPIxDK5y3kPfVTKhkwn3s6RzlJXWvW1VJ8kvf3z_g79T_eYe0VbACuJNd3shamCNobL8LqPQ4m1AQdnKKCXnO_qCKQGWw3Hckl3XZwOeH4QiIZw1FWxqF_1PNjnWCy5DvEyW1CgOxXFP0AV8Wd7nKsBBM6ae9xqZ6D4jNDDkRzUCoVBS-QtdhTXrVbnmpetRM9NL64CJqLulp8a3pZJtMW2KObKfCMCXwNGMO8YiIDjvdzJaBK4ydX3f1zzmvDgdHm206hb1GC87ZFuui0OiIL6SDw9lOxMZeKGCu1ImW7Zd2rYs_O1-w1WftNBsFgoGLl3H_3Qx1ngbyMy2-C_P4VObrFh5RZs_Tznp9Ria4yanOOFkWaD65Oc7HIieZJEB_1YNu9caEcAu78PeFIU_vjXDdMOaCrkzxz7VSvCKETI_a-lw7ahXVaSNPHz_pa9dl4bju5jbrcRg3Pt6v9Q6xRgadTObJGWb3yyPabUOTVgb8WYq1YtpPk2C8pXvlgNCsczZu9TxrTrv4_lDtO3iQjxajcuFWjzR2QvmEC8ECODuUKwxgNr09EIQrmL9TZ2dz3H4_leqqv-yX8QO5pAXE5M4Ej4_wxyTy3b-cu44VhtoijjxXR2V9JDYAjaWKvAaFW6e0-Oe74aDrJDTEfl5vyPmR9NXe1FEC2sNS-R9j--ZTSxCY4NNpRliFUk09JoAghjFd0nDmzSLy1aW3gG54AGFNp4V4RJp-pQyA==.eyJlbmRwb2ludF9zbHVnIjoib3BlbmFpL2dwdC02LWx1bmEtMjAyNjA5MjJ8YXp1cmUifQ\",\"id\":\"rs_0bfbf65b32472feb016ad8b98497e08195bb0baccce9029d24\",\"format\":\"azure-openai-responses-v1\",\"index\":0}]}}}\n\ndata: {\"type\":\"tool-output-available\",\"toolCallId\":\"call_4zBIipY1JXOgSV4Gl9DnqYux\",\"output\":{\"previousLabel\":null,\"reason\":null,\"recorded\":true},\"providerMetadata\":{\"openrouter\":{\"reasoning_details\":[{\"type\":\"reasoning.encrypted\",\"data\":\"gAAAAABq2LmInR_O56ekhOpRVVVnzuej-urowYu0S-GssI9NNmcM1yyHIFRIGYDix0kwtj9vAUpSoTBB-79JHKZTe9lO7Dz1TKXKdrYxcMXGO2FKaG0-ErlxQqUmZpAlZwohVmzEDxczOvCTS0ZY126CJIaYr_YP8yFOlyjSWu-NIn8r1AaoOF1H7AVWoRZtQsEXj5qufwzx0OqFdHAuC9dRsksT8E2TRhxVbWLfRaWkpFmdvTlTeG_Bli8qk3aKAkJNBWA1NilB-_zMWiymjqhdZ6rxiuHt7ijYu2Ya4HG57mDKtZEzlqhRzpBwS6CGfj0jEaVsT7ouin3jRt3dI2986idvDKKTZ17e5SAMcBy4sX05V_w1H2nfZpIXREW4uQlnzXweThb3ZaUBBqg7Lzn7wwCr9eXkjcvRAMAwBr_bw2ZpBAOzEYymBx_qwXNRwHQM5VB5rvnUkdDh9ZPXsKODbDvqpWCPhHgTqtHFMKbJkLLHyx_obZMjOSZ6fizYCeSnbKArp8dDnRj7Rn8U5gK1a2oGXuTchmqakrAPMynStTTqaisqZ1BetbFqCXluIHFXXE2t-BGZh7EWTrmWdDwAXtmEbmqz7N18RQ21JJ1tJ4EDDvn0XhmX98eTPDrfKtr_WeuPs1cGgaer8IYfh-8ZSEhg5161eUfQjT5mDLWEJ68U1oagA44442QHTnJLWTUDD0l5vxprYYRwSs3AKNKYMdTFdIo49xxTdqGjE7YVEefBt0pZvxZO6HqJjZTa52ANQ_s_CgHMguBc8h-FfCo9cfU7cl1HwNuTIzcdm1eQcfiYOS-zBUi_70TG2CfdprvGZqd1O7_Ydlcts2ef8fc5IFx7hzS7NYCcCdadsVLnzvSISxxw8JpPhqn9OQdm2hynggE0QivpFXVxNzzBfTLqC253OUEUYO9CkSUjaVgW2v1UviZTrrJ7NommPRnOrP-4V187Fo7BhpOP1dD9htwojCcaA1r8ysS_cuMM2FY15B5AqLKaQXCSnJqzGSHVJpeW_gwYPDFJXlhEKh6x0P9n4MswmBkL6fr9KnaOujBWu7qj-45QOrtS5owf90G9H9k4jK4FxGqcJGDj0UgbqfX3cQGmirt8Y2CdTW7w2acXFVaadVxoroHV0W68cs-7S4NE1jxPv6aO2ci4dJuHyQnCfPlxElGZXcZMls8w0GdPi553Q5Sx4Ry2wR2tObEMvbf63tTHkSRz2fwYFiJyXYtH39UjfVreZ3Yg3aGfHR8JRv6QlvDkGfdh4n4oqs3M5polk4lYyYDsTlywHfSOQdvPAqIZauZIbAuc1cZMZgTUEpTIOcua-3bLIHWYJSvLI3CGhoo2VpODakKLP2SVw9cwtHboRs5wM5OBBioo4Pey8XSA6urRr2bMM2w5SGJdJb4pR3-qcaa3MPfp6BhV3HpP3X81Vfj-6rBL4xuH_qjcGErS-fClxrAdQ8CGOuPIxDK5y3kPfVTKhkwn3s6RzlJXWvW1VJ8kvf3z_g79T_eYe0VbACuJNd3shamCNobL8LqPQ4m1AQdnKKCXnO_qCKQGWw3Hckl3XZwOeH4QiIZw1FWxqF_1PNjnWCy5DvEyW1CgOxXFP0AV8Wd7nKsBBM6ae9xqZ6D4jNDDkRzUCoVBS-QtdhTXrVbnmpetRM9NL64CJqLulp8a3pZJtMW2KObKfCMCXwNGMO8YiIDjvdzJaBK4ydX3f1zzmvDgdHm206hb1GC87ZFuui0OiIL6SDw9lOxMZeKGCu1ImW7Zd2rYs_O1-w1WftNBsFgoGLl3H_3Qx1ngbyMy2-C_P4VObrFh5RZs_Tznp9Ria4yanOOFkWaD65Oc7HIieZJEB_1YNu9caEcAu78PeFIU_vjXDdMOaCrkzxz7VSvCKETI_a-lw7ahXVaSNPHz_pa9dl4bju5jbrcRg3Pt6v9Q6xRgadTObJGWb3yyPabUOTVgb8WYq1YtpPk2C8pXvlgNCsczZu9TxrTrv4_lDtO3iQjxajcuFWjzR2QvmEC8ECODuUKwxgNr09EIQrmL9TZ2dz3H4_leqqv-yX8QO5pAXE5M4Ej4_wxyTy3b-cu44VhtoijjxXR2V9JDYAjaWKvAaFW6e0-Oe74aDrJDTEfl5vyPmR9NXe1FEC2sNS-R9j--ZTSxCY4NNpRliFUk09JoAghjFd0nDmzSLy1aW3gG54AGFNp4V4RJp-pQyA==.eyJlbmRwb2ludF9zbHVnIjoib3BlbmFpL2dwdC02LWx1bmEtMjAyNjA5MjJ8YXp1cmUifQ\",\"id\":\"rs_0bfbf65b32472feb016ad8b98497e08195bb0baccce9029d24\",\"format\":\"azure-openai-responses-v1\",\"index\":0}]}}}\n\ndata: {\"type\":\"finish-step\"}\n\ndata: {\"type\":\"start-step\"}\n\ndata: {\"type\":\"text-start\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"##\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" U\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"zas\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"ad\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"nienie\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"\\n\\n\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"Zak\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"up\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" internet\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"owy\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" spr\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"zed\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" \"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"9\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" dni\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" mie\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"ści\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" się\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" w\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" termin\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"ie\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" \"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"14\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" dni\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" dla\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" zw\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"rot\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"u\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" ustaw\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"owego\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" (§\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"2\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" ust.\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" 1\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" Regulamin\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"u zw\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"rotów\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"). Na\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" zdjęciu\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" wida\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"ć lic\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"zne p\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"ęk\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"nięcia\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" i roz\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"ległe\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" uszk\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"odzenie szk\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"ła\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" ekranu\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\". Same ś\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"lady używania\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" ani brak op\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"akowania nie\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" wyklucz\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"ają tej ś\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"cieżki\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" (§2 ust\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\". 3\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"), ale pracownik\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" musi obejrzeć\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" urządzenie, by\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" ocenić,\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" czy korzystanie wp\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"łynęło\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" na jego wartość\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\". Ewentualne\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" potr\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"ącenie ustala\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" pracownik po oględ\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"zinach; nie da\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" się go określić\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" na podstawie zdjęcia\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" (§2 ust. 4\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\").\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" Dlatego ocena wymaga\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" dalszej weryfikacji\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\".\\n\\n## Co dalej\\n\\n1\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\". To wstępna\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" ocena — samo zgłoszenie\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" nie jest o\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"świadczeniem o odstąpieniu\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" od umowy (§5 ust.\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" 4). Jeśli chcesz sk\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"orzystać ze zwrotu,\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" złóż oświadczenie zgodnie z\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" procedurą sklepu.\\n2.\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" Po złożeniu oświadczenia możesz\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" odesłać telefon na adres do zw\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"rotów podany\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" w potwierdzeniu zamówienia albo\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" przynieść go do sklepu stac\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"jonarnego wraz z dowodem zakupu (§\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"5\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" ust. 2). Sprzęt należy o\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"desłać w ciągu 14 dni od\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" złożenia oświadczenia (§2 ust. \"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"6).\\n3. Pracownik sprawdzi\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" telefon fizycznie, w tym zakres uszkod\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\"zenia i jego\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" wpływ na wartość, a następnie podejmie\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" ostateczną\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\",\"delta\":\" decyzję (§5 ust. 3).\"}\n\ndata: {\"type\":\"text-end\",\"id\":\"gen-1792588168-CqaMPcI2owVoC8czDGQS\"}\n\ndata: {\"type\":\"finish-step\"}\n\ndata: {\"type\":\"finish\",\"finishReason\":\"stop\"}\n\ndata: [DONE]\n\n"
+    },
+    "headers": {
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "cache-control": "no-store",
+      "connection": "keep-alive",
+      "content-type": "text/event-stream",
+      "x-accel-buffering": "no",
+      "x-vercel-ai-ui-message-stream": "v1",
+      "date": "Wed, 21 Oct 2026 13:09:23 GMT",
+      "transfer-encoding": "chunked"
+    },
+    "status": 200
+  }
+}

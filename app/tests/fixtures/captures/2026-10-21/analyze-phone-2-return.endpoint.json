@@ -1,0 +1,73 @@
+{
+  "request": {
+    "fields": {
+      "caseType": "return",
+      "category": "smartphone",
+      "modelName": "Testowy Model X1",
+      "purchaseChannel": "online",
+      "purchaseDate": "2026-10-12",
+      "reason": ""
+    },
+    "photo": {
+      "bytes": 14979,
+      "fileName": "phone-2.jpeg",
+      "sha256": "ed4df956aa26a579ac44df2dc8a3cb5e848b29ce5e3f8898a82b8202b39a4a27"
+    }
+  },
+  "response": {
+    "body": {
+      "caseContext": {
+        "caseType": "return",
+        "category": "smartphone",
+        "modelName": "Testowy Model X1",
+        "purchaseChannel": "online",
+        "purchaseDate": "2026-10-12",
+        "reason": "",
+        "assessmentDate": "2026-10-21",
+        "daysSincePurchase": 9
+      },
+      "imageAnalysis": {
+        "confidence": "high",
+        "equipmentVisible": "Smartfon widoczny od tyłu, z niebieską obudową i logo Apple.",
+        "imageUsable": "yes",
+        "matchesCategory": "yes",
+        "matchesModel": "uncertain",
+        "observations": [
+          {
+            "component": "Tylny panel",
+            "description": "Niebieski panel z widocznym logo Apple; nie widać wyraźnych uszkodzeń.",
+            "location": "Środek tylnej części urządzenia"
+          },
+          {
+            "component": "Aparaty",
+            "description": "Dwa obiektywy i lampa błyskowa w podwyższonej wyspie aparatu.",
+            "location": "Górny lewy róg tylnej części urządzenia"
+          }
+        ],
+        "safetyHazards": [],
+        "unusableReason": null,
+        "accessoriesVisible": true,
+        "packagingVisible": false,
+        "protectiveFilms": "not_visible",
+        "resaleableAsNew": "uncertain",
+        "resaleableReasons": [
+          "Na widocznej części obudowy nie widać wyraźnych śladów uszkodzeń.",
+          "Nie pokazano ekranu ani opakowania, a stan plomb jest niewidoczny."
+        ],
+        "seals": "not_visible",
+        "signsOfUse": [],
+        "variant": "return"
+      }
+    },
+    "headers": {
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "cache-control": "no-store",
+      "content-type": "application/json",
+      "date": "Wed, 21 Oct 2026 13:08:30 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "status": 200
+  }
+}

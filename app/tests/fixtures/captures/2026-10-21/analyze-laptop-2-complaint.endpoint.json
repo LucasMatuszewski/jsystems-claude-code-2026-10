@@ -1,0 +1,79 @@
+{
+  "request": {
+    "fields": {
+      "caseType": "complaint",
+      "category": "laptop",
+      "modelName": "Testowy Model X1",
+      "purchaseChannel": "online",
+      "purchaseDate": "2026-10-12",
+      "reason": "Urządzenie przestało działać poprawnie kilka dni temu, proszę o ocenę zgłoszenia."
+    },
+    "photo": {
+      "bytes": 165974,
+      "fileName": "laptop-2.webp",
+      "sha256": "ca694b473018e37af2b5d9fd27deccc2402240c95c41cc3a521e1d28b55dee73"
+    }
+  },
+  "response": {
+    "body": {
+      "caseContext": {
+        "caseType": "complaint",
+        "category": "laptop",
+        "modelName": "Testowy Model X1",
+        "purchaseChannel": "online",
+        "purchaseDate": "2026-10-12",
+        "reason": "Urządzenie przestało działać poprawnie kilka dni temu, proszę o ocenę zgłoszenia.",
+        "assessmentDate": "2026-10-21",
+        "daysSincePurchase": 9
+      },
+      "imageAnalysis": {
+        "confidence": "high",
+        "equipmentVisible": "Otwarty laptop Lenovo z włączonym ekranem, klawiaturą i gładzikiem.",
+        "imageUsable": "yes",
+        "matchesCategory": "yes",
+        "matchesModel": "uncertain",
+        "observations": [
+          {
+            "component": "Ekran",
+            "description": "Wyświetla niebieski pulpit i małe okno programu; na widocznej powierzchni nie widać pęknięć.",
+            "location": "Górna część laptopa"
+          },
+          {
+            "component": "Klawiatura",
+            "description": "Widoczne są klawisze oraz czerwony wskaźnik TrackPoint.",
+            "location": "Środkowa część podstawy"
+          },
+          {
+            "component": "Gładzik",
+            "description": "Widoczny gładzik z przyciskami nad jego górną krawędzią.",
+            "location": "Przednia, środkowa część podstawy"
+          },
+          {
+            "component": "Obudowa",
+            "description": "Widoczna obudowa bez jednoznacznych śladów uszkodzeń.",
+            "location": "Podstawa laptopa i ramka wokół ekranu"
+          }
+        ],
+        "safetyHazards": [],
+        "unusableReason": null,
+        "damages": [],
+        "damageVisible": "no",
+        "externalCauseTraces": [],
+        "likelyCause": "undetermined",
+        "likelyCauseRationale": "Na zdjęciu nie widać uszkodzeń ani jednoznacznych śladów wskazujących na przyczynę problemu.",
+        "manufacturingDefectTraces": [],
+        "variant": "complaint"
+      }
+    },
+    "headers": {
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "cache-control": "no-store",
+      "content-type": "application/json",
+      "date": "Wed, 21 Oct 2026 13:09:17 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "status": 200
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "request": {
+    "fields": {
+      "caseType": "return",
+      "category": "smartphone",
+      "modelName": "Testowy Model X1",
+      "purchaseChannel": "online",
+      "purchaseDate": "2026-10-12",
+      "reason": ""
+    },
+    "photo": {
+      "bytes": 106565,
+      "fileName": "phone-1.jpg",
+      "sha256": "88ec9f05c16a14713e4c90fcb021174926f0b26410d392e63cf9f2739d7e25f2"
+    }
+  },
+  "response": {
+    "body": {
+      "caseContext": {
+        "caseType": "return",
+        "category": "smartphone",
+        "modelName": "Testowy Model X1",
+        "purchaseChannel": "online",
+        "purchaseDate": "2026-10-12",
+        "reason": "",
+        "assessmentDate": "2026-10-21",
+        "daysSincePurchase": 9
+      },
+      "imageAnalysis": {
+        "confidence": "high",
+        "equipmentVisible": "Smartfon z mocno popękanym ekranem, ustawiony na białej podstawce.",
+        "imageUsable": "yes",
+        "matchesCategory": "yes",
+        "matchesModel": "uncertain",
+        "observations": [
+          {
+            "component": "Ekran",
+            "description": "Widoczne liczne pęknięcia, w tym rozległe pęknięcia pajęczynowe w górnej części i długie pęknięcie biegnące przez ekran.",
+            "location": "Przednia powierzchnia urządzenia"
+          },
+          {
+            "component": "Podstawka",
+            "description": "Biała podstawka podtrzymuje urządzenie.",
+            "location": "Pod urządzeniem"
+          }
+        ],
+        "safetyHazards": [],
+        "unusableReason": null,
+        "accessoriesVisible": true,
+        "packagingVisible": false,
+        "protectiveFilms": "not_visible",
+        "resaleableAsNew": "no",
+        "resaleableReasons": [
+          "Ekran jest widocznie mocno popękany."
+        ],
+        "seals": "not_visible",
+        "signsOfUse": [
+          {
+            "location": "Przednia powierzchnia urządzenia",
+            "type": "other"
+          }
+        ],
+        "variant": "return"
+      }
+    },
+    "headers": {
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "cache-control": "no-store",
+      "content-type": "application/json",
+      "date": "Wed, 21 Oct 2026 13:08:13 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "status": 200
+  }
+}

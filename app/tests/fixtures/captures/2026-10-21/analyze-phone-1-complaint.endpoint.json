@@ -1,0 +1,82 @@
+{
+  "request": {
+    "fields": {
+      "caseType": "complaint",
+      "category": "smartphone",
+      "modelName": "Testowy Model X1",
+      "purchaseChannel": "online",
+      "purchaseDate": "2026-10-12",
+      "reason": "Urządzenie przestało działać poprawnie kilka dni temu, proszę o ocenę zgłoszenia."
+    },
+    "photo": {
+      "bytes": 106565,
+      "fileName": "phone-1.jpg",
+      "sha256": "88ec9f05c16a14713e4c90fcb021174926f0b26410d392e63cf9f2739d7e25f2"
+    }
+  },
+  "response": {
+    "body": {
+      "caseContext": {
+        "caseType": "complaint",
+        "category": "smartphone",
+        "modelName": "Testowy Model X1",
+        "purchaseChannel": "online",
+        "purchaseDate": "2026-10-12",
+        "reason": "Urządzenie przestało działać poprawnie kilka dni temu, proszę o ocenę zgłoszenia.",
+        "assessmentDate": "2026-10-21",
+        "daysSincePurchase": 9
+      },
+      "imageAnalysis": {
+        "confidence": "high",
+        "equipmentVisible": "Smartfon z mocno uszkodzonym, popękanym ekranem.",
+        "imageUsable": "yes",
+        "matchesCategory": "yes",
+        "matchesModel": "uncertain",
+        "observations": [
+          {
+            "component": "Ekran",
+            "description": "Widoczne liczne pęknięcia; duża część wyświetlacza jest ciemna, a przez ekran przebiega zielona linia.",
+            "location": "Przednia powierzchnia urządzenia"
+          },
+          {
+            "component": "Obudowa",
+            "description": "Widoczne krawędzie obudowy; na zdjęciu nie widać jednoznacznych odkształceń.",
+            "location": "Wzdłuż boków urządzenia"
+          }
+        ],
+        "safetyHazards": [],
+        "unusableReason": null,
+        "damages": [
+          {
+            "extent": "Rozległe, liczne pęknięcia obejmujące znaczną część ekranu.",
+            "location": "Ekran, przede wszystkim górna część i okolice górnej lewej krawędzi, z pęknięcię",
+            "type": "crack"
+          },
+          {
+            "extent": "Duży ciemny obszar oraz widoczna zielona linia na wyświetlaczu.",
+            "location": "Ekran, po lewej stronie i przez środkową część wyświetlacza",
+            "type": "dead_pixels_or_lines"
+          }
+        ],
+        "damageVisible": "yes",
+        "externalCauseTraces": [
+          "radiating_cracks"
+        ],
+        "likelyCause": "user_caused",
+        "likelyCauseRationale": "Rozległe pęknięcia promieniście rozchodzące się w górnej części ekranu oraz zaburzenia obrazu są widoczne na zdjęciu i mogą wskazywać na uszkodzenie mechaniczne. Samo zdjęcie nie pozwala ustalić dokładnego zdarzenia.",
+        "manufacturingDefectTraces": [],
+        "variant": "complaint"
+      }
+    },
+    "headers": {
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "cache-control": "no-store",
+      "content-type": "application/json",
+      "date": "Wed, 21 Oct 2026 13:08:22 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "status": 200
+  }
+}
