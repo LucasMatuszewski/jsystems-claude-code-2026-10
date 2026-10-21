@@ -57,11 +57,13 @@ export function getAiEnv(): AiEnv {
   const llmModel = required("LLM_MODEL");
   const capture = optional("AI_CAPTURE_DIR");
   cached = {
-    captureDir: capture ? path.resolve(process.cwd(), capture) : null,
+    captureDir: capture
+      ? path.resolve(/* turbopackIgnore: true */ process.cwd(), capture)
+      : null,
     llmModel,
     openRouterApiKey,
     policiesDir: path.resolve(
-      process.cwd(),
+      /* turbopackIgnore: true */ process.cwd(),
       optional("POLICIES_DIR") || DEFAULT_POLICIES_DIR
     ),
     port: parsePort(),

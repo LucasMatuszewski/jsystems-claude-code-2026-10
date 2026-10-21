@@ -12,10 +12,13 @@ const FILE_NAMES: Record<CaseType, string> = {
 const cache = new Map<CaseType, string>();
 
 function readPolicyFile(caseType: CaseType): string {
-  const file = path.join(getAiEnv().policiesDir, FILE_NAMES[caseType]);
+  const file = path.join(
+    /* turbopackIgnore: true */ getAiEnv().policiesDir,
+    FILE_NAMES[caseType]
+  );
   let text: string | null = null;
   try {
-    text = fs.readFileSync(file, "utf8");
+    text = fs.readFileSync(/* turbopackIgnore: true */ file, "utf8");
   } catch {
     text = null;
   }

@@ -8,6 +8,11 @@ loadEnvConfig(path.resolve(process.cwd(), ".."));
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactCompiler: true,
+  // Production builds type-check application code only; `npm run typecheck`
+  // still covers the test files through tsconfig.json.
+  typescript: {
+    tsconfigPath: "tsconfig.build.json",
+  },
 };
 
 export default nextConfig;
