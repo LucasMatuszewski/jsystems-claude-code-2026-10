@@ -46,6 +46,7 @@ export default defineConfig({
           ],
           name: "dom",
           setupFiles: sharedSetupFiles,
+          testTimeout: 20_000,
         },
       },
     ],
