@@ -59,18 +59,19 @@ export default defineConfig({
   timeout: 180_000,
   use: {
     baseURL: "http://localhost:3000",
-    // E-18 types the date field keyboard-only in US order (mmddyyyy); the
-    // browser takes the field order from the OS locale (pl_PL on the VMs).
+    // E2E runs like Polish users: the native date field order follows the
+    // browser locale and the OS locale, so both are pinned explicitly.
     launchOptions: {
       env: {
         ...process.env,
-        LANG: "en_US.UTF-8",
-        LANGUAGE: "en_US",
-        LC_ALL: "en_US.UTF-8",
+        LANG: "pl_PL.UTF-8",
+        LANGUAGE: "pl",
+        LC_ALL: "pl_PL.UTF-8",
       },
     },
-    locale: "en-US",
+    locale: "pl-PL",
     screenshot: "only-on-failure",
+    timezoneId: "Europe/Warsaw",
     trace: "retain-on-failure",
     video: "retain-on-failure",
   },
