@@ -1,0 +1,10 @@
+
+> hardware-service-decision-copilot@0.1.0 start
+> next start
+
+▲ Next.js 16.4.2
+- Local:         http://localhost:3000
+- Network:       http://10.123.3.95:3000
+✓ Ready in 415ms
+✓ Running next.config.ts took 98ms
+Configuration error: missing or invalid OPENROUTER_API_KEY

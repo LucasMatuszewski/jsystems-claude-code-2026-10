@@ -1,0 +1,14 @@
+
+> hardware-service-decision-copilot@0.1.0 dev
+> next dev
+
+▲ Next.js 16.4.2 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.123.3.95:3000
+✓ Ready in 964ms
+✓ Running next.config.ts took 107ms
+
+✓ Generated AGENTS.md for AI agents. Set `agentRules: false` in next.config to disable.
+○ Compiling / ...
+ GET / 200 in 1554ms (next.js: 344ms, application-code: 1209ms)
+[?25h
