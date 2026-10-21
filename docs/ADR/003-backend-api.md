@@ -176,7 +176,7 @@ In-stream errors (`/api/chat`) carry the code string only (`DECISION_FAILED`, `D
 **Consequences:**
 - (+) No artificial interruption of long conversations.
 - (-) Token cost per session is unbounded; monitored through OpenRouter usage logging (ADR-002 §3.6).
-**Review trigger:** The PRD open question on a per-session cap is decided, or test/course spend exceeds budget.
+**Review trigger:** The PRD open question on a per-session cap is decided, or the course spend exceeds its budget.
 
 ### D-API5 No rate limiting in the MVP
 **Status:** Accepted

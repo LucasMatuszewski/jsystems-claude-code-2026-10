@@ -23,7 +23,7 @@ Guiding rule from the product owner: **E2E tests and manual tests use the full r
 | AI SDK test helpers | `/vercel/ai` (`ai/test`: `MockLanguageModelV4`, `mockId`, `mockValues`; `simulateReadableStream` from `ai`; `wrapLanguageModel` middleware) | Deterministic integration tests; recording middleware for captures |
 | OpenRouter provider | https://github.com/OpenRouterTeam/ai-sdk-provider | Custom `fetch` option used to record raw HTTP exchanges |
 | Playwright 1.64 | `/microsoft/playwright` | Contract tests (`request` fixture), E2E projects (Chromium, Firefox, WebKit), multiple `webServer` entries, tags/`grep`, traces |
-| Playwright CLI / MCP | Course environment (`.mcp.json`) | Manual QA driving and screenshots |
+| Playwright CLI | Course environment (`playwright-cli`; its `.playwright-cli/` folder is gitignored) — default browser tool for agents | Manual QA driving and screenshots |
 
 ---
 
@@ -179,8 +179,8 @@ Separate lines for: build (command, result, warnings), typecheck, lint, unit+int
 - Additional mocked E2E project: rejected by the product owner.
 **Consequences:**
 - (+) Tests reflect production behaviour, including latency and model variance.
-- (-) Costs per run, slower suites, non-deterministic outcomes requiring lenient assertions and reliability runs.
-**Review trigger:** Monthly OpenRouter spend on tests exceeds the agreed course budget.
+- (-) Slower suites and non-deterministic outcomes requiring lenient assertions and reliability runs.
+**Review trigger:** Real-stack runs become too slow to finish within a course module.
 
 ### D-T2 Mocks only from verbatim captures
 **Status:** Accepted
@@ -230,7 +230,7 @@ flowchart BT
         U[Unit<br/>Vitest + RTL]
         I[Integration<br/>route handlers + MockLanguageModelV4]
     end
-    subgraph Real["Real stack (OpenRouter, paid)"]
+    subgraph Real["Real stack (real OpenRouter, no mocks)"]
         C[Contract<br/>Playwright request]
         E[E2E<br/>Playwright browsers]
         M[Manual QA<br/>Playwright CLI]
