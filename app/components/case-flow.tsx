@@ -1,20 +1,31 @@
 "use client";
 
 import { FormScreen } from "@/components/case-form/form-screen";
+import { ChatView } from "@/components/chat/chat-view";
+import { NewCaseDialog } from "@/components/chat/new-case-dialog";
 import { AppHeader } from "@/components/layout/app-header";
 import { CaseSessionProvider, useCaseSession } from "@/lib/session/context";
 import { useCaseChat } from "@/lib/session/use-case-chat";
+import { useLeaveGuard } from "@/lib/session/use-leave-guard";
 
 function CaseFlowScreens(): React.JSX.Element {
   const { state } = useCaseSession();
   const chat = useCaseChat();
+  const isChat = state.screen === "chat";
+
+  // AC-49: leaving the page during a chat asks for confirmation.
+  useLeaveGuard(isChat);
 
   return (
     <>
-      <AppHeader />
+      <AppHeader
+        actions={
+          isChat ? <NewCaseDialog onConfirm={chat.confirmNewCase} /> : undefined
+        }
+      />
       <main className="mx-auto w-full max-w-3xl px-4 py-6">
-        {state.screen === "chat" ? (
-          <div data-testid="chat-screen" />
+        {isChat ? (
+          <ChatView chat={chat} />
         ) : (
           <div data-screen={state.screen} data-testid="form-screen">
             <FormScreen

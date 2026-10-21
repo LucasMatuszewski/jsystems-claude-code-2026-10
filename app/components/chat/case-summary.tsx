@@ -82,7 +82,14 @@ export function CaseSummary({
     {
       key: "currentDecision",
       label: texts.summary.currentDecision,
-      value: <DecisionBadge label={currentLabel} />,
+      value: (
+        <span
+          data-label={currentLabel ?? "none"}
+          data-testid="summary-decision"
+        >
+          <DecisionBadge label={currentLabel} />
+        </span>
+      ),
     },
   ];
 
