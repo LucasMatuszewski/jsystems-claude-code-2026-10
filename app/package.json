@@ -3,17 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "typecheck": "tsc --noEmit",
-    "lint": "ultracite check",
+    "capture": "playwright test --config=playwright.capture.config.ts",
+    "dev": "next dev",
     "format": "ultracite fix",
+    "lint": "ultracite check",
+    "start": "next start",
     "test": "vitest run",
-    "test:watch": "vitest",
     "test:contract": "playwright test --project=contract",
     "test:e2e": "playwright test --project=chromium --project=firefox --project=webkit",
-    "capture": "playwright test --config=playwright.capture.config.ts"
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.152",

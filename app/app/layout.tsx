@@ -5,9 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  description: "Asystent decyzji serwisowych dla zwrotów i reklamacji sprzętu",
   title: "Asystent zwrotów i reklamacji",
-  description:
-    "Asystent decyzji serwisowych dla zwrotów i reklamacji sprzętu",
 };
 
 export default function RootLayout({

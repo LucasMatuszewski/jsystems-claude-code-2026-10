@@ -1,6 +1,14 @@
 "use client";
 
 import type { ChatStatus, FileUIPart, SourceDocumentUIPart } from "ai";
+import {
+  CornerDownLeftIcon,
+  ImageIcon,
+  PlusIcon,
+  SquareIcon,
+  XIcon,
+} from "lucide-react";
+import { nanoid } from "nanoid";
 import type {
   ChangeEvent,
   ChangeEventHandler,
@@ -14,7 +22,16 @@ import type {
   ReactNode,
   RefObject,
 } from "react";
-
+import {
+  Children,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   InputGroup,
   InputGroupAddon,
@@ -35,24 +52,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import {
-  CornerDownLeftIcon,
-  ImageIcon,
-  PlusIcon,
-  SquareIcon,
-  XIcon,
-} from "lucide-react";
-import { nanoid } from "nanoid";
-import {
-  Children,
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
 
 // ============================================================================
 // Helpers
@@ -82,28 +81,28 @@ const convertBlobUrlToDataUrl = async (url: string): Promise<string | null> => {
 // ============================================================================
 
 export interface AttachmentsContext {
-  files: (FileUIPart & { id: string })[];
   add: (files: File[] | FileList) => void;
-  remove: (id: string) => void;
   clear: () => void;
-  openFileDialog: () => void;
   fileInputRef: RefObject<HTMLInputElement | null>;
+  files: (FileUIPart & { id: string })[];
+  openFileDialog: () => void;
+  remove: (id: string) => void;
 }
 
 export interface TextInputContext {
-  value: string;
-  setInput: (v: string) => void;
   clear: () => void;
+  setInput: (v: string) => void;
+  value: string;
 }
 
 export interface PromptInputControllerProps {
-  textInput: TextInputContext;
-  attachments: AttachmentsContext;
   /** INTERNAL: Allows PromptInput to register its file textInput + "open" callback */
   __registerFileInput: (
     ref: RefObject<HTMLInputElement | null>,
     open: () => void
   ) => void;
+  attachments: AttachmentsContext;
+  textInput: TextInputContext;
 }
 
 const PromptInputController = createContext<PromptInputControllerProps | null>(
@@ -292,10 +291,10 @@ export const usePromptInputAttachments = () => {
 // ============================================================================
 
 export interface ReferencedSourcesContext {
-  sources: (SourceDocumentUIPart & { id: string })[];
   add: (sources: SourceDocumentUIPart[] | SourceDocumentUIPart) => void;
-  remove: (id: string) => void;
   clear: () => void;
+  remove: (id: string) => void;
+  sources: (SourceDocumentUIPart & { id: string })[];
 }
 
 export const LocalReferencedSourcesContext =
@@ -312,8 +311,8 @@ export const usePromptInputReferencedSources = () => {
 };
 
 export interface PromptInputMessage {
-  text: string;
   files: FileUIPart[];
+  text: string;
 }
 
 export type PromptInputProps = Omit<
