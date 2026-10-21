@@ -83,13 +83,18 @@ Verify only the scope relevant to your change. If the change affects runtime beh
 **Env Vars:** See `.env.example`. Configure only the provider chosen in the ADR (OpenRouter or Anthropic); credentials remain server-side. The CLI subscription and application API credentials are separate.
 
 ### Commit Rules
-- Commit only after verification passes and the changed scope is in a working state.
-- Keep commits focused: one logical change per commit.
-- Format: `Area: short summary` (e.g. `Backend:`, `Frontend:`, `Docs:`)
+- **Commit proactively — do not wait to be asked.** This file is the user's standing instruction: commit every completed logical unit of work as soon as its scoped verification passes and the changed scope is in a working state (e.g. PRD, policy documents, ADRs, design system, review fixes, a feature slice, a bug fix, a config change). This applies equally to work produced through skills such as `write-prd`, `write-adr` or `create-design-system`.
+- **Start clean.** Before changing files, run `git status`. Commit pre-existing uncommitted work first in logical groups (ask only if its origin is unclear), so your own changes stay a separate, reviewable diff.
+- **Never commit on `main`.** If the current branch is `main`, create a branch before the first commit, named `<type>/<short-kebab-description>` (`feature/`, `fix/`, `docs/`, `chore/`). If you are already on a non-`main` branch for the same work, keep committing there; ask before starting a new branch for unrelated work.
+- Keep commits focused: one logical change per commit; split larger work into several commits (e.g. one per review theme).
+- Format: `Area: short summary` (e.g. `Backend:`, `Frontend:`, `Docs:`, `Design:`), with a body explaining what changed and why.
+- Documentation-only commits need only the diff, link and consistency checks from Verification.
+- Never commit secrets, `.env*` files or `.claude/worktrees/`.
+- List the created commit hashes and the branch in your final summary.
 - Do **not** push to remote unless the user explicitly asks.
 
 ### Git Worktrees
-- Use this checkout by default. Create a worktree only when requested or needed for parallel agent work; ask first when not explicitly requested.
+- Avoid worktrees by default; work in this checkout. Create a worktree only when the user explicitly asks for one, or when parallel agent work makes it unavoidable — and in that case ask first.
 - Remove worktrees with `git worktree remove <path>` and run `git worktree prune` when done.
 
 ### Completion Criteria
@@ -99,3 +104,4 @@ A task is complete only when:
 - Verification for the changed scope passed with no errors or warnings
 - Runtime changes passed Manual QA on the actual UI, CLI or API, with screenshots or command/request evidence and the application's own visual reference where applicable; documentation-only work passed its scoped checks
 - The commit message is focused and the repository is in a consistent, reviewable state
+- The work is committed on a non-`main` branch and the commit hashes are reported
