@@ -59,6 +59,17 @@ export default defineConfig({
   timeout: 180_000,
   use: {
     baseURL: "http://localhost:3000",
+    // E-18 types the date field keyboard-only in US order (mmddyyyy); the
+    // browser takes the field order from the OS locale (pl_PL on the VMs).
+    launchOptions: {
+      env: {
+        ...process.env,
+        LANG: "en_US.UTF-8",
+        LANGUAGE: "en_US",
+        LC_ALL: "en_US.UTF-8",
+      },
+    },
+    locale: "en-US",
     screenshot: "only-on-failure",
     trace: "retain-on-failure",
     video: "retain-on-failure",
