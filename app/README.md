@@ -1,60 +1,71 @@
-# App
+<a href="https://chatbot.ai-sdk.dev/demo">
+  <img alt="Chatbot" src="app/(chat)/opengraph-image.png">
+  <h1 align="center">Chatbot</h1>
+</a>
 
-This folder will contain the application built during the course.
+<p align="center">
+    Chatbot (formerly AI Chatbot) is a free, open-source template built with Next.js and the AI SDK that helps you quickly build powerful chatbot applications.
+</p>
 
-## How to start
+<p align="center">
+  <a href="https://chatbot.ai-sdk.dev/docs"><strong>Read Docs</strong></a> ·
+  <a href="#features"><strong>Features</strong></a> ·
+  <a href="#model-providers"><strong>Model Providers</strong></a> ·
+  <a href="#deploy-your-own"><strong>Deploy Your Own</strong></a> ·
+  <a href="#running-locally"><strong>Running locally</strong></a>
+</p>
+<br/>
 
-The app is scaffolded live during the course through a structured process:
+## Features
 
-1. **Research** — use agents to research and validate the project idea
-2. **PRD** — generate a Product Requirements Document (`../docs/PRD.md`)
-3. **ADR** — generate Architecture Decision Records (`../docs/ADR/`) to choose the tech stack
-4. **Scaffold** — use the chosen boilerplate (`create-next-app`, AI SDK starter, Mastra, etc.)
-5. **Implement** — build features with agents using TDD
+- [Next.js](https://nextjs.org) App Router
+  - Advanced routing for seamless navigation and performance
+  - React Server Components (RSCs) and Server Actions for server-side rendering and increased performance
+- [AI SDK](https://ai-sdk.dev/docs/introduction)
+  - Unified API for generating text, structured objects, and tool calls with LLMs
+  - Hooks for building dynamic chat and generative user interfaces
+  - Supports OpenAI, Anthropic, Google, xAI, and other model providers via AI Gateway
+- [shadcn/ui](https://ui.shadcn.com)
+  - Styling with [Tailwind CSS](https://tailwindcss.com)
+  - Component primitives from [Radix UI](https://radix-ui.com) for accessibility and flexibility
+- Data Persistence
+  - [Neon Serverless Postgres](https://vercel.com/marketplace/neon) for saving chat history and user data
+  - [Vercel Blob](https://vercel.com/storage/blob) for efficient file storage
+- [Auth.js](https://authjs.dev)
+  - Simple and secure authentication
 
-## Checklist
+## Model Providers
 
-Use this checklist during scaffolding. Some items are provided by the boilerplate (e.g. `create-next-app` ships `tsconfig.json`, ESLint config). Others you add explicitly.
+This template uses the [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) to access multiple AI models through a unified interface. Models are configured in `lib/ai/models.ts` with per-model provider routing. Included models: Mistral, Moonshot, DeepSeek, OpenAI, and xAI.
 
-### Project setup
-- [ ] Choose framework (Next.js, Express+Vite, Mastra, other) — record in ADR
-- [ ] Initialize project (e.g. `npx create-next-app@latest` or equivalent)
-- [ ] TypeScript config (`tsconfig.json`)
-- [ ] Package manager chosen (npm / pnpm / bun)
+### AI Gateway Authentication
 
-### Code quality
-- [ ] ESLint config (`eslint.config.js`)
-- [ ] Prettier config (`.prettierrc`, `.prettierignore`)
-- [ ] `.editorconfig` (optional but recommended)
+**For Vercel deployments**: Authentication is handled automatically via OIDC tokens.
 
-### Testing
-- [ ] Unit/integration test runner (Vitest / Jest)
-- [ ] E2E test runner (Playwright)
-- [ ] Test setup file (e.g. `test-setup.ts` with Testing Library matchers)
+**For non-Vercel deployments**: You need to provide an AI Gateway API key by setting the `AI_GATEWAY_API_KEY` environment variable in your `.env.local` file.
 
-### Environment
-- [ ] `.env.example` with required env vars (API keys, ports)
-- [ ] `.env` created locally (gitignored)
-- [ ] `.gitignore` (node_modules, .env, build output, etc.)
+With the [AI SDK](https://ai-sdk.dev/docs/introduction), you can also switch to direct LLM providers like [OpenAI](https://openai.com), [Anthropic](https://anthropic.com), [Cohere](https://cohere.com/), and [many more](https://ai-sdk.dev/providers/ai-sdk-providers) with just a few lines of code.
 
-### AI integration
-- [ ] Vercel AI SDK (`ai` package) or equivalent
-- [ ] API route / endpoint for chat
-- [ ] Model configuration (provider, model name, API key from env)
+## Deploy Your Own
 
-### Design
-- [ ] Design tokens (`../assets/design-tokens.json`)
-- [ ] Tailwind CSS or equivalent
-- [ ] Logo and favicon (`../assets/`)
-- [ ] Design system doc (`../docs/design-guidelines.md`)
+You can deploy your own version of Chatbot to Vercel with one click:
 
-### Documentation
-- [ ] PRD (`../docs/PRD.md`)
-- [ ] ADRs (`../docs/ADR/`)
-- [ ] AGENTS.md in `app/` with stack-specific rules
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/templates/next.js/chatbot)
 
-## Notes
+## Running locally
 
-- Don't create config files manually if the boilerplate provides them — it leads to conflicts.
-- Let the agent research and recommend the right boilerplate based on the ADR decisions.
-- Keep this folder organized: separate routes, components, domain logic, and tests.
+You will need to use the environment variables [defined in `.env.example`](.env.example) to run Chatbot. It's recommended you use [Vercel Environment Variables](https://vercel.com/docs/projects/environment-variables) for this, but a `.env` file is all that is necessary.
+
+> Note: You should not commit your `.env` file or it will expose secrets that will allow others to control access to your various AI and authentication provider accounts.
+
+1. Install Vercel CLI: `npm i -g vercel`
+2. Link local instance with Vercel and GitHub accounts (creates `.vercel` directory): `vercel link`
+3. Download your environment variables: `vercel env pull`
+
+```bash
+pnpm install
+pnpm db:migrate # Setup database or apply latest database changes
+pnpm dev
+```
+
+Your app template should now be running on [localhost:3000](http://localhost:3000).
