@@ -33,3 +33,6 @@ playwright-report/
 /playwright/.cache/
 .playwright-cli/
 *.tsbuildinfo
+
+# QA screenshots and logs kept for review (never committed)
+/qa-artifacts/
