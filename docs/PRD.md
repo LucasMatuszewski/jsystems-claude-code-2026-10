@@ -129,7 +129,7 @@ Hardware Service Decision Copilot is an MVP web application in which a consumer 
 - AC-18: During processing the UI shows two sequential step labels: "Analizujemy zdjęcie…" while the image is analyzed and "Przygotowujemy decyzję…" while the decision is generated.
 - AC-19: Before analysis, the system reduces the photo so that its longer edge is at most 1568 px and the file sent for analysis does not exceed 1 MB; aspect ratio is preserved.
 - AC-20: For case type "Zwrot", the image is analyzed with return-specific instructions; for "Reklamacja", with complaint-specific instructions. The two instruction sets are distinct.
-- AC-21: The decision agent receives: all form fields, the purchase channel, the number of days from purchase date to the current date computed by the system, the structured image description and the full text of the policy matching the case type. It does not receive the other policy.
+- AC-21: The decision agent receives: all form fields, the purchase channel, the number of days from purchase date to the current date computed by the system, the structured image description and the full text of the policy matching the case type. It does not receive the other policy, with one exception: for case type "Zwrot" it also receives §7 (Bezpieczeństwo) of the Complaint Policy, and only that section, so the safety rule of AC-36 can be applied.
 - AC-22: If image analysis or decision generation returns an error, or the first token of the decision does not arrive within 60 seconds of submission, the system returns to the form with all fields and the photo preserved and shows "Nie udało się przeanalizować zgłoszenia. Spróbuj ponownie." with a "Spróbuj ponownie" button that resubmits the same data.
 - AC-23: Credentials for AI services are never sent to the browser.
 
@@ -146,7 +146,7 @@ Hardware Service Decision Copilot is an MVP web application in which a consumer 
 - AC-33: Complaint within 730 days where the image description reports damage matching §4 Complaint Policy with high confidence: the agent returns "Odrzucenie (wstępne)" or "Przekazanie do weryfikacji"; it never states that the customer caused the damage as a fact, only that the visible traces indicate it.
 - AC-34: Complaint within 730 days where the image description reports a defect consistent with §5 Complaint Policy and no §4 traces: the agent returns "Akceptacja (wstępna)" and states that repair or replacement is the first remedy (§3 ust. 1).
 - AC-35: When the image description reports that the photo is unreadable, shows no electronic equipment, or shows equipment inconsistent with the selected category, the agent returns "Potrzebne dodatkowe informacje", names the problem and instructs the customer to start a new case with a new photo.
-- AC-36: When the image description or reason mentions a swollen battery, smoke, sparking or burning smell, the first message includes the safety instruction from §7 Complaint Policy before the "Co dalej" section.
+- AC-36: For both case types, when the image description or reason mentions a swollen battery, smoke, sparking or burning smell, the first message includes the safety instruction from §7 Complaint Policy before the "Co dalej" section.
 - AC-37: The first message is streamed: text begins to appear before the full message is generated.
 
 ### Chat
@@ -244,7 +244,7 @@ Hardware Service Decision Copilot is an MVP web application in which a consumer 
 ### 9.2 Screen 2 — Chat
 - **Header**: logo, product name, "Nowe zgłoszenie" button.
 - **Case summary panel**: on wide screens a left sidebar; on narrow screens a collapsible section above the conversation, collapsed by default. Contents per AC-38, including the current decision label styled as in the decision block.
-- **Conversation area**: assistant bubbles aligned left with an "Asystent AI" label; customer bubbles aligned right. The first assistant bubble contains the decision block as a visually separated card at the top, followed by "Uzasadnienie", "Co dalej" and the disclaimer in smaller muted text.
+- **Conversation area**: assistant bubbles aligned left with an "Asystent AI" label; customer bubbles aligned right. The first assistant bubble starts with the one-sentence greeting, directly followed by the decision block as a visually separated card, then "Uzasadnienie", "Co dalej" and the disclaimer in smaller muted text (order per AC-24).
 - **Updated decision**: rendered as the same card style with the title "Zaktualizowana decyzja" and "poprzednio: <label>".
 - **Input bar**: fixed at the bottom; multi-line textarea, character counter shown after 1800 characters, "Wyślij" button which becomes "Zatrzymaj" during streaming. No attachment button.
 - **Loading state**: while waiting for the first token, a typing indicator bubble is shown.
@@ -399,14 +399,20 @@ The first message structure is fixed: greeting → decision block → "Uzasadnie
 - Purchase channel field added because the 14-day statutory return applies only to distance purchases.
 - The sample policies are written in Polish because they are customer-facing content cited by the agent; all other repository documentation is in English.
 
+### Decisions made during ADR review (2026-10-21)
+- Safety instruction (§7 Complaint Policy) applies to returns too; AC-21 and AC-36 updated accordingly.
+- The first message order is greeting → decision card → "Uzasadnienie" → "Co dalej" → disclaimer; §9.2 aligned with AC-24.
+- A delivery date stated in chat does not change the system-computed day count; borderline cases are escalated (see Assumptions).
+- No per-session cap on the number of chat messages in the MVP; the cost-control question stays open.
+
 ### Assumptions
 - The customer is addressed with the informal "Ty" form, as is common in Polish electronics e-commerce; switch to "Pan/Pani" if the shop's brand voice requires it.
-- The purchase date equals the delivery date. Borderline online returns (days 13–16) may be affected; the agent may ask the customer for the delivery date in the chat and treat a stated delivery date as new information.
+- The purchase date equals the delivery date. Borderline online returns (days 13–16) may be affected; the agent may ask the customer for the delivery date in the chat and treat a stated delivery date as new information. The agent never recalculates the day count from it (§11.3); when the stated date could change the applicable deadline, the agent sets "Przekazanie do weryfikacji" and explains that the employee verifies the delivery date.
 - Image analysis instructions and decision-agent instructions are product content maintained alongside the policies; their exact wording is an implementation artifact defined during the ADR/implementation phase, but must satisfy Section 11.
 
 ### Open questions
 - Exact privacy/data-processing notice wording for sending the photo and text to an external AI service, and whether explicit consent is required (legal).
-- Whether a per-session cap on the number of chat messages is needed to control AI costs.
+- Whether a per-session cap on the number of chat messages is needed to control AI costs (MVP ships without a cap).
 - Whether the shop wants an in-person channel (address, opening hours) in "Co dalej"; currently the agent refers generically to "sklep stacjonarny" and "adres do zwrotów podany w potwierdzeniu zamówienia".
 - Final legal review of both sample policies.
 
