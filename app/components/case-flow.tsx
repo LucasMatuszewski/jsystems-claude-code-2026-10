@@ -1,7 +1,11 @@
 "use client";
 
+import { FormScreen } from "@/components/case-form/form-screen";
 import { AppHeader } from "@/components/layout/app-header";
 import { CaseSessionProvider, useCaseSession } from "@/lib/session/context";
+
+// P4-05: replace noop with useChat start
+const noop = (): void => undefined;
 
 function CaseFlowScreens(): React.JSX.Element {
   const { state } = useCaseSession();
@@ -13,7 +17,9 @@ function CaseFlowScreens(): React.JSX.Element {
         {state.screen === "chat" ? (
           <div data-testid="chat-screen" />
         ) : (
-          <div data-screen={state.screen} data-testid="form-screen" />
+          <div data-screen={state.screen} data-testid="form-screen">
+            <FormScreen startChat={noop} />
+          </div>
         )}
       </main>
     </>
