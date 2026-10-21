@@ -107,43 +107,40 @@ export function isJpeg(bytes: Buffer): boolean {
   return bytes.length >= 3 && bytes.subarray(0, 3).equals(JPEG_MAGIC);
 }
 
-/** Reads width and height from the first SOF0/SOF2 marker of a JPEG. */
+const SOF_MARKERS = new Set([
+  0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf,
+]);
+
+/** Reads width and height from the first SOF marker of a JPEG. */
 export function jpegSize(bytes: Buffer): { width: number; height: number } {
   if (!isJpeg(bytes)) {
     throw new Error("not a JPEG (missing FF D8 FF)");
   }
-  let offset = 2;
-  while (offset < bytes.length) {
+  let offset = 2; // after FF D8
+  while (offset + 1 < bytes.length) {
     if (bytes.readUInt8(offset) !== 0xff) {
       throw new Error(`invalid JPEG marker at offset ${offset}`);
     }
-    let marker = bytes.readUInt8(offset + 1);
-    offset += 1;
-    // Fill bytes (FF FF ...) may precede a marker.
-    while (marker === 0xff) {
+    // Skip fill bytes (FF FF ...) preceding a marker.
+    while (bytes.readUInt8(offset + 1) === 0xff) {
       offset += 1;
-      marker = bytes.readUInt8(offset + 1);
     }
-    offset += 2;
-    if (
-      marker === 0xd8 ||
-      marker === 0x01 ||
-      (marker >= 0xd0 && marker <= 0xd7)
-    ) {
+    const marker = bytes.readUInt8(offset + 1);
+    // Standalone markers carry no length.
+    if (marker === 0x01 || (marker >= 0xd0 && marker <= 0xd8)) {
+      offset += 2;
       continue;
     }
     if (marker === 0xd9 || marker === 0xda) {
       break;
     }
-    const segmentLength = bytes.readUInt16BE(offset);
-    if (marker === 0xc0 || marker === 0xc2) {
-      // Segment layout: length (2), precision (1), height (2), width (2).
+    if (SOF_MARKERS.has(marker)) {
       return {
-        height: bytes.readUInt16BE(offset + 3),
-        width: bytes.readUInt16BE(offset + 5),
+        height: bytes.readUInt16BE(offset + 5),
+        width: bytes.readUInt16BE(offset + 7),
       };
     }
-    offset += segmentLength;
+    offset += 2 + bytes.readUInt16BE(offset + 2);
   }
-  throw new Error("JPEG SOF0/SOF2 marker not found");
+  throw new Error("JPEG SOF marker not found");
 }
