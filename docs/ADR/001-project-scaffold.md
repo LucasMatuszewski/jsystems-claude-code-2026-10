@@ -50,8 +50,8 @@ Each step ends with the check in the last column. Steps 1–2 produce one pristi
 
 | # | Step | Details | Check |
 |---|---|---|---|
-| 1 | Preconditions | Node ≥ 22 (VM: 24.22.0), npm available, `app/` contains only `README.md`, working tree has no uncommitted changes under `app/`. | `node -v`, `git status app/` |
-| 2 | Import template | Run `npx degit vercel/chatbot#c2f8235e1f3ea903ad8b7f61447c4f74164b5c58 app --force` from the repository root. This overwrites `app/README.md` (the course checklist stays in git history; its items are covered by this ADR). Commit as `Scaffold: Import vercel/chatbot template at c2f8235`. | `app/package.json` shows `"ai": "7.0.15"` |
+| 1 | Preconditions | Node ≥ 22 (VM: 24.22.0), npm available, `app/` contains only `README.md`, the working tree is clean, and `docs/PRD.md`, `docs/policies/`, `docs/ADR/`, `docs/design-guidelines.md` and `assets/` are tracked in git (worktrees and fresh clones depend on them; policies are read at runtime). | `node -v`, `git status`, `git ls-files docs assets` |
+| 2 | Import template | Run `npx degit vercel/chatbot#c2f8235e1f3ea903ad8b7f61447c4f74164b5c58 app --force` from the repository root. This overwrites `app/README.md` (the course checklist stays in git history; its items are covered by this ADR). Confirm `app/LICENSE` is Apache-2.0 (Vercel, Inc.); stop and ask the user if it is not. Commit as `Scaffold: Import vercel/chatbot template at c2f8235`. This vendor-import commit is a deliberate exception to the AGENTS.md rule "commit only after verification passes": it is not expected to build (it needs auth/DB services) and exists only so the stripping diff in step 14 is reviewable. | `app/package.json` shows `"ai": "7.0.15"`; `app/LICENSE` checked |
 | 3 | Remove files | Delete everything in §3.4 "Remove". | `git status` shows only deletions |
 | 4 | Switch to npm | Delete `pnpm-lock.yaml` and the `packageManager` field; replace scripts per §3.5. | `package.json` has no `pnpm` reference |
 | 5 | Dependencies | Uninstall the packages in §3.6 "Remove"; install/upgrade those in §3.6 "Add/upgrade" with npm. Generates `package-lock.json`. | `npm ls --depth=0` has no errors; TAC-001-03 |
@@ -159,8 +159,8 @@ Unit tests are colocated next to their source as `*.test.ts` / `*.test.tsx`.
 | `test` | `vitest run` | Unit + integration |
 | `test:watch` | `vitest` | TDD loop |
 | `test:contract` | `playwright test --project=contract` | Real HTTP contract tests |
-| `test:e2e` | `playwright test --project=chromium --project=firefox --project=webkit` | Real browser E2E |
-| `capture` | `playwright test --project=contract --grep @capture` | Refresh verbatim captures (ADR-005 §3.3) |
+| `test:e2e` | `playwright test --project=chromium --project=firefox --project=webkit` | Real browser E2E (Firefox and WebKit projects run only tests tagged `@smoke`, via `grep` in their project config) |
+| `capture` | `playwright test --config=playwright.capture.config.ts` | Refresh verbatim captures; the capture config starts its own server with `AI_CAPTURE_DIR` set (ADR-005 §3.3) |
 
 ### 3.6 Dependency changes
 
@@ -200,8 +200,7 @@ Unit tests are colocated next to their source as `*.test.ts` / `*.test.tsx`.
 
 | Artifact | Content |
 |---|---|
-| `app/.env.example` | `OPENROUTER_API_KEY=`, `LLM_MODEL=`, `VISION_MODEL=`, `POLICIES_DIR=`, `PORT=` with one-line comments |
-| `tests/fixtures/images/SOURCES.md` | One row per image: file name, scenario, origin (own photo or license-free source URL), license, date |
+| `app/.env.example` | `OPENROUTER_API_KEY=`, `LLM_MODEL=`, `VISION_MODEL=`, `POLICIES_DIR=`, `PORT=`, `AI_CAPTURE_DIR=` (commented "capture runs only") with one-line comments |
 | Scaffold commit message | Lists exact installed versions of `next`, `react`, `ai`, `@ai-sdk/react`, `@openrouter/ai-sdk-provider`, `zod`, `vitest`, `@playwright/test` |
 
 ---

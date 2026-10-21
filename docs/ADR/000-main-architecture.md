@@ -40,7 +40,7 @@ All links were read on 2026-10-21. Package versions were read from the npm regis
 | **OpenRouter Responses API** — [openrouter.ai/docs/api_reference/responses/overview](https://openrouter.ai/docs/api_reference/responses/overview) | `POST https://openrouter.ai/api/v1/responses`, OpenAI-Responses-compatible, explicitly stateless (`store: true` and `previous_response_id` are rejected with 400). | Being stateless, it gives no advantage over chat completions for this app. Calling it directly would bypass the AI SDK UI message stream, so `useChat`, tool parts, stop/regenerate and the AI Elements components would have to be re-implemented by hand. | **Rejected** for the MVP. |
 | **Chat SDK** — [chat-sdk.dev](https://chat-sdk.dev/) | Today the domain documents "a unified TypeScript SDK for building chat bots and agents across Slack, Microsoft Teams, Google Chat, Discord" (source `github.com/vercel/chat`). It is not a web chat template. | The PRD needs a browser form and chat, not a bot on messaging platforms. | **Rejected** (wrong product category). |
 | **Vercel Chatbot template** — [github.com/vercel/chatbot](https://github.com/vercel/chatbot) ("Chatbot (formerly AI Chatbot)"; the Next.js chat template earlier associated with the "Chat SDK" name) | Official, maintained Next.js 16 + AI SDK 7 + AI Elements + shadcn/ui + Streamdown + Playwright template. Also ships Auth.js, Postgres/Drizzle, Vercel Blob, Redis resumable streams, BotID, AI Gateway, artifacts/document editors. | Best available starting point for the chat framework (matching versions, AI Elements already wired to `useChat`, Playwright set up). Its persistence, auth, Vercel services and artifacts conflict with PRD §7 and must be removed. | **Chosen as the scaffold base**, pinned and stripped (ADR-001). |
-| **AI Elements** — [elements.ai-sdk.dev](https://elements.ai-sdk.dev) | shadcn/ui registry of chat components (`Conversation`, `Message`, `MessageResponse` on Streamdown, `PromptInput`, `Tool`, `Shimmer`) that consume `useChat` data directly. | Streaming markdown out of the box (AC-46), stick-to-bottom scrolling (AC-47), source code lives in the repo so x-kom tokens can be applied. | **Chosen** as the chat UI component library (ADR-004). |
+| **AI Elements** — [elements.ai-sdk.dev](https://elements.ai-sdk.dev) | shadcn/ui registry of chat components (`Conversation`, `Message`, `MessageResponse` on Streamdown, `PromptInput`, `Shimmer`; the registry's `Tool` component is not used because the decision card is custom) that consume `useChat` data directly. | Streaming markdown out of the box (AC-46), stick-to-bottom scrolling (AC-47), source code lives in the repo so x-kom tokens can be applied. | **Chosen** as the chat UI component library (ADR-004). |
 | **assistant-ui** — `@assistant-ui/react@0.15.x`, `@assistant-ui/react-ai-sdk@1.4.x` | Chat UI framework with its own runtime (`useChatRuntime`, `AssistantChatTransport`) over AI SDK 7. | Works, but adds a second runtime and message model over `useChat`; harder to control the custom first-message flow and tool-part rendering. | **Rejected** in favour of AI Elements. |
 
 ---
@@ -53,7 +53,7 @@ All links were read on 2026-10-21. Package versions were read from the npm regis
 | OpenRouter AI SDK provider | `/openrouterteam/ai-sdk-provider` (indexed docs may lag; README at https://github.com/OpenRouterTeam/ai-sdk-provider is authoritative for 3.x) | `createOpenRouter`, model settings (`provider`, `usage`, `plugins`, `structuredOutputs`) |
 | OpenRouter platform | `/websites/openrouter_ai`, https://openrouter.ai/docs | Image inputs, structured outputs, provider routing, ZDR, models API |
 | Next.js | `/vercel/next.js` | App Router, route handlers, `create-next-app` flags (reference), Turbopack |
-| AI Elements | `/vercel/ai-elements` | Conversation, Message, MessageResponse, PromptInput, Tool, Shimmer |
+| AI Elements | `/vercel/ai-elements` | Conversation, Message, MessageResponse, PromptInput, Shimmer |
 | shadcn/ui | `/shadcn-ui/ui` | Base UI primitives, theming via CSS variables (Tailwind 4) |
 | Zod | `/colinhacks/zod` | Shared request/response/form/tool schemas (zod 4) |
 | Vitest | `/vitest-dev/vitest` | Unit and integration tests |
@@ -77,8 +77,8 @@ Single Next.js App Router application (monolith) acting as both the frontend (on
 │   ├── app/              App Router: layout, single page, api/analyze, api/chat
 │   ├── components/       ai-elements/ (vendored), ui/ (shadcn), case-form/, chat/, layout/
 │   ├── lib/              case/ (schemas, days, labels, texts), image/, ai/ (server-only), session/
-│   ├── public/           logo, favicon, font (copied from /assets)
-│   └── tests/            integration/, e2e/, fixtures/ (images, captures)
+│   ├── public/           logo (copied from /assets); favicon and font live in app/app/
+│   └── tests/            integration/, contract/, e2e/, fixtures/captures/
 ├── assets/               brand source files (read-only reference)
 ├── docs/                 PRD, ADR, design guidelines, policies (runtime input for the agent)
 └── .env.example          root example; the app uses app/.env.local
@@ -171,8 +171,8 @@ Full contracts in ADR-003. Summary:
 
 | Endpoint | Input | Output | Errors | Notes |
 |---|---|---|---|---|
-| `POST /api/analyze` | `multipart/form-data`: the 6 form fields + `photo` | `200 application/json` `{ caseContext, imageAnalysis }` | `400 VALIDATION_ERROR` (with field issues), `413 PHOTO_TOO_LARGE`, `415 UNSUPPORTED_IMAGE_TYPE`, `502 ANALYSIS_FAILED`, `504 ANALYSIS_TIMEOUT` | Non-streaming; server timeout 50 s; `maxDuration` 60 s |
-| `POST /api/chat` | `application/json` `{ id, messages: CaseUIMessage[], caseContext, imageAnalysis }` | `200` UI message stream (SSE, AI SDK protocol) | `400 VALIDATION_ERROR`, `422 CONVERSATION_LIMIT`; in-stream `error` chunk for model failures and first-chunk timeout | `maxDuration` 120 s; `timeout.firstChunkMs` 60 000 |
+| `POST /api/analyze` | `multipart/form-data`: the 6 form fields + `photo` | `200 application/json` `{ caseContext, imageAnalysis }` | `400 VALIDATION_ERROR` (with field issues), `400 PHOTO_REQUIRED`, `413 PHOTO_TOO_LARGE`, `415 UNSUPPORTED_CONTENT_TYPE`, `415 UNSUPPORTED_IMAGE_TYPE`, `500 CONFIGURATION_ERROR`, `502 ANALYSIS_FAILED`, `504 ANALYSIS_TIMEOUT` | Non-streaming; server timeout 50 s; `maxDuration` 60 s |
+| `POST /api/chat` | `application/json` `{ id, messages: CaseUIMessage[], caseContext, imageAnalysis }` | `200` UI message stream (SSE, AI SDK protocol) | `400 VALIDATION_ERROR`, `422 CONVERSATION_LIMIT`, `500 CONFIGURATION_ERROR`; in-stream `error` chunk (`DECISION_FAILED`, `DECISION_TIMEOUT`) | `maxDuration` 120 s; `timeout.firstChunkMs` 60 000 |
 
 Error body for non-stream errors: `{ "error": { "code": string, "message": string (Polish, user-safe), "fields"?: Record<string, string> } }`.
 
@@ -180,7 +180,7 @@ Error body for non-stream errors: `{ "error": { "code": string, "message": strin
 
 ## 7. Environment Variables
 
-Stored in `app/.env.local` (gitignored). `app/.env.example` lists the same names with empty values; the root `.env.example` gains the `VISION_MODEL` line.
+Stored in `app/.env.local` (gitignored). `app/.env.example` lists `OPENROUTER_API_KEY`, `LLM_MODEL`, `VISION_MODEL`, `POLICIES_DIR`, `PORT` and `AI_CAPTURE_DIR` (commented as capture-only) with empty values; `ANTHROPIC_API_KEY` is not listed there. The root `.env.example` gains the `VISION_MODEL` line.
 
 | Variable | Purpose | Required | Example value |
 |---|---|---|---|
@@ -192,7 +192,7 @@ Stored in `app/.env.local` (gitignored). `app/.env.example` lists the same names
 | `AI_CAPTURE_DIR` | Enables the recording middleware that saves verbatim provider responses; set only by `npm run capture` (ADR-005 §3.3) | No (unset in normal runs and E2E) | `tests/fixtures/captures/2026-10-21` |
 | `ANTHROPIC_API_KEY` | Not used by this application (present in root `.env.example` for the course) | No | empty |
 
-Startup validation: the first request to either route validates env with Zod and returns `500 CONFIGURATION_ERROR` (logged with the missing variable name, never its value) if `OPENROUTER_API_KEY` or `LLM_MODEL` is missing. No model ID is hard-coded; ADR-002 §6.3 defines the model-selection check.
+Startup validation: the first request to either route validates env with Zod and returns `500 CONFIGURATION_ERROR` (logged with the missing variable name, never its value) if `OPENROUTER_API_KEY` or `LLM_MODEL` is missing. No model ID is hard-coded; ADR-002 decision D-AI5 defines the model-selection check.
 
 ---
 
@@ -300,7 +300,7 @@ Startup validation: the first request to either route validates env with Zod and
 **Consequences:**
 - (+) Current versions and working AI Elements chat from day one.
 - (-) Large removal step; mistakes there can leave dead code or broken imports (mitigated by the explicit keep/remove list and `tsc`/build checks).
-**Review trigger:** If stripping takes longer than building from the AI Elements recipe would, or the template's license terms are unsuitable (license file must be checked at import, ADR-001 §6).
+**Review trigger:** If stripping takes longer than building from the AI Elements recipe would, or the template's license terms are unsuitable (license file is checked at import, ADR-001 §3.2 step 2).
 
 ---
 
