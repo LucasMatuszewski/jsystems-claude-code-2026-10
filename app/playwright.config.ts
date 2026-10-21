@@ -63,17 +63,20 @@ export default defineConfig({
     trace: "retain-on-failure",
     video: "retain-on-failure",
   },
-  // The 3200 server starts after the first entry's build has finished.
+  // Playwright starts webServer entries in parallel, so the 3200 server waits
+  // until the 3000 entry (build + start) responds before it starts itself.
   webServer: [
     {
       command: "npm run build && npm run start",
       env: { AI_CAPTURE_DIR: "", PORT: "3000" },
       reuseExistingServer: true,
+      stderr: "pipe",
+      stdout: "pipe",
       timeout: 300_000,
       url: "http://localhost:3000",
     },
     {
-      command: "npm run start -- -p 3200",
+      command: `node -e "const w=()=>fetch('http://localhost:3000/').then(()=>process.exit(0),()=>setTimeout(w,1000));w()" && npm run start -- -p 3200`,
       env: {
         AI_CAPTURE_DIR: "",
         LLM_MODEL: "invalid/model-does-not-exist",
@@ -81,7 +84,9 @@ export default defineConfig({
         VISION_MODEL: "invalid/model-does-not-exist",
       },
       reuseExistingServer: false,
-      timeout: 120_000,
+      stderr: "pipe",
+      stdout: "pipe",
+      timeout: 420_000,
       url: "http://localhost:3200",
     },
   ],
