@@ -146,9 +146,9 @@ Normalized form fields (without photo) plus `daysSincePurchase` (integer ≥ 0, 
 
 ### ImageAnalysis (output of the image analyst)
 
-Discriminated union on `variant` (`return` \| `complaint`). Common fields per PRD §11.2: `imageUsable` (`yes`/`no`) + `unusableReason` (nullable enum: `blurry`, `too_dark`, `device_not_visible`, `packaging_only`, `other`), `equipmentVisible` (string), `matchesCategory` and `matchesModel` (`yes`/`no`/`uncertain`), `observations` (array of `{ component, location, description }`), `confidence` (`high`/`medium`/`low`).
-Return variant adds `signsOfUse` (array of `{ type, location }`), `protectiveFilms` (`present`/`absent`/`not_visible`), `packagingVisible`, `accessoriesVisible` (booleans), `resaleableAsNew` (`yes`/`no`/`uncertain`) + `resaleableReasons` (string array).
-Complaint variant adds `damageVisible` (`yes`/`no`/`uncertain`), `damages` (array of `{ type, location, extent }`), `externalCauseTraces` (string array), `manufacturingDefectTraces` (string array), `likelyCause` (`manufacturing_defect`/`user_caused`/`normal_wear`/`undetermined`) + `likelyCauseRationale`, `safetyHazards` (array of `swollen_battery`/`burn_marks`/`other`).
+Discriminated union on `variant` (`return` \| `complaint`). Common fields per PRD §11.2: `imageUsable` (`yes`/`no`) + `unusableReason` (nullable enum: `blurry`, `too_dark`, `device_not_visible`, `packaging_only`, `other`), `equipmentVisible` (string), `matchesCategory` and `matchesModel` (`yes`/`no`/`uncertain`), `observations` (array of `{ component, location, description }`), `confidence` (`high`/`medium`/`low`), `safetyHazards` (array of `swollen_battery`/`burn_marks`/`other`).
+Return variant adds `signsOfUse` (array of `{ type, location }`), `protectiveFilms` (`present`/`absent`/`not_visible`), `seals` (`intact`/`broken`/`not_visible`), `packagingVisible`, `accessoriesVisible` (booleans), `resaleableAsNew` (`yes`/`no`/`uncertain`) + `resaleableReasons` (string array).
+Complaint variant adds `damageVisible` (`yes`/`no`/`uncertain`), `damages` (array of `{ type, location, extent }`), `externalCauseTraces` (string array), `manufacturingDefectTraces` (string array), `likelyCause` (`manufacturing_defect`/`user_caused`/`normal_wear`/`undetermined`) + `likelyCauseRationale`.
 All fields are always present (nullable where needed) because strict structured outputs require every property to be listed as required. Full schema in ADR-002 §4.1.
 
 ### DecisionLabel
@@ -562,4 +562,4 @@ TDD per `AGENTS.md`: tests first, observed failing for the right reason, then mi
 - TAC-05: Every `/api/chat` first turn contains exactly one `set_decision` tool part before any text part, in 100% of real contract-test runs.
 - TAC-06: The first UI message stream chunk carrying content arrives in < 60 s from submit in every E2E run; the measured p95 is reported.
 - TAC-07: The repository contains no dependency on `next-auth`, `drizzle-orm`, `postgres`, `@vercel/blob`, `redis`, `resumable-stream`, `botid` or `@ai-sdk/gateway` after scaffolding.
-- TAC-08: Only the policy matching `caseType` appears in the decision agent instructions (unit test on the builder; AC-21).
+- TAC-08: Only the policy matching `caseType` appears in the decision agent instructions, plus — for returns only — the §7 safety section of the complaint policy (unit test on the builder; AC-21, ADR-002 D-AI7).

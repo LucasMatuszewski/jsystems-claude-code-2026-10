@@ -126,6 +126,7 @@ After the parts of the **first** assistant message, once that message is no long
 - **Reason**: `maxLength = 2000`, counter "N / 2000" always visible (AC-09).
 - **Processing** (AC-17/18): all controls disabled (`fieldset disabled`); `ProcessingSteps` replaces the submit button, lists "Analizujemy zdjęcie…" and "Przygotowujemy decyzję…", highlights the active one, `aria-live="polite"`.
 - **Chat input** (AC-40): trimmed length 1–2000; send disabled when empty; Enter sends, Shift+Enter newline; counter "N / 2000" shown when length > 1800; no attachment control (AC-44).
+- **Case summary** (AC-38): case type, purchase channel, category, model name, purchase date, days since purchase (from `caseContext.daysSincePurchase`), reason or "—" when empty, photo thumbnail, and the current decision label styled as in the decision card (empty placeholder until the first decision is recorded).
 - **Auto-scroll** (AC-47): provided by `Conversation` (stick-to-bottom; stops when the user scrolls up; `ConversationScrollButton` returns).
 - **Leave-page** (AC-49): `beforeunload` listener registered only while `screen = chat`.
 - **New case** (AC-50): `AlertDialog` with title "Rozpocząć nowe zgłoszenie?", description "Obecna rozmowa zostanie utracona.", buttons "Anuluj" and "Rozpocznij nowe"; confirm → `stop()` then `RESET`.
@@ -179,7 +180,7 @@ All controls reachable by Tab in visual order; tiles and radios operable with ar
 | `FieldErrors` | partial map field → Polish message; plus `photo` |
 | `CaseMessageMetadata` | `{ kind: 'case-submission' \| 'follow-up' }` |
 | `DecisionView` | `{ label, previousLabel, greeting, changeReason, isUpdate }` derived from a tool part |
-| `UiTexts` (`lib/case/texts.ts`) | Every Polish string used by the UI, including PRD-verbatim ones (AC-05/06/07/11/12/14/16/22/28/50) |
+| `UiTexts` (`lib/case/texts.ts`) | Every Polish string used by the UI, including PRD-verbatim ones (AC-05/06/07/11/12/14/16/22/28/50) and PRD §9 copy: product name "Asystent zwrotów i reklamacji", tile explanations "Chcę oddać sprawny sprzęt" / "Sprzęt ma wadę lub usterkę", placeholder "np. Samsung Galaxy S24", "Wybierz zdjęcie", "Usuń", "Wyślij zgłoszenie", "Spróbuj ponownie", "Asystent AI", "Wyślij", "Zatrzymaj", "Nowe zgłoszenie", "Nie wysłano", "Ponów", "Zaktualizowana decyzja", "poprzednio:", and the format/size hint "JPG, PNG lub WebP, maks. 10 MB" (product copy) |
 
 ---
 
