@@ -22,16 +22,18 @@ Agent you should always use to delegate work to based on specialization:
 "be-developer"
 "qa-engineer"
 
-If these agents are not defined, you should create the definition files for these subagents. Make them very short and concise. Define only the role; don't make them too verbose. Example: .github\agents\CodeReview.agent.md
+If these agents are not defined, you should create the definition files for these subagents. Make them very short and concise. Define only the role; don't make them too verbose.
 
 Files you should use to create detailed plan of implementation of our PoC application:
 - @docs/PRD-Product-Requirements-Document.md
 - @docs/ADR
 - @docs/design-guidelines.md
 
-You should provide exact context needed to every task for every subagent.
-But provide only required information for this specific task.
-So don't blow the context window with everything about the application.
-You should only provide to the specialized subagents information needed to complete the task at hand.
+Agent Orchestrator who will use this plan should provide exact context needed to every task for every subagent.
+You shouldn't add to this file with a plan all the details that are in the ADR and PRD. These ADR and PRD files are the source of truth, and the plan should refer to them so that it contains links to the relevant sections of the ADR and PRD. That way, the agent doesn't have to have all this information immediately visible in one file if it doesn't need it.
+On the other hand, the agent delegating to subagents should write the prompt for each subagent in a temporary file containing all the details, so the subagent does not have to look at other documents and already has everything needed to perform the task.
+The prompt should manage this agent in such a way that it doesn't have to think about what decisions to make, but should guide it step by step on exactly how to perform this task, because we will use smaller models for these subagents to perform these tasks. I plan to use the Haiku model here.
+When delegating to subagents, I want the Agent Orchestrator to decide which subagent and which model controlling it will be best for each task. Be defoult use the Haiku model, which will be much cheaper for writing code, running tests, and checking functionality. However, remember that Orchestrator Agent have to make all decisions as a wise model. Orchestrator agent will manage this process. The orchestrator should make all decisions and be responsible for what the other agents do. Smaller agents, like Haiku subagents, should receive all instructions from you and the main agent. The main agent should manage this process and check the quality of their performance.
+But provide only required information for this specific task. So don't blow the context window with everything about the application. You should only provide to the specialized subagents information needed to complete the task at hand.
 
 If anything is unclear, you should ask minimum 5 questions to make sure that you understand everything correct and that you don't have any doubts about what you should do and how this process should work.
