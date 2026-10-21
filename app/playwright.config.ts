@@ -6,6 +6,13 @@ try {
   /* .env is optional for typecheck */
 }
 
+// Empty optional variables in .env must not override defaults (e.g. PORT=).
+for (const name of ["PORT", "VISION_MODEL", "POLICIES_DIR", "AI_CAPTURE_DIR"]) {
+  if (process.env[name] === "") {
+    delete process.env[name];
+  }
+}
+
 export default defineConfig({
   expect: { timeout: 90_000 },
   fullyParallel: false,
@@ -60,7 +67,7 @@ export default defineConfig({
   webServer: [
     {
       command: "npm run build && npm run start",
-      env: { AI_CAPTURE_DIR: "" },
+      env: { AI_CAPTURE_DIR: "", PORT: "3000" },
       reuseExistingServer: true,
       timeout: 300_000,
       url: "http://localhost:3000",
@@ -70,6 +77,7 @@ export default defineConfig({
       env: {
         AI_CAPTURE_DIR: "",
         LLM_MODEL: "invalid/model-does-not-exist",
+        PORT: "3200",
         VISION_MODEL: "invalid/model-does-not-exist",
       },
       reuseExistingServer: false,
