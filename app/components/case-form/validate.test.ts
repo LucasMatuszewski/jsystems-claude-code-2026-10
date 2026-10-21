@@ -57,6 +57,16 @@ describe("validateCaseForm", () => {
     });
   });
 
+  it("reports the complaint reason error alongside other empty fields", () => {
+    const errors = validateCaseForm(
+      { ...EMPTY, caseType: "complaint", reason: "Uszkodzony" },
+      false
+    );
+    expect(errors.reason).toBe(texts.validation.reasonComplaintMin);
+    expect(errors.category).toBe(texts.validation.categoryRequired);
+    expect(errors.photo).toBe(texts.validation.photoRequired);
+  });
+
   it("rejects a purchase date in the future", () => {
     expect(
       validateCaseForm({ ...VALID, purchaseDate: "2999-01-01" }, true)

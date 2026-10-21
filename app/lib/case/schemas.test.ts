@@ -269,6 +269,20 @@ describe("caseFormSchema", () => {
       expect(issuePaths(result)).toContain("reason");
     });
 
+    it("reports the complaint reason error alongside other field errors", () => {
+      const result = caseFormSchema.safeParse({
+        ...baseInput,
+        category: null,
+        modelName: "",
+        reason: "Uszkodzony",
+      });
+      expect(toFieldErrors(zodErrorOf(result))).toEqual({
+        category: "Wybierz kategorię sprzętu",
+        modelName: "Podaj nazwę lub model sprzętu (min. 2 znaki)",
+        reason: "Opisz problem (min. 20 znaków)",
+      });
+    });
+
     it("accepts exactly 20 characters for a complaint", () => {
       const result = caseFormSchema.safeParse({
         ...baseInput,

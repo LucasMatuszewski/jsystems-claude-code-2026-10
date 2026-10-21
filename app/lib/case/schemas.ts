@@ -71,7 +71,11 @@ export const caseFormBaseSchema = z.object({
 
 type ComplaintRuleInput = { caseType: CaseType; reason: unknown };
 
-/** Complaints need at least 20 trimmed characters in reason. */
+/**
+ * Complaints need at least 20 trimmed characters in reason.
+ * `when` makes Zod run this even when other fields already have issues, so
+ * every invalid field reports its error on one submit (AC-15).
+ */
 function complaintReasonRule(
   value: ComplaintRuleInput,
   ctx: z.RefinementCtx
@@ -88,8 +92,22 @@ function complaintReasonRule(
   }
 }
 
-export const caseFormSchema =
-  caseFormBaseSchema.superRefine(complaintReasonRule);
+const complaintReasonParams = {
+  when: (payload: { value: unknown }) => {
+    const value = payload.value as Partial<ComplaintRuleInput> | null;
+    return (
+      typeof value === "object" &&
+      value !== null &&
+      typeof value.caseType === "string" &&
+      typeof value.reason === "string"
+    );
+  },
+};
+
+export const caseFormSchema = caseFormBaseSchema.superRefine(
+  complaintReasonRule,
+  complaintReasonParams
+);
 export type CaseFormInput = z.input<typeof caseFormSchema>;
 export type CaseForm = z.output<typeof caseFormSchema>;
 export type CaseFormField = keyof CaseForm;
@@ -126,7 +144,7 @@ export const caseContextSchema = caseFormBaseSchema
     assessmentDate: isoDateSchema,
     daysSincePurchase: z.number().int().min(0),
   })
-  .superRefine(complaintReasonRule);
+  .superRefine(complaintReasonRule, complaintReasonParams);
 export type CaseContext = z.output<typeof caseContextSchema>;
 
 // ---------------------------------------------------------------------------
