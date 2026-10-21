@@ -193,7 +193,7 @@ All controls reachable by Tab in visual order; tiles and radios operable with ar
 | `ChatScreen ↔ useChat` | `messages`, `status`, `error`, `sendMessage`, `regenerate`, `stop` |
 | `DecisionCard` props | `DecisionView` |
 | `CaseSummary` props | `caseContext`, `reducedPhotoUrl`, `originalPhotoUrl` (overlay), `currentLabel` |
-| Error codes → texts | Submission (form screen): `ANALYSIS_*`, `DECISION_*`, `VALIDATION_ERROR`, `PHOTO_REQUIRED`, `UNSUPPORTED_IMAGE_TYPE`, `PHOTO_TOO_LARGE`, `CONFIGURATION_ERROR`, network failure → AC-22 banner. Follow-up (chat): `DECISION_*`, `VALIDATION_ERROR`, `CONFIGURATION_ERROR`, network failure → "Nie wysłano" + "Ponów"; `CONVERSATION_LIMIT` → non-retryable notice with the ADR-003 §4.5 text, input disabled, pointing to "Nowe zgłoszenie" (no "Ponów"). For HTTP errors the `useChat` transport error carries the response body; the client parses `error.code` from it and falls back to "network failure" when it cannot. |
+| Error codes → texts | Submission (form screen): `ANALYSIS_*`, `DECISION_*`, `VALIDATION_ERROR`, `PHOTO_REQUIRED`, `UNSUPPORTED_IMAGE_TYPE`, `PHOTO_TOO_LARGE`, `CONFIGURATION_ERROR`, network failure → AC-22 banner. Follow-up (chat): `DECISION_*`, `VALIDATION_ERROR`, `CONFIGURATION_ERROR`, network failure → "Nie wysłano" + "Ponów"; `REQUEST_TOO_LARGE` → non-retryable notice with the ADR-003 §4.5 text, input disabled, pointing to "Nowe zgłoszenie" (no "Ponów"). For HTTP errors the `useChat` transport error carries the response body; the client parses `error.code` from it and falls back to "network failure" when it cannot. |
 
 ---
 
@@ -381,7 +381,7 @@ sequenceDiagram
 | Processing state | Unit | pending analyze | controls disabled; step 1 active; then step 2 (AC-17/18) | — |
 | First-turn failure | Unit (mock transport) | analyze 502 / stream error / fake timers 60 s | back to form, values + photo kept, banner text AC-22, retry re-submits | stream starting with `step-start` only does not count as first content |
 | First-turn failure after switch | Unit (mock transport from capture) | error after tool part; error after `step-start` only; stop during first message | recorded decision → "Odpowiedź została przerwana." + "Ponów" (`regenerate`); no recorded decision → back to form with AC-22 banner | disclaimer absent until a recorded decision exists |
-| Conversation limit | Unit | follow-up returns 422 `CONVERSATION_LIMIT` | non-retryable notice, no "Ponów", input disabled | — |
+| Request too large | Unit | follow-up returns 413 `REQUEST_TOO_LARGE` | non-retryable notice, no "Ponów", input disabled | — |
 | Decision card rendering | Unit | message fixtures derived from real captures for each label | Correct title, label text, icon, style class; greeting before card | `recorded=false` hidden; `input-streaming` skeleton |
 | Updated decision | Unit | follow-up fixture with `previousLabel` | "Zaktualizowana decyzja", "poprzednio: …", reminder; summary label updated (AC-43) | — |
 | Disclaimer | Unit | first assistant message finished | Exact AC-28 text once | not rendered on later messages |

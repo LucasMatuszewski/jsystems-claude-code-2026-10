@@ -172,7 +172,7 @@ Full contracts in ADR-003. Summary:
 | Endpoint | Input | Output | Errors | Notes |
 |---|---|---|---|---|
 | `POST /api/analyze` | `multipart/form-data`: the 6 form fields + `photo` | `200 application/json` `{ caseContext, imageAnalysis }` | `400 VALIDATION_ERROR` (with field issues), `400 PHOTO_REQUIRED`, `413 PHOTO_TOO_LARGE`, `415 UNSUPPORTED_CONTENT_TYPE`, `415 UNSUPPORTED_IMAGE_TYPE`, `500 CONFIGURATION_ERROR`, `502 ANALYSIS_FAILED`, `504 ANALYSIS_TIMEOUT` | Non-streaming; server timeout 50 s; `maxDuration` 60 s |
-| `POST /api/chat` | `application/json` `{ id, messages: CaseUIMessage[], caseContext, imageAnalysis }` | `200` UI message stream (SSE, AI SDK protocol) | `400 VALIDATION_ERROR`, `422 CONVERSATION_LIMIT`, `500 CONFIGURATION_ERROR`; in-stream `error` chunk (`DECISION_FAILED`, `DECISION_TIMEOUT`) | `maxDuration` 120 s; `timeout.firstChunkMs` 60 000 |
+| `POST /api/chat` | `application/json` `{ id, messages: CaseUIMessage[], caseContext, imageAnalysis }` | `200` UI message stream (SSE, AI SDK protocol) | `400 VALIDATION_ERROR`, `413 REQUEST_TOO_LARGE`, `500 CONFIGURATION_ERROR`; in-stream `error` chunk (`DECISION_FAILED`, `DECISION_TIMEOUT`) | `maxDuration` 120 s; `timeout.firstChunkMs` 60 000 |
 
 Error body for non-stream errors: `{ "error": { "code": string, "message": string (Polish, user-safe), "fields"?: Record<string, string> } }`.
 

@@ -214,7 +214,7 @@ See §3.4. `DecisionLabel` enum values: `accepted`, `rejected`, `needs_info`, `e
 **Consequences:**
 - (+) Deterministic order; the first content chunk (tool-input delta) arrives early.
 - (-) Greeting is not a text part; the UI must render it from the tool input.
-**PRD tension resolved:** PRD §9.2 places the decision card "at the top" of the first bubble, while AC-24 requires greeting → decision block → sections. AC-24 is the testable criterion and wins: the card follows the one-sentence greeting directly. Proposed PRD amendment to §9.2: "the decision card directly after the greeting".
+**PRD tension resolved:** PRD §9.2 places the decision card "at the top" of the first bubble, while AC-24 requires greeting → decision block → sections. AC-24 is the testable criterion and wins: the card follows the one-sentence greeting directly. PRD §9.2 was amended accordingly on 2026-10-21.
 **Review trigger:** If AI Elements adds a native ordered "tool + text" pattern that makes this unnecessary.
 
 ### D-AI4 Policies read from `docs/policies` at runtime
@@ -255,7 +255,7 @@ See §3.4. `DecisionLabel` enum values: `accepted`, `rejected`, `needs_info`, `e
 **Review trigger:** Resolution of PRD open question on privacy notice/consent.
 
 ### D-AI7 Safety instruction for both case types
-**Status:** Proposed (needs product-owner confirmation and a PRD clarification)
+**Status:** Accepted (confirmed by the product owner, 2026-10-21)
 **Date:** 2026-10-21
 **Context:** AC-36 requires the safety instruction from §7 of the Complaint Policy whenever a hazard is indicated, regardless of case type, while AC-21 forbids passing the other policy to the agent. A return with a swollen battery would otherwise get no safety text.
 **Decision:** `safetyHazards` is a common analyst field. For `return` cases the instructions include only the §7 section of the complaint policy, extracted at runtime by heading, inside `<safety_rules>`. The rest of the complaint policy is never loaded for returns.
@@ -264,8 +264,8 @@ See §3.4. `DecisionLabel` enum values: `accepted`, `rejected`, `needs_info`, `e
 - Duplicate the §7 text in code: two sources of truth.
 **Consequences:**
 - (+) Safety guidance for every case; single source of truth.
-- (-) Deviates from a literal reading of AC-21. Proposed PRD amendment to AC-21: "It does not receive the other policy, except §7 (Bezpieczeństwo) of the Complaint Policy, which is always available."
-**Review trigger:** Product-owner decision on the AC-21 amendment.
+- (-) The return prompt carries one section of the complaint policy; PRD AC-21 and AC-36 were amended to state this exception.
+**Review trigger:** Changes to §7 of the complaint policy or a separate safety policy document.
 
 ### D-AI8 Delivery date stated in chat
 **Status:** Accepted

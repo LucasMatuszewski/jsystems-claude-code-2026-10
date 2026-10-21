@@ -68,7 +68,7 @@ Messages not given verbatim by the PRD ("Wybierz…", "Podaj datę zakupu") are 
 | Field | Rule |
 |---|---|
 | `id` | string 1–100 (chat ID from `useChat`) |
-| `messages` | non-empty array of `CaseUIMessage` (the 60-message cap is checked before schema validation, §5.2); validated with the AI SDK UI message validator using `metadataSchema` (`kind` enum) and the `set_decision` history schema |
+| `messages` | non-empty array of `CaseUIMessage` (no product limit on the count, D-API4); validated with the AI SDK UI message validator using `metadataSchema` (`kind` enum) and the `set_decision` history schema |
 | `caseContext` | `caseContextSchema` |
 | `imageAnalysis` | `imageAnalysisSchema`, `variant` must equal `caseContext.caseType` |
 
@@ -85,7 +85,7 @@ Additional rules: the last message has role `user`; every user text part trimmed
 | `UNSUPPORTED_IMAGE_TYPE` | 415 | "Dozwolone formaty: JPG, PNG, WebP" (AC-11) |
 | `PHOTO_TOO_LARGE` | 413 | "Zdjęcie po zmniejszeniu przekracza 1 MB." |
 | `UNSUPPORTED_CONTENT_TYPE` | 415 | "Nieobsługiwany format żądania." |
-| `CONVERSATION_LIMIT` | 422 | "Osiągnięto limit długości rozmowy. Rozpocznij nowe zgłoszenie." |
+| `REQUEST_TOO_LARGE` | 413 | "Rozmowa jest zbyt długa, aby ją kontynuować. Rozpocznij nowe zgłoszenie." |
 | `ANALYSIS_FAILED` | 502 | "Nie udało się przeanalizować zgłoszenia. Spróbuj ponownie." (AC-22) |
 | `ANALYSIS_TIMEOUT` | 504 | same as above |
 | `CONFIGURATION_ERROR` | 500 | "Usługa jest chwilowo niedostępna." |
@@ -114,13 +114,12 @@ In-stream errors (`/api/chat`) carry the code string only (`DECISION_FAILED`, `D
 ### 5.2 `POST /api/chat`
 
 - **Runtime**: `nodejs`; `maxDuration = 120`.
-- **Request**: `Content-Type: application/json`; body `ChatRequest` (§4.4). Max body size enforced by checking `Content-Length` ≤ 512 KB (a 60-message conversation with 2000-char messages and the analysis fits well below).
+- **Request**: `Content-Type: application/json`; body `ChatRequest` (§4.4). Max body size enforced by checking `Content-Length` ≤ 2 MB as a technical safeguard against abuse, not a product limit (≈ 1 000 messages of 2 000 characters would be needed to reach it).
 - **Processing order**:
   1. Parse JSON → 400 on failure.
-  2. If `messages` is an array with more than 60 items → 422 `CONVERSATION_LIMIT` (checked first, so the limit is reported even when other fields are also invalid).
-  3. Validate with `chatRequestSchema` and the UI message validator → 400 `VALIDATION_ERROR`.
-  4. Recompute `daysSincePurchase` and `assessmentDate` from `caseContext.purchaseDate` (client values ignored, D-07).
-  5. `streamDecisionTurn` with `request.signal`.
+  2. Validate with `chatRequestSchema` and the UI message validator → 400 `VALIDATION_ERROR`.
+  3. Recompute `daysSincePurchase` and `assessmentDate` from `caseContext.purchaseDate` (client values ignored, D-07).
+  4. `streamDecisionTurn` with `request.signal`.
 - **Response**: 200 UI message stream (AI SDK protocol, `text/event-stream`), `Cache-Control: no-store`.
 - **Errors**: pre-stream errors as JSON envelopes (§4.5); errors after the stream started as error chunks (ADR-002 §5.3).
 
@@ -168,17 +167,16 @@ In-stream errors (`/api/chat`) carry the code string only (`DECISION_FAILED`, `D
 - (-) A case open across midnight may show one day more in later replies (correct behaviour).
 **Review trigger:** n/a.
 
-### D-API4 Conversation cap of 60 messages
-**Status:** Proposed
-**Date:** 2026-10-21
-**Context:** PRD open question on AI cost control; stateless server resends the whole history.
-**Decision:** Reject requests with more than 60 messages (≈ 30 exchanges) with `CONVERSATION_LIMIT`.
+### D-API4 No conversation cap in the MVP
+**Status:** Accepted (product owner, 2026-10-21)
+**Context:** PRD open question on AI cost control; the stateless server resends the whole history on every turn.
+**Decision:** No limit on the number of chat messages. Only a 2 MB request-body safeguard exists (`413 REQUEST_TOO_LARGE`), which normal use cannot reach.
 **Rejected alternatives:**
-- No cap: unbounded token cost per session.
+- Cap of 60 messages with `CONVERSATION_LIMIT`: rejected by the product owner for the MVP.
 **Consequences:**
-- (+) Bounded cost and request size.
-- (-) Very long conversations must restart.
-**Review trigger:** Product decision on the PRD open question.
+- (+) No artificial interruption of long conversations.
+- (-) Token cost per session is unbounded; monitored through OpenRouter usage logging (ADR-002 §3.6).
+**Review trigger:** The PRD open question on a per-session cap is decided, or test/course spend exceeds budget.
 
 ### D-API5 No rate limiting in the MVP
 **Status:** Accepted
@@ -217,11 +215,11 @@ flowchart TD
         A7 -- fail --> E502[502 ANALYSIS_FAILED / 504 ANALYSIS_TIMEOUT]
     end
     subgraph Chat["POST /api/chat"]
-        C0[Request] --> C1{JSON + size ≤ 512 KB?}
+        C0[Request] --> CS{size ≤ 2 MB?}
+        CS -- no --> E413c[413 REQUEST_TOO_LARGE]
+        CS -- yes --> C1{valid JSON?}
         C1 -- no --> E400c[400 VALIDATION_ERROR]
-        C1 -- yes --> CL{messages ≤ 60?}
-        CL -- no --> E422[422 CONVERSATION_LIMIT]
-        CL -- yes --> C2{chatRequestSchema + UI message validation}
+        C1 -- yes --> C2{chatRequestSchema + UI message validation}
         C2 -- no --> E400d[400 VALIDATION_ERROR]
         C2 -- ok --> C3[Recompute days]
         C3 --> C4[streamDecisionTurn]
@@ -257,7 +255,7 @@ sequenceDiagram
 | Analyze route: validation | Integration | invalid fields | 400 envelope with `fields` | missing photo, 1 MB + 1 byte, HEIC |
 | Analyze route: success | Integration (mock model from capture) | valid multipart | 200 matching `analyzeResponseSchema`; `daysSincePurchase` computed with frozen clock | — |
 | Analyze route: AI failure | Integration | mock throws API error / timeout | 502 / 504 envelope | — |
-| Chat route: validation | Integration | 61 messages; file part in user message; 2001-char text; `variant` ≠ `caseType`; last message assistant | 422 / 400 / 400 / 400 / 400 | tampered `daysSincePurchase` ignored (prompt receives recomputed value) |
+| Chat route: validation | Integration | body > 2 MB; file part in user message; 2001-char text; `variant` ≠ `caseType`; last message assistant | 413 / 400 / 400 / 400 / 400 | tampered `daysSincePurchase` ignored (prompt receives recomputed value) |
 | Chat route: stream | Integration (mock model from capture) | first turn | Stream parses into UI message with tool part then text; `Content-Type: text/event-stream` | client abort ends stream without error chunk |
 | Real contract: analyze | Contract (real OpenRouter) | each fixture image | Status 200 and body valid against schema; capture saved | HEIC → 415 without calling OpenRouter |
 | Real contract: chat | Contract (real) | first turn for each fixture + one follow-up | Stream chunk sequence valid; exactly one `set_decision` before text | — |
