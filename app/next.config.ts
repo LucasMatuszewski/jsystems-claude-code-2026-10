@@ -3,7 +3,15 @@ import { loadEnvConfig } from "@next/env";
 import type { NextConfig } from "next";
 
 // The credentials live in the repository-root .env; the app itself is in app/.
-loadEnvConfig(path.resolve(process.cwd(), ".."));
+// Next has already loaded env files for app/ before this config runs, and
+// @next/env caches that first result, so forceReload is required here;
+// without it the root .env is silently skipped.
+loadEnvConfig(
+  path.resolve(process.cwd(), ".."),
+  process.env.NODE_ENV !== "production",
+  undefined,
+  true
+);
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
