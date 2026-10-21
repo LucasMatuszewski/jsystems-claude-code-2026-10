@@ -376,8 +376,8 @@ sequenceDiagram
 | Inline validation + focus | Unit | submit empty | Each error under its field; focus on case type; no `fetch` call (AC-15) | only photo missing → focus on photo button |
 | Conditional reason | Unit | switch return ↔ complaint | label, `*`, min 20 rule, hint texts (AC-07/08/14) | switching keeps typed text |
 | Counter and max | Unit | type 2005 chars | value length 2000, "2000 / 2000" (AC-09) | paste |
-| Photo checks | Unit | 11 MB file; HEIC; PNG renamed `.jpg` | AC-12 msg; AC-11 msg; accepted | replace file; "Usuń" |
-| Reduction | Unit (jsdom with canvas stubs) + E2E (real browsers) | 4000×3000 JPEG 8 MB | longer edge 1568, ≤ 1 MB, same aspect ratio ±1 px | portrait EXIF orientation; transparent PNG |
+| Photo checks | Unit | pure `sniff()` with byte signatures (JPEG, PNG, WebP, HEIC `ftyp`, empty) and the size check with numeric sizes; component test with real files from `assets/example-images/` (`laptop-1.png` = JPEG content) | AC-11/AC-12 messages; `laptop-1.png` accepted | replace file; "Usuń"; no generated or empty image files (ADR-005 §3.2) |
+| Reduction | Unit (scaling math, quality loop with canvas stubs) + E2E E-21 (real browsers) | `assets/example-images/laptop-1.png` (3024×3135, 1.2 MB) | longer edge 1568, ≤ 1 MB, same aspect ratio ±1 px | `laptop-2.webp` stays below limits (no upscaling) |
 | Processing state | Unit | pending analyze | controls disabled; step 1 active; then step 2 (AC-17/18) | — |
 | First-turn failure | Unit (mock transport) | analyze 502 / stream error / fake timers 60 s | back to form, values + photo kept, banner text AC-22, retry re-submits | stream starting with `step-start` only does not count as first content |
 | First-turn failure after switch | Unit (mock transport from capture) | error after tool part; error after `step-start` only; stop during first message | recorded decision → "Odpowiedź została przerwana." + "Ponów" (`regenerate`); no recorded decision → back to form with AC-22 banner | disclaimer absent until a recorded decision exists |

@@ -97,16 +97,16 @@ app/
 │   ├── integration/               route handler tests (Vitest)
 │   ├── contract/                  real HTTP contract tests (Playwright request)
 │   ├── e2e/                       real browser flows (Playwright)
-│   └── fixtures/
-│       ├── images/                synthetic test photos (+ SOURCES.md with license/origin)
-│       └── captures/              verbatim real responses (+ metadata)
+│   ├── fixtures/
+│   │   └── captures/              verbatim real responses (+ metadata); test photos stay in /assets/example-images
+│   └── README.md                  AC → test ID traceability table
 ├── public/logo.svg
 ├── .env.example
 ├── AGENTS.md
 ├── LICENSE                        template license retained (Apache-2.0, Vercel)
 ├── README.md                      project README (commands, env, links to docs/)
 ├── biome.jsonc, components.json, next.config.ts, postcss.config.mjs
-├── playwright.config.ts, vitest.config.ts, tsconfig.json
+├── playwright.config.ts, playwright.capture.config.ts, vitest.config.ts, tsconfig.json
 └── package.json, package-lock.json
 ```
 
@@ -190,7 +190,7 @@ Unit tests are colocated next to their source as `*.test.ts` / `*.test.tsx`.
 - **`next.config.ts`**: remove `withBotId`, demo `basePath`/`assetPrefix`/redirect, `images.remotePatterns`, `cacheComponents` and all `experimental` flags; keep `reactCompiler: true` and `poweredByHeader: false`. Rationale: fewer moving parts; Cache Components brings no value to a client page plus two POST handlers.
 - **Route handlers**: `export const runtime = 'nodejs'` (policy file reads, Buffer handling); `/api/analyze` `maxDuration = 60`, `/api/chat` `maxDuration = 120`.
 - **`biome.jsonc`**: keep Ultracite preset; ignore `components/ai-elements/**` and `components/ui/**` from lint rules that would force edits to vendored code (format still applies).
-- **`playwright.config.ts`**: load `.env.local` with Node's `process.loadEnvFile`; projects `contract` (no browser, `tests/contract`), `chromium`, `firefox`, `webkit` (`tests/e2e`); `webServer` `npm run dev` with `reuseExistingServer: true`, URL `http://localhost:${PORT ?? 3000}`; test timeout 180 s, expect timeout 90 s (real LLM latency); `workers: 2`, `retries: 0` (flakiness must be visible); traces, screenshots and video retained on failure.
+- **`playwright.config.ts`**: load `.env.local` with Node's `process.loadEnvFile`; projects `contract` (no browser, `tests/contract`), `chromium`, `firefox` and `webkit` (`tests/e2e`; Firefox/WebKit `grep` `@smoke`), `failure` (E-22); two `webServer` entries on the production build — port 3000 (`reuseExistingServer: true`, `AI_CAPTURE_DIR` unset) and port 3200 with invalid model IDs (ADR-005 §3.1); a global setup that aborts if `AI_CAPTURE_DIR` is set; **`playwright.capture.config.ts`**: own server on port 3100 with `AI_CAPTURE_DIR`, `reuseExistingServer: false`, `grep` `@capture`; test timeout 180 s, expect timeout 90 s (real LLM latency); `workers: 2`, `retries: 0` (flakiness must be visible); traces, screenshots and video retained on failure.
 - **`vitest.config.ts`**: plugins React + tsconfig paths; `environment: 'jsdom'` for `components/**` and `lib/session/**`, `node` for `lib/case/**`, `lib/ai/**`, `tests/integration/**` (per-file environment comments or `projects`); setup file registers `@testing-library/jest-dom`; exclude `tests/e2e`, `tests/contract`.
 - **`.gitignore`**: keep template entries; ensure `.env*.local`, `test-results/`, `playwright-report/`, `.next/` are ignored; `tests/fixtures/captures/` is **tracked**.
 

@@ -542,12 +542,12 @@ TDD per `AGENTS.md`: tests first, observed failing for the right reason, then mi
 
 ### Key test scenarios
 
-- **Return online day 9, clean headphones photo** → `set_decision.label` ∈ {`accepted`, `escalated`} (AC-29); edge: day 14 vs 15 boundary.
+- **Return online day 9 with a real photo** (`assets/example-images/phone-1.jpg`) → one of the four labels with full structure; with a clean hand-written analysis (contract C-07e) → ∈ {`accepted`, `escalated`} (AC-29); edge: day 14 vs 15 boundary.
 - **Return day 40** → `rejected`, text mentions complaint path when reason describes a defect (AC-30).
 - **Complaint day 800** → `rejected`, text contains "§2 ust. 3" and manufacturer warranty (AC-32).
 - **Complaint with screen line, no impact traces** → `accepted`, text mentions repair or replacement (AC-34).
-- **Photo of a non-device / blurry photo** → `needs_info`, text instructs to start a new case (AC-35).
-- **Swollen battery photo** → safety instruction precedes "Co dalej" (AC-36).
+- **Phone photo submitted as category Laptop**, or a hand-written unusable-photo analysis → `needs_info`, text instructs to start a new case (AC-35).
+- **Swollen battery described in the reason** (both case types) → safety instruction precedes "Co dalej" (AC-36, ADR-002 D-AI7).
 - **Analysis 5xx / 60 s timeout** → back to form, data and photo preserved, retry works (AC-22).
 - **Follow-up changes decision** → "Zaktualizowana decyzja" card, summary label updated (AC-43).
 - **Follow-up fails** → "Nie wysłano" + "Ponów", no duplicate message (AC-45).
