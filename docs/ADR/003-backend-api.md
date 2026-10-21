@@ -68,7 +68,7 @@ Messages not given verbatim by the PRD ("Wybierz…", "Podaj datę zakupu") are 
 | Field | Rule |
 |---|---|
 | `id` | string 1–100 (chat ID from `useChat`) |
-| `messages` | array 1–60 of `CaseUIMessage`; validated with the AI SDK UI message validator using `metadataSchema` (`kind` enum) and the `set_decision` history schema |
+| `messages` | non-empty array of `CaseUIMessage` (the 60-message cap is checked before schema validation, §5.2); validated with the AI SDK UI message validator using `metadataSchema` (`kind` enum) and the `set_decision` history schema |
 | `caseContext` | `caseContextSchema` |
 | `imageAnalysis` | `imageAnalysisSchema`, `variant` must equal `caseContext.caseType` |
 
@@ -117,9 +117,10 @@ In-stream errors (`/api/chat`) carry the code string only (`DECISION_FAILED`, `D
 - **Request**: `Content-Type: application/json`; body `ChatRequest` (§4.4). Max body size enforced by checking `Content-Length` ≤ 512 KB (a 60-message conversation with 2000-char messages and the analysis fits well below).
 - **Processing order**:
   1. Parse JSON → 400 on failure.
-  2. Validate with `chatRequestSchema` and the UI message validator → 400 `VALIDATION_ERROR`; > 60 messages → 422 `CONVERSATION_LIMIT`.
-  3. Recompute `daysSincePurchase` and `assessmentDate` from `caseContext.purchaseDate` (client values ignored, D-07).
-  4. `streamDecisionTurn` with `request.signal`.
+  2. If `messages` is an array with more than 60 items → 422 `CONVERSATION_LIMIT` (checked first, so the limit is reported even when other fields are also invalid).
+  3. Validate with `chatRequestSchema` and the UI message validator → 400 `VALIDATION_ERROR`.
+  4. Recompute `daysSincePurchase` and `assessmentDate` from `caseContext.purchaseDate` (client values ignored, D-07).
+  5. `streamDecisionTurn` with `request.signal`.
 - **Response**: 200 UI message stream (AI SDK protocol, `text/event-stream`), `Cache-Control: no-store`.
 - **Errors**: pre-stream errors as JSON envelopes (§4.5); errors after the stream started as error chunks (ADR-002 §5.3).
 
@@ -218,9 +219,10 @@ flowchart TD
     subgraph Chat["POST /api/chat"]
         C0[Request] --> C1{JSON + size ≤ 512 KB?}
         C1 -- no --> E400c[400 VALIDATION_ERROR]
-        C1 -- yes --> C2{chatRequestSchema + UI message validation}
+        C1 -- yes --> CL{messages ≤ 60?}
+        CL -- no --> E422[422 CONVERSATION_LIMIT]
+        CL -- yes --> C2{chatRequestSchema + UI message validation}
         C2 -- no --> E400d[400 VALIDATION_ERROR]
-        C2 -- "> 60 msgs" --> E422[422 CONVERSATION_LIMIT]
         C2 -- ok --> C3[Recompute days]
         C3 --> C4[streamDecisionTurn]
         C4 --> C5[200 UI message stream]

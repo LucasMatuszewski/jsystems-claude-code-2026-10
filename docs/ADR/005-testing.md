@@ -148,7 +148,7 @@ Separate lines for: build (command, result, warnings), typecheck, lint, unit+int
 | C-02 analyze per fixture | `POST /api/analyze` multipart | 200; `Content-Type: application/json`; `Cache-Control: no-store`; body validates against `analyzeResponseSchema` imported from `lib/case/schemas.ts`; expected facts (§3.2); `daysSincePurchase` equals the test's own computation |
 | C-03 analyze rejects | HEIC, 1 MB + 1, missing photo, invalid fields | 415 / 413 / 400 / 400 with valid envelope |
 | C-04 chat first turn | `POST /api/chat` with C-02 output and a `case-submission` message | 200 `text/event-stream`; chunk sequence: `start` → step with `tool-input-*` for `set_decision` → `tool-output-available` `{recorded: true}` → step with `text-*` → `finish`; exactly one `set_decision`; greeting non-empty |
-| C-05 chat follow-up | C-04 history + follow-up | 200; zero or one `set_decision`; if present `previousLabel` equals C-04 label |
+| C-05 chat follow-up | C-04 history + follow-up | 200; zero or one `set_decision`; if present with `recorded: true`, `output.previousLabel` equals the C-04 label and `input.label` differs from it |
 | C-06 chat rejects | 61 messages; file part; variant mismatch | 422 / 400 / 400 |
 
 ---

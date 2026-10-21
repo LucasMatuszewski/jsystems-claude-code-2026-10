@@ -84,10 +84,12 @@ app/layout.tsx                    <html lang="pl">, Instrument Sans, metadata, T
 - Hook typed with `CaseUIMessage`. Transport: `DefaultChatTransport` with `api: '/api/chat'` and `prepareSendMessagesRequest` returning `{ id, messages, caseContext, imageAnalysis }`, reading the latter two from a ref updated by the reducer (so the transport object is created once).
 - **First turn**: after `ANALYSIS_SUCCEEDED`, call `sendMessage` with text "Przesłano zgłoszenie." and `metadata: { kind: 'case-submission' }`. This message is never rendered.
 - **Follow-ups**: `sendMessage({ text, metadata: { kind: 'follow-up' } })`.
-- **Transition to chat**: an effect watches `messages`; when an assistant message has at least one part, dispatch `FIRST_CHUNK_RECEIVED` (AC-37 — the chat appears with content already streaming).
-- **First-turn failure** (AC-22): if `status` becomes `error` while `screen = processing`, or the submission deadline fires, call `stop()`, `setMessages([])` and dispatch `SUBMIT_FAILED`. "Spróbuj ponownie" re-runs the whole pipeline (validation, reduction, analysis, decision) with the stored data.
+- **First content part** (definition used by every rule below): a `tool-set_decision` part in any state, or a `text` part with non-empty text. `step-start`, `reasoning`, source and metadata parts never count; the creation of an empty assistant message does not count either.
+- **Transition to chat**: an effect watches `messages`; when the newest assistant message has its first content part, dispatch `FIRST_CHUNK_RECEIVED` (AC-37 — the chat appears with content already streaming).
+- **First-turn failure before the switch** (AC-22): if `status` becomes `error` while `screen = processing`, or the submission deadline fires, call `stop()`, `setMessages([])` and dispatch `SUBMIT_FAILED`. "Spróbuj ponownie" re-runs the whole pipeline (validation, reduction, analysis, decision) with the stored data.
+- **First-turn failure after the switch** (error chunk, `chunkMs`/`totalMs` timeout, network drop, or the customer pressing "Zatrzymaj" during the first message): if no `set_decision` part with `recorded = true` exists yet, treat it exactly like the failure before the switch (back to the form with the AC-22 banner, data kept). If the decision is already recorded, keep the partial message and show under the assistant bubble "Odpowiedź została przerwana." (product copy) with "Ponów", which calls `regenerate()` and replaces the partial first message. A stop by the customer shows the same notice without the error styling.
 - **Submission deadline**: one 60 s timer started at `SUBMIT_STARTED`, covering the analysis fetch and the decision until the first chunk; it aborts the analysis `fetch` via `AbortController` or calls `stop()`.
-- **Follow-up deadline** (AC-45): a 60 s timer per send, cleared when the newest assistant message gets its first part; on expiry `stop()` and mark the last user message failed.
+- **Follow-up deadline** (AC-45): a 60 s timer per send, cleared when the newest assistant message gets its first content part; on expiry `stop()` and mark the last user message failed. This client watchdog is the authority for the 60 s rule; the server `firstChunkMs` is only a safety net (ADR-002 §3.5).
 - **Failed follow-up** (AC-45): if `status = error` or the deadline fired, the last user message shows "Nie wysłano" and "Ponów". "Ponów" calls `regenerate()`, which resubmits the existing messages without adding a new user message (no duplicate). Error text: "Nie udało się wysłać wiadomości." (product copy).
 - **Stop** (AC-41): while `status` is `submitted` or `streaming`, `PromptInputSubmit` shows "Zatrzymaj" and calls `stop()`; the partial reply stays. The textarea remains editable; Enter does not send while busy.
 - **Throttle**: `useChat` option `throttle: 50` (ms) to limit re-renders during streaming.
@@ -105,13 +107,13 @@ For each assistant message, render parts in order:
 | Part | Rendering |
 |---|---|
 | `tool-set_decision`, state `input-streaming` | Card skeleton with `Shimmer` "Przygotowujemy decyzję…" |
-| `tool-set_decision`, `output-available`, `recorded = true`, `previousLabel = null` | Greeting paragraph (`input.greeting`), then `DecisionCard` with title "Decyzja" and the label |
-| `tool-set_decision`, `output-available`, `recorded = true`, `previousLabel ≠ null` | `DecisionCard` titled "Zaktualizowana decyzja", "poprzednio: <label>", `changeReason`, and the fixed reminder "Ocena nadal jest wstępna — ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu." (product copy; satisfies §11.7) |
+| `tool-set_decision`, `output-available`, `output.recorded = true`, `output.previousLabel = null` | Greeting paragraph (`input.greeting`), then `DecisionCard` with title "Decyzja" and `input.label` |
+| `tool-set_decision`, `output-available`, `output.recorded = true`, `output.previousLabel ≠ null` | `DecisionCard` titled "Zaktualizowana decyzja", "poprzednio: <output.previousLabel>", `input.changeReason`, and the fixed reminder "Ocena nadal jest wstępna — ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu." (product copy; satisfies §11.7) |
 | `tool-set_decision`, `recorded = false` or `output-error` | Nothing |
 | `text` | `MessageResponse` (Streamdown) with images disabled and links disabled (`allowedImagePrefixes` and `allowedLinkPrefixes` empty) |
 | `step-start`, other | Nothing |
 
-After the parts of the **first** assistant message, once that message is no longer streaming, render `Disclaimer` with the exact AC-28 text in smaller muted style. User messages render `text` parts as plain text with preserved line breaks (AC-46). The `case-submission` message is skipped. Every assistant bubble has the visible label "Asystent AI".
+After the parts of the **first** assistant message, once that message is no longer streaming and contains a recorded decision, render `Disclaimer` with the exact AC-28 text in smaller muted style. User messages render `text` parts as plain text with preserved line breaks (AC-46). The `case-submission` message is skipped. Every assistant bubble has the visible label "Asystent AI".
 
 **Current label** for `CaseSummary`: `deriveCurrentLabel(messages)` from `lib/case/labels.ts` (shared with the server, ADR-002 §3.4).
 
@@ -189,7 +191,7 @@ All controls reachable by Tab in visual order; tiles and radios operable with ar
 | `ChatScreen ↔ useChat` | `messages`, `status`, `error`, `sendMessage`, `regenerate`, `stop` |
 | `DecisionCard` props | `DecisionView` |
 | `CaseSummary` props | `caseContext`, `reducedPhotoUrl`, `currentLabel` |
-| Error codes → texts | `ANALYSIS_*`, `DECISION_*`, `VALIDATION_ERROR`, `UNSUPPORTED_IMAGE_TYPE`, `PHOTO_TOO_LARGE`, network failure → AC-22 banner text on the form; follow-up errors → "Nie wysłano" |
+| Error codes → texts | Submission (form screen): `ANALYSIS_*`, `DECISION_*`, `VALIDATION_ERROR`, `PHOTO_REQUIRED`, `UNSUPPORTED_IMAGE_TYPE`, `PHOTO_TOO_LARGE`, `CONFIGURATION_ERROR`, network failure → AC-22 banner. Follow-up (chat): `DECISION_*`, `VALIDATION_ERROR`, `CONFIGURATION_ERROR`, network failure → "Nie wysłano" + "Ponów"; `CONVERSATION_LIMIT` → non-retryable notice with the ADR-003 §4.5 text, input disabled, pointing to "Nowe zgłoszenie" (no "Ponów"). For HTTP errors the `useChat` transport error carries the response body; the client parses `error.code` from it and falls back to "network failure" when it cannot. |
 
 ---
 
@@ -375,7 +377,9 @@ sequenceDiagram
 | Photo checks | Unit | 11 MB file; HEIC; PNG renamed `.jpg` | AC-12 msg; AC-11 msg; accepted | replace file; "Usuń" |
 | Reduction | Unit (jsdom with canvas stubs) + E2E (real browsers) | 4000×3000 JPEG 8 MB | longer edge 1568, ≤ 1 MB, same aspect ratio ±1 px | portrait EXIF orientation; transparent PNG |
 | Processing state | Unit | pending analyze | controls disabled; step 1 active; then step 2 (AC-17/18) | — |
-| First-turn failure | Unit (mock transport) | analyze 502 / stream error / fake timers 60 s | back to form, values + photo kept, banner text AC-22, retry re-submits | — |
+| First-turn failure | Unit (mock transport) | analyze 502 / stream error / fake timers 60 s | back to form, values + photo kept, banner text AC-22, retry re-submits | stream starting with `step-start` only does not count as first content |
+| First-turn failure after switch | Unit (mock transport from capture) | error after tool part; error after `step-start` only; stop during first message | recorded decision → "Odpowiedź została przerwana." + "Ponów" (`regenerate`); no recorded decision → back to form with AC-22 banner | disclaimer absent until a recorded decision exists |
+| Conversation limit | Unit | follow-up returns 422 `CONVERSATION_LIMIT` | non-retryable notice, no "Ponów", input disabled | — |
 | Decision card rendering | Unit | message fixtures derived from real captures for each label | Correct title, label text, icon, style class; greeting before card | `recorded=false` hidden; `input-streaming` skeleton |
 | Updated decision | Unit | follow-up fixture with `previousLabel` | "Zaktualizowana decyzja", "poprzednio: …", reminder; summary label updated (AC-43) | — |
 | Disclaimer | Unit | first assistant message finished | Exact AC-28 text once | not rendered on later messages |

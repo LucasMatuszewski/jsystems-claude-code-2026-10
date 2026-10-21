@@ -157,7 +157,7 @@ Enum `accepted` \| `rejected` \| `needs_info` \| `escalated`, displayed as "Akce
 
 ### CaseUIMessage (chat messages, AI SDK UI message)
 
-`UIMessage<CaseMessageMetadata, never, CaseTools>` where `metadata.kind` is `case-submission` (the hidden first user turn) or `follow-up`, and `CaseTools` contains `set_decision` with input `{ greeting: string | null, label: DecisionLabel, previousLabel: DecisionLabel | null, changeReason: string | null }` and output `{ recorded: true }`. The current decision is the `label` of the last `set_decision` part in state `output-available` (ADR-002 §3.4).
+`UIMessage<CaseMessageMetadata, never, CaseTools>` where `metadata.kind` is `case-submission` (the hidden first user turn) or `follow-up`, and `CaseTools` contains `set_decision` with model-supplied input `{ greeting: string | null, label: DecisionLabel, changeReason: string | null }` and server-produced output `{ recorded: boolean, previousLabel: DecisionLabel | null, reason: 'unchanged' | null }` (the server, not the model, fills `previousLabel`). The current decision is the `label` of the last `set_decision` part in state `output-available` (ADR-002 §3.4).
 
 ### CaseSession (client only)
 
@@ -472,7 +472,7 @@ sequenceDiagram
     UC->>CH: POST {all messages, caseContext, imageAnalysis}
     CH->>CH: Validate (≤ 2000 chars), currentLabel = last set_decision
     CH->>DA: streamText(toolChoice auto)
-    DA-->>UC: tool set_decision {label: accepted, previousLabel: escalated, changeReason}
+    DA-->>UC: tool set_decision input {label: accepted, changeReason}, output {recorded: true, previousLabel: escalated}
     UC-->>CI: Card "Zaktualizowana decyzja (poprzednio: …)" + fixed reminder
     UC-->>SUM: derived current label = accepted
     DA-->>UC: text deltas
