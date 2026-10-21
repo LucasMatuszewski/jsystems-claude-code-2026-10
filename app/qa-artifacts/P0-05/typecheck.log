@@ -1,0 +1,9 @@
+
+> hardware-service-decision-copilot@0.1.0 typecheck
+> tsc --noEmit
+
+lib/case/labels.ts(14,9): error TS18048: 'message' is possibly 'undefined'.
+lib/case/labels.ts(17,18): error TS18048: 'message' is possibly 'undefined'.
+lib/case/labels.ts(18,20): error TS18048: 'message' is possibly 'undefined'.
+lib/case/labels.ts(20,27): error TS2345: Argument of type 'UIMessagePart<never, CaseTools> | undefined' is not assignable to parameter of type 'UIMessagePart<never, CaseTools>'.
+  Type 'undefined' is not assignable to type 'UIMessagePart<never, CaseTools>'.

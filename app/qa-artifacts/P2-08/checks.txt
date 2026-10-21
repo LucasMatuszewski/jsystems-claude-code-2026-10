@@ -1,0 +1,11 @@
+P2-08 capture checks, 2026-10-21T13:10:23Z
+Run: npm run capture -> 10 passed (2.4m), exit 0 (see qa-artifacts/P2-08/capture-run.log)
+Endpoint+meta pairs: 10 endpoint, 10 meta
+Raw openrouter files: 15 (all status 200, model openai/gpt-6-luna)
+Provider files: 15 (vision-generate 10, decision-stream 5; decision streams contain tool-call and text parts)
+Total files: 50; size: 1063293 bytes (~1.1 MB)
+Secret check grep -rniE 'authorization|bearer |sk-or-': no matches (exit 1)
+Base64 image data check: no matches
+Image data: replaced by imageOmitted+sha256 in all raw and vision provider files
+Meta check: all 10 meta files have capturedAt, target, scenario, request (photo fileName+sha256+bytes, no bytes data), appCommit b2513d3, versions ai 7.0.148, @openrouter/ai-sdk-provider 3.1.0, next 16.4.2
+Ports 3000/3100/3200 before run: free; after run: see below

@@ -1,0 +1,99 @@
+
+Running 14 tests using 2 workers
+
+  ✓   1 [chromium] › tests/e2e/form.spec.ts:30:7 › E-01 @smoke form structure and validation › seven fields appear in AC-01 order (3.1s)
+  ✓   3 [chromium] › tests/e2e/form.spec.ts:48:7 › E-01 @smoke form structure and validation › case type and channel radios exist unchecked and category lists nine options (3.0s)
+  ✓   4 [chromium] › tests/e2e/form.spec.ts:78:7 › E-01 @smoke form structure and validation › AI-use notice is shown verbatim (1.6s)
+  ✓   5 [chromium] › tests/e2e/form.spec.ts:85:7 › E-01 @smoke form structure and validation › empty submit shows every error, focuses the first field and sends no analyze request (2.1s)
+  ✘   6 [chromium] › tests/e2e/form.spec.ts:109:7 › E-01 @smoke form structure and validation › complaint shows required reason label and enforces minimum length (1.7m)
+  ✓   7 [chromium] › tests/e2e/form.spec.ts:130:7 › E-01 @smoke form structure and validation › return shows optional reason label without required marker (3.4s)
+  ✓   8 [chromium] › tests/e2e/form.spec.ts:144:7 › E-01 @smoke form structure and validation › reason counter, reason and model name limits and date max (2.4s)
+  ✓   9 [chromium] › tests/e2e/form.spec.ts:171:7 › E-02 @smoke photo rules › uploaded photo shows thumbnail, file name and remove action (3.0s)
+  ✓  10 [chromium] › tests/e2e/form.spec.ts:189:7 › E-02 @smoke photo rules › a new photo replaces the previous one (2.7s)
+  ✓  11 [chromium] › tests/e2e/form.spec.ts:208:7 › E-02 @smoke photo rules › remove deletes the thumbnail (2.6s)
+  ✓  12 [chromium] › tests/e2e/form.spec.ts:226:7 › E-02 @smoke photo rules › photo hint follows the selected case type (2.5s)
+  -  13 [chromium] › tests/e2e/form.spec.ts:250:8 › E-02 photo rejection cases › rejects HEIC (AC-11)
+  -  14 [chromium] › tests/e2e/form.spec.ts:265:8 › E-02 photo rejection cases › rejects > 10 MB (AC-12)
+  ✘   2 [chromium] › tests/e2e/reduction.spec.ts:11:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio (3.4m)
+
+
+  1) [chromium] › tests/e2e/form.spec.ts:109:7 › E-01 @smoke form structure and validation › complaint shows required reason label and enforces minimum length 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('#field-reason-error')
+    Expected: "Opisz problem (min. 20 znaków)"
+    Timeout: 90000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" locator('#field-reason-error') with timeout 90000ms
+      - waiting for locator('#field-reason-error')
+
+
+      123 |     await formPage.fillReason("Uszkodzony");
+      124 |     await formPage.submit();
+    > 125 |     await expect(formPage.errorFor("reason")).toHaveText(
+          |                                               ^
+      126 |       texts.validation.reasonComplaintMin
+      127 |     );
+      128 |   });
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/form.spec.ts:125:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/e2e/reduction.spec.ts:11:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio 
+
+    Test timeout of 180000ms exceeded.
+
+    Error: page.waitForRequest: Test timeout of 180000ms exceeded.
+
+      23 |
+      24 |     // Passive observation: no interception, the request goes to the real server.
+    > 25 |     const requestPromise = page.waitForRequest(
+         |                                 ^
+      26 |       (candidate) =>
+      27 |         new URL(candidate.url()).pathname === "/api/analyze" &&
+      28 |         candidate.method() === "POST"
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/reduction.spec.ts:25:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests/e2e/form.spec.ts:109:7 › E-01 @smoke form structure and validation › complaint shows required reason label and enforces minimum length 
+    [chromium] › tests/e2e/reduction.spec.ts:11:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio 
+  2 skipped
+  10 passed (3.9m)
+exit=1

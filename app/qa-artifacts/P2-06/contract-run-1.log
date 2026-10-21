@@ -1,0 +1,332 @@
+[WebServer] Turbopack build encountered 2 warnings:
+[WebServer] ./lib/ai/env.ts:60:27
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   58 |   const capture = optional("AI_CAPTURE_DIR");
+[WebServer]   59 |   cached = {
+[WebServer] > 60 |     captureDir: capture ? path.resolve(process.cwd(), capture) : null,
+[WebServer]      |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer]   61 |     llmModel,
+[WebServer]   62 |     openRouterApiKey,
+[WebServer]   63 |     policiesDir: path.resolve(
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.resolve(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import trace:
+[WebServer]   App Route:
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer] 
+[WebServer] ./lib/ai/env.ts:63:18
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   61 |     llmModel,
+[WebServer]   62 |     openRouterApiKey,
+[WebServer] > 63 |     policiesDir: path.resolve(
+[WebServer]      |                  ^^^^^^^^^^^^
+[WebServer] > 64 |       process.cwd(),
+[WebServer]      | ^^^^^^^^^^^^^^^^^^^^
+[WebServer] > 65 |       optional("POLICIES_DIR") || DEFAULT_POLICIES_DIR
+[WebServer]      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer] > 66 |     ),
+[WebServer]      | ^^^^^
+[WebServer]   67 |     port: parsePort(),
+[WebServer]   68 |     visionModel: optional("VISION_MODEL") || llmModel,
+[WebServer]   69 |   };
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.resolve(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import trace:
+[WebServer]   App Route:
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer] 
+
+Running 13 tests using 2 workers
+
+{
+  "llm": {
+    "id": "openai/gpt-6-luna",
+    "supported_parameters": [
+      "include_reasoning",
+      "max_completion_tokens",
+      "max_tokens",
+      "reasoning",
+      "reasoning_effort",
+      "response_format",
+      "seed",
+      "structured_outputs",
+      "tool_choice",
+      "tools",
+      "verbosity"
+    ]
+  },
+  "vision": {
+    "id": "openai/gpt-6-luna",
+    "input_modalities": [
+      "file",
+      "image",
+      "text"
+    ],
+    "supported_parameters": [
+      "include_reasoning",
+      "max_completion_tokens",
+      "max_tokens",
+      "reasoning",
+      "reasoning_effort",
+      "response_format",
+      "seed",
+      "structured_outputs",
+      "tool_choice",
+      "tools",
+      "verbosity"
+    ]
+  }
+}
+  ✓   1 [contract] › tests/contract/models.contract.ts:16:7 › C-01 model capabilities › configured vision and LLM models support required capabilities (813ms)
+  ✘   2 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-1.jpg return @capture (952ms)
+  ✘   3 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-1.jpg complaint @capture (285ms)
+  ✘   4 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-2.jpeg return @capture (234ms)
+  ✘   5 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-2.jpeg complaint @capture (221ms)
+  ✘   6 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-3.jpeg return @capture (229ms)
+  ✘   7 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-3.jpeg complaint @capture (215ms)
+  ✘   8 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 laptop-2.webp return @capture (355ms)
+  ✘   9 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 laptop-2.webp complaint @capture (267ms)
+  ✓  10 [contract] › tests/contract/analyze.contract.ts:137:7 › C-03 analyze rejects › C-03 (a) oversized photo returns 413 PHOTO_TOO_LARGE (185ms)
+  ✓  11 [contract] › tests/contract/analyze.contract.ts:154:7 › C-03 analyze rejects › C-03 (b) missing photo returns 400 PHOTO_REQUIRED (48ms)
+  ✓  12 [contract] › tests/contract/analyze.contract.ts:168:7 › C-03 analyze rejects › C-03 (c) invalid fields return 400 VALIDATION_ERROR with field errors (67ms)
+  ✓  13 [contract] › tests/contract/analyze.contract.ts:193:7 › C-03 analyze rejects › C-03 (d) JSON body returns 415 UNSUPPORTED_CONTENT_TYPE (41ms)
+
+
+  1) [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-1.jpg return @capture 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 502
+
+      88 |         const { json, text } = await readBody(response);
+      89 |
+    > 90 |         expect(response.status()).toBe(200);
+         |                                   ^
+      91 |         expect(response.headers()["content-type"]).toContain(
+      92 |           "application/json"
+      93 |         );
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/analyze.contract.ts:90:35
+
+    Error Context: test-results/analyze.contract.ts-C-02-a-72bbf--phone-1-jpg-return-capture-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/analyze.contract.ts-C-02-a-72bbf--phone-1-jpg-return-capture-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/analyze.contract.ts-C-02-a-72bbf--phone-1-jpg-return-capture-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-1.jpg complaint @capture 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 502
+
+      88 |         const { json, text } = await readBody(response);
+      89 |
+    > 90 |         expect(response.status()).toBe(200);
+         |                                   ^
+      91 |         expect(response.headers()["content-type"]).toContain(
+      92 |           "application/json"
+      93 |         );
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/analyze.contract.ts:90:35
+
+    Error Context: test-results/analyze.contract.ts-C-02-a-bb934-one-1-jpg-complaint-capture-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/analyze.contract.ts-C-02-a-bb934-one-1-jpg-complaint-capture-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/analyze.contract.ts-C-02-a-bb934-one-1-jpg-complaint-capture-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-2.jpeg return @capture 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 502
+
+      88 |         const { json, text } = await readBody(response);
+      89 |
+    > 90 |         expect(response.status()).toBe(200);
+         |                                   ^
+      91 |         expect(response.headers()["content-type"]).toContain(
+      92 |           "application/json"
+      93 |         );
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/analyze.contract.ts:90:35
+
+    Error Context: test-results/analyze.contract.ts-C-02-a-802b2-phone-2-jpeg-return-capture-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/analyze.contract.ts-C-02-a-802b2-phone-2-jpeg-return-capture-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/analyze.contract.ts-C-02-a-802b2-phone-2-jpeg-return-capture-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-2.jpeg complaint @capture 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 502
+
+      88 |         const { json, text } = await readBody(response);
+      89 |
+    > 90 |         expect(response.status()).toBe(200);
+         |                                   ^
+      91 |         expect(response.headers()["content-type"]).toContain(
+      92 |           "application/json"
+      93 |         );
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/analyze.contract.ts:90:35
+
+    Error Context: test-results/analyze.contract.ts-C-02-a-5404f-ne-2-jpeg-complaint-capture-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/analyze.contract.ts-C-02-a-5404f-ne-2-jpeg-complaint-capture-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/analyze.contract.ts-C-02-a-5404f-ne-2-jpeg-complaint-capture-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-3.jpeg return @capture 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 502
+
+      88 |         const { json, text } = await readBody(response);
+      89 |
+    > 90 |         expect(response.status()).toBe(200);
+         |                                   ^
+      91 |         expect(response.headers()["content-type"]).toContain(
+      92 |           "application/json"
+      93 |         );
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/analyze.contract.ts:90:35
+
+    Error Context: test-results/analyze.contract.ts-C-02-a-53241-phone-3-jpeg-return-capture-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/analyze.contract.ts-C-02-a-53241-phone-3-jpeg-return-capture-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/analyze.contract.ts-C-02-a-53241-phone-3-jpeg-return-capture-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-3.jpeg complaint @capture 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 502
+
+      88 |         const { json, text } = await readBody(response);
+      89 |
+    > 90 |         expect(response.status()).toBe(200);
+         |                                   ^
+      91 |         expect(response.headers()["content-type"]).toContain(
+      92 |           "application/json"
+      93 |         );
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/analyze.contract.ts:90:35
+
+    Error Context: test-results/analyze.contract.ts-C-02-a-4a023-ne-3-jpeg-complaint-capture-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/analyze.contract.ts-C-02-a-4a023-ne-3-jpeg-complaint-capture-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/analyze.contract.ts-C-02-a-4a023-ne-3-jpeg-complaint-capture-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 laptop-2.webp return @capture 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 502
+
+      88 |         const { json, text } = await readBody(response);
+      89 |
+    > 90 |         expect(response.status()).toBe(200);
+         |                                   ^
+      91 |         expect(response.headers()["content-type"]).toContain(
+      92 |           "application/json"
+      93 |         );
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/analyze.contract.ts:90:35
+
+    Error Context: test-results/analyze.contract.ts-C-02-a-60949-aptop-2-webp-return-capture-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/analyze.contract.ts-C-02-a-60949-aptop-2-webp-return-capture-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/analyze.contract.ts-C-02-a-60949-aptop-2-webp-return-capture-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 laptop-2.webp complaint @capture 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 502
+
+      88 |         const { json, text } = await readBody(response);
+      89 |
+    > 90 |         expect(response.status()).toBe(200);
+         |                                   ^
+      91 |         expect(response.headers()["content-type"]).toContain(
+      92 |           "application/json"
+      93 |         );
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/analyze.contract.ts:90:35
+
+    Error Context: test-results/analyze.contract.ts-C-02-a-f359c-op-2-webp-complaint-capture-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/analyze.contract.ts-C-02-a-f359c-op-2-webp-complaint-capture-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/analyze.contract.ts-C-02-a-f359c-op-2-webp-complaint-capture-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8 failed
+    [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-1.jpg return @capture 
+    [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-1.jpg complaint @capture 
+    [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-2.jpeg return @capture 
+    [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-2.jpeg complaint @capture 
+    [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-3.jpeg return @capture 
+    [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-3.jpeg complaint @capture 
+    [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 laptop-2.webp return @capture 
+    [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 laptop-2.webp complaint @capture 
+  5 passed (56.0s)

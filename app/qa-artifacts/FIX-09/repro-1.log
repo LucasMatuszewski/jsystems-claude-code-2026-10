@@ -1,0 +1,566 @@
+[WebServer] 
+[WebServer] > hardware-service-decision-copilot@0.1.0 build
+[WebServer] > next build
+[WebServer] 
+[WebServer] ▲ Next.js 16.4.2 (Turbopack)
+[WebServer] ✓ Running next.config.ts took 274ms
+[WebServer] 
+[WebServer]   Creating an optimized production build ...
+[WebServer] ✓ Compiled successfully in 6.3s
+[WebServer]   Running TypeScript ...
+[WebServer]   Finished TypeScript in 8.9s ...
+[WebServer]   Collecting page data using 3 workers ...
+[WebServer]   Generating static pages using 3 workers (0/6) ...
+[WebServer]   Generating static pages using 3 workers (1/6) 
+[WebServer]   Generating static pages using 3 workers (2/6) 
+[WebServer]   Generating static pages using 3 workers (4/6) 
+[WebServer] ✓ Generating static pages using 3 workers (6/6) in 994ms
+[WebServer]   Finalizing page optimization ...
+[WebServer] 
+[WebServer] Route (app)
+[WebServer] ┌ ○ /
+[WebServer] ├ ○ /_not-found
+[WebServer] ├ ƒ /api/analyze
+[WebServer] └ ƒ /api/chat
+[WebServer] 
+[WebServer] 
+[WebServer] ○  (Static)   prerendered as static content
+[WebServer] ƒ  (Dynamic)  server-rendered on demand
+[WebServer] 
+[WebServer] 
+[WebServer] > hardware-service-decision-copilot@0.1.0 start
+[WebServer] > next start
+[WebServer] 
+[WebServer] ▲ Next.js 16.4.2
+[WebServer] - Local:         http://localhost:3000
+[WebServer] - Network:       http://10.123.3.95:3000
+[WebServer] ✓ Ready in 372ms
+[WebServer] ✓ Running next.config.ts took 114ms
+[WebServer] 
+[WebServer] > hardware-service-decision-copilot@0.1.0 start
+[WebServer] > next start -p 3200
+[WebServer] 
+[WebServer] ▲ Next.js 16.4.2
+[WebServer] - Local:         http://localhost:3200
+[WebServer] - Network:       http://10.123.3.95:3200
+[WebServer] ✓ Ready in 316ms
+[WebServer] ✓ Running next.config.ts took 92ms
+
+Running 24 tests using 2 workers
+
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":8895,"finishReason":"stop","usage":{"inputTokens":1301,"outputTokens":551,"reasoningTokens":256,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":10394,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":597,"reasoningTokens":273,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":30,"totalMs":13668,"finishReason":"stop","usage":{"inputTokens":6076,"outputTokens":898,"reasoningTokens":498,"cost":0}}
+E-06 label=needs_info ttfc_ms=17361
+E-06 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — potrzebuję doprecyzowania, bo zdjęcie nie pasuje do kategorii produktu.
+
+Decyzja
+
+Potrzebne dodatkowe informacje
+
+Uzasadnienie
+
+Zakup internetowy zgłoszono 9 dni temu, więc wstępnie właściwa jest ścieżka zwrotu ustawowego z §2 ust. 1 Regulaminu zwrotów. Jednak formularz wskazuje laptop, a na zdjęciu widać niebieski smartfon Apple z trzema obiektywami. Nie mogę więc potwierdzić, jaki produkt zgłaszasz. Brakuje zdjęcia zgłoszonego urządzenia, które pozwalałoby obejrzeć je w całości. Sam brak widocznego opakowania nie wyklucza zwrotu ustawowego (§2 ust. 3).
+
+Co dalej
+Jeśli zgłaszasz zwrot laptopa, rozpocznij nowe zgłoszenie przyciskiem „Nowe zgłoszenie” i dołącz zdjęcie właściwego urządzenia. Zrób je w dobrym świetle, pokaż cały sprzęt, a jeśli zgłaszasz konkretny problem — także zbliżenie tego miejsca.
+Jeśli zgłaszasz zwrot smartfona, również rozpocznij nowe zgłoszenie z prawidłową kategorią i zdjęciem całego urządzenia.
+Po wstępnej ocenie możesz odesłać sprzęt na adres do zwrotów podany w potwierdzeniu zamówienia albo przynieść go do sklepu stacjonarnego z dowodem zakupu. Pracownik sprawdzi go fizycznie zgodnie z §5 ust. 2–3 Regulaminu zwrotów.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":12,"totalMs":12351,"finishReason":"stop","usage":{"inputTokens":5935,"outputTokens":773,"reasoningTokens":327,"cost":0}}
+  ✓   2 [chromium] › tests/e2e/chat-decisions.spec.ts:10:7 › E-06 return with a laptop photo needs more information › label needs_info and asks for a new report (27.4s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":21,"totalMs":4151,"finishReason":"stop","usage":{"inputTokens":3363,"outputTokens":96,"reasoningTokens":74,"cost":0}}
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":8045,"finishReason":"stop","usage":{"inputTokens":2433,"outputTokens":650,"reasoningTokens":234,"cost":0}}
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":4,"totalMs":9975,"finishReason":"stop","usage":{"inputTokens":6134,"outputTokens":790,"reasoningTokens":368,"cost":0}}
+E-07 complaint label=escalated ttfc_ms=13223
+E-07 complaint first message:
+Asystent AI
+
+Dziękujemy za zgłoszenie — rozumiem, że niepokoi Cię stan telefonu.
+
+Decyzja
+
+Przekazanie do weryfikacji
+
+Bezpieczeństwo
+
+Natychmiast odłącz telefon od zasilania i przestań go używać. Nie otwieraj obudowy (§7 ust. 1–2 Regulaminu reklamacji).
+
+Uzasadnienie
+
+Zgłaszasz spuchniętą baterię i zapach spalenizny. Na zdjęciu widać natomiast liczne pęknięcia ekranu oraz ciemne obszary zasłaniające obraz. Widoczne ślady wskazują na uszkodzenie mechaniczne opisane w §4 ust. 1 Regulaminu reklamacji. Jednocześnie ze zdjęcia nie da się ocenić stanu baterii ani potwierdzić przyczyny zapachu. Dlatego potrzebne są fizyczne oględziny telefonu. Pracownik sprawdzi ekran, obudowę i baterię oraz oceni zgłoszone objawy. Wstępnie, przy zakupie sprzed 9 dni, sprawa mieści się w okresie z §2 ust. 1.
+
+Co dalej
+Aby złożyć formalną reklamację, przekaż telefon do sklepu stacjonarnego albo wyślij go przesyłką. Dołącz dowód zakupu i opis pęknięć, spuchniętej baterii oraz zapachu; adres do zwrotów znajdziesz w potwierdzeniu zamówienia (§6 ust. 2).
+Nie używaj ani nie ładuj telefonu i nie otwieraj go przed przekazaniem.
+Sklep odpowiada na formalną reklamację w terminie 14 dni od jej otrzymania (§6 ust. 3).
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓   3 [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › complaint: safety phrase comes before "Co dalej" (21.4s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6644,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":546,"reasoningTokens":218,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":8,"totalMs":11872,"finishReason":"stop","usage":{"inputTokens":6117,"outputTokens":1015,"reasoningTokens":574,"cost":0}}
+E-07 return label=escalated ttfc_ms=10006
+E-07 return first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdzę, jak wygląda zwrot w Twojej sytuacji.
+
+Decyzja
+
+Przekazanie do weryfikacji
+
+Bezpieczeństwo
+
+Zapach spalenizny i podejrzenie spuchniętej baterii wymagają ostrożności: natychmiast odłącz telefon od zasilania i nie używaj go. Nie otwieraj obudowy.
+
+Uzasadnienie
+
+Zakup internetowy sprzed 9 dni kwalifikuje się wstępnie do zwrotu ustawowego z §2 ust. 1 Regulaminu zwrotów. Na zdjęciu widać liczne, rozległe pęknięcia ekranu. Zgodnie z §2 ust. 3 same ślady używania ani brak oryginalnego opakowania nie wykluczają zwrotu ustawowego. Jednak pracownik po fizycznych oględzinach ocenia, czy korzystanie wpłynęło na wartość urządzenia, a ewentualne potrącenie ustala po kontroli (§2 ust. 4). Dlatego potrzebna jest ocena pracownika; sprawdzi on także stan urządzenia i jego zgodność ze zgłoszeniem.
+
+Co dalej
+Aby skorzystać ze zwrotu, złóż oświadczenie o odstąpieniu od umowy. To zgłoszenie jest wstępną oceną, a nie samym oświadczeniem (§5 ust. 4).
+Po złożeniu oświadczenia odeślij sprzęt w ciągu 14 dni na adres do zwrotów podany w potwierdzeniu zamówienia albo przynieś go do sklepu stacjonarnego wraz z dowodem zakupu (§2 ust. 6, §5 ust. 2).
+Pracownik obejrzy urządzenie i podejmie ostateczną decyzję (§5 ust. 3).
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓   4 [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › return: safety phrase comes before "Co dalej" (21.0s)
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6490,"finishReason":"stop","usage":{"inputTokens":3932,"outputTokens":561,"reasoningTokens":167,"cost":0}}
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":5,"totalMs":14574,"finishReason":"stop","usage":{"inputTokens":6057,"outputTokens":1018,"reasoningTokens":626,"cost":0}}
+E-08 label=rejected ttfc_ms=11507
+E-08 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdziłem opis i dołączone zdjęcie.
+
+Decyzja
+
+Odrzucenie (wstępne)
+
+Uzasadnienie
+
+Wstępna ocena jest negatywna: na zdjęciu widać rozchodzące się promieniście pęknięcia ekranu i punkt ich zbiegu, co wskazuje na miejscowe uszkodzenie mechaniczne. Tego rodzaju uszkodzenia są wyłączone z reklamacji na podstawie §4 ust. 1 Regulaminu reklamacji. Zgłoszenie mieści się w dwuletnim okresie z §2 ust. 1, ale sam termin nie zmienia oceny widocznych śladów. Opisujesz pionową linię, natomiast na zdjęciu widoczne są pęknięcia — pracownik może zweryfikować tę różnicę podczas oględzin.
+
+To ocena wstępna, nie ostateczna decyzja. Możesz rozważyć gwarancję producenta, płatną naprawę albo konsultację w sklepie stacjonarnym.
+
+Co dalej
+Jeśli chcesz złożyć formalną reklamację, przekaż laptop do sklepu stacjonarnego albo wyślij go na adres do zwrotów podany w potwierdzeniu zamówienia, dołączając dowód zakupu i opis niezgodności.
+Sklep odpowiada na formalną reklamację w ciągu 14 dni od jej otrzymania (§6 ust. 2–3). Ostateczną ocenę pracownik lub serwis przeprowadza po fizycznych oględzinach (§6 ust. 4).
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓   5 [chromium] › tests/e2e/chat-decisions.spec.ts:57:7 › E-08 complaint in store, laptop with a screen defect › label is one of the four and the reply does not blame the customer (24.5s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":8507,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":538,"reasoningTokens":244,"cost":0}}
+E-11 first label=rejected ttfc_ms=10538
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":9,"totalMs":6879,"finishReason":"stop","usage":{"inputTokens":5919,"outputTokens":521,"reasoningTokens":186,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":4,"totalMs":4255,"finishReason":"stop","usage":{"inputTokens":3258,"outputTokens":316,"reasoningTokens":190,"cost":0}}
+E-11 follow-up reply:
+Asystent AI
+
+Dziękuję za doprecyzowanie. Kompletne, nieotwarte opakowanie oraz nienaruszone folie i plomby spełniają te warunki zwrotu dobrowolnego. Na zdjęciu nadal widać jednak mocno popękany ekran, a brak śladów uszkodzeń jest osobnym warunkiem z §3 ust. 3 pkt 1. Możesz rozważyć reklamację, gwarancję producenta, odpłatną naprawę lub konsultację w sklepie stacjonarnym.
+E-11 second decision card: NOT shown
+  ✓   6 [chromium] › tests/e2e/chat-decisions.spec.ts:79:7 › E-11 decision update after new information › a second decision card is shown as an update when the assistant revises it (22.8s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6524,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":541,"reasoningTokens":275,"cost":0}}
+  ✘   1 [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input (2.2m)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":8,"totalMs":10562,"finishReason":"stop","usage":{"inputTokens":5977,"outputTokens":702,"reasoningTokens":332,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":12,"totalMs":5668,"finishReason":"stop","usage":{"inputTokens":3362,"outputTokens":129,"reasoningTokens":95,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":8695,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":727,"reasoningTokens":516,"cost":0}}
+  ✓   8 [chromium] › tests/e2e/chat-controls.spec.ts:108:7 › E-15 new case dialog › cancel keeps the chat, confirm starts an empty form (17.6s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":8057,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":644,"reasoningTokens":302,"cost":0}}
+  ✓   9 [chromium] › tests/e2e/chat-controls.spec.ts:134:7 › E-16 leaving the page › reload on the chat screen shows a beforeunload dialog (13.8s)
+  ✓  10 [chromium] › tests/e2e/chat-controls.spec.ts:148:7 › E-16 leaving the page › reload on the form screen shows no dialog (1.8s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":7333,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":619,"reasoningTokens":279,"cost":0}}
+  ✓  11 [chromium] › tests/e2e/chat-controls.spec.ts:163:7 › E-17 summary photo overlay › opens with the photo, closes with Esc, the close button and an outside click (12.0s)
+  ✘   7 [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input (2.0m)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":7922,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":603,"reasoningTokens":322,"cost":0}}
+  ✓  13 [chromium] › tests/e2e/chat-controls.spec.ts:108:7 › E-15 new case dialog › cancel keeps the chat, confirm starts an empty form (14.4s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":5414,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":543,"reasoningTokens":213,"cost":0}}
+  ✓  14 [chromium] › tests/e2e/chat-controls.spec.ts:134:7 › E-16 leaving the page › reload on the chat screen shows a beforeunload dialog (12.1s)
+  ✓  15 [chromium] › tests/e2e/chat-controls.spec.ts:148:7 › E-16 leaving the page › reload on the form screen shows no dialog (1.5s)
+  ✘  12 [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 360x800: no horizontal scroll and keyboard-only return flow (1.7m)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":8215,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":588,"reasoningTokens":263,"cost":0}}
+  ✓  16 [chromium] › tests/e2e/chat-controls.spec.ts:163:7 › E-17 summary photo overlay › opens with the photo, closes with Esc, the close button and an outside click (13.0s)
+  ✘  17 [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 1920x1080: no horizontal scroll and keyboard-only return flow (1.7m)
+  ✘  18 [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 360x800: no horizontal scroll and keyboard-only return flow (1.7m)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":8865,"finishReason":"stop","usage":{"inputTokens":1301,"outputTokens":634,"reasoningTokens":339,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":9,"totalMs":11162,"finishReason":"stop","usage":{"inputTokens":5998,"outputTokens":716,"reasoningTokens":298,"cost":0}}
+E-06 label=needs_info ttfc_ms=14518
+E-06 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdzę, co można wstępnie ustalić na podstawie przesłanych informacji.
+
+Decyzja
+
+Potrzebne dodatkowe informacje
+
+Uzasadnienie
+
+Z podanych danych wynika, że zakup był internetowy, a od zakupu minęło 9 dni. Wstępnie odpowiada to ścieżce zwrotu ustawowego opisanej w §2 ust. 1 Regulaminu zwrotów. Nie mogę jednak ocenić zgłoszenia na podstawie obecnego zdjęcia, bo jest niezgodne z kategorią „Laptop”: widać na nim tył smartfona Apple z trzema obiektywami aparatu. Nie wiadomo więc, czy zdjęcie przedstawia zgłaszany sprzęt ani jaki jest jego stan. Do oceny potrzebne jest potwierdzenie, jakiego urządzenia dotyczy zwrot. Zgodnie z §5 ust. 3 Regulaminu zwrotów ostateczną decyzję podejmuje pracownik po fizycznych oględzinach.
+
+Co dalej
+Napisz w czacie, czy zwrot dotyczy laptopa, czy smartfona. Jeśli to laptop, opisz krótko, jaki model lub rodzaj urządzenia przedstawia zdjęcie.
+Jeśli potrzebne jest nowe zdjęcie, rozpocznij nowe zgłoszenie przyciskiem „Nowe zgłoszenie”. Zrób zdjęcie w dobrym świetle, pokaż całe urządzenie i dodaj zbliżenie ewentualnego problemu.
+Po wyjaśnieniu rozbieżności możesz odesłać sprzęt na adres do zwrotów podany w potwierdzeniu zamówienia albo przynieść go do sklepu stacjonarnego wraz z dowodem zakupu.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓  19 [chromium] › tests/e2e/chat-decisions.spec.ts:10:7 › E-06 return with a laptop photo needs more information › label needs_info and asks for a new report (23.4s)
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":8111,"finishReason":"stop","usage":{"inputTokens":2433,"outputTokens":616,"reasoningTokens":154,"cost":0}}
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":6,"totalMs":10351,"finishReason":"stop","usage":{"inputTokens":5980,"outputTokens":930,"reasoningTokens":491,"cost":0}}
+E-07 complaint label=escalated ttfc_ms=10583
+E-07 complaint first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdzę je wstępnie na podstawie opisu i zdjęcia.
+
+Decyzja
+
+Przekazanie do weryfikacji
+
+Bezpieczeństwo
+
+Ponieważ w opisie zgłaszasz spuchniętą baterię i zapach spalenizny, natychmiast odłącz telefon od zasilania i przestań go używać. Nie otwieraj obudowy (§7 ust. 1–2 Regulaminu reklamacji).
+
+Uzasadnienie
+
+Zgłoszenie mieści się w dwuletnim okresie odpowiedzialności (§2 ust. 1 Regulaminu reklamacji). Na zdjęciu widać liczne pęknięcia ekranu oraz rozległe ciemne obszary; widoczne ślady wskazują na możliwe uszkodzenie mechaniczne, które jest wyłączone z reklamacji (§4 ust. 1). Jednocześnie zdjęcie nie pozwala ocenić baterii ani ustalić, czy zgłaszane objawy mają związek z widocznym uszkodzeniem. Dlatego potrzebne są oględziny telefonu przez pracownika lub serwis; ten wstępny wynik nie przesądza o ostatecznym rozpatrzeniu.
+
+Co dalej
+Możesz przekazać telefon do sklepu stacjonarnego albo wysłać go na adres do zwrotów podany w potwierdzeniu zamówienia. Dołącz dowód zakupu i opis niezgodności, w tym informację o spuchniętej baterii i zapachu spalenizny.
+Pracownik lub serwis sprawdzi stan ekranu i obudowy oraz oceni baterię i możliwą przyczynę objawów. Sklep odpowiada na formalną reklamację w ciągu 14 dni od jej otrzymania (§6 ust. 2–4).
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓  21 [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › complaint: safety phrase comes before "Co dalej" (21.3s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6477,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":653,"reasoningTokens":296,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":10,"totalMs":17985,"finishReason":"stop","usage":{"inputTokens":6228,"outputTokens":978,"reasoningTokens":575,"cost":0}}
+E-07 return label=escalated ttfc_ms=11156
+E-07 return first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdzę, jaką ścieżkę zwrotu przewiduje regulamin.
+
+Decyzja
+
+Przekazanie do weryfikacji
+
+Bezpieczeństwo
+
+W zgłoszeniu podajesz, że bateria jest spuchnięta i czuć zapach spalenizny. Natychmiast odłącz smartfon od zasilania, nie używaj go i nie otwieraj obudowy.
+
+Uzasadnienie
+
+Zakup internetowy zgłoszono 9 dni od zakupu, więc dotyczy go zwrot ustawowy z §2 ust. 1 Regulaminu zwrotów. Widoczne na zdjęciu liczne pęknięcia ekranu same w sobie nie wykluczają tej ścieżki — §2 ust. 3 stanowi, że ślady używania nie odbierają prawa do zwrotu ustawowego. Jednak pracownik musi fizycznie obejrzeć urządzenie i ocenić, czy korzystanie wpłynęło na jego wartość; ewentualne potrącenie ustala po oględzinach (§2 ust. 4). Dlatego wynik wymaga weryfikacji.
+
+Co dalej
+Pracownik sprawdzi stan smartfona podczas fizycznych oględzin i podejmie ostateczną decyzję.
+Możesz przynieść urządzenie z dowodem zakupu do sklepu stacjonarnego albo odesłać je na adres do zwrotów podany w potwierdzeniu zamówienia (§5 ust. 2).
+Pamiętaj, że ta wstępna ocena nie jest oświadczeniem o odstąpieniu od umowy (§5 ust. 4).
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓  22 [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › return: safety phrase comes before "Co dalej" (27.5s)
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6602,"finishReason":"stop","usage":{"inputTokens":3932,"outputTokens":482,"reasoningTokens":116,"cost":0}}
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":3,"totalMs":15931,"finishReason":"stop","usage":{"inputTokens":5815,"outputTokens":1055,"reasoningTokens":634,"cost":0}}
+E-08 label=rejected ttfc_ms=8633
+E-08 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdziłem opis i załączone zdjęcie.
+
+Decyzja
+
+Odrzucenie (wstępne)
+
+Uzasadnienie
+
+Opisujesz pionową linię na ekranie, ale na zdjęciu widać rozchodzące się promieniście pęknięcia w jego lewej dolnej części; nie widać wyraźnie zgłaszanej linii. To istotna rozbieżność, więc na podstawie obecnych informacji nie mogę ocenić, czy chodzi o tę samą usterkę. Pęknięcia mogą wskazywać na uszkodzenie mechaniczne opisane w §4 ust. 1 Regulaminu reklamacji. Z kolei pionowe linie mogą być wadą ekranu, o której mowa w §5 ust. 1, jeśli nie towarzyszą im ślady z §4.
+
+Co dalej
+Napisz tutaj, czy pęknięcia widoczne na zdjęciu są na tym laptopie i czy występują niezależnie od zgłaszanej pionowej linii.
+Jeśli potrzebne będzie nowe zdjęcie, rozpocznij nowe zgłoszenie przyciskiem „Nowe zgłoszenie”. Zrób je w dobrym świetle, pokaż całe urządzenie i dodaj zbliżenie problemu.
+Po wyjaśnieniu rozbieżności można ustalić dalszy krok. Formalną reklamację składa się, przekazując sprzęt z dowodem zakupu i opisem do sklepu stacjonarnego albo wysyłając go na adres do zwrotów podany w potwierdzeniu zamówienia; odpowiedź na formalną reklamację jest udzielana w terminie 14 dni (§6 ust. 2–3 Regulaminu reklamacji).
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓  23 [chromium] › tests/e2e/chat-decisions.spec.ts:57:7 › E-08 complaint in store, laptop with a screen defect › label is one of the four and the reply does not blame the customer (26.0s)
+  ✘  20 [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 1920x1080: no horizontal scroll and keyboard-only return flow (1.7m)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":10194,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":570,"reasoningTokens":259,"cost":0}}
+E-11 first label=rejected ttfc_ms=12653
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":5,"totalMs":8737,"finishReason":"stop","usage":{"inputTokens":5923,"outputTokens":727,"reasoningTokens":362,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":3,"totalMs":3355,"finishReason":"stop","usage":{"inputTokens":3291,"outputTokens":299,"reasoningTokens":136,"cost":0}}
+E-11 follow-up reply:
+Asystent AI
+
+Dziękuję za doprecyzowanie. Kompletne, nieotwarte opakowanie oraz nienaruszone folie i plomby spełniają te warunki, ale nie zmieniają oceny widocznego pęknięcia ekranu. Przy zwrocie dobrowolnym wymagane jest również, by sprzęt nie nosił śladów uszkodzeń (§3 ust. 3 Regulaminu zwrotów).
+
+Możesz skorzystać z reklamacji, jeśli uważasz, że sprzęt jest niezgodny z umową, albo sprawdzić możliwość naprawy w ramach gwarancji producenta, odpłatnej naprawy czy konsultacji w sklepie stacjonarnym.
+E-11 second decision card: NOT shown
+  ✓  24 [chromium] › tests/e2e/chat-decisions.spec.ts:79:7 › E-11 decision update after new information › a second decision card is shown as an update when the assistant revises it (25.9s)
+
+
+  1) [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'Zatrzymaj', exact: true })
+    Expected: visible
+    Timeout: 90000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('button', { name: 'Zatrzymaj', exact: true }) with timeout 90000ms
+      - waiting for getByRole('button', { name: 'Zatrzymaj', exact: true })
+
+
+      81 |
+      82 |     // While streaming the send button is replaced by the stop button.
+    > 83 |     await expect(chat.stopButton()).toBeVisible();
+         |                                     ^
+      84 |     await expect(chat.sendButton()).toHaveCount(0);
+      85 |     const streamed = chat.assistantMessages().last();
+      86 |     await expect
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-controls.spec.ts:83:37
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 360x800: no horizontal scroll and keyboard-only return flow 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('Analizujemy zdjęcie…', { exact: true }).first()
+    Expected: visible
+    Timeout: 90000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('Analizujemy zdjęcie…', { exact: true }).first() with timeout 90000ms
+      - waiting for getByText('Analizujemy zdjęcie…', { exact: true }).first()
+
+
+       at e2e/pages/chat.page.ts:121
+
+      119 |     await expect(
+      120 |       this.page.getByText(texts.processing.analyzing, { exact: true }).first()
+    > 121 |     ).toBeVisible();
+          |       ^
+      122 |     await expect(
+      123 |       this.page.getByText(texts.processing.deciding, { exact: true }).first()
+      124 |     ).toBeVisible();
+        at ChatPage.expectProcessingSteps (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/pages/chat.page.ts:121:7)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-controls.spec.ts:245:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 1920x1080: no horizontal scroll and keyboard-only return flow 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('Analizujemy zdjęcie…', { exact: true }).first()
+    Expected: visible
+    Timeout: 90000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('Analizujemy zdjęcie…', { exact: true }).first() with timeout 90000ms
+      - waiting for getByText('Analizujemy zdjęcie…', { exact: true }).first()
+
+
+       at e2e/pages/chat.page.ts:121
+
+      119 |     await expect(
+      120 |       this.page.getByText(texts.processing.analyzing, { exact: true }).first()
+    > 121 |     ).toBeVisible();
+          |       ^
+      122 |     await expect(
+      123 |       this.page.getByText(texts.processing.deciding, { exact: true }).first()
+      124 |     ).toBeVisible();
+        at ChatPage.expectProcessingSteps (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/pages/chat.page.ts:121:7)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-controls.spec.ts:245:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-b2376-d-keyboard-only-return-flow-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-b2376-d-keyboard-only-return-flow-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-controls-E-18-smoke-r-b2376-d-keyboard-only-return-flow-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-b2376-d-keyboard-only-return-flow-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat-controls-E-18-smoke-r-b2376-d-keyboard-only-return-flow-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'Zatrzymaj', exact: true })
+    Expected: visible
+    Timeout: 90000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('button', { name: 'Zatrzymaj', exact: true }) with timeout 90000ms
+      - waiting for getByRole('button', { name: 'Zatrzymaj', exact: true })
+
+
+      81 |
+      82 |     // While streaming the send button is replaced by the stop button.
+    > 83 |     await expect(chat.stopButton()).toBeVisible();
+         |                                     ^
+      84 |     await expect(chat.sendButton()).toHaveCount(0);
+      85 |     const streamed = chat.assistantMessages().last();
+      86 |     await expect
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-controls.spec.ts:83:37
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium-repeat1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium-repeat1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium-repeat1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium-repeat1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium-repeat1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 360x800: no horizontal scroll and keyboard-only return flow 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('Analizujemy zdjęcie…', { exact: true }).first()
+    Expected: visible
+    Timeout: 90000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('Analizujemy zdjęcie…', { exact: true }).first() with timeout 90000ms
+      - waiting for getByText('Analizujemy zdjęcie…', { exact: true }).first()
+
+
+       at e2e/pages/chat.page.ts:121
+
+      119 |     await expect(
+      120 |       this.page.getByText(texts.processing.analyzing, { exact: true }).first()
+    > 121 |     ).toBeVisible();
+          |       ^
+      122 |     await expect(
+      123 |       this.page.getByText(texts.processing.deciding, { exact: true }).first()
+      124 |     ).toBeVisible();
+        at ChatPage.expectProcessingSteps (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/pages/chat.page.ts:121:7)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-controls.spec.ts:245:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium-repeat1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium-repeat1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium-repeat1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium-repeat1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium-repeat1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 1920x1080: no horizontal scroll and keyboard-only return flow 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('Analizujemy zdjęcie…', { exact: true }).first()
+    Expected: visible
+    Timeout: 90000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('Analizujemy zdjęcie…', { exact: true }).first() with timeout 90000ms
+      - waiting for getByText('Analizujemy zdjęcie…', { exact: true }).first()
+
+
+       at e2e/pages/chat.page.ts:121
+
+      119 |     await expect(
+      120 |       this.page.getByText(texts.processing.analyzing, { exact: true }).first()
+    > 121 |     ).toBeVisible();
+          |       ^
+      122 |     await expect(
+      123 |       this.page.getByText(texts.processing.deciding, { exact: true }).first()
+      124 |     ).toBeVisible();
+        at ChatPage.expectProcessingSteps (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/pages/chat.page.ts:121:7)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-controls.spec.ts:245:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-b2376-d-keyboard-only-return-flow-chromium-repeat1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-b2376-d-keyboard-only-return-flow-chromium-repeat1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-controls-E-18-smoke-r-b2376-d-keyboard-only-return-flow-chromium-repeat1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-b2376-d-keyboard-only-return-flow-chromium-repeat1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat-controls-E-18-smoke-r-b2376-d-keyboard-only-return-flow-chromium-repeat1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input 
+    [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 360x800: no horizontal scroll and keyboard-only return flow 
+    [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 1920x1080: no horizontal scroll and keyboard-only return flow 
+    [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input 
+    [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 360x800: no horizontal scroll and keyboard-only return flow 
+    [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 1920x1080: no horizontal scroll and keyboard-only return flow 
+  18 passed (9.0m)

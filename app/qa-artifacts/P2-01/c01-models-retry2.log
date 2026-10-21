@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+{
+  "llm": {
+    "id": "openai/gpt-6-luna",
+    "supported_parameters": [
+      "include_reasoning",
+      "max_completion_tokens",
+      "max_tokens",
+      "reasoning",
+      "reasoning_effort",
+      "response_format",
+      "seed",
+      "structured_outputs",
+      "tool_choice",
+      "tools",
+      "verbosity"
+    ]
+  },
+  "vision": {
+    "id": "openai/gpt-6-luna",
+    "input_modalities": [
+      "file",
+      "image",
+      "text"
+    ],
+    "supported_parameters": [
+      "include_reasoning",
+      "max_completion_tokens",
+      "max_tokens",
+      "reasoning",
+      "reasoning_effort",
+      "response_format",
+      "seed",
+      "structured_outputs",
+      "tool_choice",
+      "tools",
+      "verbosity"
+    ]
+  }
+}
+  ✓  1 [contract] › tests/contract/models.contract.ts:16:7 › C-01 model capabilities › configured vision and LLM models support required capabilities (871ms)
+
+  1 passed (18.8s)

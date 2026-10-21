@@ -1,0 +1,7 @@
+▲ Next.js 16.4.2
+- Local:         http://localhost:3000
+- Network:       http://10.123.3.95:3000
+✓ Ready in 471ms
+✓ Running next.config.ts took 104ms
+TEMP-DEBUG-P2-06 AI_APICallError No endpoints found that can handle the requested parameters. To learn more about provider routing, visit: https://openrouter.ai/docs/guides/routing/provider-selection "{\"error\":{\"message\":\"No endpoints found that can handle the requested parameters. To learn more about provider routing, visit: https://openrouter.ai/docs/guides/routing/provider-selection\",\"code\":404,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":7},{\"step\":\"Filter by Regional Surcharge\",\"endpoint_count\":4},{\"step\":\"Filter by Tier Endpoint Rows\",\"endpoint_count\":2,\"reason\":\"Excluded tier endpoint rows the request did not opt into\"}],\"failed_routing_step\":\"Filter by Parameters\"}}}" ""
+{"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ANALYSIS_FAILED","route":"analyze","totalMs":204}

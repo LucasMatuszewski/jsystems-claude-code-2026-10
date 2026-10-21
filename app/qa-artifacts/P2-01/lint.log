@@ -1,0 +1,39 @@
+
+> hardware-service-decision-copilot@0.1.0 lint
+> ultracite check
+
+lib/image/reduce.test.ts:2:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Sort the imported names.
+  
+     1 │ import { describe, expect, it, vi } from "vitest";
+   > 2 │ import {
+       │ ^^^^^^^^
+   > 3 │   MAX_EDGE,
+   > 4 │   MAX_ROUNDS,
+        ...
+  > 10 │   targetSize,
+  > 11 │ } from "@/lib/image/reduce";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    12 │ 
+    13 │ type CanvasLog = { width: number; height: number; quality: number }[];
+  
+  i Safe fix: Organize imports and exports (Biome)
+  
+      4   4 │     MAX_ROUNDS,
+      5   5 │     QUALITY_STEPS,
+      6     │ - ··ReductionError,
+      7     │ - ··type·ReduceDeps,
+          6 │ + ··type·ReduceDeps,
+          7 │ + ··ReductionError,
+      8   8 │     reducePhoto,
+      9   9 │     SCALE_STEP,
+  
+
+Checked 89 files in 1886ms. No fixes applied.
+Found 1 error.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

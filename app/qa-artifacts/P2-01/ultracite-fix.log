@@ -1,0 +1,53 @@
+tests/contract/analyze.contract.ts:23:1 lint/suspicious/useAwait ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × This async function lacks an await expression.
+  
+    21 │   | { name: string; mimeType: string; buffer: Buffer };
+    22 │ 
+  > 23 │ async function postAnalyze(
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 24 │   request: APIRequestContext,
+  > 25 │   multipart: Record<string, MultipartValue>
+  > 26 │ ): Promise<APIResponse> {
+  > 27 │   return request.post(ENDPOINT, { multipart });
+  > 28 │ }
+       │ ^
+    29 │ 
+    30 │ function responseHeaders(response: APIResponse): Record<string, string> {
+  
+  i Remove this async modifier, or add an await expression in the function.
+  
+    21 │   | { name: string; mimeType: string; buffer: Buffer };
+    22 │ 
+  > 23 │ async function postAnalyze(
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 24 │   request: APIRequestContext,
+  > 25 │   multipart: Record<string, MultipartValue>
+  > 26 │ ): Promise<APIResponse> {
+  > 27 │   return request.post(ENDPOINT, { multipart });
+  > 28 │ }
+       │ ^
+    29 │ 
+    30 │ function responseHeaders(response: APIResponse): Record<string, string> {
+  
+  i Async functions without await expressions may not need to be declared async.
+  
+
+tests/contract/models.contract.ts:16:81 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected empty object pattern.
+  
+    15 │ test.describe("C-01 model capabilities", () => {
+  > 16 │   test("configured vision and LLM models support required capabilities", async ({}, testInfo) => {
+       │                                                                                 ^^
+    17 │     const apiKey = process.env.OPENROUTER_API_KEY;
+    18 │     const visionModelId = process.env.VISION_MODEL || process.env.LLM_MODEL;
+  
+
+Checked 5 files in 2s. Fixed 4 files.
+Found 2 errors.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while applying fixes.
+  
+

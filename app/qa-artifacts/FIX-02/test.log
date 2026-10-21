@@ -1,0 +1,130 @@
+
+> hardware-service-decision-copilot@0.1.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v5.0.5 /home/labuser/DEV/jsystems-claude-code-2026-10/app
+
+ ❯ |dom| lib/session/use-case-chat.test.tsx (12 tests | 6 failed) 1831ms
+   ❯ useCaseChat (12)
+     × 5. marks a silent follow-up as failed after 60 s and retries without duplicating the user message 57ms
+     × does not time out a follow-up that starts streaming content 42ms
+     × stop during a follow-up keeps the partial reply and sets no marker 37ms
+     × 6. HTTP 413 REQUEST_TOO_LARGE on a follow-up disables the input and ignores further sends 61ms
+     × a failed follow-up (network error) gets a failed marker 12ms
+     × 7. confirmNewCase resets to a fresh form with a new chat id and no messages 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |dom| lib/session/use-case-chat.test.tsx > useCaseChat > 5. marks a silent follow-up as failed after 60 s and retries without duplicating the user message
+AssertionError: expected 'processing' to be 'chat' // Object.is equality
+
+Expected: "chat"
+Received: "processing"
+
+ ❯ completeFirstTurn lib/session/use-case-chat.test.tsx:167:30
+    165|   startFlow();
+    166|   await waitFor(() => expect(probe.state.screen).toBe("chat"));
+    167|   await waitFor(() => expect(probe.chat.status).toBe("ready"));
+       |                              ^
+    168|   return mock;
+    169| }
+ ❯ lib/session/use-case-chat.test.tsx:299:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  |dom| lib/session/use-case-chat.test.tsx > useCaseChat > does not time out a follow-up that starts streaming content
+AssertionError: expected 'processing' to be 'chat' // Object.is equality
+
+Expected: "chat"
+Received: "processing"
+
+ ❯ completeFirstTurn lib/session/use-case-chat.test.tsx:167:30
+    165|   startFlow();
+    166|   await waitFor(() => expect(probe.state.screen).toBe("chat"));
+    167|   await waitFor(() => expect(probe.chat.status).toBe("ready"));
+       |                              ^
+    168|   return mock;
+    169| }
+ ❯ lib/session/use-case-chat.test.tsx:337:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  |dom| lib/session/use-case-chat.test.tsx > useCaseChat > stop during a follow-up keeps the partial reply and sets no marker
+AssertionError: expected 'processing' to be 'chat' // Object.is equality
+
+Expected: "chat"
+Received: "processing"
+
+ ❯ completeFirstTurn lib/session/use-case-chat.test.tsx:167:30
+    165|   startFlow();
+    166|   await waitFor(() => expect(probe.state.screen).toBe("chat"));
+    167|   await waitFor(() => expect(probe.chat.status).toBe("ready"));
+       |                              ^
+    168|   return mock;
+    169| }
+ ❯ lib/session/use-case-chat.test.tsx:351:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  |dom| lib/session/use-case-chat.test.tsx > useCaseChat > 6. HTTP 413 REQUEST_TOO_LARGE on a follow-up disables the input and ignores further sends
+AssertionError: expected 'processing' to be 'chat' // Object.is equality
+
+Expected: "chat"
+Received: "processing"
+
+ ❯ completeFirstTurn lib/session/use-case-chat.test.tsx:167:30
+    165|   startFlow();
+    166|   await waitFor(() => expect(probe.state.screen).toBe("chat"));
+    167|   await waitFor(() => expect(probe.chat.status).toBe("ready"));
+       |                              ^
+    168|   return mock;
+    169| }
+ ❯ lib/session/use-case-chat.test.tsx:368:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  |dom| lib/session/use-case-chat.test.tsx > useCaseChat > a failed follow-up (network error) gets a failed marker
+AssertionError: expected 'processing' to be 'chat' // Object.is equality
+
+Expected: "chat"
+Received: "processing"
+
+ ❯ completeFirstTurn lib/session/use-case-chat.test.tsx:167:30
+    165|   startFlow();
+    166|   await waitFor(() => expect(probe.state.screen).toBe("chat"));
+    167|   await waitFor(() => expect(probe.chat.status).toBe("ready"));
+       |                              ^
+    168|   return mock;
+    169| }
+ ❯ lib/session/use-case-chat.test.tsx:398:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  |dom| lib/session/use-case-chat.test.tsx > useCaseChat > 7. confirmNewCase resets to a fresh form with a new chat id and no messages
+AssertionError: expected 'processing' to be 'chat' // Object.is equality
+
+Expected: "chat"
+Received: "processing"
+
+ ❯ completeFirstTurn lib/session/use-case-chat.test.tsx:167:30
+    165|   startFlow();
+    166|   await waitFor(() => expect(probe.state.screen).toBe("chat"));
+    167|   await waitFor(() => expect(probe.chat.status).toBe("ready"));
+       |                              ^
+    168|   return mock;
+    169| }
+ ❯ lib/session/use-case-chat.test.tsx:410:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed | 52 passed (53)
+      Tests  6 failed | 460 passed (466)
+   Start at  15:26:33
+   Duration  62.19s (environment 45%, import 20%, tests 18%, setup 11%, transform 6%, worker 1%)
+

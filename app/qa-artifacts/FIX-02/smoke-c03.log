@@ -1,0 +1,9 @@
+
+Running 4 tests using 1 worker
+
+  ✓  1 [contract] › tests/contract/analyze.contract.ts:137:7 › C-03 analyze rejects › C-03 (a) oversized photo returns 413 PHOTO_TOO_LARGE (1.8s)
+  ✓  2 [contract] › tests/contract/analyze.contract.ts:154:7 › C-03 analyze rejects › C-03 (b) missing photo returns 400 PHOTO_REQUIRED (319ms)
+  ✓  3 [contract] › tests/contract/analyze.contract.ts:168:7 › C-03 analyze rejects › C-03 (c) invalid fields return 400 VALIDATION_ERROR with field errors (318ms)
+  ✓  4 [contract] › tests/contract/analyze.contract.ts:193:7 › C-03 analyze rejects › C-03 (d) JSON body returns 415 UNSUPPORTED_CONTENT_TYPE (203ms)
+
+  4 passed (2.6m)

@@ -1,0 +1,15 @@
+
+> hardware-service-decision-copilot@0.1.0 start
+> next start
+
+▲ Next.js 16.4.2
+- Local:         http://localhost:3000
+- Network:       http://10.123.3.95:3000
+✓ Ready in 411ms
+✓ Running next.config.ts took 93ms
+{"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":9407,"usage":{"inputTokens":2361,"outputTokens":660,"cost":0}}
+{"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":28,"totalMs":62145,"usage":{"inputTokens":6061,"outputTokens":690,"cost":0}}
+{"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":11528,"usage":{"inputTokens":2361,"outputTokens":792,"cost":0}}
+{"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":6,"totalMs":15204,"usage":{"inputTokens":6143,"outputTokens":810,"cost":0}}
+{"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":12250,"usage":{"inputTokens":2435,"outputTokens":515,"cost":0}}
+{"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":6,"totalMs":11038,"usage":{"inputTokens":5790,"outputTokens":853,"cost":0}}

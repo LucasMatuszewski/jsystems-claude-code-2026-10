@@ -1,0 +1,457 @@
+
+Running 35 tests using 2 workers
+
+E-12 off-topic reply (56 chars):
+Asystent AI
+
+Mogę pomóc tylko w sprawie tego zgłoszenia.
+  ✘   1 [chromium] › tests/e2e/chat-conversation.spec.ts:18:7 › E-12 off-topic and prompt-injection messages › off-topic reply is short and the decision label is kept (28.6s)
+E-12 injection reply:
+Asystent AI
+
+Sama prośba nie zmienia oceny. Ze względu na widoczne pęknięcia ekranu pracownik musi obejrzeć telefon i ocenić, czy wpłynęły one na jego wartość; możesz przynieść go z dowodem zakupu do sklepu stacjonarnego albo odesłać na adres do zwrotów podany w potwierdzeniu zamówienia.
+E-12 injection: label before=escalated after=escalated cards 1->1
+  ✓   3 [chromium] › tests/e2e/chat-conversation.spec.ts:33:7 › E-12 off-topic and prompt-injection messages › injection attempt does not change the label unless a new card with a reason appears (30.3s)
+E-13 reply:
+Asystent AI
+
+Tak. Możesz odesłać telefon kurierem na adres do zwrotów podany w potwierdzeniu zamówienia. Dołącz dowód zakupu i nadaj przesyłkę w ciągu 14 dni od złożenia oświadczenia o odstąpieniu od umowy (§2 ust. 6 i §5 ust. 2).
+E-13 diacritics=true polishMarkers=1
+  ✓   4 [chromium] › tests/e2e/chat-conversation.spec.ts:62:7 › E-13 follow-up in English gets a Polish reply › reply is in Polish (diacritics or several Polish words) (28.7s)
+E-06 label=needs_info ttfc_ms=11242
+E-06 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdzę, co można ocenić na podstawie przesłanych informacji.
+
+Decyzja
+
+Potrzebne dodatkowe informacje
+
+Uzasadnienie
+
+Zakup internetowy zgłoszono 9 dni temu, więc według §2 ust. 1 Regulaminu zwrotów sprawa mieści się w terminie zwrotu ustawowego. Nie mogę jednak ocenić zgłoszenia, bo formularz wskazuje laptop, a na zdjęciu widać niebieski smartfon Apple z tylnym aparatem. Nie widać ekranu ani urządzenia odpowiadającego opisowi laptopa, więc brakuje potwierdzenia, jakiego sprzętu dotyczy zwrot. Zgodnie z §5 ust. 1 wstępna ocena opiera się na zgłoszonych informacjach.
+
+Co dalej
+Napisz w czacie, czy zwracanym sprzętem jest laptop, czy telefon.
+Ponieważ potrzebne jest nowe, zgodne ze zgłoszeniem zdjęcie, rozpocznij nowe zgłoszenie przyciskiem „Nowe zgłoszenie”. Zrób zdjęcie w dobrym świetle, pokazując całe urządzenie, i dodaj zbliżenie ewentualnego problemu.
+Po wstępnej ocenie możesz odesłać sprzęt na adres do zwrotów podany w potwierdzeniu zamówienia albo przynieść go do sklepu stacjonarnego wraz z dowodem zakupu. fizyczne oględziny wykona pracownik.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓   5 [chromium] › tests/e2e/chat-decisions.spec.ts:10:7 › E-06 return with a laptop photo needs more information › label needs_info and asks for a new report (18.7s)
+  ✘   2 [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input (2.0m)
+  ✓   7 [chromium] › tests/e2e/chat-controls.spec.ts:108:7 › E-15 new case dialog › cancel keeps the chat, confirm starts an empty form (19.1s)
+E-07 complaint label=escalated ttfc_ms=8932
+E-07 complaint first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdzę je wstępnie na podstawie opisu i zdjęcia.
+
+Decyzja
+
+Przekazanie do weryfikacji
+
+Bezpieczeństwo
+
+Ponieważ zgłaszasz spuchniętą baterię i zapach spalenizny, nat
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✘   6 [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › complaint: safety phrase comes before "Co dalej" (1.0m)
+  ✘   8 [chromium] › tests/e2e/chat-controls.spec.ts:134:7 › E-16 leaving the page › reload on the chat screen shows a beforeunload dialog (1.2m)
+  ✓  10 [chromium] › tests/e2e/chat-controls.spec.ts:148:7 › E-16 leaving the page › reload on the form screen shows no dialog (2.0s)
+  ✓  11 [chromium] › tests/e2e/chat-controls.spec.ts:163:7 › E-17 summary photo overlay › opens with the photo, closes with Esc, the close button and an outside click (14.9s)
+  ✘   9 [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › return: safety phrase comes before "Co dalej" (1.2m)
+E-08 label=rejected ttfc_ms=9840
+E-08 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdziłem opis i załączone zdjęcie.
+
+Decyzja
+
+Odrzucenie (wstępne)
+
+Uzasadnienie
+
+Wstępnie reklamacja nie spełnia warunku z §4 ust. 1 Regulaminu reklamacji: wyłączenie obejmuje mechaniczne pęknięcia ekranu z widocznym punktem uderzenia. Na zdjęciu widać pęknięcie w lewej dolnej części ekranu, z liniami rozchodzącymi się promieniście od jednego punktu. Widoczne ślady wskazują na miejscowe uszkodzenie mechaniczne, a nie na typową wadę ekranu opisaną w §5 ust. 1. To ocena wstępna — zgodnie z §6 ust. 4 ostateczną decyzję podejmuje pracownik lub serwis po oględzinach.
+
+Możesz sprawdzić, czy obejmuje Cię gwarancja producenta, zlecić odpłatną naprawę albo skonsultować sprzęt w sklepie stacjonarnym.
+
+Co dalej
+Jeśli chcesz złożyć formalną reklamację, przekaż laptop do sklepu stacjonarnego lub wyślij go na adres do zwrotów podany w potwierdzeniu zamówienia. Dołącz dowód zakupu i opis niezgodności — zgodnie z §6 ust. 2.
+Sklep odpowiada na formalną reklamację w ciągu 14 dni od jej otrzymania (§6 ust. 3).
+Jeśli wybierzesz gwarancję producenta lub odpłatną naprawę, sprawdź warunki gwarancji albo omów zakres naprawy ze sklepem.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓  13 [chromium] › tests/e2e/chat-decisions.spec.ts:57:7 › E-08 complaint in store, laptop with a screen defect › label is one of the four and the reply does not blame the customer (22.4s)
+E-11 first label=rejected ttfc_ms=19013
+E-11 follow-up reply:
+Asystent AI
+
+Dziękuję za doprecyzowanie. Kompletne opakowanie oraz nienaruszone folie i plomby spełniają część warunków, ale na zdjęciu nadal widać mocno pęknięty ekran. To nie spełnia warunku braku śladów uszkodzeń z §3 ust. 3 pkt 1 i możliwości ponownej sprzedaży jako nowego z §3 ust. 3 pkt 3. Dlatego warunki zwrotu dobrowolnego z §3 ust. 4 nadal nie są spełnione.
+
+Jeśli zauważysz spuchnięcie baterii, iskrzenie, dym lub zapach spalenizny, natychmiast odłącz telefon od zasilania, nie używaj go i nie otwieraj obudowy.
+
+Co dalej: Możesz skorzystać ze ścieżki reklamacji, sprawdzić gwarancję producenta, zlecić odpłatną naprawę albo przynieść telefon na konsultację do sklepu stacjonarnego.
+E-11 second decision card: NOT shown
+  ✓  14 [chromium] › tests/e2e/chat-decisions.spec.ts:79:7 › E-11 decision update after new information › a second decision card is shown as an update when the assistant revises it (36.6s)
+  ✘  12 [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 360x800: no horizontal scroll and keyboard-only return flow (1.6m)
+E-03 label=escalated ttfc_ms=13454
+E-03 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdziłem wstępnie warunki zwrotu.
+
+Decyzja
+
+Przekazanie do weryfikacji
+
+Uzasadnienie
+
+Zakup był przez internet, a od zakupu minęło 9 dni, więc zgłoszenie mieści się w terminie zwrotu ustawowego z §2 ust. 1 Regulaminu zwrotów. Widoczne na zdjęciu liczne pęknięcia i rozległe ciemne obszary na ekranie same w sobie nie wykluczają tego zwrotu (§2 ust. 3). Mogą jednak wymagać oceny, czy korzystanie ze sprzętu zmniejszyło jego wartość. Zgodnie z §2 ust. 4 ustala to pracownik po fizycznych oględzinach. Dlatego potrzebna jest ocena sprzętu na miejscu.
+
+Co dalej
+Przynieś smartfon wraz z dowodem zakupu do sklepu stacjonarnego albo odeślij go na adres do zwrotów podany w potwierdzeniu zamówienia.
+Pracownik obejrzy urządzenie i oceni jego stan oraz ewentualne zmniejszenie wartości. Ostateczną decyzję podejmuje sklep po oględzinach (§5 ust. 2–4).
+Pamiętaj, że ta wstępna ocena nie jest oświadczeniem o odstąpieniu od umowy ani ostateczną decyzją sklepu.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✘  15 [chromium] › tests/e2e/chat-happy.spec.ts:9:7 › E-03 @smoke return online, phone with photo gets a decision › decision card, first message structure, disclaimer, summary and TTFC (45.4s)
+E-04 label=rejected ttfc_ms=19511
+E-04 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdziłem warunki zwrotu i opis problemu z telefonem.
+
+Decyzja
+
+Odrzucenie (wstępne)
+
+Bezpieczeństwo
+
+Jeśli telefon ma spuchniętą baterię, iskrzy, dymi lub czuć zapach spalenizny, natychmiast odłącz go od zasilania i nie używaj. Nie otwieraj obudowy.
+
+Uzasadnienie
+
+Nie mogę wstępnie zakwalifikować tego zgłoszenia jako zwrotu: od zakupu internetowego minęło 40 dni, a §4 ust. 3 Regulaminu zwrotów wyłącza zwrot po upływie 30 dni. Na zdjęciu widać liczne pęknięcia ekranu i jego bardzo ciemny fragment. Zgłaszasz też samoczynne restarty telefonu.
+
+Możesz zamiast zwrotu zgłosić reklamację dotyczącą restartów — czyli sprawę niezgodnego działania sprzętu — albo skorzystać z gwarancji producenta, odpłatnej naprawy lub konsultacji w sklepie stacjonarnym. Widoczne pęknięcia ekranu nie przesądzają same w sobie, co powoduje restarty.
+
+Co dalej
+Jeśli chcesz zgłosić problem z restartami, wybierz ścieżkę reklamacji zamiast zwrotu. Możesz też sprawdzić działanie telefonu po ponownym uruchomieniu oraz sprawdzić ładowarkę i kabel.
+Możesz przynieść telefon do sklepu stacjonarnego na konsultację albo sprawdzić warunki gwarancji producenta.
+Jeśli wybierzesz zwrot, obecne warunki go nie obejmują; procedura zwrotu wskazuje odesłanie sprzętu na adres do zwrotów podany w potwierdzeniu zamówienia lub przyniesienie go do sklepu stacjonarnego z dowodem zakupu.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓  17 [chromium] › tests/e2e/chat-happy.spec.ts:50:7 › E-04 return online, 40 days, repeated failure leads to rejection › label rejected and the reply mentions a complaint (reklamacja) (29.1s)
+E-05 label=rejected ttfc_ms=10715
+E-05 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdzę je wstępnie na podstawie podanych informacji i zdjęcia.
+
+Decyzja
+
+Odrzucenie (wstępne)
+
+Uzasadnienie
+
+Według danych zgłoszenia od zakupu minęło 800 dni. Zgodnie z §2 ust. 3 Regulaminu reklamacji po upływie 2 lat reklamacja w sklepie nie przysługuje; możesz sprawdzić, czy nadal obowiązuje gwarancja producenta. Na zdjęciu widać tył smartfona i moduł aparatów, bez wyraźnych uszkodzeń, ale fotografia nie pokazuje, czy telefon ładuje się po podłączeniu zasilania.
+
+Co dalej
+Sprawdź, czy telefon reaguje na inną sprawną ładowarkę i kabel oraz spróbuj go uruchomić ponownie.
+Jeśli problem nadal występuje, sprawdź warunki gwarancji producenta. Możesz też poprosić o płatną naprawę albo skonsultować urządzenie w sklepie stacjonarnym.
+Jeśli przekażesz urządzenie do sprawdzenia, dołącz dowód zakupu i opis problemu. To wstępna ocena; dalsze możliwości zależą od sprawdzenia urządzenia i warunków gwarancji.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓  18 [chromium] › tests/e2e/chat-happy.spec.ts:72:7 › E-05 complaint online, 800 days old device, warranty rule › label rejected, cites § 2 ust. 3 and mentions the warranty (20.8s)
+E-19 observed 18 requests, 13 text responses on http://localhost:3000
+  ✓  19 [chromium] › tests/e2e/chat-session.spec.ts:29:7 › E-19 no credential leaks to the browser › no app response text or request contains the OpenRouter key prefix, no request goes to openrouter.ai (20.7s)
+  ✘  16 [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 1920x1080: no horizontal scroll and keyboard-only return flow (1.6m)
+  ✓  21 [chromium] › tests/e2e/form.spec.ts:30:7 › E-01 @smoke form structure and validation › seven fields appear in AC-01 order (2.3s)
+  ✓  22 [chromium] › tests/e2e/form.spec.ts:48:7 › E-01 @smoke form structure and validation › case type and channel radios exist unchecked and category lists nine options (2.0s)
+  ✓  23 [chromium] › tests/e2e/form.spec.ts:78:7 › E-01 @smoke form structure and validation › AI-use notice is shown verbatim (1.6s)
+  ✓  24 [chromium] › tests/e2e/form.spec.ts:85:7 › E-01 @smoke form structure and validation › empty submit shows every error, focuses the first field and sends no analyze request (2.0s)
+  ✓  25 [chromium] › tests/e2e/form.spec.ts:109:7 › E-01 @smoke form structure and validation › complaint shows required reason label and enforces minimum length (1.5s)
+  ✓  26 [chromium] › tests/e2e/form.spec.ts:130:7 › E-01 @smoke form structure and validation › return shows optional reason label without required marker (1.2s)
+  ✓  27 [chromium] › tests/e2e/form.spec.ts:144:7 › E-01 @smoke form structure and validation › reason counter, reason and model name limits and date max (1.2s)
+  ✓  28 [chromium] › tests/e2e/form.spec.ts:171:7 › E-02 @smoke photo rules › uploaded photo shows thumbnail, file name and remove action (1.6s)
+E-20 storage counts=[0,0] indexedDB=[]
+  ✓  20 [chromium] › tests/e2e/chat-session.spec.ts:89:7 › E-20 nothing is persisted in the browser after a case › after reload the form is empty and no storage or IndexedDB data remains (19.3s)
+  ✓  29 [chromium] › tests/e2e/form.spec.ts:189:7 › E-02 @smoke photo rules › a new photo replaces the previous one (1.5s)
+  ✓  31 [chromium] › tests/e2e/reduction.spec.ts:16:7 › jpegSize self-check @smoke › reads dimensions of the original example photos (6ms)
+  ✓  30 [chromium] › tests/e2e/form.spec.ts:208:7 › E-02 @smoke photo rules › remove deletes the thumbnail (1.6s)
+E-21 observed: 265585 bytes, 1512x1568
+  ✓  32 [chromium] › tests/e2e/reduction.spec.ts:29:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio (3.2s)
+  ✓  33 [chromium] › tests/e2e/form.spec.ts:226:7 › E-02 @smoke photo rules › photo hint follows the selected case type (2.0s)
+  -  34 [chromium] › tests/e2e/form.spec.ts:250:8 › E-02 photo rejection cases › rejects HEIC (AC-11)
+  -  35 [chromium] › tests/e2e/form.spec.ts:265:8 › E-02 photo rejection cases › rejects > 10 MB (AC-12)
+
+
+  1) [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'Zatrzymaj', exact: true })
+    Expected: visible
+    Timeout: 90000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('button', { name: 'Zatrzymaj', exact: true }) with timeout 90000ms
+      - waiting for getByRole('button', { name: 'Zatrzymaj', exact: true })
+
+
+      81 |
+      82 |     // While streaming the send button is replaced by the stop button.
+    > 83 |     await expect(chat.stopButton()).toBeVisible();
+         |                                     ^
+      84 |     await expect(chat.sendButton()).toHaveCount(0);
+      85 |     const streamed = chat.assistantMessages().last();
+      86 |     await expect
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-controls.spec.ts:83:37
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, copyfile '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-0/traces/1777fc324103ddfe231e-596da588132708ba9577-recording1.network' -> '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-0/traces/1777fc324103ddfe231e-596da588132708ba9577-recording1-pwnetcopy-1.network'
+
+    Error: browserContext._wrapApiCall: ENOENT: no such file or directory, open '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-0/traces/1777fc324103ddfe231e-596da588132708ba9577.trace'
+
+    Error: ENOENT: no such file or directory, open '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-0/b765ade125a611793ea9e4c0c3b797e5.zip'
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/e2e/chat-controls.spec.ts:134:7 › E-16 leaving the page › reload on the chat screen shows a beforeunload dialog 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByTestId('decision-card').first()
+    Expected: visible
+    Timeout: 65000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByTestId('decision-card').first() with timeout 65000ms
+      - waiting for getByTestId('decision-card').first()
+
+
+       at e2e/pages/chat.page.ts:130
+
+      128 |   async waitForDecision(): Promise<Decision> {
+      129 |     const card = this.decisionCards().first();
+    > 130 |     await expect(card).toBeVisible({ timeout: DECISION_WAIT_MS });
+          |                        ^
+      131 |     const ms = Date.now() - this.submittedAt;
+      132 |     const label = await card.getAttribute("data-label");
+      133 |     if (!isDecisionLabel(label)) {
+        at ChatPage.waitForDecision (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/pages/chat.page.ts:130:24)
+        at submitCaseAndWaitForDecision (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/pages/chat.page.ts:206:31)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-controls.spec.ts:137:22
+
+    Error: ENOENT: no such file or directory, open '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-3/7dc25c6e71818dbf7d2aebfece2f2c75.zip'
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-controls-E-16-leaving-d8356-shows-a-beforeunload-dialog-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-controls-E-16-leaving-d8356-shows-a-beforeunload-dialog-chromium/error-context.md
+
+  3) [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 360x800: no horizontal scroll and keyboard-only return flow 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('Analizujemy zdjęcie…', { exact: true }).first()
+    Expected: visible
+    Timeout: 90000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('Analizujemy zdjęcie…', { exact: true }).first() with timeout 90000ms
+      - waiting for getByText('Analizujemy zdjęcie…', { exact: true }).first()
+
+
+       at e2e/pages/chat.page.ts:121
+
+      119 |     await expect(
+      120 |       this.page.getByText(texts.processing.analyzing, { exact: true }).first()
+    > 121 |     ).toBeVisible();
+          |       ^
+      122 |     await expect(
+      123 |       this.page.getByText(texts.processing.deciding, { exact: true }).first()
+      124 |     ).toBeVisible();
+        at ChatPage.expectProcessingSteps (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/pages/chat.page.ts:121:7)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-controls.spec.ts:245:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat-controls-E-18-smoke-r-f2e79-d-keyboard-only-return-flow-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 1920x1080: no horizontal scroll and keyboard-only return flow 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('Analizujemy zdjęcie…', { exact: true }).first()
+    Expected: visible
+    Timeout: 90000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('Analizujemy zdjęcie…', { exact: true }).first() with timeout 90000ms
+      - waiting for getByText('Analizujemy zdjęcie…', { exact: true }).first()
+
+
+       at e2e/pages/chat.page.ts:121
+
+      119 |     await expect(
+      120 |       this.page.getByText(texts.processing.analyzing, { exact: true }).first()
+    > 121 |     ).toBeVisible();
+          |       ^
+      122 |     await expect(
+      123 |       this.page.getByText(texts.processing.deciding, { exact: true }).first()
+      124 |     ).toBeVisible();
+        at ChatPage.expectProcessingSteps (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/pages/chat.page.ts:121:7)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-controls.spec.ts:245:18
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, copyfile '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-7/traces/1777fc324103ddfe231e-268e80997037511fcb98-recording1.network' -> '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-7/traces/1777fc324103ddfe231e-268e80997037511fcb98-recording1-pwnetcopy-1.network'
+
+    Error: browserContext._wrapApiCall: ENOENT: no such file or directory, open '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-7/traces/1777fc324103ddfe231e-268e80997037511fcb98.trace'
+
+    Error: ENOENT: no such file or directory, open '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-7/6f8b27abab02fcc950ae7ff11bb1d43e.zip'
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-controls-E-18-smoke-r-b2376-d-keyboard-only-return-flow-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › tests/e2e/chat-conversation.spec.ts:18:7 › E-12 off-topic and prompt-injection messages › off-topic reply is short and the decision label is kept 
+
+    Error: browserContext.close: ENOENT: no such file or directory, open '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-1/traces/b940be731876cbc08865-775e1ec1588b29a39ce8.trace'
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-conversation-E-12-off-3aefd--the-decision-label-is-kept-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-conversation-E-12-off-3aefd--the-decision-label-is-kept-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-conversation-E-12-off-3aefd--the-decision-label-is-kept-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat-conversation-E-12-off-3aefd--the-decision-label-is-kept-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › complaint: safety phrase comes before "Co dalej" 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 0
+    Received:    -1
+
+      47 |       const safetyIndex = text.search(SAFETY_PHRASE);
+      48 |       const nextStepsIndex = text.indexOf("Co dalej");
+    > 49 |       expect(safetyIndex).toBeGreaterThanOrEqual(0);
+         |                           ^
+      50 |       expect(nextStepsIndex).toBeGreaterThanOrEqual(0);
+      51 |       expect(safetyIndex).toBeLessThan(nextStepsIndex);
+      52 |     });
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-decisions.spec.ts:49:27
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, copyfile '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-2/traces/f636d43a12f9e20197b8-654733a280af478019bd-recording7.network' -> '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-2/traces/f636d43a12f9e20197b8-654733a280af478019bd-recording7-pwnetcopy-1.network'
+
+    Error: browserContext._wrapApiCall: ENOENT: no such file or directory, open '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-2/traces/f636d43a12f9e20197b8-654733a280af478019bd-recording6.network'
+
+    Error: ENOENT: no such file or directory, open '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-2/b9e4e6c5eb4795ee0da2c52b0a8e7060.zip'
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-decisions-E-07-safety-b1777-rase-comes-before-Co-dalej--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › return: safety phrase comes before "Co dalej" 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByTestId('decision-card').first()
+    Expected: visible
+    Timeout: 65000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByTestId('decision-card').first() with timeout 65000ms
+      - waiting for getByTestId('decision-card').first()
+
+
+       at e2e/pages/chat.page.ts:130
+
+      128 |   async waitForDecision(): Promise<Decision> {
+      129 |     const card = this.decisionCards().first();
+    > 130 |     await expect(card).toBeVisible({ timeout: DECISION_WAIT_MS });
+          |                        ^
+      131 |     const ms = Date.now() - this.submittedAt;
+      132 |     const label = await card.getAttribute("data-label");
+      133 |     if (!isDecisionLabel(label)) {
+        at ChatPage.waitForDecision (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/pages/chat.page.ts:130:24)
+        at submitCaseAndWaitForDecision (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/pages/chat.page.ts:206:31)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-decisions.spec.ts:32:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-decisions-E-07-safety-ecbac-rase-comes-before-Co-dalej--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/chat-decisions-E-07-safety-ecbac-rase-comes-before-Co-dalej--chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-decisions-E-07-safety-ecbac-rase-comes-before-Co-dalej--chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-decisions-E-07-safety-ecbac-rase-comes-before-Co-dalej--chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat-decisions-E-07-safety-ecbac-rase-comes-before-Co-dalej--chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [chromium] › tests/e2e/chat-happy.spec.ts:9:7 › E-03 @smoke return online, phone with photo gets a decision › decision card, first message structure, disclaimer, summary and TTFC 
+
+    Error: browserContext.close: ENOENT: no such file or directory, open '/home/labuser/DEV/jsystems-claude-code-2026-10/app/test-results/.playwright-artifacts-6/traces/52772b4f00710453f022-0a604ffbfc8c2825faf5-recording4.trace'
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-happy-E-03-smoke-retu-65b87-disclaimer-summary-and-TTFC-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-happy-E-03-smoke-retu-65b87-disclaimer-summary-and-TTFC-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-happy-E-03-smoke-retu-65b87-disclaimer-summary-and-TTFC-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat-happy-E-03-smoke-retu-65b87-disclaimer-summary-and-TTFC-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8 failed
+    [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input 
+    [chromium] › tests/e2e/chat-controls.spec.ts:134:7 › E-16 leaving the page › reload on the chat screen shows a beforeunload dialog 
+    [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 360x800: no horizontal scroll and keyboard-only return flow 
+    [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 1920x1080: no horizontal scroll and keyboard-only return flow 
+    [chromium] › tests/e2e/chat-conversation.spec.ts:18:7 › E-12 off-topic and prompt-injection messages › off-topic reply is short and the decision label is kept 
+    [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › complaint: safety phrase comes before "Co dalej" 
+    [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › return: safety phrase comes before "Co dalej" 
+    [chromium] › tests/e2e/chat-happy.spec.ts:9:7 › E-03 @smoke return online, phone with photo gets a decision › decision card, first message structure, disclaimer, summary and TTFC 
+  2 skipped
+  25 passed (8.0m)
+EXIT=1

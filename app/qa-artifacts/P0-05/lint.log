@@ -1,0 +1,62 @@
+
+> hardware-service-decision-copilot@0.1.0 lint
+> ultracite check
+
+lib/case/labels.ts:12:45 lint/style/noIncrementDecrement ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected use of increment/decrement unary operator.
+  
+    10 │   messages: readonly CaseUIMessage[]
+    11 │ ): DecisionLabel | null {
+  > 12 │   for (let m = messages.length - 1; m >= 0; m--) {
+       │                                             ^^^
+    13 │     const message = messages[m];
+    14 │     if (message.role !== "assistant") {
+  
+  i The unary ++ and -- operators are subject to automatic semicolon insertion, differences in whitespace can change semantics of source code. Instead use += or -=.
+  
+
+lib/case/labels.ts:17:52 lint/style/noIncrementDecrement ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected use of increment/decrement unary operator.
+  
+    15 │       continue;
+    16 │     }
+  > 17 │     for (let p = message.parts.length - 1; p >= 0; p--) {
+       │                                                    ^^^
+    18 │       const part = message.parts[p];
+    19 │       if (
+  
+  i The unary ++ and -- operators are subject to automatic semicolon insertion, differences in whitespace can change semantics of source code. Instead use += or -=.
+  
+
+vitest.config.ts:12:35 lint/correctness/noGlobalDirnameFilename  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Don't use __dirname.
+  
+    10 │   resolve: {
+    11 │     alias: {
+  > 12 │       "server-only": path.resolve(__dirname, "tests/setup/server-only-stub.ts"),
+       │                                   ^^^^^^^^^
+    13 │     },
+    14 │   },
+  
+  i __dirname is not available in ES modules.
+  
+  i Safe fix: Replace __dirname with import.meta.dirname.
+  
+    10 10 │     resolve: {
+    11 11 │       alias: {
+    12    │ - ······"server-only":·path.resolve(__dirname,·"tests/setup/server-only-stub.ts"),
+       12 │ + ······"server-only":·path.resolve(import.meta.dirname,·"tests/setup/server-only-stub.ts"),
+    13 13 │       },
+    14 14 │     },
+  
+
+Checked 62 files in 2s. No fixes applied.
+Found 3 errors.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

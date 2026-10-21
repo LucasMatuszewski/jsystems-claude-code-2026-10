@@ -1,0 +1,456 @@
+
+Running 24 tests using 2 workers
+
+  ✓   2 [firefox] › tests/e2e/form.spec.ts:30:7 › E-01 @smoke form structure and validation › seven fields appear in AC-01 order (16.4s)
+  ✓   3 [firefox] › tests/e2e/form.spec.ts:48:7 › E-01 @smoke form structure and validation › case type and channel radios exist unchecked and category lists nine options (41.2s)
+  ✓   4 [firefox] › tests/e2e/form.spec.ts:78:7 › E-01 @smoke form structure and validation › AI-use notice is shown verbatim (8.1s)
+  ✓   5 [firefox] › tests/e2e/form.spec.ts:85:7 › E-01 @smoke form structure and validation › empty submit shows every error, focuses the first field and sends no analyze request (7.6s)
+  ✘   6 [firefox] › tests/e2e/form.spec.ts:109:7 › E-01 @smoke form structure and validation › complaint shows required reason label and enforces minimum length (1.7m)
+  ✘   1 [firefox] › tests/e2e/reduction.spec.ts:11:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio (3.2m)
+  ✘   8 [webkit] › tests/e2e/form.spec.ts:30:7 › E-01 @smoke form structure and validation › seven fields appear in AC-01 order (18ms)
+  ✓   7 [firefox] › tests/e2e/form.spec.ts:130:7 › E-01 @smoke form structure and validation › return shows optional reason label without required marker (10.2s)
+  ✘  10 [webkit] › tests/e2e/form.spec.ts:48:7 › E-01 @smoke form structure and validation › case type and channel radios exist unchecked and category lists nine options (20ms)
+  ✘  11 [webkit] › tests/e2e/form.spec.ts:78:7 › E-01 @smoke form structure and validation › AI-use notice is shown verbatim (13ms)
+  ✓   9 [firefox] › tests/e2e/form.spec.ts:144:7 › E-01 @smoke form structure and validation › reason counter, reason and model name limits and date max (7.9s)
+  ✘  13 [webkit] › tests/e2e/form.spec.ts:85:7 › E-01 @smoke form structure and validation › empty submit shows every error, focuses the first field and sends no analyze request (18ms)
+  ✓  12 [firefox] › tests/e2e/form.spec.ts:171:7 › E-02 @smoke photo rules › uploaded photo shows thumbnail, file name and remove action (5.6s)
+  ✘  15 [webkit] › tests/e2e/form.spec.ts:109:7 › E-01 @smoke form structure and validation › complaint shows required reason label and enforces minimum length (16ms)
+  ✓  14 [firefox] › tests/e2e/form.spec.ts:189:7 › E-02 @smoke photo rules › a new photo replaces the previous one (5.7s)
+  ✘  17 [webkit] › tests/e2e/form.spec.ts:130:7 › E-01 @smoke form structure and validation › return shows optional reason label without required marker (13ms)
+  ✘  18 [webkit] › tests/e2e/form.spec.ts:144:7 › E-01 @smoke form structure and validation › reason counter, reason and model name limits and date max (11ms)
+  ✓  16 [firefox] › tests/e2e/form.spec.ts:208:7 › E-02 @smoke photo rules › remove deletes the thumbnail (5.3s)
+  ✘  20 [webkit] › tests/e2e/form.spec.ts:171:7 › E-02 @smoke photo rules › uploaded photo shows thumbnail, file name and remove action (43ms)
+  ✓  19 [firefox] › tests/e2e/form.spec.ts:226:7 › E-02 @smoke photo rules › photo hint follows the selected case type (7.1s)
+  ✘  21 [webkit] › tests/e2e/form.spec.ts:189:7 › E-02 @smoke photo rules › a new photo replaces the previous one (22ms)
+  ✘  22 [webkit] › tests/e2e/reduction.spec.ts:11:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio (14ms)
+  ✘  23 [webkit] › tests/e2e/form.spec.ts:208:7 › E-02 @smoke photo rules › remove deletes the thumbnail (9ms)
+  ✘  24 [webkit] › tests/e2e/form.spec.ts:226:7 › E-02 @smoke photo rules › photo hint follows the selected case type (12ms)
+
+
+  1) [firefox] › tests/e2e/form.spec.ts:109:7 › E-01 @smoke form structure and validation › complaint shows required reason label and enforces minimum length 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('#field-reason-error')
+    Expected: "Opisz problem (min. 20 znaków)"
+    Timeout: 90000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" locator('#field-reason-error') with timeout 90000ms
+      - waiting for locator('#field-reason-error')
+
+
+      123 |     await formPage.fillReason("Uszkodzony");
+      124 |     await formPage.submit();
+    > 125 |     await expect(formPage.errorFor("reason")).toHaveText(
+          |                                               ^
+      126 |       texts.validation.reasonComplaintMin
+      127 |     );
+      128 |   });
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/form.spec.ts:125:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [firefox] › tests/e2e/reduction.spec.ts:11:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio 
+
+    Test timeout of 180000ms exceeded.
+
+    Error: page.waitForRequest: Test timeout of 180000ms exceeded.
+
+      23 |
+      24 |     // Passive observation: no interception, the request goes to the real server.
+    > 25 |     const requestPromise = page.waitForRequest(
+         |                                 ^
+      26 |       (candidate) =>
+      27 |         new URL(candidate.url()).pathname === "/api/analyze" &&
+      28 |         candidate.method() === "POST"
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/reduction.spec.ts:25:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [webkit] › tests/e2e/form.spec.ts:30:7 › E-01 @smoke form structure and validation › seven fields appear in AC-01 order 
+
+    Error: browserType.launch: 
+    ╔══════════════════════════════════════════════════════╗
+    ║ Host system is missing dependencies to run browsers. ║
+    ║ Please install them with the following command:      ║
+    ║                                                      ║
+    ║     sudo npx playwright install-deps                 ║
+    ║                                                      ║
+    ║ Alternatively, use apt:                              ║
+    ║     sudo apt-get install libevent-2.1-7t64\          ║
+    ║         libflite1\                                   ║
+    ║         libavif16\                                   ║
+    ║         libmanette-0.2-0                             ║
+    ║                                                      ║
+    ║ <3 Playwright Team                                   ║
+    ╚══════════════════════════════════════════════════════╝
+
+    Error Context: test-results/form-E-01-smoke-form-struc-00fd1-ields-appear-in-AC-01-order-webkit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-00fd1-ields-appear-in-AC-01-order-webkit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-01-smoke-form-struc-00fd1-ields-appear-in-AC-01-order-webkit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [webkit] › tests/e2e/form.spec.ts:48:7 › E-01 @smoke form structure and validation › case type and channel radios exist unchecked and category lists nine options 
+
+    Error: browserType.launch: 
+    ╔══════════════════════════════════════════════════════╗
+    ║ Host system is missing dependencies to run browsers. ║
+    ║ Please install them with the following command:      ║
+    ║                                                      ║
+    ║     sudo npx playwright install-deps                 ║
+    ║                                                      ║
+    ║ Alternatively, use apt:                              ║
+    ║     sudo apt-get install libevent-2.1-7t64\          ║
+    ║         libflite1\                                   ║
+    ║         libavif16\                                   ║
+    ║         libmanette-0.2-0                             ║
+    ║                                                      ║
+    ║ <3 Playwright Team                                   ║
+    ╚══════════════════════════════════════════════════════╝
+
+    Error Context: test-results/form-E-01-smoke-form-struc-33dff-category-lists-nine-options-webkit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-33dff-category-lists-nine-options-webkit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-01-smoke-form-struc-33dff-category-lists-nine-options-webkit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [webkit] › tests/e2e/form.spec.ts:78:7 › E-01 @smoke form structure and validation › AI-use notice is shown verbatim 
+
+    Error: browserType.launch: 
+    ╔══════════════════════════════════════════════════════╗
+    ║ Host system is missing dependencies to run browsers. ║
+    ║ Please install them with the following command:      ║
+    ║                                                      ║
+    ║     sudo npx playwright install-deps                 ║
+    ║                                                      ║
+    ║ Alternatively, use apt:                              ║
+    ║     sudo apt-get install libevent-2.1-7t64\          ║
+    ║         libflite1\                                   ║
+    ║         libavif16\                                   ║
+    ║         libmanette-0.2-0                             ║
+    ║                                                      ║
+    ║ <3 Playwright Team                                   ║
+    ╚══════════════════════════════════════════════════════╝
+
+    Error Context: test-results/form-E-01-smoke-form-struc-5561b-se-notice-is-shown-verbatim-webkit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-5561b-se-notice-is-shown-verbatim-webkit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-01-smoke-form-struc-5561b-se-notice-is-shown-verbatim-webkit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [webkit] › tests/e2e/form.spec.ts:85:7 › E-01 @smoke form structure and validation › empty submit shows every error, focuses the first field and sends no analyze request 
+
+    Error: browserType.launch: 
+    ╔══════════════════════════════════════════════════════╗
+    ║ Host system is missing dependencies to run browsers. ║
+    ║ Please install them with the following command:      ║
+    ║                                                      ║
+    ║     sudo npx playwright install-deps                 ║
+    ║                                                      ║
+    ║ Alternatively, use apt:                              ║
+    ║     sudo apt-get install libevent-2.1-7t64\          ║
+    ║         libflite1\                                   ║
+    ║         libavif16\                                   ║
+    ║         libmanette-0.2-0                             ║
+    ║                                                      ║
+    ║ <3 Playwright Team                                   ║
+    ╚══════════════════════════════════════════════════════╝
+
+    Error Context: test-results/form-E-01-smoke-form-struc-08e3c-nd-sends-no-analyze-request-webkit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-08e3c-nd-sends-no-analyze-request-webkit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-01-smoke-form-struc-08e3c-nd-sends-no-analyze-request-webkit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [webkit] › tests/e2e/form.spec.ts:109:7 › E-01 @smoke form structure and validation › complaint shows required reason label and enforces minimum length 
+
+    Error: browserType.launch: 
+    ╔══════════════════════════════════════════════════════╗
+    ║ Host system is missing dependencies to run browsers. ║
+    ║ Please install them with the following command:      ║
+    ║                                                      ║
+    ║     sudo npx playwright install-deps                 ║
+    ║                                                      ║
+    ║ Alternatively, use apt:                              ║
+    ║     sudo apt-get install libevent-2.1-7t64\          ║
+    ║         libflite1\                                   ║
+    ║         libavif16\                                   ║
+    ║         libmanette-0.2-0                             ║
+    ║                                                      ║
+    ║ <3 Playwright Team                                   ║
+    ╚══════════════════════════════════════════════════════╝
+
+    Error Context: test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-webkit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-webkit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-01-smoke-form-struc-77f93-and-enforces-minimum-length-webkit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [webkit] › tests/e2e/form.spec.ts:130:7 › E-01 @smoke form structure and validation › return shows optional reason label without required marker 
+
+    Error: browserType.launch: 
+    ╔══════════════════════════════════════════════════════╗
+    ║ Host system is missing dependencies to run browsers. ║
+    ║ Please install them with the following command:      ║
+    ║                                                      ║
+    ║     sudo npx playwright install-deps                 ║
+    ║                                                      ║
+    ║ Alternatively, use apt:                              ║
+    ║     sudo apt-get install libevent-2.1-7t64\          ║
+    ║         libflite1\                                   ║
+    ║         libavif16\                                   ║
+    ║         libmanette-0.2-0                             ║
+    ║                                                      ║
+    ║ <3 Playwright Team                                   ║
+    ╚══════════════════════════════════════════════════════╝
+
+    Error Context: test-results/form-E-01-smoke-form-struc-94e22-bel-without-required-marker-webkit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-94e22-bel-without-required-marker-webkit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-01-smoke-form-struc-94e22-bel-without-required-marker-webkit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [webkit] › tests/e2e/form.spec.ts:144:7 › E-01 @smoke form structure and validation › reason counter, reason and model name limits and date max 
+
+    Error: browserType.launch: 
+    ╔══════════════════════════════════════════════════════╗
+    ║ Host system is missing dependencies to run browsers. ║
+    ║ Please install them with the following command:      ║
+    ║                                                      ║
+    ║     sudo npx playwright install-deps                 ║
+    ║                                                      ║
+    ║ Alternatively, use apt:                              ║
+    ║     sudo apt-get install libevent-2.1-7t64\          ║
+    ║         libflite1\                                   ║
+    ║         libavif16\                                   ║
+    ║         libmanette-0.2-0                             ║
+    ║                                                      ║
+    ║ <3 Playwright Team                                   ║
+    ╚══════════════════════════════════════════════════════╝
+
+    Error Context: test-results/form-E-01-smoke-form-struc-d2c4b-el-name-limits-and-date-max-webkit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-01-smoke-form-struc-d2c4b-el-name-limits-and-date-max-webkit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-01-smoke-form-struc-d2c4b-el-name-limits-and-date-max-webkit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) [webkit] › tests/e2e/form.spec.ts:171:7 › E-02 @smoke photo rules › uploaded photo shows thumbnail, file name and remove action 
+
+    Error: browserType.launch: 
+    ╔══════════════════════════════════════════════════════╗
+    ║ Host system is missing dependencies to run browsers. ║
+    ║ Please install them with the following command:      ║
+    ║                                                      ║
+    ║     sudo npx playwright install-deps                 ║
+    ║                                                      ║
+    ║ Alternatively, use apt:                              ║
+    ║     sudo apt-get install libevent-2.1-7t64\          ║
+    ║         libflite1\                                   ║
+    ║         libavif16\                                   ║
+    ║         libmanette-0.2-0                             ║
+    ║                                                      ║
+    ║ <3 Playwright Team                                   ║
+    ╚══════════════════════════════════════════════════════╝
+
+    Error Context: test-results/form-E-02-smoke-photo-rule-a7819-file-name-and-remove-action-webkit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-02-smoke-photo-rule-a7819-file-name-and-remove-action-webkit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-02-smoke-photo-rule-a7819-file-name-and-remove-action-webkit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) [webkit] › tests/e2e/form.spec.ts:189:7 › E-02 @smoke photo rules › a new photo replaces the previous one 
+
+    Error: browserType.launch: 
+    ╔══════════════════════════════════════════════════════╗
+    ║ Host system is missing dependencies to run browsers. ║
+    ║ Please install them with the following command:      ║
+    ║                                                      ║
+    ║     sudo npx playwright install-deps                 ║
+    ║                                                      ║
+    ║ Alternatively, use apt:                              ║
+    ║     sudo apt-get install libevent-2.1-7t64\          ║
+    ║         libflite1\                                   ║
+    ║         libavif16\                                   ║
+    ║         libmanette-0.2-0                             ║
+    ║                                                      ║
+    ║ <3 Playwright Team                                   ║
+    ╚══════════════════════════════════════════════════════╝
+
+    Error Context: test-results/form-E-02-smoke-photo-rule-3f0c2-o-replaces-the-previous-one-webkit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-02-smoke-photo-rule-3f0c2-o-replaces-the-previous-one-webkit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-02-smoke-photo-rule-3f0c2-o-replaces-the-previous-one-webkit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) [webkit] › tests/e2e/form.spec.ts:208:7 › E-02 @smoke photo rules › remove deletes the thumbnail 
+
+    Error: browserType.launch: 
+    ╔══════════════════════════════════════════════════════╗
+    ║ Host system is missing dependencies to run browsers. ║
+    ║ Please install them with the following command:      ║
+    ║                                                      ║
+    ║     sudo npx playwright install-deps                 ║
+    ║                                                      ║
+    ║ Alternatively, use apt:                              ║
+    ║     sudo apt-get install libevent-2.1-7t64\          ║
+    ║         libflite1\                                   ║
+    ║         libavif16\                                   ║
+    ║         libmanette-0.2-0                             ║
+    ║                                                      ║
+    ║ <3 Playwright Team                                   ║
+    ╚══════════════════════════════════════════════════════╝
+
+    Error Context: test-results/form-E-02-smoke-photo-rules-remove-deletes-the-thumbnail-webkit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-02-smoke-photo-rules-remove-deletes-the-thumbnail-webkit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-02-smoke-photo-rules-remove-deletes-the-thumbnail-webkit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) [webkit] › tests/e2e/form.spec.ts:226:7 › E-02 @smoke photo rules › photo hint follows the selected case type 
+
+    Error: browserType.launch: 
+    ╔══════════════════════════════════════════════════════╗
+    ║ Host system is missing dependencies to run browsers. ║
+    ║ Please install them with the following command:      ║
+    ║                                                      ║
+    ║     sudo npx playwright install-deps                 ║
+    ║                                                      ║
+    ║ Alternatively, use apt:                              ║
+    ║     sudo apt-get install libevent-2.1-7t64\          ║
+    ║         libflite1\                                   ║
+    ║         libavif16\                                   ║
+    ║         libmanette-0.2-0                             ║
+    ║                                                      ║
+    ║ <3 Playwright Team                                   ║
+    ╚══════════════════════════════════════════════════════╝
+
+    Error Context: test-results/form-E-02-smoke-photo-rule-8e76e-lows-the-selected-case-type-webkit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form-E-02-smoke-photo-rule-8e76e-lows-the-selected-case-type-webkit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/form-E-02-smoke-photo-rule-8e76e-lows-the-selected-case-type-webkit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) [webkit] › tests/e2e/reduction.spec.ts:11:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio 
+
+    Error: browserType.launch: 
+    ╔══════════════════════════════════════════════════════╗
+    ║ Host system is missing dependencies to run browsers. ║
+    ║ Please install them with the following command:      ║
+    ║                                                      ║
+    ║     sudo npx playwright install-deps                 ║
+    ║                                                      ║
+    ║ Alternatively, use apt:                              ║
+    ║     sudo apt-get install libevent-2.1-7t64\          ║
+    ║         libflite1\                                   ║
+    ║         libavif16\                                   ║
+    ║         libmanette-0.2-0                             ║
+    ║                                                      ║
+    ║ <3 Playwright Team                                   ║
+    ╚══════════════════════════════════════════════════════╝
+
+    Error Context: test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-webkit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-webkit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-webkit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14 failed
+    [firefox] › tests/e2e/form.spec.ts:109:7 › E-01 @smoke form structure and validation › complaint shows required reason label and enforces minimum length 
+    [firefox] › tests/e2e/reduction.spec.ts:11:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio 
+    [webkit] › tests/e2e/form.spec.ts:30:7 › E-01 @smoke form structure and validation › seven fields appear in AC-01 order 
+    [webkit] › tests/e2e/form.spec.ts:48:7 › E-01 @smoke form structure and validation › case type and channel radios exist unchecked and category lists nine options 
+    [webkit] › tests/e2e/form.spec.ts:78:7 › E-01 @smoke form structure and validation › AI-use notice is shown verbatim 
+    [webkit] › tests/e2e/form.spec.ts:85:7 › E-01 @smoke form structure and validation › empty submit shows every error, focuses the first field and sends no analyze request 
+    [webkit] › tests/e2e/form.spec.ts:109:7 › E-01 @smoke form structure and validation › complaint shows required reason label and enforces minimum length 
+    [webkit] › tests/e2e/form.spec.ts:130:7 › E-01 @smoke form structure and validation › return shows optional reason label without required marker 
+    [webkit] › tests/e2e/form.spec.ts:144:7 › E-01 @smoke form structure and validation › reason counter, reason and model name limits and date max 
+    [webkit] › tests/e2e/form.spec.ts:171:7 › E-02 @smoke photo rules › uploaded photo shows thumbnail, file name and remove action 
+    [webkit] › tests/e2e/form.spec.ts:189:7 › E-02 @smoke photo rules › a new photo replaces the previous one 
+    [webkit] › tests/e2e/form.spec.ts:208:7 › E-02 @smoke photo rules › remove deletes the thumbnail 
+    [webkit] › tests/e2e/form.spec.ts:226:7 › E-02 @smoke photo rules › photo hint follows the selected case type 
+    [webkit] › tests/e2e/reduction.spec.ts:11:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio 
+  10 passed (5.9m)
+exit=1

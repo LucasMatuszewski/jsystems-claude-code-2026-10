@@ -1,0 +1,7 @@
+▲ Next.js 16.4.2
+- Local:         http://localhost:3000
+- Network:       http://10.123.3.95:3000
+✓ Ready in 384ms
+✓ Running next.config.ts took 94ms
+{"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":9956,"usage":{"inputTokens":2433,"outputTokens":669,"cost":0}}
+{"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":28,"totalMs":15089,"usage":{"inputTokens":6285,"outputTokens":886,"cost":0}}

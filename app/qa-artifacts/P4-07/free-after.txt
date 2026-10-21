@@ -1,0 +1,3 @@
+               razem       użyte       wolne    dzielone   buf/cache    dostępne
+Pamięć:         5828        3057         621         154        2583        2770
+Wymiana:           0           0           0

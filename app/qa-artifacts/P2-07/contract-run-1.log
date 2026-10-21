@@ -1,0 +1,148 @@
+[WebServer] Turbopack build encountered 4 warnings:
+[WebServer] ./lib/ai/env.ts:60:27
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   58 |   const capture = optional("AI_CAPTURE_DIR");
+[WebServer]   59 |   cached = {
+[WebServer] > 60 |     captureDir: capture ? path.resolve(process.cwd(), capture) : null,
+[WebServer]      |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer]   61 |     llmModel,
+[WebServer]   62 |     openRouterApiKey,
+[WebServer]   63 |     policiesDir: path.resolve(
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.resolve(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import trace:
+[WebServer]   App Route:
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer] 
+[WebServer] ./lib/ai/env.ts:63:18
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   61 |     llmModel,
+[WebServer]   62 |     openRouterApiKey,
+[WebServer] > 63 |     policiesDir: path.resolve(
+[WebServer]      |                  ^^^^^^^^^^^^
+[WebServer] > 64 |       process.cwd(),
+[WebServer]      | ^^^^^^^^^^^^^^^^^^^^
+[WebServer] > 65 |       optional("POLICIES_DIR") || DEFAULT_POLICIES_DIR
+[WebServer]      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer] > 66 |     ),
+[WebServer]      | ^^^^^
+[WebServer]   67 |     port: parsePort(),
+[WebServer]   68 |     visionModel: optional("VISION_MODEL") || llmModel,
+[WebServer]   69 |   };
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.resolve(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import trace:
+[WebServer]   App Route:
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer] 
+[WebServer] ./lib/ai/policies.ts:18:12
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   16 |   let text: string | null = null;
+[WebServer]   17 |   try {
+[WebServer] > 18 |     text = fs.readFileSync(file, "utf8");
+[WebServer]      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer]   19 |   } catch {
+[WebServer]   20 |     text = null;
+[WebServer]   21 |   }
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: fs.readFileSync(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import traces:
+[WebServer]   #1 [App Route]:
+[WebServer]     ./lib/ai/policies.ts
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer]   #2 [App Route]:
+[WebServer]     ./lib/ai/policies.ts
+[WebServer]     ./lib/ai/prompts/decision-agent.ts
+[WebServer]     ./lib/ai/decision-agent.ts
+[WebServer]     ./app/api/chat/route.ts
+[WebServer] 
+[WebServer] 
+[WebServer] ./lib/ai/policies.ts:15:16
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   13 |
+[WebServer]   14 | function readPolicyFile(caseType: CaseType): string {
+[WebServer] > 15 |   const file = path.join(getAiEnv().policiesDir, FILE_NAMES[caseType]);
+[WebServer]      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer]   16 |   let text: string | null = null;
+[WebServer]   17 |   try {
+[WebServer]   18 |     text = fs.readFileSync(file, "utf8");
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.join(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import traces:
+[WebServer]   #1 [App Route]:
+[WebServer]     ./lib/ai/policies.ts
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer]   #2 [App Route]:
+[WebServer]     ./lib/ai/policies.ts
+[WebServer]     ./lib/ai/prompts/decision-agent.ts
+[WebServer]     ./lib/ai/decision-agent.ts
+[WebServer]     ./app/api/chat/route.ts
+[WebServer] 
+[WebServer] 
+
+Running 5 tests using 1 worker
+
+C-04 set_decision label: escalated
+C-04 response text:
+## Uzasadnienie
+
+Zakup internetowy i 9 dni od zakupu mieszczą się w terminie zwrotu ustawowego — odstąpienia od umowy zawartej przez internet w ciągu 14 dni (§2 ust. 1 Regulaminu zwrotów). Widoczne ślady używania ani brak oryginalnego opakowania same w sobie nie wykluczają takiego zwrotu (§2 ust. 3).
+
+Na zdjęciu ekran smartfona jest jednak popękany, widać liczne rysy oraz pionowy zielony pas. Potrzebne są fizyczne oględziny, aby pracownik ocenił stan urządzenia i ewentualne zmniejszenie jego wartości; tę ocenę wykonuje pracownik, a nie zdjęcie (§2 ust. 4 i §5 ust. 3).
+
+## Co dalej
+
+1. Możesz przynieść smartfon wraz z dowodem zakupu do sklepu stacjonarnego albo odesłać go na adres do zwrotów podany w potwierdzeniu zamówienia.
+2. Jeśli składasz oświadczenie o odstąpieniu, termin na odesłanie sprzętu wynosi 14 dni od złożenia oświadczenia (§2 ust. 6). Samo zgłoszenie w aplikacji nie jest oświadczeniem o odstąpieniu (§5 ust. 4).
+3. Po otrzymaniu urządzenia pracownik przeprowadzi oględziny i podejmie ostateczną decyzję.
+  ✓  1 [contract] › tests/contract/chat.contract.ts:81:7 › C-04 chat first turn @capture › C-04 first turn streams set_decision then the explanation (19.0s)
+C-05 follow-up text:
+Dziękuję za doprecyzowanie. Kompletne, nieotwarte opakowanie oraz nienaruszone folie i plomby nie wykluczają zwrotu ustawowego (§2 ust. 3). Na zdjęciu nadal widać mocno pęknięty ekran, dlatego pracownik musi obejrzeć smartfon i ocenić, czy uszkodzenie wpływa na jego wartość (§2 ust. 4).
+
+Możesz odesłać urządzenie na adres do zwrotów podany w potwierdzeniu zamówienia albo przynieść je do sklepu stacjonarnego wraz z dowodem zakupu (§5 ust. 2).
+  ✓  2 [contract] › tests/contract/chat.contract.ts:190:7 › C-05 chat follow-up @capture › C-05 follow-up turn after the first answer (17.9s)
+  ✓  3 [contract] › tests/contract/chat.contract.ts:267:7 › C-06 chat rejects › C-06 (a) 70 messages are accepted with no count cap (54.8s)
+  ✓  4 [contract] › tests/contract/chat.contract.ts:306:7 › C-06 chat rejects › C-06 (b) a file part in a follow-up returns 400 VALIDATION_ERROR (18.7s)
+  ✓  5 [contract] › tests/contract/chat.contract.ts:335:7 › C-06 chat rejects › C-06 (c) caseContext.caseType mismatching imageAnalysis returns 400 VALIDATION_ERROR (7.1s)
+
+  5 passed (2.4m)

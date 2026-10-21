@@ -1,0 +1,8 @@
+
+Running 2 tests using 1 worker
+
+  ✓  1 [chromium] › tests/e2e/reduction.spec.ts:16:7 › jpegSize self-check @smoke › reads dimensions of the original example photos (49ms)
+E-21 observed: 265585 bytes, 1512x1568
+  ✓  2 [chromium] › tests/e2e/reduction.spec.ts:29:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio (2.8s)
+
+  2 passed (26.5s)

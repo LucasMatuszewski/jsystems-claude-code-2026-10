@@ -1,0 +1,232 @@
+[WebServer] Turbopack build encountered 4 warnings:
+[WebServer] ./lib/ai/env.ts:60:27
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   58 |   const capture = optional("AI_CAPTURE_DIR");
+[WebServer]   59 |   cached = {
+[WebServer] > 60 |     captureDir: capture ? path.resolve(process.cwd(), capture) : null,
+[WebServer]      |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer]   61 |     llmModel,
+[WebServer]   62 |     openRouterApiKey,
+[WebServer]   63 |     policiesDir: path.resolve(
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.resolve(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import trace:
+[WebServer]   App Route:
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer] 
+[WebServer] ./lib/ai/env.ts:63:18
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   61 |     llmModel,
+[WebServer]   62 |     openRouterApiKey,
+[WebServer] > 63 |     policiesDir: path.resolve(
+[WebServer]      |                  ^^^^^^^^^^^^
+[WebServer] > 64 |       process.cwd(),
+[WebServer]      | ^^^^^^^^^^^^^^^^^^^^
+[WebServer] > 65 |       optional("POLICIES_DIR") || DEFAULT_POLICIES_DIR
+[WebServer]      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer] > 66 |     ),
+[WebServer]      | ^^^^^
+[WebServer]   67 |     port: parsePort(),
+[WebServer]   68 |     visionModel: optional("VISION_MODEL") || llmModel,
+[WebServer]   69 |   };
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.resolve(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import trace:
+[WebServer]   App Route:
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer] 
+[WebServer] ./lib/ai/policies.ts:18:12
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   16 |   let text: string | null = null;
+[WebServer]   17 |   try {
+[WebServer] > 18 |     text = fs.readFileSync(file, "utf8");
+[WebServer]      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer]   19 |   } catch {
+[WebServer]   20 |     text = null;
+[WebServer]   21 |   }
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: fs.readFileSync(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import traces:
+[WebServer]   #1 [App Route]:
+[WebServer]     ./lib/ai/policies.ts
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer]   #2 [App Route]:
+[WebServer]     ./lib/ai/policies.ts
+[WebServer]     ./lib/ai/prompts/decision-agent.ts
+[WebServer]     ./lib/ai/decision-agent.ts
+[WebServer]     ./app/api/chat/route.ts
+[WebServer] 
+[WebServer] 
+[WebServer] ./lib/ai/policies.ts:15:16
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   13 |
+[WebServer]   14 | function readPolicyFile(caseType: CaseType): string {
+[WebServer] > 15 |   const file = path.join(getAiEnv().policiesDir, FILE_NAMES[caseType]);
+[WebServer]      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer]   16 |   let text: string | null = null;
+[WebServer]   17 |   try {
+[WebServer]   18 |     text = fs.readFileSync(file, "utf8");
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.join(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import traces:
+[WebServer]   #1 [App Route]:
+[WebServer]     ./lib/ai/policies.ts
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer]   #2 [App Route]:
+[WebServer]     ./lib/ai/policies.ts
+[WebServer]     ./lib/ai/prompts/decision-agent.ts
+[WebServer]     ./lib/ai/decision-agent.ts
+[WebServer]     ./app/api/chat/route.ts
+[WebServer] 
+[WebServer] 
+
+Running 6 tests using 1 worker
+
+C-07 (a) label: rejected
+C-07 (a) response text:
+## Uzasadnienie
+
+Zakup w sklepie stacjonarnym, 20 dni temu, mieści się w terminie zwrotu dobrowolnego określonym w §3 ust. 1 Regulaminu zwrotów. Warunki tego zwrotu wymagają jednak, by sprzęt nie nosił śladów używania (§3 ust. 3 pkt 1). Na zdjęciu widać rysy na tylnej obudowie, więc ten warunek nie jest spełniony. Zgodnie z §3 ust. 4 zwrot dobrowolny nie może być w tej sytuacji przyjęty.
+
+## Co dalej
+
+1. Jeśli uważasz, że telefon ma wadę lub jest niezgodny z umową, możesz złożyć reklamację zamiast zwrotu.
+2. Możesz też sprawdzić możliwość skorzystania z gwarancji producenta, zapytać o płatną naprawę albo skonsultować urządzenie w sklepie stacjonarnym.
+3. Przy zwrocie pracownik sklepu przeprowadza oględziny i podejmuje ostateczną decyzję zgodnie z §5 ust. 3 Regulaminu zwrotów. Możesz przynieść sprzęt do sklepu stacjonarnego z dowodem zakupu.
+  ✓  1 [contract] › tests/contract/decision-matrix.contract.ts:153:7 › C-07 decision matrix › C-07 (a) return with a visible scratch and not resaleable as new is rejected under §3 ust. 3 (12.9s)
+C-07 (b) label: rejected
+C-07 (b) response text:
+## Uzasadnienie
+
+Zgłoszenie dotyczy reklamacji smartfona. Zdjęcie jest czytelne i pokazuje pęknięcia ekranu rozchodzące się z punktu w lewym górnym rogu. Widoczne ślady wskazują na uszkodzenie mechaniczne z punktem uderzenia, wymienione w §4 ust. 1 Regulaminu reklamacji jako wyłączenie z reklamacji. Dlatego wstępna ocena jest negatywna. Nie oznacza to ostatecznej decyzji — pracownik lub serwis podejmuje ją po oględzinach (§6 ust. 4).
+
+## Co dalej
+
+1. Jeśli chcesz złożyć formalną reklamację mimo tej wstępnej oceny, przekaż smartfon do sklepu stacjonarnego albo wyślij go przesyłką, dołączając dowód zakupu i opis usterki. Sklep odpowiada na formalną reklamację w ciągu 14 dni od jej otrzymania (§6 ust. 2–3). Wstępne zgłoszenie nie uruchamia tego terminu.
+2. Możesz też sprawdzić warunki gwarancji producenta, zapytać o płatną naprawę albo skorzystać z konsultacji w sklepie stacjonarnym.
+  ✓  2 [contract] › tests/contract/decision-matrix.contract.ts:179:7 › C-07 decision matrix › C-07 (b) complaint with a crack from an impact point does not blame the customer (9.0s)
+C-07 (c) label: needs_info
+C-07 (c) response text:
+## Uzasadnienie
+
+W formularzu zgłoszono laptop, ale na zdjęciu widoczny jest smartfon z pionową linią na środku ekranu. To niezgodność między zdjęciem a opisem, więc nie mogę ocenić, czy usterka dotyczy zgłoszonego laptopa. Sama linia na ekranie może odpowiadać wadzie opisanej w §5 ust. 1 Regulaminu reklamacji, jeśli nie towarzyszą jej ślady z §4, ale zdjęcie nie pozwala tego przypisać do właściwego urządzenia. Wstępna ocena nie jest formalną reklamacją (§6 ust. 5 Regulaminu reklamacji).
+
+## Co dalej
+
+1. Napisz w czacie, czy urządzeniem ze zdjęcia jest zgłoszony laptop. Brakuje potwierdzenia, że zdjęcie przedstawia ten sam sprzęt.
+2. Jeśli potrzebne jest nowe zdjęcie, rozpocznij nowe zgłoszenie przyciskiem „Nowe zgłoszenie”. Zrób je w dobrym świetle: pokaż całe urządzenie oraz zbliżenie usterki.
+3. Po wyjaśnieniu sprawy formalną reklamację możesz złożyć, przekazując urządzenie z dowodem zakupu i opisem niezgodności do sklepu stacjonarnego lub wysyłając je na adres do zwrotów podany w potwierdzeniu zamówienia. Na formalną reklamację sklep odpowiada w ciągu 14 dni (§6 ust. 2–3 Regulaminu reklamacji).
+  ✘  3 [contract] › tests/contract/decision-matrix.contract.ts:210:7 › C-07 decision matrix › C-07 (c) complaint with a line defect and no external traces is accepted with repair or replacement (11.2s)
+C-07 (d) label: needs_info
+C-07 (d) response text:
+## Uzasadnienie
+
+Zakup internetowy i podane 9 dni od zakupu wskazują na ścieżkę zwrotu ustawowego z §2 ust. 1 Regulaminu zwrotów. W tej ścieżce ślady używania ani brak oryginalnego opakowania same w sobie nie wykluczają zwrotu (§2 ust. 3). Przesłane zdjęcie jest jednak rozmazane i nie pozwala rozpoznać urządzenia, więc nie da się ocenić jego stanu. Brakuje czytelnego widoku całego smartfona oraz zbliżenia pokazującego jego stan.
+
+## Co dalej
+
+1. Aby uzupełnić ocenę, rozpocznij nowe zgłoszenie przyciskiem „Nowe zgłoszenie” i dołącz nowe zdjęcia. Zrób je w dobrym świetle: pokaż całe urządzenie, a osobno zbliżenie jego powierzchni.
+2. Po złożeniu oświadczenia o odstąpieniu od umowy sprzęt należy odesłać w ciągu 14 dni albo przynieść do sklepu stacjonarnego wraz z dowodem zakupu (§5 ust. 2 Regulaminu zwrotów). Adres do zwrotów znajdziesz w potwierdzeniu zamówienia.
+3. Pracownik oceni urządzenie po jego otrzymaniu lub przyniesieniu. Ewentualne zmniejszenie wartości ustala po fizycznych oględzinach (§2 ust. 4).
+  ✓  4 [contract] › tests/contract/decision-matrix.contract.ts:244:7 › C-07 decision matrix › C-07 (d) unusable blurry photo asks for a new photo with tips (10.0s)
+C-07 (e) label: accepted
+C-07 (e) response text:
+## Uzasadnienie
+
+Zakup internetowy, a podany czas od zakupu wynosi 9 dni, więc zgłoszenie mieści się w ścieżce zwrotu ustawowego. Zwrot ustawowy to odstąpienie od umowy zawartej na odległość. Zgodnie z §2 ust. 1 Regulaminu zwrotów możesz z niego skorzystać w ciągu 14 dni od wydania sprzętu. Na zdjęciu widoczny jest smartfon, akcesoria i opakowanie; folie ochronne oraz plomby są oznaczone jako nienaruszone, a sprzęt jako nadający się do ponownej sprzedaży. Przy tej ścieżce same ślady używania lub brak opakowania nie wykluczają zwrotu (§2 ust. 3). Ewentualne zmniejszenie wartości ocenia pracownik po oględzinach (§2 ust. 4).
+
+## Co dalej
+
+1. Aby skorzystać ze zwrotu, złóż oświadczenie o odstąpieniu od umowy w terminie 14 dni od wydania sprzętu. Ta wstępna ocena nie jest takim oświadczeniem (§5 ust. 4).
+2. Po złożeniu oświadczenia odeślij sprzęt w ciągu 14 dni na adres do zwrotów podany w potwierdzeniu zamówienia albo przynieś go do sklepu stacjonarnego wraz z dowodem zakupu (§5 ust. 2 i §2 ust. 6).
+3. Pracownik obejrzy urządzenie i podejmie ostateczną decyzję (§5 ust. 3).
+  ✓  5 [contract] › tests/contract/decision-matrix.contract.ts:266:7 › C-07 decision matrix › C-07 (e) clean return inside the window is accepted or escalated (19.9s)
+C-08 (f) first turn label: needs_info
+C-08 (f) first turn response text:
+## Uzasadnienie
+
+Zakup w sklepie stacjonarnym sprzed 20 dni mieści się w terminie zwrotu dobrowolnego z §3 ust. 1 Regulaminu zwrotów. Na zdjęciu widać smartfon i akcesoria, ale nie widać oryginalnego opakowania ani stanu folii ochronnych i plomb. Nie da się też ocenić, czy urządzenie nadaje się do ponownej sprzedaży jako nowe. Te warunki są istotne przy zwrocie dobrowolnym (§3 ust. 3), dlatego potrzebuję uzupełnienia informacji.
+
+## Co dalej
+
+1. Napisz w czacie, czy masz oryginalne opakowanie oraz czy folie i plomby są nienaruszone. Jeśli możesz, opisz też, czy telefon jest w stanie pozwalającym na sprzedaż jako nowy.
+2. Jeśli potrzebne będzie nowe zdjęcie, załóż nowe zgłoszenie przyciskiem „Nowe zgłoszenie”. Zrób je w dobrym świetle: pokaż całe urządzenie i dołącz zbliżenie ważnych elementów, a także opakowanie i plomby.
+3. Po uzupełnieniu informacji możesz przynieść sprzęt z dowodem zakupu do sklepu stacjonarnego albo odesłać go na adres do zwrotów podany w potwierdzeniu zamówienia. Pracownik sprawdzi urządzenie i podejmie ostateczną decyzję.
+C-08 (f) first label: needs_info
+C-08 (f) follow-up label: accepted
+C-08 (f) follow-up text:
+Potwierdzenie, że opakowanie jest kompletne i nieotwarte, a folie i plomby nienaruszone, uzupełnia brakujące informacje. Wstępnie warunki zwrotu dobrowolnego z §3 ust. 3 są spełnione.
+
+Możesz przynieść sprzęt wraz z dowodem zakupu do sklepu stacjonarnego albo odesłać go na adres do zwrotów podany w potwierdzeniu zamówienia. Pracownik sprawdzi urządzenie i podejmie ostateczną decyzję.
+  ✓  6 [contract] › tests/contract/decision-matrix.contract.ts:286:7 › C-08 decision revision › C-08 (f) incomplete packaging is revised after the customer confirms it (40.3s)
+
+
+  1) [contract] › tests/contract/decision-matrix.contract.ts:210:7 › C-07 decision matrix › C-07 (c) complaint with a line defect and no external traces is accepted with repair or replacement 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "accepted"
+    Received: "needs_info"
+
+      238 |     });
+      239 |
+    > 240 |     expect(turn.label).toBe("accepted");
+          |                        ^
+      241 |     expect(turn.text).toMatch(/napraw|wymian/i);
+      242 |   });
+      243 |
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/decision-matrix.contract.ts:240:24
+
+    Error Context: test-results/decision-matrix.contract.t-b385a--with-repair-or-replacement-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/decision-matrix.contract.t-b385a--with-repair-or-replacement-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/decision-matrix.contract.t-b385a--with-repair-or-replacement-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [contract] › tests/contract/decision-matrix.contract.ts:210:7 › C-07 decision matrix › C-07 (c) complaint with a line defect and no external traces is accepted with repair or replacement 
+  5 passed (3.1m)

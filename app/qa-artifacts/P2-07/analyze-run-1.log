@@ -1,0 +1,416 @@
+[WebServer] Turbopack build encountered 4 warnings:
+[WebServer] ./lib/ai/env.ts:60:27
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   58 |   const capture = optional("AI_CAPTURE_DIR");
+[WebServer]   59 |   cached = {
+[WebServer] > 60 |     captureDir: capture ? path.resolve(process.cwd(), capture) : null,
+[WebServer]      |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer]   61 |     llmModel,
+[WebServer]   62 |     openRouterApiKey,
+[WebServer]   63 |     policiesDir: path.resolve(
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.resolve(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import trace:
+[WebServer]   App Route:
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer] 
+[WebServer] ./lib/ai/env.ts:63:18
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   61 |     llmModel,
+[WebServer]   62 |     openRouterApiKey,
+[WebServer] > 63 |     policiesDir: path.resolve(
+[WebServer]      |                  ^^^^^^^^^^^^
+[WebServer] > 64 |       process.cwd(),
+[WebServer]      | ^^^^^^^^^^^^^^^^^^^^
+[WebServer] > 65 |       optional("POLICIES_DIR") || DEFAULT_POLICIES_DIR
+[WebServer]      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer] > 66 |     ),
+[WebServer]      | ^^^^^
+[WebServer]   67 |     port: parsePort(),
+[WebServer]   68 |     visionModel: optional("VISION_MODEL") || llmModel,
+[WebServer]   69 |   };
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.resolve(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import trace:
+[WebServer]   App Route:
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer] 
+[WebServer] ./lib/ai/policies.ts:18:12
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   16 |   let text: string | null = null;
+[WebServer]   17 |   try {
+[WebServer] > 18 |     text = fs.readFileSync(file, "utf8");
+[WebServer]      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer]   19 |   } catch {
+[WebServer]   20 |     text = null;
+[WebServer]   21 |   }
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: fs.readFileSync(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import traces:
+[WebServer]   #1 [App Route]:
+[WebServer]     ./lib/ai/policies.ts
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer]   #2 [App Route]:
+[WebServer]     ./lib/ai/policies.ts
+[WebServer]     ./lib/ai/prompts/decision-agent.ts
+[WebServer]     ./lib/ai/decision-agent.ts
+[WebServer]     ./app/api/chat/route.ts
+[WebServer] 
+[WebServer] 
+[WebServer] ./lib/ai/policies.ts:15:16
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   13 |
+[WebServer]   14 | function readPolicyFile(caseType: CaseType): string {
+[WebServer] > 15 |   const file = path.join(getAiEnv().policiesDir, FILE_NAMES[caseType]);
+[WebServer]      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer]   16 |   let text: string | null = null;
+[WebServer]   17 |   try {
+[WebServer]   18 |     text = fs.readFileSync(file, "utf8");
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.join(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import traces:
+[WebServer]   #1 [App Route]:
+[WebServer]     ./lib/ai/policies.ts
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer]   #2 [App Route]:
+[WebServer]     ./lib/ai/policies.ts
+[WebServer]     ./lib/ai/prompts/decision-agent.ts
+[WebServer]     ./lib/ai/decision-agent.ts
+[WebServer]     ./app/api/chat/route.ts
+[WebServer] 
+[WebServer] 
+
+Running 12 tests using 1 worker
+
+C-02 phone-1.jpg return imageAnalysis: {
+  "confidence": "high",
+  "equipmentVisible": "Smartfon z mocno popękanym ekranem, ustawiony na białej podstawce.",
+  "imageUsable": "yes",
+  "matchesCategory": "yes",
+  "matchesModel": "uncertain",
+  "observations": [
+    {
+      "component": "Ekran",
+      "description": "Widoczne liczne pęknięcia i rozchodzące się rysy; ekran wyświetla menu ustawień.",
+      "location": "Przednia strona urządzenia, głównie górna i środkowa część ekranu."
+    }
+  ],
+  "safetyHazards": [],
+  "unusableReason": null,
+  "accessoriesVisible": false,
+  "packagingVisible": false,
+  "protectiveFilms": "not_visible",
+  "resaleableAsNew": "no",
+  "resaleableReasons": [
+    "Ekran jest mocno popękany."
+  ],
+  "seals": "not_visible",
+  "signsOfUse": [
+    {
+      "location": "Ekran, głównie górna i środkowa część",
+      "type": "other"
+    }
+  ],
+  "variant": "return"
+}
+  ✓   1 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-1.jpg return @capture (8.9s)
+C-02 phone-1.jpg complaint imageAnalysis: {
+  "confidence": "high",
+  "equipmentVisible": "Smartfon z mocno uszkodzonym ekranem.",
+  "imageUsable": "yes",
+  "matchesCategory": "yes",
+  "matchesModel": "uncertain",
+  "observations": [
+    {
+      "component": "Ekran",
+      "description": "Widoczne liczne pęknięcia oraz cienka zielona pionowa linia na wyświetlaczu.",
+      "location": "Na przedniej stronie urządzenia, na większości powierzchni ekranu."
+    },
+    {
+      "component": "Obudowa",
+      "description": "Widoczna obudowa smartfona; na zdjęciu nie widać wyraźnego wygięcia.",
+      "location": "Wzdłuż krawędzi urządzenia."
+    }
+  ],
+  "safetyHazards": [],
+  "unusableReason": null,
+  "damages": [
+    {
+      "extent": "Liczne pęknięcia obejmujące znaczną część ekranu, z większym skupiskiem uszkodzeń przy górnej krawędzi.",
+      "location": "Na przedniej szybie ekranu, szczególnie w górnej części i wzdłuż kilku przebieg,",
+      "type": "crack"
+    },
+    {
+      "extent": "Cienka, zielona linia biegnąca niemal przez całą wysokość ekranu.",
+      "location": "W przybliżeniu w środkowej części wyświetlacza.",
+      "type": "dead_pixels_or_lines"
+    }
+  ],
+  "damageVisible": "yes",
+  "externalCauseTraces": [
+    "radiating_cracks"
+  ],
+  "likelyCause": "user_caused",
+  "likelyCauseRationale": "Rozległy, promieniście rozchodzący się układ pęknięć oraz pionowa linia na wyświetlaczu wskazują na uszkodzenie mechaniczne. Na zdjęciu nie widać jednoznacznego punktu uderzenia ani innych śladów pozwalających ustalić okoliczności.",
+  "manufacturingDefectTraces": [],
+  "variant": "complaint"
+}
+  ✓   2 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-1.jpg complaint @capture (11.9s)
+C-02 phone-2.jpeg return imageAnalysis: {
+  "confidence": "medium",
+  "equipmentVisible": "Niebieski smartfon z logo Apple i podwójnym aparatem z tyłu.",
+  "imageUsable": "yes",
+  "matchesCategory": "yes",
+  "matchesModel": "uncertain",
+  "observations": [
+    {
+      "component": "Tył obudowy",
+      "description": "Niebieski panel z widocznym logo Apple; nie widać wyraźnych uszkodzeń.",
+      "location": "Środek tylnej części urządzenia"
+    },
+    {
+      "component": "Aparaty",
+      "description": "Dwa obiektywy i lampa błyskowa w podwyższonej wyspie aparatu.",
+      "location": "Lewy górny róg tylnej części urządzenia"
+    }
+  ],
+  "safetyHazards": [],
+  "unusableReason": null,
+  "accessoriesVisible": true,
+  "packagingVisible": false,
+  "protectiveFilms": "not_visible",
+  "resaleableAsNew": "uncertain",
+  "resaleableReasons": [
+    "Widoczna tylna część wygląda na nieuszkodzoną.",
+    "Nie można ocenić ekranu ani całego stanu urządzenia na podstawie tego ujęcia."
+  ],
+  "seals": "not_visible",
+  "signsOfUse": [],
+  "variant": "return"
+}
+  ✓   3 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-2.jpeg return @capture (12.2s)
+C-02 phone-2.jpeg complaint imageAnalysis: {
+  "confidence": "high",
+  "equipmentVisible": "Niebieski smartfon, widoczny od strony tylnej obudowy, trzymany w dłoni.",
+  "imageUsable": "yes",
+  "matchesCategory": "yes",
+  "matchesModel": "uncertain",
+  "observations": [
+    {
+      "component": "Tylna obudowa",
+      "description": "Niebieska, gładka powierzchnia z widocznym logo Apple; nie widać pęknięć ani innych wyraźnych uszkodzeń.",
+      "location": "Środkowa część tylnej strony urządzenia"
+    },
+    {
+      "component": "Moduł aparatów",
+      "description": "Widoczny podniesiony moduł z trzema okrągłymi elementami obiektywów oraz lampą błyskową.",
+      "location": "Górny lewy róg tylnej obudowy"
+    }
+  ],
+  "safetyHazards": [],
+  "unusableReason": null,
+  "damages": [],
+  "damageVisible": "no",
+  "externalCauseTraces": [],
+  "likelyCause": "undetermined",
+  "likelyCauseRationale": "Na zdjęciu nie widać uszkodzenia ani śladów wskazujących na konkretną przyczynę.",
+  "manufacturingDefectTraces": [],
+  "variant": "complaint"
+}
+  ✓   4 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-2.jpeg complaint @capture (5.8s)
+C-02 phone-3.jpeg return imageAnalysis: {
+  "confidence": "high",
+  "equipmentVisible": "Smartfon Samsung w ciemnoszarej obudowie, pokazany od tyłu; obok widoczne pudełko i materiały papierowe.",
+  "imageUsable": "yes",
+  "matchesCategory": "yes",
+  "matchesModel": "no",
+  "observations": [
+    {
+      "component": "Tylny panel",
+      "description": "Gładki, ciemnoszary panel z widocznym logo Samsung; nie widać wyraźnych uszkodzeń.",
+      "location": "Środek telefonu"
+    },
+    {
+      "component": "Aparaty",
+      "description": "Kilka osobnych, okrągłych obiektywów i czujników.",
+      "location": "Górna lewa część tylnego panelu"
+    },
+    {
+      "component": "Opakowanie",
+      "description": "Widoczne pudełko z napisem „Galaxy S24 Ultra”.",
+      "location": "Po prawej stronie telefonu"
+    }
+  ],
+  "safetyHazards": [],
+  "unusableReason": null,
+  "accessoriesVisible": false,
+  "packagingVisible": true,
+  "protectiveFilms": "not_visible",
+  "resaleableAsNew": "uncertain",
+  "resaleableReasons": [
+    "Widoczny tylny panel wygląda na nieuszkodzony.",
+    "Ekran i ewentualne ślady użytkowania z przodu nie są widoczne.",
+    "Plomby nie są widoczne."
+  ],
+  "seals": "not_visible",
+  "signsOfUse": [],
+  "variant": "return"
+}
+  ✓   5 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-3.jpeg return @capture (24.0s)
+C-02 phone-3.jpeg complaint imageAnalysis: {
+  "confidence": "high",
+  "equipmentVisible": "Smartfon Samsung widoczny od tyłu, obok opakowania i akcesoriów.",
+  "imageUsable": "yes",
+  "matchesCategory": "yes",
+  "matchesModel": "no",
+  "observations": [
+    {
+      "component": "Tylny panel",
+      "description": "Jasny, gładki panel bez widocznych pęknięć ani innych uszkodzeń.",
+      "location": "Tył smartfona"
+    },
+    {
+      "component": "Aparaty",
+      "description": "Kilka oddzielnych obiektywów w okrągłych osłonach.",
+      "location": "W górnej lewej części tylnego panelu"
+    },
+    {
+      "component": "Opakowanie",
+      "description": "Na pudełku widoczny jest napis „Galaxy S24 Ultra”.",
+      "location": "Po prawej stronie zdjęcia"
+    }
+  ],
+  "safetyHazards": [],
+  "unusableReason": null,
+  "damages": [],
+  "damageVisible": "no",
+  "externalCauseTraces": [],
+  "likelyCause": "undetermined",
+  "likelyCauseRationale": "Na widocznej powierzchni smartfona nie widać uszkodzeń ani śladów wskazujących na przyczynę problemu.",
+  "manufacturingDefectTraces": [],
+  "variant": "complaint"
+}
+  ✓   6 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 phone-3.jpeg complaint @capture (9.3s)
+C-02 laptop-2.webp return imageAnalysis: {
+  "confidence": "medium",
+  "equipmentVisible": "Otwarty laptop marki Lenovo z widocznym ekranem i klawiaturą.",
+  "imageUsable": "yes",
+  "matchesCategory": "yes",
+  "matchesModel": "uncertain",
+  "observations": [
+    {
+      "component": "Ekran",
+      "description": "Ekran jest włączony; widoczny niebieski pulpit i małe okno programu.",
+      "location": "Górna część laptopa"
+    },
+    {
+      "component": "Klawiatura",
+      "description": "Widoczna pełna klawiatura z czerwonym wskaźnikiem pośrodku.",
+      "location": "Środkowa część podstawy"
+    },
+    {
+      "component": "Obudowa",
+      "description": "Widoczne logo Lenovo oraz naklejki.",
+      "location": "Ramka ekranu i prawa oraz lewa część podstawy"
+    }
+  ],
+  "safetyHazards": [],
+  "unusableReason": null,
+  "accessoriesVisible": false,
+  "packagingVisible": false,
+  "protectiveFilms": "not_visible",
+  "resaleableAsNew": "uncertain",
+  "resaleableReasons": [
+    "Na widocznych powierzchniach nie widać wyraźnych uszkodzeń ani śladów zużycia.",
+    "Laptop jest włączony, a plomby nie są widoczne."
+  ],
+  "seals": "not_visible",
+  "signsOfUse": [],
+  "variant": "return"
+}
+  ✓   7 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 laptop-2.webp return @capture (9.1s)
+C-02 laptop-2.webp complaint imageAnalysis: {
+  "confidence": "high",
+  "equipmentVisible": "Otwarty laptop Lenovo z widocznym ekranem, klawiaturą i gładzikiem.",
+  "imageUsable": "yes",
+  "matchesCategory": "yes",
+  "matchesModel": "uncertain",
+  "observations": [
+    {
+      "component": "Ekran",
+      "description": "Wyświetla niebieski pulpit i małe okno; na widocznej powierzchni nie widać pęknięć ani innych uszkodzeń.",
+      "location": "W górnej części laptopa"
+    },
+    {
+      "component": "Klawiatura",
+      "description": "Widoczna klawiatura z czerwonym wskaźnikiem pośrodku.",
+      "location": "Środkowa część podstawy laptopa"
+    },
+    {
+      "component": "Gładzik",
+      "description": "Widoczny gładzik z przyciskami nad jego powierzchnią.",
+      "location": "Poniżej klawiatury, na podstawie laptopa"
+    },
+    {
+      "component": "Oznaczenie producenta",
+      "description": "Widoczne logo Lenovo.",
+      "location": "Na dolnej ramce ekranu"
+    }
+  ],
+  "safetyHazards": [],
+  "unusableReason": null,
+  "damages": [],
+  "damageVisible": "no",
+  "externalCauseTraces": [],
+  "likelyCause": "undetermined",
+  "likelyCauseRationale": "Na zdjęciu nie widać uszkodzeń ani innych jednoznacznych śladów wskazujących na przyczynę usterki.",
+  "manufacturingDefectTraces": [],
+  "variant": "complaint"
+}
+  ✓   8 [contract] › tests/contract/analyze.contract.ts:79:11 › C-02 analyze per photo @capture › C-02 laptop-2.webp complaint @capture (6.3s)
+  ✓   9 [contract] › tests/contract/analyze.contract.ts:137:7 › C-03 analyze rejects › C-03 (a) oversized photo returns 413 PHOTO_TOO_LARGE (209ms)
+  ✓  10 [contract] › tests/contract/analyze.contract.ts:154:7 › C-03 analyze rejects › C-03 (b) missing photo returns 400 PHOTO_REQUIRED (50ms)
+  ✓  11 [contract] › tests/contract/analyze.contract.ts:168:7 › C-03 analyze rejects › C-03 (c) invalid fields return 400 VALIDATION_ERROR with field errors (102ms)
+  ✓  12 [contract] › tests/contract/analyze.contract.ts:193:7 › C-03 analyze rejects › C-03 (d) JSON body returns 415 UNSUPPORTED_CONTENT_TYPE (59ms)
+
+  12 passed (1.9m)

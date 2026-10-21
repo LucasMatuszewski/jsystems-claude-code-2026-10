@@ -1,0 +1,150 @@
+
+> hardware-service-decision-copilot@0.1.0 build
+> next build
+
+▲ Next.js 16.4.2 (Turbopack)
+✓ Running next.config.ts took 438ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 24.6s
+  Running TypeScript ...
+  Finished TypeScript in 14.1s ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/6) ...
+  Generating static pages using 3 workers (1/6) 
+  Generating static pages using 3 workers (2/6) 
+  Generating static pages using 3 workers (4/6) 
+✓ Generating static pages using 3 workers (6/6) in 1054ms
+Turbopack build encountered 4 warnings:
+./lib/ai/env.ts:60:27
+Warning: Dynamic filesystem access causes tracing of the whole project
+  [90m58 |[0m   [36mconst[0m capture = optional([32m"AI_CAPTURE_DIR"[0m);
+  [90m59 |[0m   cached = {
+[33m[1m>[0m [90m60 |[0m     captureDir: capture ? path.resolve(process.cwd(), capture) : [36mnull[0m,
+  [90m   |[0m                           [33m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m61 |[0m     llmModel,
+  [90m62 |[0m     openRouterApiKey,
+  [90m63 |[0m     policiesDir: path.resolve(
+
+Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+This can slow down deployments or lead to failures when size limits are exceeded.
+To resolve this, you can
+- make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+- only use them in development, or
+- opt out by adding an ignore comment to the highlighted call: path.resolve(/*turbopackIgnore: true*/ ...), or
+- remove them.
+
+Import trace:
+  App Route:
+    ./lib/ai/env.ts
+    ./app/api/analyze/route.ts
+
+
+./lib/ai/env.ts:63:18
+Warning: Dynamic filesystem access causes tracing of the whole project
+  [90m61 |[0m     llmModel,
+  [90m62 |[0m     openRouterApiKey,
+[33m[1m>[0m [90m63 |[0m     policiesDir: path.resolve(
+  [90m   |[0m                  [33m[1m^^^^^^^^^^^^[0m
+[33m[1m>[0m [90m64 |[0m       process.cwd(),
+  [90m   |[0m [33m[1m^^^^^^^^^^^^^^^^^^^^[0m
+[33m[1m>[0m [90m65 |[0m       optional([32m"POLICIES_DIR"[0m) || [33mDEFAULT_POLICIES_DIR[0m
+  [90m   |[0m [33m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[33m[1m>[0m [90m66 |[0m     ),
+  [90m   |[0m [33m[1m^^^^^[0m
+  [90m67 |[0m     port: parsePort(),
+  [90m68 |[0m     visionModel: optional([32m"VISION_MODEL"[0m) || llmModel,
+  [90m69 |[0m   };
+
+Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+This can slow down deployments or lead to failures when size limits are exceeded.
+To resolve this, you can
+- make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+- only use them in development, or
+- opt out by adding an ignore comment to the highlighted call: path.resolve(/*turbopackIgnore: true*/ ...), or
+- remove them.
+
+Import trace:
+  App Route:
+    ./lib/ai/env.ts
+    ./app/api/analyze/route.ts
+
+
+./lib/ai/policies.ts:18:12
+Warning: Dynamic filesystem access causes tracing of the whole project
+  [90m16 |[0m   [36mlet[0m text: string | [36mnull[0m = [36mnull[0m;
+  [90m17 |[0m   [36mtry[0m {
+[33m[1m>[0m [90m18 |[0m     text = fs.readFileSync(file, [32m"utf8"[0m);
+  [90m   |[0m            [33m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m   } [36mcatch[0m {
+  [90m20 |[0m     text = [36mnull[0m;
+  [90m21 |[0m   }
+
+Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+This can slow down deployments or lead to failures when size limits are exceeded.
+To resolve this, you can
+- make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+- only use them in development, or
+- opt out by adding an ignore comment to the highlighted call: fs.readFileSync(/*turbopackIgnore: true*/ ...), or
+- remove them.
+
+Import traces:
+  #1 [App Route]:
+    ./lib/ai/policies.ts
+    ./lib/ai/env.ts
+    ./app/api/analyze/route.ts
+
+  #2 [App Route]:
+    ./lib/ai/policies.ts
+    ./lib/ai/prompts/decision-agent.ts
+    ./lib/ai/decision-agent.ts
+    ./app/api/chat/route.ts
+
+
+./lib/ai/policies.ts:15:16
+Warning: Dynamic filesystem access causes tracing of the whole project
+  [90m13 |[0m
+  [90m14 |[0m [36mfunction[0m readPolicyFile(caseType: [33mCaseType[0m): string {
+[33m[1m>[0m [90m15 |[0m   [36mconst[0m file = path.join(getAiEnv().policiesDir, [33mFILE_NAMES[0m[caseType]);
+  [90m   |[0m                [33m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m16 |[0m   [36mlet[0m text: string | [36mnull[0m = [36mnull[0m;
+  [90m17 |[0m   [36mtry[0m {
+  [90m18 |[0m     text = fs.readFileSync(file, [32m"utf8"[0m);
+
+Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+This can slow down deployments or lead to failures when size limits are exceeded.
+To resolve this, you can
+- make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+- only use them in development, or
+- opt out by adding an ignore comment to the highlighted call: path.join(/*turbopackIgnore: true*/ ...), or
+- remove them.
+
+Import traces:
+  #1 [App Route]:
+    ./lib/ai/policies.ts
+    ./lib/ai/env.ts
+    ./app/api/analyze/route.ts
+
+  #2 [App Route]:
+    ./lib/ai/policies.ts
+    ./lib/ai/prompts/decision-agent.ts
+    ./lib/ai/decision-agent.ts
+    ./app/api/chat/route.ts
+
+
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/analyze
+└ ƒ /api/chat
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

@@ -1,0 +1,7 @@
+
+Running 1 test using 1 worker
+
+  ✓  1 [failure] › tests/e2e/failure.spec.ts:9:7 › E-22 failed analysis returns to the form with data preserved › AC-22 banner after a failed analysis, data kept, retry processes again (3.8s)
+
+  1 passed (25.4s)
+EXIT=0

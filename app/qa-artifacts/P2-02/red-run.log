@@ -1,0 +1,217 @@
+[WebServer] Turbopack build encountered 2 warnings:
+[WebServer] ./lib/ai/env.ts:60:27
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   58 |   const capture = optional("AI_CAPTURE_DIR");
+[WebServer]   59 |   cached = {
+[WebServer] > 60 |     captureDir: capture ? path.resolve(process.cwd(), capture) : null,
+[WebServer]      |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer]   61 |     llmModel,
+[WebServer]   62 |     openRouterApiKey,
+[WebServer]   63 |     policiesDir: path.resolve(
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.resolve(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import trace:
+[WebServer]   App Route:
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer] 
+[WebServer] ./lib/ai/env.ts:63:18
+[WebServer] Warning: Dynamic filesystem access causes tracing of the whole project
+[WebServer]   61 |     llmModel,
+[WebServer]   62 |     openRouterApiKey,
+[WebServer] > 63 |     policiesDir: path.resolve(
+[WebServer]      |                  ^^^^^^^^^^^^
+[WebServer] > 64 |       process.cwd(),
+[WebServer]      | ^^^^^^^^^^^^^^^^^^^^
+[WebServer] > 65 |       optional("POLICIES_DIR") || DEFAULT_POLICIES_DIR
+[WebServer]      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer] > 66 |     ),
+[WebServer]      | ^^^^^
+[WebServer]   67 |     port: parsePort(),
+[WebServer]   68 |     visionModel: optional("VISION_MODEL") || llmModel,
+[WebServer]   69 |   };
+[WebServer] 
+[WebServer] Static analysis determined that this filesystem access causes the whole project to be traced and included in the output.
+[WebServer] This is usually unintentional and leads to all source files (including the public folder) to be deployed as part of the server code.
+[WebServer] This can slow down deployments or lead to failures when size limits are exceeded.
+[WebServer] To resolve this, you can
+[WebServer] - make sure the path is statically scoped to some subfolder, for example path.join(process.cwd(), 'data', bar), or
+[WebServer] - only use them in development, or
+[WebServer] - opt out by adding an ignore comment to the highlighted call: path.resolve(/*turbopackIgnore: true*/ ...), or
+[WebServer] - remove them.
+[WebServer] 
+[WebServer] Import trace:
+[WebServer]   App Route:
+[WebServer]     ./lib/ai/env.ts
+[WebServer]     ./app/api/analyze/route.ts
+[WebServer] 
+[WebServer] 
+
+Running 5 tests using 1 worker
+
+  ✘  1 [contract] › tests/contract/chat.contract.ts:81:7 › C-04 chat first turn @capture › C-04 first turn streams set_decision then the explanation (7.2s)
+  ✘  2 [contract] › tests/contract/chat.contract.ts:190:7 › C-05 chat follow-up @capture › C-05 follow-up turn after the first answer (8.3s)
+  ✘  3 [contract] › tests/contract/chat.contract.ts:267:7 › C-06 chat rejects › C-06 (a) 70 messages are accepted with no count cap (9.8s)
+  ✘  4 [contract] › tests/contract/chat.contract.ts:306:7 › C-06 chat rejects › C-06 (b) a file part in a follow-up returns 400 VALIDATION_ERROR (9.1s)
+  ✘  5 [contract] › tests/contract/chat.contract.ts:335:7 › C-06 chat rejects › C-06 (c) caseContext.caseType mismatching imageAnalysis returns 400 VALIDATION_ERROR (6.4s)
+
+
+  1) [contract] › tests/contract/chat.contract.ts:81:7 › C-04 chat first turn @capture › C-04 first turn streams set_decision then the explanation 
+
+    Error: {"error":{"code":"NOT_IMPLEMENTED","message":"Endpoint not implemented yet."}}
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 501
+
+      91 |     const response = await postChat(request, body);
+      92 |
+    > 93 |     expect(response.status, response.raw).toBe(200);
+         |                                           ^
+      94 |     expect(response.headers["content-type"]).toMatch(/^text\/event-stream/);
+      95 |     expect(response.headers["cache-control"]).toBe("no-store");
+      96 |
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/chat.contract.ts:93:43
+
+    Error Context: test-results/chat.contract.ts-C-04-chat-32252-cision-then-the-explanation-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat.contract.ts-C-04-chat-32252-cision-then-the-explanation-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat.contract.ts-C-04-chat-32252-cision-then-the-explanation-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [contract] › tests/contract/chat.contract.ts:190:7 › C-05 chat follow-up @capture › C-05 follow-up turn after the first answer 
+
+    Error: {"error":{"code":"NOT_IMPLEMENTED","message":"Endpoint not implemented yet."}}
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 501
+
+      58 |   };
+      59 |   const response = await postChat(request, body);
+    > 60 |   expect(response.status, response.raw).toBe(200);
+         |                                         ^
+      61 |   expect(response.headers["content-type"]).toMatch(/^text\/event-stream/);
+      62 |   const [toolCall] = toolInputs(response.chunks, "set_decision");
+      63 |   const input = toolCall?.input as { label?: unknown } | undefined;
+        at runFirstTurn (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/chat.contract.ts:60:41)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/chat.contract.ts:191:19
+
+    Error Context: test-results/chat.contract.ts-C-05-chat-37975-turn-after-the-first-answer-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat.contract.ts-C-05-chat-37975-turn-after-the-first-answer-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat.contract.ts-C-05-chat-37975-turn-after-the-first-answer-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [contract] › tests/contract/chat.contract.ts:267:7 › C-06 chat rejects › C-06 (a) 70 messages are accepted with no count cap 
+
+    Error: {"error":{"code":"NOT_IMPLEMENTED","message":"Endpoint not implemented yet."}}
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 501
+
+      58 |   };
+      59 |   const response = await postChat(request, body);
+    > 60 |   expect(response.status, response.raw).toBe(200);
+         |                                         ^
+      61 |   expect(response.headers["content-type"]).toMatch(/^text\/event-stream/);
+      62 |   const [toolCall] = toolInputs(response.chunks, "set_decision");
+      63 |   const input = toolCall?.input as { label?: unknown } | undefined;
+        at runFirstTurn (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/chat.contract.ts:60:41)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/chat.contract.ts:270:19
+
+    Error Context: test-results/chat.contract.ts-C-06-chat-9d868--accepted-with-no-count-cap-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat.contract.ts-C-06-chat-9d868--accepted-with-no-count-cap-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat.contract.ts-C-06-chat-9d868--accepted-with-no-count-cap-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [contract] › tests/contract/chat.contract.ts:306:7 › C-06 chat rejects › C-06 (b) a file part in a follow-up returns 400 VALIDATION_ERROR 
+
+    Error: {"error":{"code":"NOT_IMPLEMENTED","message":"Endpoint not implemented yet."}}
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 501
+
+      58 |   };
+      59 |   const response = await postChat(request, body);
+    > 60 |   expect(response.status, response.raw).toBe(200);
+         |                                         ^
+      61 |   expect(response.headers["content-type"]).toMatch(/^text\/event-stream/);
+      62 |   const [toolCall] = toolInputs(response.chunks, "set_decision");
+      63 |   const input = toolCall?.input as { label?: unknown } | undefined;
+        at runFirstTurn (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/chat.contract.ts:60:41)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/chat.contract.ts:309:19
+
+    Error Context: test-results/chat.contract.ts-C-06-chat-e6af0-eturns-400-VALIDATION-ERROR-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat.contract.ts-C-06-chat-e6af0-eturns-400-VALIDATION-ERROR-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat.contract.ts-C-06-chat-e6af0-eturns-400-VALIDATION-ERROR-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [contract] › tests/contract/chat.contract.ts:335:7 › C-06 chat rejects › C-06 (c) caseContext.caseType mismatching imageAnalysis returns 400 VALIDATION_ERROR 
+
+    Error: {"error":{"code":"NOT_IMPLEMENTED","message":"Endpoint not implemented yet."}}
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 400
+    Received: 501
+
+      253 |   code: string
+      254 | ): void {
+    > 255 |   expect(response.status, response.raw).toBe(status);
+          |                                         ^
+      256 |   expect(response.headers["cache-control"]).toBe("no-store");
+      257 |   expect(response.headers["content-type"]).toContain("application/json");
+      258 |   const json: unknown = JSON.parse(response.raw);
+        at expectErrorEnvelope (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/chat.contract.ts:255:41)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/contract/chat.contract.ts:350:5
+
+    Error Context: test-results/chat.contract.ts-C-06-chat-affb9-eturns-400-VALIDATION-ERROR-contract/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat.contract.ts-C-06-chat-affb9-eturns-400-VALIDATION-ERROR-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat.contract.ts-C-06-chat-affb9-eturns-400-VALIDATION-ERROR-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5 failed
+    [contract] › tests/contract/chat.contract.ts:81:7 › C-04 chat first turn @capture › C-04 first turn streams set_decision then the explanation 
+    [contract] › tests/contract/chat.contract.ts:190:7 › C-05 chat follow-up @capture › C-05 follow-up turn after the first answer 
+    [contract] › tests/contract/chat.contract.ts:267:7 › C-06 chat rejects › C-06 (a) 70 messages are accepted with no count cap 
+    [contract] › tests/contract/chat.contract.ts:306:7 › C-06 chat rejects › C-06 (b) a file part in a follow-up returns 400 VALIDATION_ERROR 
+    [contract] › tests/contract/chat.contract.ts:335:7 › C-06 chat rejects › C-06 (c) caseContext.caseType mismatching imageAnalysis returns 400 VALIDATION_ERROR 

@@ -1,0 +1,42 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 [firefox] › tests/e2e/reduction.spec.ts:11:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio (6.0s)
+
+
+  1) [firefox] › tests/e2e/reduction.spec.ts:11:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio 
+
+    Error: invalid JPEG marker at offset 4175
+
+       at e2e/helpers/photos.ts:118
+
+      116 |   while (offset < bytes.length) {
+      117 |     if (bytes.readUInt8(offset) !== 0xff) {
+    > 118 |       throw new Error(`invalid JPEG marker at offset ${offset}`);
+          |             ^
+      119 |     }
+      120 |     let marker = bytes.readUInt8(offset + 1);
+      121 |     offset += 1;
+        at jpegSize (/home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/helpers/photos.ts:118:13)
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/reduction.spec.ts:44:39
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/reduction-E-21-smoke-photo-942f6-JPEG-with-kept-aspect-ratio-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [firefox] › tests/e2e/reduction.spec.ts:11:7 › E-21 @smoke photo reduction › outgoing analyze request carries a reduced JPEG with kept aspect ratio 

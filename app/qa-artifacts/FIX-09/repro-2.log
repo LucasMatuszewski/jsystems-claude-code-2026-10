@@ -1,0 +1,405 @@
+[WebServer] 
+[WebServer] > hardware-service-decision-copilot@0.1.0 build
+[WebServer] > next build
+[WebServer] 
+[WebServer] ▲ Next.js 16.4.2 (Turbopack)
+[WebServer] ✓ Running next.config.ts took 98ms
+[WebServer] 
+[WebServer]   Creating an optimized production build ...
+[WebServer] ✓ Compiled successfully in 1916ms
+[WebServer]   Running TypeScript ...
+[WebServer]   Finished TypeScript in 4.9s ...
+[WebServer]   Collecting page data using 3 workers ...
+[WebServer]   Generating static pages using 3 workers (0/6) ...
+[WebServer]   Generating static pages using 3 workers (1/6) 
+[WebServer]   Generating static pages using 3 workers (2/6) 
+[WebServer]   Generating static pages using 3 workers (4/6) 
+[WebServer] ✓ Generating static pages using 3 workers (6/6) in 733ms
+[WebServer]   Finalizing page optimization ...
+[WebServer] 
+[WebServer] Route (app)
+[WebServer] ┌ ○ /
+[WebServer] ├ ○ /_not-found
+[WebServer] ├ ƒ /api/analyze
+[WebServer] └ ƒ /api/chat
+[WebServer] 
+[WebServer] 
+[WebServer] ○  (Static)   prerendered as static content
+[WebServer] ƒ  (Dynamic)  server-rendered on demand
+[WebServer] 
+[WebServer] 
+[WebServer] > hardware-service-decision-copilot@0.1.0 start
+[WebServer] > next start
+[WebServer] 
+[WebServer] ▲ Next.js 16.4.2
+[WebServer] - Local:         http://localhost:3000
+[WebServer] - Network:       http://10.123.3.95:3000
+[WebServer] ✓ Ready in 307ms
+[WebServer] ✓ Running next.config.ts took 72ms
+[WebServer] 
+[WebServer] > hardware-service-decision-copilot@0.1.0 start
+[WebServer] > next start -p 3200
+[WebServer] 
+[WebServer] ▲ Next.js 16.4.2
+[WebServer] - Local:         http://localhost:3200
+[WebServer] - Network:       http://10.123.3.95:3200
+[WebServer] ✓ Ready in 350ms
+[WebServer] ✓ Running next.config.ts took 78ms
+
+Running 24 tests using 2 workers
+
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":7340,"finishReason":"stop","usage":{"inputTokens":1301,"outputTokens":547,"reasoningTokens":239,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":8435,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":621,"reasoningTokens":282,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":28,"totalMs":8819,"finishReason":"stop","usage":{"inputTokens":6050,"outputTokens":693,"reasoningTokens":273,"cost":0}}
+E-06 label=needs_info ttfc_ms=12069
+E-06 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdzę, czego brakuje do rzetelnej oceny zwrotu.
+
+Decyzja
+
+Potrzebne dodatkowe informacje
+
+Uzasadnienie
+
+Zakup internetowy zgłoszono 9 dni temu, więc sprawa mieści się w terminie zwrotu ustawowego opisanym w §2 ust. 1 Regulaminu zwrotów. Zdjęcie jest jednak niezgodne z kategorią zgłoszenia: pokazuje tył smartfona Apple z trzema obiektywami, a zgłoszenie dotyczy laptopa. Nie mogę więc ocenić, czy fotografia przedstawia zwracany sprzęt ani sprawdzić jego stanu. Brakuje zdjęcia laptopa, na którym widać całe urządzenie.
+
+Co dalej
+Jeśli możesz przesłać nowe zdjęcie, rozpocznij nowe zgłoszenie przyciskiem „Nowe zgłoszenie”. Zrób zdjęcie w dobrym świetle, pokazując całe urządzenie, oraz zbliżenie elementu, którego stan chcesz pokazać.
+Po otrzymaniu zgodnych informacji sklep będzie mógł przeprowadzić dalszą ocenę. Przy zwrocie ustawowym same ślady używania lub brak oryginalnego opakowania nie wykluczają zwrotu (§2 ust. 3); ewentualne zmniejszenie wartości ocenia pracownik po oględzinach (§2 ust. 4).
+Zgodnie z §5 ust. 2–3 sprzęt można przynieść do sklepu stacjonarnego z dowodem zakupu albo odesłać na adres do zwrotów podany w potwierdzeniu zamówienia; pracownik sprawdza sprzęt fizycznie i podejmuje ostateczną decyzję.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓   1 [chromium] › tests/e2e/chat-decisions.spec.ts:10:7 › E-06 return with a laptop photo needs more information › label needs_info and asks for a new report (20.4s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":13,"totalMs":8791,"finishReason":"stop","usage":{"inputTokens":5976,"outputTokens":721,"reasoningTokens":334,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":17,"totalMs":4088,"finishReason":"stop","usage":{"inputTokens":3327,"outputTokens":92,"reasoningTokens":66,"cost":0}}
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":8953,"finishReason":"stop","usage":{"inputTokens":2433,"outputTokens":729,"reasoningTokens":243,"cost":0}}
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":11,"totalMs":9670,"finishReason":"stop","usage":{"inputTokens":6027,"outputTokens":784,"reasoningTokens":378,"cost":0}}
+E-07 complaint label=escalated ttfc_ms=11108
+E-07 complaint first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdzę je na podstawie podanych informacji i zdjęcia.
+
+Decyzja
+
+Przekazanie do weryfikacji
+
+Bezpieczeństwo
+
+Natychmiast odłącz smartfon od zasilania i przestań go używać. Nie otwieraj obudowy.
+
+Uzasadnienie
+
+Zgłoszenie mieści się w 2-letnim okresie odpowiedzialności (§2 ust. 1 Regulaminu reklamacji). Na zdjęciu widać liczne, rozległe pęknięcia ekranu oraz ciemne obszary zasłaniające część obrazu. Widoczne ślady wskazują na możliwe uszkodzenie mechaniczne, które wymieniono w §4 ust. 1 Regulaminu reklamacji. Jednocześnie opisujesz spuchniętą baterię i zapach spalenizny. Przyczyna oraz stan urządzenia wymagają sprawdzenia podczas fizycznych oględzin; pracownik lub serwis oceni ekran i baterię (§6 ust. 4). To wstępna ocena, nie ostateczne rozstrzygnięcie.
+
+Co dalej
+Aby złożyć formalną reklamację, przekaż urządzenie do sklepu stacjonarnego albo wyślij je na adres do zwrotów podany w potwierdzeniu zamówienia. Dołącz dowód zakupu i opis niezgodności (§6 ust. 2).
+Sklep odpowiada na formalną reklamację w terminie 14 dni od jej otrzymania (§6 ust. 3).
+Przy podejrzeniu spuchniętej baterii nie używaj smartfona ani nie podłączaj go ponownie do zasilania.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓   3 [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › complaint: safety phrase comes before "Co dalej" (22.4s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":7661,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":625,"reasoningTokens":237,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":7,"totalMs":11915,"finishReason":"stop","usage":{"inputTokens":6349,"outputTokens":839,"reasoningTokens":427,"cost":0}}
+E-07 return label=escalated ttfc_ms=14157
+E-07 return first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdzę, jaką ścieżkę zwrotu obejmuje Twoja sprawa.
+
+Decyzja
+
+Przekazanie do weryfikacji
+
+Bezpieczeństwo
+
+Ponieważ zgłaszasz spuchniętą baterię i zapach spalenizny, natychmiast odłącz smartfon od zasilania i nie używaj go. Nie otwieraj obudowy.
+
+Uzasadnienie
+
+Zakup internetowy nastąpił 9 dni temu, więc sprawa mieści się w terminie zwrotu ustawowego — odstąpienia od umowy zawartej na odległość — zgodnie z §2 ust. 1 Regulaminu zwrotów. Na zdjęciu widać liczne pęknięcia ekranu i rozległą ciemną część. Takie ślady same w sobie nie wykluczają zwrotu ustawowego (§2 ust. 3), ale pracownik musi obejrzeć urządzenie fizycznie i ocenić, czy korzystanie wpłynęło na jego wartość. Ewentualne potrącenie ustala pracownik po oględzinach (§2 ust. 4); wstępna ocena nie jest decyzją sklepu (§5 ust. 3).
+
+Co dalej
+Pracownik sklepu stacjonarnego sprawdzi stan smartfona i oceni sprawę po oględzinach.
+Możesz przynieść urządzenie do sklepu stacjonarnego albo odesłać je na adres do zwrotów podany w potwierdzeniu zamówienia; dołącz dowód zakupu. Z uwagi na zgłoszone zagrożenie nie używaj urządzenia i nie podłączaj go ponownie.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓   4 [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › return: safety phrase comes before "Co dalej" (22.1s)
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":14327,"finishReason":"stop","usage":{"inputTokens":3932,"outputTokens":522,"reasoningTokens":143,"cost":0}}
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":13,"totalMs":14469,"finishReason":"stop","usage":{"inputTokens":5844,"outputTokens":979,"reasoningTokens":646,"cost":0}}
+E-08 label=rejected ttfc_ms=16873
+E-08 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — sprawdzę widoczne objawy i zasady reklamacji.
+
+Decyzja
+
+Odrzucenie (wstępne)
+
+Uzasadnienie
+
+Na zdjęciu widać liczne pęknięcia ekranu, rozchodzące się promieniście od punktu w dolnej lewej części. Widoczne ślady wskazują na uszkodzenie mechaniczne opisane w §4 ust. 1 Regulaminu reklamacji, które nie jest objęte reklamacją. Zgłoszony pionowy pas nie jest wyraźnie widoczny na zdjęciu. To wstępna ocena; ostateczną decyzję podejmuje pracownik lub serwis po oględzinach (§6 ust. 4).
+
+Co dalej
+Jeśli chcesz złożyć formalną reklamację, przekaż laptop do sklepu stacjonarnego albo wyślij go na adres do zwrotów podany w potwierdzeniu zamówienia. Dołącz dowód zakupu i opis pionowego pasa oraz innych objawów. Sklep odpowiada na formalną reklamację w ciągu 14 dni od jej otrzymania (§6 ust. 2–3).
+Możesz też sprawdzić warunki gwarancji producenta, zapytać o odpłatną naprawę lub skonsultować sprzęt w sklepie stacjonarnym.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓   5 [chromium] › tests/e2e/chat-decisions.spec.ts:57:7 › E-08 complaint in store, laptop with a screen defect › label is one of the four and the reply does not blame the customer (31.6s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":9444,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":505,"reasoningTokens":176,"cost":0}}
+E-11 first label=rejected ttfc_ms=13098
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":13,"totalMs":9728,"finishReason":"stop","usage":{"inputTokens":6052,"outputTokens":746,"reasoningTokens":311,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":5,"totalMs":7788,"finishReason":"stop","usage":{"inputTokens":3465,"outputTokens":493,"reasoningTokens":368,"cost":0}}
+E-11 follow-up reply:
+Asystent AI
+
+Dziękuję za doprecyzowanie. Informacja o kompletnym opakowaniu, foliach i plombach nie zmienia oceny: na zdjęciu nadal widać mocno pęknięty ekran, co nie spełnia warunku braku śladów używania określonego w §3 ust. 3. Pracownik może zweryfikować stan opakowania i urządzenia podczas oględzin. W razie konsultacji przynieś sprzęt do sklepu stacjonarnego razem z dowodem zakupu.
+E-11 second decision card: NOT shown
+  ✓   6 [chromium] › tests/e2e/chat-decisions.spec.ts:79:7 › E-11 decision update after new information › a second decision card is shown as an update when the assistant revises it (29.5s)
+  ✘   2 [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input (2.1m)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6203,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":502,"reasoningTokens":173,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":8177,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":647,"reasoningTokens":375,"cost":0}}
+  ✓   8 [chromium] › tests/e2e/chat-controls.spec.ts:108:7 › E-15 new case dialog › cancel keeps the chat, confirm starts an empty form (16.5s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":7,"totalMs":12897,"finishReason":"stop","usage":{"inputTokens":6096,"outputTokens":837,"reasoningTokens":422,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6655,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":485,"reasoningTokens":274,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":20,"totalMs":3046,"finishReason":"stop","usage":{"inputTokens":3523,"outputTokens":144,"reasoningTokens":98,"cost":0}}
+  ✓   9 [chromium] › tests/e2e/chat-controls.spec.ts:134:7 › E-16 leaving the page › reload on the chat screen shows a beforeunload dialog (13.8s)
+  ✓  10 [chromium] › tests/e2e/chat-controls.spec.ts:148:7 › E-16 leaving the page › reload on the form screen shows no dialog (1.3s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":7979,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":515,"reasoningTokens":233,"cost":0}}
+  ✓  11 [chromium] › tests/e2e/chat-controls.spec.ts:163:7 › E-17 summary photo overlay › opens with the photo, closes with Esc, the close button and an outside click (12.7s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6330,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":436,"reasoningTokens":218,"cost":0}}
+  ✓  12 [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 360x800: no horizontal scroll and keyboard-only return flow (10.6s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":7566,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":567,"reasoningTokens":244,"cost":0}}
+  ✓  13 [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 1920x1080: no horizontal scroll and keyboard-only return flow (16.8s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6706,"finishReason":"stop","usage":{"inputTokens":1301,"outputTokens":633,"reasoningTokens":328,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":9,"totalMs":8167,"finishReason":"stop","usage":{"inputTokens":6030,"outputTokens":594,"reasoningTokens":237,"cost":0}}
+E-06 label=needs_info ttfc_ms=10465
+E-06 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — potrzebuję jeszcze zdjęcia urządzenia zgodnego z danymi sprawy.
+
+Decyzja
+
+Potrzebne dodatkowe informacje
+
+Uzasadnienie
+
+Zakup internetowy sprzed 9 dni mieści się w terminie zwrotu ustawowego z §2 ust. 1 Regulaminu zwrotów. Nie mogę jednak ocenić stanu urządzenia: w formularzu wskazano laptop, a na zdjęciu widać smartfon Apple z trzema obiektywami z tyłu. Zdjęcie nie potwierdza więc, jak wygląda zgłaszany laptop ani czy spełnia warunki zwrotu.
+
+Co dalej
+Brakuje zdjęcia laptopa zgodnego z kategorią w zgłoszeniu. Potrzebne jest ujęcie całego urządzenia oraz zbliżenie na zgłaszany problem; jeśli to możliwe, pokaż też akcesoria i opakowanie.
+Wykonaj zdjęcia w dobrym świetle. Aby przesłać nowe zdjęcie, rozpocznij nową sprawę przyciskiem „Nowe zgłoszenie”.
+Po otrzymaniu zgodnych informacji będzie można przygotować wstępną ocenę. Zgodnie z §5 ust. 2–3 Regulaminu zwrotów sprzęt można przynieść do sklepu stacjonarnego albo odesłać na adres do zwrotów podany w potwierdzeniu zamówienia; pracownik sprawdza go fizycznie.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓  14 [chromium] › tests/e2e/chat-decisions.spec.ts:10:7 › E-06 return with a laptop photo needs more information › label needs_info and asks for a new report (17.6s)
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6810,"finishReason":"stop","usage":{"inputTokens":2433,"outputTokens":587,"reasoningTokens":154,"cost":0}}
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":5,"totalMs":11142,"finishReason":"stop","usage":{"inputTokens":6145,"outputTokens":859,"reasoningTokens":448,"cost":0}}
+E-07 complaint label=rejected ttfc_ms=11561
+E-07 complaint first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — rozumiem, że uszkodzenie ekranu i objawy baterii są niepokojące.
+
+Decyzja
+
+Odrzucenie (wstępne)
+
+Bezpieczeństwo
+
+Ponieważ zgłaszasz spuchniętą baterię i zapach spalenizny, natychmiast odłącz smartfon od zasilania i przestań go używać. Nie otwieraj obudowy.
+
+Uzasadnienie
+
+Wstępna ocena reklamacji jest negatywna. Na zdjęciu widać liczne pęknięcia ekranu oraz skupisko uszkodzeń, od którego rozchodzą się pęknięcia. Widoczne ślady wskazują na punktowe uderzenie, co odpowiada wyłączeniu uszkodzeń mechanicznych z §4 ust. 1 Regulaminu reklamacji. Zgłoszona spuchnięta bateria nie jest widoczna na zdjęciu, ale wymaga zachowania powyższych zasad bezpieczeństwa.
+
+Ta ocena nie jest ostateczna. Zgodnie z §6 ust. 4 ostateczną decyzję podejmuje pracownik lub serwis po oględzinach sprzętu.
+
+Co dalej
+Możesz przynieść smartfon do sklepu stacjonarnego albo wysłać go z dowodem zakupu i opisem problemu, aby złożyć formalną reklamację (§6 ust. 2). Sklep odpowiada na nią w ciągu 14 dni od otrzymania (§6 ust. 3).
+Możesz też zapytać o odpłatną naprawę lub konsultację w sklepie stacjonarnym. Możesz sprawdzić także, czy nadal obowiązuje gwarancja producenta.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓  15 [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › complaint: safety phrase comes before "Co dalej" (20.3s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":9737,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":634,"reasoningTokens":255,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":4,"totalMs":8829,"finishReason":"stop","usage":{"inputTokens":6068,"outputTokens":778,"reasoningTokens":370,"cost":0}}
+E-07 return label=escalated ttfc_ms=11506
+E-07 return first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — wstępnie sprawdzam je według zasad zwrotu.
+
+Decyzja
+
+Przekazanie do weryfikacji
+
+Bezpieczeństwo
+
+Przy podejrzeniu spuchniętej baterii i zapachu spalenizny natychmiast odłącz smartfon od zasilania i nie używaj go. Nie otwieraj obudowy.
+
+Uzasadnienie
+
+Zakup internetowy sprzed 9 dni kwalifikuje zgłoszenie do ścieżki zwrotu ustawowego z §2 ust. 1 Regulaminu zwrotów. Widoczne na zdjęciu liczne pęknięcia obejmują niemal całą powierzchnię ekranu. Ślady używania ani brak oryginalnego opakowania same w sobie nie wykluczają takiego zwrotu (§2 ust. 3), ale pracownik ustala po fizycznych oględzinach, czy korzystanie zmniejszyło wartość sprzętu i czy należy uwzględnić potrącenie (§2 ust. 4). Dlatego ocena wymaga sprawdzenia urządzenia.
+
+Co dalej
+Jeśli chcesz odstąpić od umowy, pamiętaj, że to zgłoszenie nie jest formalnym oświadczeniem o odstąpieniu (§5 ust. 4). Po jego złożeniu sprzęt trzeba odesłać w ciągu 14 dni.
+Możesz przynieść smartfon wraz z dowodem zakupu do sklepu stacjonarnego albo odesłać go na adres do zwrotów podany w potwierdzeniu zamówienia. Pracownik przeprowadzi oględziny i podejmie ostateczną decyzję (§5 ust. 2–3).
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓  16 [chromium] › tests/e2e/chat-decisions.spec.ts:29:9 › E-07 safety warning precedes the next steps › return: safety phrase comes before "Co dalej" (20.9s)
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6564,"finishReason":"stop","usage":{"inputTokens":3932,"outputTokens":558,"reasoningTokens":155,"cost":0}}
+[WebServer] {"caseType":"complaint","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":3,"totalMs":12526,"finishReason":"stop","usage":{"inputTokens":5879,"outputTokens":861,"reasoningTokens":505,"cost":0}}
+E-08 label=rejected ttfc_ms=8984
+E-08 first message:
+Asystent AI
+
+Dziękuję za zgłoszenie — wstępnie oceniam je na podstawie opisu i przesłanego zdjęcia.
+
+Decyzja
+
+Odrzucenie (wstępne)
+
+Uzasadnienie
+
+Zgłoszenie dotyczy reklamacji złożonej w ciągu 2 lat od zakupu (§2 ust. 1 Regulaminu reklamacji). Na zdjęciu widać promieniście rozchodzące się pęknięcia ekranu, a opis wskazuje na pionową linię. Widoczne ślady wskazują na uszkodzenie mechaniczne ekranu, które jest wyłączone z reklamacji zgodnie z §4 ust. 1 Regulaminu reklamacji. Dlatego wstępna ocena reklamacji jest negatywna. Ostateczną decyzję podejmuje pracownik lub serwis po oględzinach (§6 ust. 4).
+
+Co dalej
+Możesz przekazać laptop do sklepu stacjonarnego lub wysłać go na adres do zwrotów podany w potwierdzeniu zamówienia, dołączając dowód zakupu i opis problemu. Formalną reklamację sklep rozpatruje w terminie 14 dni od jej otrzymania (§6 ust. 2–3).
+Możesz sprawdzić, czy nadal obowiązuje gwarancja producenta, albo zapytać o płatną naprawę.
+Możesz też przynieść laptop do sklepu stacjonarnego na konsultację.
+
+To jest wstępna ocena przygotowana przez asystenta AI. Nie stanowi decyzji sklepu ani formalnego zgłoszenia. Ostateczną decyzję podejmuje pracownik sklepu po oględzinach sprzętu.
+  ✓  17 [chromium] › tests/e2e/chat-decisions.spec.ts:57:7 › E-08 complaint in store, laptop with a screen defect › label is one of the four and the reply does not blame the customer (22.4s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":10000,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":785,"reasoningTokens":412,"cost":0}}
+E-11 first label=rejected ttfc_ms=14042
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":5,"totalMs":12690,"finishReason":"stop","usage":{"inputTokens":6174,"outputTokens":861,"reasoningTokens":455,"cost":0}}
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"chat","msToFirstChunk":6,"totalMs":5028,"finishReason":"stop","usage":{"inputTokens":3520,"outputTokens":276,"reasoningTokens":162,"cost":0}}
+E-11 follow-up reply:
+Asystent AI
+
+Dziękuję za doprecyzowanie. Informacja o kompletnym, nieotwartym opakowaniu oraz nienaruszonych foliach i plombach uzupełnia to, czego nie było widać na zdjęciu. Nie zmienia jednak oceny: ekran ma widoczne liczne pęknięcia i urządzenie nie wygląda na nowe, a te warunki zwrotu dobrowolnego są określone w §3 ust. 3 Regulaminu zwrotów.
+E-11 second decision card: NOT shown
+  ✓  18 [chromium] › tests/e2e/chat-decisions.spec.ts:79:7 › E-11 decision update after new information › a second decision card is shown as an update when the assistant revises it (30.7s)
+  ✘   7 [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input (3.2m)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6403,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":523,"reasoningTokens":190,"cost":0}}
+  ✓  19 [chromium] › tests/e2e/chat-controls.spec.ts:108:7 › E-15 new case dialog › cancel keeps the chat, confirm starts an empty form (11.4s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":7428,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":611,"reasoningTokens":264,"cost":0}}
+  ✓  20 [chromium] › tests/e2e/chat-controls.spec.ts:134:7 › E-16 leaving the page › reload on the chat screen shows a beforeunload dialog (13.8s)
+  ✓  21 [chromium] › tests/e2e/chat-controls.spec.ts:148:7 › E-16 leaving the page › reload on the form screen shows no dialog (1.5s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":6265,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":509,"reasoningTokens":223,"cost":0}}
+  ✓  22 [chromium] › tests/e2e/chat-controls.spec.ts:163:7 › E-17 summary photo overlay › opens with the photo, closes with Esc, the close button and an outside click (12.9s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":9265,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":638,"reasoningTokens":310,"cost":0}}
+  ✓  23 [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 360x800: no horizontal scroll and keyboard-only return flow (13.2s)
+[WebServer] {"caseType":"return","event":"ai_call","modelId":"openai/gpt-6-luna","outcome":"ok","route":"analyze","totalMs":20617,"finishReason":"stop","usage":{"inputTokens":2359,"outputTokens":497,"reasoningTokens":225,"cost":0}}
+  ✓  24 [chromium] › tests/e2e/chat-controls.spec.ts:194:9 › E-18 @smoke responsive layout and keyboard-only flow › 1920x1080: no horizontal scroll and keyboard-only return flow (26.5s)
+
+
+  1) [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('button', { name: 'Wyślij', exact: true })
+    Expected: 0
+    Received: 1
+    Timeout:  90000ms
+
+    Call log:
+      - Expect "toHaveCount" getByRole('button', { name: 'Wyślij', exact: true }) with timeout 90000ms
+      - waiting for getByRole('button', { name: 'Wyślij', exact: true })
+        181 × locator resolved to 1 element
+            - unexpected value "1"
+
+
+      82 |     // While streaming the send button is replaced by the stop button.
+      83 |     await expect(chat.stopButton()).toBeVisible();
+    > 84 |     await expect(chat.sendButton()).toHaveCount(0);
+         |                                     ^
+      85 |     const streamed = chat.assistantMessages().last();
+      86 |     await expect
+      87 |       .poll(async () => (await streamed.innerText()).trim().length, {
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-controls.spec.ts:84:37
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input 
+
+    Test timeout of 180000ms exceeded.
+
+    Error: locator.click: Test timeout of 180000ms exceeded.
+    Browser logs:
+
+    <launching> /home/labuser/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-x0jLFj --remote-debugging-pipe --no-startup-window
+    <launched> pid=855030
+    [pid=855030][err] [1021/171750.528626:WARNING:components/dbus/xdg/portal.cc:126] Failed to register with org.freedesktop.host.portal.Registry
+    [pid=855030][err] [1021/171750.553865:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process.
+    [pid=855030] <gracefully close start>
+    Call log:
+      - waiting for getByRole('button', { name: 'Zatrzymaj', exact: true })
+        - locator resolved to <button type="button" data-slot="button" data-size="icon-lg" data-variant="default" aria-label="Zatrzymaj" class="group/button inline-flex shrink-0 items-center justify-center rounded-4xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructi…>…</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        318 × waiting for element to be visible, enabled and stable
+            - element is not enabled
+          - retrying click action
+            - waiting 500ms
+        - waiting for element to be visible, enabled and stable
+
+
+      91 |
+      92 |     // Stop ends streaming and keeps the partial reply text.
+    > 93 |     await chat.stopButton().click();
+         |                             ^
+      94 |     await expect(chat.stopButton()).toHaveCount(0);
+      95 |     const partial = (await streamed.innerText()).trim();
+      96 |     console.log(
+        at /home/labuser/DEV/jsystems-claude-code-2026-10/app/tests/e2e/chat-controls.spec.ts:93:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium-repeat1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium-repeat1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium-repeat1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium-repeat1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/chat-controls-E-14-smoke-c-3847e--partial-text-no-file-input-chromium-repeat1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input 
+    [chromium] › tests/e2e/chat-controls.spec.ts:57:7 › E-14 @smoke chat controls › send disabled when empty, Shift+Enter newline, Enter sends, stop keeps partial text, no file input 
+  22 passed (7.0m)
