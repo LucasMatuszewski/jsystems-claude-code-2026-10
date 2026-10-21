@@ -12,13 +12,22 @@
   "files": {
     "includes": [
       "**/*",
-      "!components/ai-elements",
-      "!components/elements",
-      "!components/ui",
       "!lib/utils.ts",
-      "!hooks/use-mobile.ts"
+      "!hooks/use-mobile.ts",
+      "!tests/fixtures/captures",
+      "!test-results",
+      "!playwright-report",
+      "!.next"
     ]
   },
+  "overrides": [
+    {
+      "includes": ["components/ai-elements/**", "components/ui/**"],
+      "linter": {
+        "enabled": false
+      }
+    }
+  ],
   "linter": {
     "rules": {
       "suspicious": {
