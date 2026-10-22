@@ -14,6 +14,12 @@ Each folder has the shape of that tool's own config folder.
 
 Install the shell aliases by delegating to your AI agent rather than editing `~/.bashrc` or `$PROFILE` by hand; each file has an example prompt in its header. Keep API keys out of these files.
 
+## Shell aliases and MiMo
+
+The shell files live in this folder: [`.bashrc-agents`](.bashrc-agents), [claude-backends.ps1](claude-backends.ps1) and [codex-aliases.ps1](codex-aliases.ps1). The Bash file is a fragment: copy it to `~/.bashrc-agents` and source it from your existing `~/.bashrc`; do not replace the whole startup file. Dot-source the PowerShell files from `$PROFILE`. Each file includes an installation prompt you can give your agent.
+
+`claude-mimo` (alias `ccm`) selects Xiaomi's MiMo Token Plan backend using `MIMO_API_KEY` from the environment. The shipped mapping uses `mimo-v2.6-pro`, `mimo-v2.6-pro[1m]` for Opus and `mimo-v2.6-flash` for Haiku/subagents. Review the model overrides in the script before use. Other switchers cover native Anthropic, OpenRouter, Z.ai and Ollama; Codex shortcuts use the separate provider profiles below. Keep keys outside the repository and shell examples.
+
 ## Claude Code statusline and cache hit rate
 
 The updated [statusline.sh](claude/statusline.sh) shows the model, context usage, cost estimate, subscription usage and `Cache: 88%`. Copy it to `~/.claude/statusline.sh` when using the shipped Claude configuration. It requires Bash and `jq`.
