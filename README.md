@@ -9,6 +9,17 @@
 
 Aktualny [program szkolenia](AGENDA.md).
 
+## Aktualizacje
+
+- **Historia czatu i podsumowania z Zooma** (dni 1-3): [course-materials/zoom-summary-chat-history/](course-materials/zoom-summary-chat-history/)
+- **Aplikacja zbudowana na zajęciach:** [PR #2 - Hardware Service Decision Copilot](https://github.com/LucasMatuszewski/jsystems-claude-code-2026-10/pull/2). Formularz zwrotu lub reklamacji ze zdjęciem, analiza zdjęcia, decyzja AI według regulaminów i czat z dalszymi pytaniami. W opisie PR są zrzuty ekranu, wyniki testów i lista zadań, które zostały do zrobienia.
+- **[Agent Toolbox](https://github.com/EdukeyTeam/agent-toolbox)** - publiczne skille dla agentów AI. Nowe skille są jeszcze w otwartych PR (w trakcie prac):
+  - [#24 `atlassian-onprem-safe`](https://github.com/EdukeyTeam/agent-toolbox/pull/24) - Bitbucket, Jira i Confluence Server/Data Center przez bezpieczne wrappery.
+  - [#25 `agent-usage-analytics`](https://github.com/EdukeyTeam/agent-toolbox/pull/25) - analiza historii sesji agentów i wykorzystania kontekstu.
+  - [#26 `legacy-codebase-workflows`](https://github.com/EdukeyTeam/agent-toolbox/pull/26) - zaktualizowane hooki i pełny lokalny RAG (wyszukiwanie w kodzie i dokumentacji offline).
+
+  Scalę je najpóźniej w piątek 23.10.2026. Od tego momentu zainstalujesz je przez [skills.sh](https://skills.sh/), np. `npx skills add EdukeyTeam/agent-toolbox --skill atlassian-onprem-safe`.
+
 Repozytorium uczestnika szkolenia JSystems (19-21.10.2026, online, 09:00-16:00). W czasie szkolenia (3 dni) przechodzimy pełny cykl wytwarzania oprogramowania z agentami AI: od pomysłu i wymagań (PRD), przez decyzje architektoniczne (ADR), plan, implementację i testy, po code review, bezpieczeństwo i CI/CD.
 
 Głównym narzędziem warsztatu jest **Claude Code CLI** na przygotowanych maszynach Ubuntu Linux (8 GB RAM, 4 rdzenie). Claude Desktop i Claude Code w przeglądarce omawiamy jako pozostałe tryby pracy; Codex i Copilot służą wyłącznie porównaniom. Możesz pracować w swoim stosie (np. C# / .NET, Java, Python); przykład prowadzącego powstaje w TypeScript.
