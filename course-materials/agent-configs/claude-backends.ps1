@@ -17,6 +17,7 @@
 # Set your provider keys as user env vars (PowerShell, persists across sessions):
 #   [Environment]::SetEnvironmentVariable("OPENROUTER_API_KEY","sk-or-...","User")
 #   [Environment]::SetEnvironmentVariable("ZAI_API_KEY","...","User")
+#   [Environment]::SetEnvironmentVariable("MIMO_API_KEY","...","User")
 # Check the active model inside Claude Code with:  /status
 # ----------------------------------------------------------------------------
 
@@ -36,7 +37,7 @@ function claude-edits { claude --permission-mode acceptEdits @args }
 function Clear-ClaudeBackendEnv {
     $vars = @(
         'ANTHROPIC_BASE_URL','ANTHROPIC_API_KEY','ANTHROPIC_AUTH_TOKEN',
-        'ANTHROPIC_CUSTOM_HEADERS','ANTHROPIC_DEFAULT_HAIKU_MODEL',
+        'ANTHROPIC_CUSTOM_HEADERS','ANTHROPIC_MODEL','ANTHROPIC_DEFAULT_HAIKU_MODEL',
         'ANTHROPIC_DEFAULT_SONNET_MODEL','ANTHROPIC_DEFAULT_OPUS_MODEL'
     )
     foreach ($v in $vars) { Remove-Item "Env:$v" -ErrorAction SilentlyContinue }
@@ -78,6 +79,21 @@ function claude-zai {
     claude @args
 }
 
+# Xiaomi MiMo Token Plan (default: mimo-v2.6-pro). Override: $env:CLAUDE_CODE_MODEL
+function claude-mimo {
+    Clear-ClaudeBackendEnv
+    $m = if ($env:CLAUDE_CODE_MODEL) { $env:CLAUDE_CODE_MODEL } else { $null }
+    $env:ANTHROPIC_BASE_URL   = "https://token-plan-ams.xiaomimimo.com/anthropic"
+    $env:ANTHROPIC_API_KEY    = ""
+    $env:ANTHROPIC_AUTH_TOKEN = $env:MIMO_API_KEY
+    $env:ANTHROPIC_MODEL      = "mimo-v2.6-pro"
+    $env:ANTHROPIC_DEFAULT_SONNET_MODEL = if ($m) { $m } else { "mimo-v2.6-pro" }
+    $env:ANTHROPIC_DEFAULT_OPUS_MODEL   = if ($m) { $m } else { "mimo-v2.6-pro[1m]" }
+    $env:ANTHROPIC_DEFAULT_HAIKU_MODEL  = if ($env:CLAUDE_CODE_HAIKU_MODEL) { $env:CLAUDE_CODE_HAIKU_MODEL } else { "mimo-v2.6-flash" }
+    $env:CLAUDE_CODE_SUBAGENT_MODEL     = if ($m) { $m } else { "mimo-v2.6-flash" }
+    claude @args
+}
+
 # Ollama local/cloud (default: glm-5.2:cloud). Override: $env:CLAUDE_CODE_MODEL
 function claude-ollama {
     Clear-ClaudeBackendEnv
@@ -94,4 +110,5 @@ function claude-ollama {
 Set-Alias ccn  claude-native
 Set-Alias cco  claude-or
 Set-Alias ccz  claude-zai
+Set-Alias ccm  claude-mimo
 Set-Alias ccol claude-ollama
