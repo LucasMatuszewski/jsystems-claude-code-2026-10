@@ -100,6 +100,7 @@ _claude_clear_backend_env() {
   unset ANTHROPIC_API_KEY
   unset ANTHROPIC_AUTH_TOKEN
   unset ANTHROPIC_CUSTOM_HEADERS
+  unset ANTHROPIC_MODEL
   unset ANTHROPIC_DEFAULT_HAIKU_MODEL
   unset ANTHROPIC_DEFAULT_SONNET_MODEL
   unset ANTHROPIC_DEFAULT_OPUS_MODEL
@@ -136,6 +137,19 @@ claude-zai() {
   claude "$@"
 }
 
+claude-mimo() {
+  _claude_clear_backend_env
+  export ANTHROPIC_BASE_URL="https://token-plan-ams.xiaomimimo.com/anthropic"
+  export ANTHROPIC_API_KEY=""
+  export ANTHROPIC_AUTH_TOKEN="${MIMO_API_KEY}"
+  export ANTHROPIC_MODEL="mimo-v2.6-pro"
+  export ANTHROPIC_DEFAULT_SONNET_MODEL="${CLAUDE_CODE_MODEL:-mimo-v2.6-pro}"
+  export ANTHROPIC_DEFAULT_OPUS_MODEL="${CLAUDE_CODE_MODEL:-mimo-v2.6-pro[1m]}"
+  export ANTHROPIC_DEFAULT_HAIKU_MODEL="${CLAUDE_CODE_HAIKU_MODEL:-mimo-v2.6-flash}"
+  export CLAUDE_CODE_SUBAGENT_MODEL="${CLAUDE_CODE_MODEL:-mimo-v2.6-flash}"
+  claude "$@"
+}
+
 claude-ollama() {
   _claude_clear_backend_env
   export ANTHROPIC_BASE_URL="${OLLAMA_ANTHROPIC_BASE_URL:-http://localhost:11434}"
@@ -150,6 +164,7 @@ claude-ollama() {
 alias ccn='claude-native'
 alias cco='claude-or'
 alias ccz='claude-zai'
+alias ccm='claude-mimo'
 alias ccol='claude-ollama'
 
 # ============================================================
