@@ -11,6 +11,11 @@ Aktualny [program szkolenia](AGENDA.md).
 
 ## Aktualizacje
 
+- **22.10.2026: możliwe usunięcie Plan Mode z Claude Code.** [Thariq pisze o rozważanym usunięciu trybu](https://x.com/trq212/status/2102813194196758746) i wykorzystaniu Shift+Tab do zmiany poziomu wysiłku modelu. To propozycja, bez ogłoszonej daty usunięcia. W naszym workflow instrukcje planowania można zapisać w Skills; sam wpis nie wskazuje popularności Skills jako przyczyny tej propozycji.
+- **Cache Codex bez terminu wygaśnięcia dla zalogowanych użytkowników.** Według [zapowiedzi Thibaulta Sottiaux](https://x.com/thsottiaux/status/2112712984644784534) Codex i Work zachowują cache bezterminowo, także po powrocie do starej rozmowy. Ponowne użycie kontekstu z cache może ograniczyć zużycie limitu i koszty; nie oznacza bezpłatności całej rozmowy. W tym samym wpisie API ma osobne okno 12 godzin, a nie bezterminową retencję.
+- **Konfiguracje powłoki i MiMo:** [agent-configs](course-materials/agent-configs/README.md#shell-aliases-and-mimo) zawiera `.bashrc-agents`, `claude-backends.ps1` i `codex-aliases.ps1`. Skrót `claude-mimo` / `ccm` wybiera backend MiMo Token Plan. Pliki przenieśliśmy do tego katalogu; `.bashrc-agents` dołącz do własnego `.bashrc`, zamiast go zastępować.
+- **Dyktowanie po polsku i angielski z polskim akcentem:** [sprawdzony research Handy / Canary 1B v2](course-materials/Research/speech-to-text-models-polish-handy.md). Canary pozostaje praktyczną rekomendacją z lokalnych prób; notatka oddziela obserwacje od potwierdzonych benchmarków i pokazuje, jak porównać modele na własnym głosie.
+
 - **Historia czatu i podsumowania z Zooma** (dni 1-3): [course-materials/zoom-summary-chat-history/](course-materials/zoom-summary-chat-history/)
 - **Aplikacja zbudowana na zajęciach:** [PR #2 - Hardware Service Decision Copilot](https://github.com/LucasMatuszewski/jsystems-claude-code-2026-10/pull/2). Formularz zwrotu lub reklamacji ze zdjęciem, analiza zdjęcia, decyzja AI według regulaminów i czat z dalszymi pytaniami. W opisie PR są zrzuty ekranu, wyniki testów i lista zadań, które zostały do zrobienia.
 - **[Agent Toolbox](https://github.com/EdukeyTeam/agent-toolbox)** - publiczne skille dla agentów AI. Nowe skille są jeszcze w otwartych PR (w trakcie prac):
