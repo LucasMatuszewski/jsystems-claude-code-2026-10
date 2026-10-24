@@ -71,12 +71,9 @@
   kroki, macierz zależności między zadaniami i agentami, by mogli pracować
   częściowo równolegle bez wzajemnego przerywania. Commity po każdej fazie.
   Opcjonalnie: workflow script orkiestrujący subagentów.
-- **Czym:** prompt `course-materials/Prompt examples/Plan-SubAgents-matrix-dependency-map.md`
-  (refererencja stylu planu); sub-agenci `be-developer`, `fe-developer`,
-  `qa-engineer` z Modułu 2.3; git worktrees (Moduł 3.1) dla pracy równoległej.
-  Przed demem sprawdz na VM, czy workflow script dziala.
+- **Czym:** prompt `course-materials/Prompt examples/Plan-SubAgents-matrix-dependency-map.md` (punkt odniesienia dla planu) oraz role `be-developer`, `fe-developer`, `qa-engineer` z Modułu 2.3. Domyślnie rozdziel pliki lub foldery w jednym checkout i zapisz zależności. Worktree to wyjątek dla koniecznych równoległych zmian tych samych plików w osobnych checkoutach: uzgodnij kontrakty, scalaj wyniki kolejno, rozwiąż konflikty i uruchom testy. Zapis Git (gałąź, indeks, staging i commit) wykonuje wyłącznie koordynator. W AGENTS.md zapisz zakaz domyślnego tworzenia worktree: instalacje zależności zużywają dysk i CPU, a sprzątanie bywa pomijane. Przed pokazem sprawdź na VM, czy skrypt orkiestrujący działa.
 - **Kiedy:** Dzień 2 — Moduł 2.3; Dzień 3 — Moduł 3.1 (Task Plan Matrix,
-  worktrees, 3 agentów równolegle).
+  podział plików, zależności i ewentualny worktree).
 - **Ukończenie:** dokument planu z fazami, macierzą zależności i briefami per
   agent (tylko wymagany kontekst, bez balastu); każdy agent wie, co robi, bez
   pytań.

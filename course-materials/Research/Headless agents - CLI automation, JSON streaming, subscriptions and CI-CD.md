@@ -1415,7 +1415,7 @@ opencode run \
 
 # 37. A better delegation pattern: isolated Git worktrees
 
-For autonomous write tasks, consider creating a temporary Git worktree:
+For autonomous write tasks, default to one checkout with disjoint files/folders and a dependency plan; only the coordinator changes branches, stages files or creates commits. Use a temporary Git worktree only when agents must change the same files in parallel in separate checkouts. Agree contracts, integrate sequentially and resolve conflicts before tests; worktrees do not eliminate merge conflicts. Put a no-default-worktrees rule in AGENTS.md because dependency installs consume disk and CPU and agents often forget cleanup. The following commands illustrate that explicit exception:
 
 ```bash
 git worktree add ../agent-task -b ai/task
@@ -2024,7 +2024,7 @@ Tests
 PR
 ```
 
-Each worker can run in a separate worktree and emit JSONL events.
+Workers normally use disjoint files in one checkout and emit JSONL events. Separate worktrees are an explicit exception for necessary parallel changes to the same files, with coordinator-owned Git writes and sequential integration.
 
 The parent process does not need to understand terminal UI output.
 
@@ -2271,7 +2271,7 @@ final result
 
 ## Step 4 - add an isolated worktree
 
-Let the agent implement a small task inside a temporary Git worktree.
+Let the agent implement a small task in the existing checkout by default. Use a temporary worktree only for the necessary same-file parallel-work exception described in section 37, with an agreed integration and cleanup plan.
 
 ## Step 5 - verify deterministically
 
