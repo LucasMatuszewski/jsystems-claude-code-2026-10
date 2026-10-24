@@ -1,3 +1,5 @@
+> W tym repozytorium workflow Azure pozostaje nieaktywnym przykładem w pliku `pr-agent-azure-review.yml.example`. Do code review używaj zatwierdzonego narzędzia; nie uruchamiaj modeli Azure do prac programistycznych.
+
 # GitHub review workflows: Community PR-Agent and Azure OpenAI
 
 Use [pr-agent-azure-review.yml](pr-agent-azure-review.yml) for Azure OpenAI with its native deployment configuration. For OpenRouter, OpenAI or any other OpenAI-compatible endpoint, and for other CI platforms, use the [PR-Agent (Qodo) exercise](../PR-Agent-Qodo/README.md). The historical [qodo-pr-agent-review.yml](qodo-pr-agent-review.yml) is a separate Anthropic example; its filename is retained for older course links. Both run **Community PR-Agent v0.47.0**, independently maintained under MIT, rather than commercial Qodo. Activate only one workflow initially to avoid duplicate reviews and charges.
