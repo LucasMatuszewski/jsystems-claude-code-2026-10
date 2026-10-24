@@ -24,3 +24,5 @@ Po omówieniu planu przeprowadź ćwiczenie: wspólnie wydzielimy procedurę pla
 
 
 Kontekst AI Chat: kontrakt endpointu i streamingu ustalamy przed równoległą pracą. Role to `be-developer`, `fe-developer` oraz `qa-engineer`; uczestnik definiuje je w module 2.3. Przykłady w `course-materials/agent-configs/claude/` są nieaktywne. Podaj właściciela wspólnego kontraktu i lockfile. QA może przygotować scenariusze równolegle, lecz E2E uruchamia po integracji. Nie zakładaj istniejącej autoryzacji ani bazy historii, jeśli PRD ich nie wymaga.
+
+W jednym checkout tylko koordynator przełącza gałęzie, zmienia indeks Git, dodaje pliki do stage i tworzy commity. Wykonawcy edytują wyłącznie przydzielone pliki i oddają diff, bez operacji zapisu Git. Worktree nie usuwa konfliktów przy scalaniu tych samych plików.

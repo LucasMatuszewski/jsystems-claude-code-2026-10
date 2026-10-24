@@ -305,7 +305,7 @@ Zweryfikuj polecenia startu i testów w wybranym szkielecie, zanim wpiszesz je j
   <li><strong>Zwykła sesja</strong> - też może przygotować plan; wyraźnie poproś o zatrzymanie przed implementacją.</li>
 </ul></div></section>
 <section class="slide"><div class="slide-body"><div class="kicker">02 / prompt planu</div><h2>Prompt planu z macierzą zależności</h2><p>Podaj agentowi ścieżki do aktualnego PRD i ADR-ów. Jeśli ich brakuje, agent zapyta przed przygotowaniem planu.</p>
-<p><a href="prompty.html#P19-plan-matryca">Biblioteka promptów</a> · <a href="prompts/P19-plan-matryca.md">Markdown</a></p><div class="prompt-full"><button type="button" class="copy-prompt" data-copy-prompt="slide-prompt-P19-plan-matryca">Kopiuj prompt</button><pre id="slide-prompt-P19-plan-matryca" data-prompt-id="P19-plan-matryca" data-prompt-version="7"># Plan pracy nad aplikacją na podstawie PRD
+<p><a href="prompty.html#P19-plan-matryca">Biblioteka promptów</a> · <a href="prompts/P19-plan-matryca.md">Markdown</a></p><div class="prompt-full"><button type="button" class="copy-prompt" data-copy-prompt="slide-prompt-P19-plan-matryca">Kopiuj prompt</button><pre id="slide-prompt-P19-plan-matryca" data-prompt-id="P19-plan-matryca" data-prompt-version="8"># Plan pracy nad aplikacją na podstawie PRD
 
 Pracuję nad projektem opisanym w aktualnym PRD. Zapytaj mnie o ścieżkę do PRD i istniejących ADR-ów, jeśli ich nie podałem. Źródłem wymagań jest **aktualny PRD mojego projektu**, nie przykładowy prompt z materiałów kursowych. Jeśli pracuję nad grupową aplikacją AI Chat z backendem TypeScript, streamingiem i React useChat, pomiń funkcje opcjonalne usunięte z PRD podczas zajęć.
 
@@ -331,6 +331,8 @@ Po omówieniu planu przeprowadź ćwiczenie: wspólnie wydzielimy procedurę pla
 
 
 Kontekst AI Chat: kontrakt endpointu i streamingu ustalamy przed równoległą pracą. Role to `be-developer`, `fe-developer` oraz `qa-engineer`; uczestnik definiuje je w module 2.3. Przykłady w `course-materials/agent-configs/claude/` są nieaktywne. Podaj właściciela wspólnego kontraktu i lockfile. QA może przygotować scenariusze równolegle, lecz E2E uruchamia po integracji. Nie zakładaj istniejącej autoryzacji ani bazy historii, jeśli PRD ich nie wymaga.
+
+W jednym checkout tylko koordynator przełącza gałęzie, zmienia indeks Git, dodaje pliki do stage i tworzy commity. Wykonawcy edytują wyłącznie przydzielone pliki i oddają diff, bez operacji zapisu Git. Worktree nie usuwa konfliktów przy scalaniu tych samych plików.
 </pre></div></div></section>
 <section class="slide"><div class="slide-body"><div class="kicker">03 / podział pracy</div><h2>Deleguj według macierzy zależności</h2><ul>
   <li>Zlecaj równolegle tylko zadania z <strong>oddzielnymi plikami i jasnym wynikiem</strong>. Każdy agent dostaje cel, zakres, sposób sprawdzenia i informację o pracy pozostałych.</li>
@@ -355,7 +357,7 @@ Kontekst AI Chat: kontrakt endpointu i streamingu ustalamy przed równoległą p
   <li>Nie przypisuj dwóch wykonawców do tego samego pliku.</li>
   <li>Każdy wynik wymaga weryfikacji w głównej zmianie.</li>
 </ul></div></section>
-<section class="slide"><div class="slide-body"><div class="kicker">Dodatkowy prompt / plan</div><h2>Krótszy plan dla małego zadania</h2><p>Dla małej zmiany możesz użyć <a href="prompts/P04-plan-podzial-pracy.md">krótszego promptu do planowania</a>: 3-5 zadań na podstawie aktualnego PRD. Przy większym projekcie skorzystaj z <a href="prompty.html#P19-plan-matryca">planu z macierzą zależności</a>.</p><div class="prompt-full"><h3>Plan zespołu agentów</h3><div class="prompt-full"><button type="button" class="copy-prompt" data-copy-prompt="prompt-P04-plan-podzial-pracy">Kopiuj prompt</button><pre id="prompt-P04-plan-podzial-pracy" data-prompt-id="P04-plan-podzial-pracy" data-prompt-version="5">Zaplanuj jeden mały fragment funkcjonalności z zatwierdzonego PRD aplikacji AI Chat. Każde zadanie musi mieć właściciela, granice plików, sposób przekazania wyniku i sprawdzenie. Zanim zaproponujesz pracę równoległą, potwierdź możliwości bieżącej wersji Claude Code i przyjęte zasady repozytorium.
+<section class="slide"><div class="slide-body"><div class="kicker">Dodatkowy prompt / plan</div><h2>Krótszy plan dla małego zadania</h2><p>Dla małej zmiany możesz użyć <a href="prompts/P04-plan-podzial-pracy.md">krótszego promptu do planowania</a>: 3-5 zadań na podstawie aktualnego PRD. Przy większym projekcie skorzystaj z <a href="prompty.html#P19-plan-matryca">planu z macierzą zależności</a>.</p><div class="prompt-full"><h3>Plan zespołu agentów</h3><div class="prompt-full"><button type="button" class="copy-prompt" data-copy-prompt="prompt-P04-plan-podzial-pracy">Kopiuj prompt</button><pre id="prompt-P04-plan-podzial-pracy" data-prompt-id="P04-plan-podzial-pracy" data-prompt-version="6">Zaplanuj jeden mały fragment funkcjonalności z zatwierdzonego PRD aplikacji AI Chat. Każde zadanie musi mieć właściciela, granice plików, sposób przekazania wyniku i sprawdzenie. Zanim zaproponujesz pracę równoległą, potwierdź możliwości bieżącej wersji Claude Code i przyjęte zasady repozytorium.
 
 Znajdź aktualny zatwierdzony PRD tej aplikacji. Jeśli istnieje kilka kandydatów, zapytaj, który rozstrzyga wymagania. Przeczytaj właściwe ADR-y i wytyczne wizualne, a następnie obejrzyj kod i testy. Nie traktuj przykładów PRD lub ADR z `course-materials/` jako decyzji projektu, chyba że użytkownik jawnie wskaże konkretny plik. Wybierz jeden pionowy fragment, którego działanie można pokazać użytkownikowi albo wywołaniem API. Nie planuj całej aplikacji naraz.
 
@@ -368,6 +370,8 @@ Role AI Chat to `be-developer`, `fe-developer` i `qa-engineer`; uczestnik defini
 Test jest rzeczywistą zależnością: zachowanie ze specyfikacji i nieprzechodzący test poprzedzają implementację, kontrola integracji następuje po zmianie komponentów, a końcowy diff i review po całości. Planuj małe commity dopiero po zielonej fazie. Zapisz sposób obsługi nieudanego testu, niespodziewanej cudzej zmiany, niezgodności wersji/API i niedostępnego modelu zewnętrznego. Chroń istniejącą pracę; bez destrukcyjnego resetu i bez osłabiania asercji.
 
 Zatrzymaj się na planie. Zwróć macierz zależności, jeden akapit opisujący ścieżkę krytyczną oraz pierwsze ograniczone zadanie gotowe dla wykonawcy. Jeżeli użytkownik zatwierdził ścieżkę zapisu, zachowaj tam cały plan jako dokument do przeglądu. W przeciwnym razie zaproponuj ścieżkę i zapytaj przed zapisem, nadal przedstawiając treść planu w odpowiedzi. Utworzenie zatwierdzonego dokumentu planu jest dozwolone; implementacja, uruchomienie delegacji, otwarcie PR i merge wymagają osobnego polecenia po przeglądzie planu.
+
+Only the coordinator may switch branches, stage changes, write the Git index or create commits in the shared checkout. Workers edit only their assigned files and return a diff; they do not run Git writes. Worktrees do not eliminate same-file merge conflicts.
 </pre></div></div></div></section>
 <section class="slide"><div class="slide-body"><div class="kicker">Zespół agentów</div><h2>Kiedy delegować, kiedy zostać przy jednym</h2><ul>
   <li>Rozdziel zadania z <strong>niezależnymi plikami i kryteriami wyniku</strong>.</li>

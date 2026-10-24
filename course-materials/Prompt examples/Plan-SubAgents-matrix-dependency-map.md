@@ -37,3 +37,6 @@ Finish with the saved plan link, unresolved decisions, the first bounded task an
 After reviewing the plan, identify which planning steps would be useful in another project. With the group, write a small SKILL.md containing a precise trigger, required inputs, the dependency-matrix contract, source-link rules, model/ownership policy and the stop-for-review boundary. Remove this application's domain, client names and decisions. Test the skill on a second small feature: does it find the real sources, ask only missing questions, avoid overlapping files and stop before implementation? Refine it from the observed result.
 
 Optional external example for comparison: [write-implementation-plan, public PR #28](https://github.com/EdukeyTeam/agent-toolbox/pull/28). It is a pending proposal, not a required installation or an approved dependency of this exercise. Inspect its current state and compare its plan/brief separation with your own skill.
+
+
+Only the coordinator may switch branches, stage changes, write the Git index or create commits in the shared checkout. Workers edit only their assigned files and return a diff; they do not run Git writes. Worktrees do not eliminate same-file merge conflicts.

@@ -43,3 +43,6 @@ Using CLI models inside Workflows/subagents (the `model` param only takes Claude
 - Label wrappers with the real worker prefix, e.g. `{label: 'gpt-5.6:migrate'}` / `{label: 'grok-4.5:slides'}` - the UI shows the wrapper's Claude model, so the label is the only signal of the real worker.
 - CLI runs can exceed Bash's 10-minute timeout: pass an explicit timeout or run in background and poll the report file.
 - Workflow token budgets only count Claude tokens; CLI work is free and invisible to `budget.spent()`.
+
+
+Only the coordinator may switch branches, stage changes, write the Git index or create commits in the shared checkout. Workers edit only their assigned files and return a diff; they do not run Git writes. Worktrees do not eliminate same-file merge conflicts.
