@@ -335,9 +335,9 @@ Kontekst AI Chat: kontrakt endpointu i streamingu ustalamy przed równoległą p
 W jednym checkout tylko koordynator przełącza gałęzie, zmienia indeks Git, dodaje pliki do stage i tworzy commity. Wykonawcy edytują wyłącznie przydzielone pliki i oddają diff, bez operacji zapisu Git. Worktree nie usuwa konfliktów przy scalaniu tych samych plików.
 </pre></div></div></section>
 <section class="slide"><div class="slide-body"><div class="kicker">03 / podział pracy</div><h2>Deleguj według macierzy zależności</h2><ul>
-  <li>Zlecaj równolegle tylko zadania z <strong>oddzielnymi plikami i jasnym wynikiem</strong>. Każdy agent dostaje cel, zakres, sposób sprawdzenia i informację o pracy pozostałych.</li>
+  <li>Domyślnie zlecaj równolegle zadania z <strong>oddzielnymi plikami i jasnym wynikiem</strong> w jednym checkout. Każdy agent dostaje cel, zakres, sposób sprawdzenia i informację o pracy pozostałych.</li>
   <li><strong>Jeden katalog:</strong> przypisz właścicieli plików i ustal kolejność zależności. Jeden agent integruje wyniki i uruchamia testy całości.</li>
-  <li><strong>Worktree:</strong> wybierz tylko przy koniecznych równoległych zmianach tych samych plików. W pozostałych przypadkach rozdziel pliki lub foldery, ustal zależności i pozostaw zapis Git jednemu koordynatorowi.</li>
+  <li><strong>Worktree:</strong> wyjątek dla koniecznych równoległych zmian tych samych plików w osobnych checkoutach. Uzgodnij kontrakty zmian, scalaj wyniki kolejno i rozwiąż konflikty przed testami; stan Git zmienia koordynator.</li>
 </ul></div></section>
 <section class="slide"><div class="slide-body"><div class="kicker">03 / sesje i role</div><h2>Równoległość wymaga wspólnego stanu</h2><ul>
   <li><strong>Porównanie: Copilot CLI:</strong> <code>←</code> otwiera panel sesji (przy pustym polu), a <code>/session</code> kartę wszystkich sesji (<a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/work-with-multiple-sessions">dokumentacja</a>).</li>
@@ -354,7 +354,7 @@ W jednym checkout tylko koordynator przełącza gałęzie, zmienia indeks Git, d
 </ul></div></section>
 <section class="slide"><div class="slide-body"><div class="kicker">Porównanie: Copilot / opcjonalnie</div><h2>Delegowanie tylko przy niezależnych zadaniach</h2><p>Najpierw ustal kontrakt, właściciela plików i test dla każdej części.</p>
 <ul>
-  <li>Nie przypisuj dwóch wykonawców do tego samego pliku.</li>
+  <li>W jednym checkout nie przypisuj dwóch wykonawców do tego samego pliku.</li>
   <li>Każdy wynik wymaga weryfikacji w głównej zmianie.</li>
 </ul></div></section>
 <section class="slide"><div class="slide-body"><div class="kicker">Dodatkowy prompt / plan</div><h2>Krótszy plan dla małego zadania</h2><p>Dla małej zmiany możesz użyć <a href="prompts/P04-plan-podzial-pracy.md">krótszego promptu do planowania</a>: 3-5 zadań na podstawie aktualnego PRD. Przy większym projekcie skorzystaj z <a href="prompty.html#P19-plan-matryca">planu z macierzą zależności</a>.</p><div class="prompt-full"><h3>Plan zespołu agentów</h3><div class="prompt-full"><button type="button" class="copy-prompt" data-copy-prompt="prompt-P04-plan-podzial-pracy">Kopiuj prompt</button><pre id="prompt-P04-plan-podzial-pracy" data-prompt-id="P04-plan-podzial-pracy" data-prompt-version="6">Zaplanuj jeden mały fragment funkcjonalności z zatwierdzonego PRD aplikacji AI Chat. Każde zadanie musi mieć właściciela, granice plików, sposób przekazania wyniku i sprawdzenie. Zanim zaproponujesz pracę równoległą, potwierdź możliwości bieżącej wersji Claude Code i przyjęte zasady repozytorium.
