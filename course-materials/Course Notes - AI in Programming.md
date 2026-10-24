@@ -922,3 +922,9 @@ Main agent can delegate tasks to sub-agents (often specialized), to focus on orc
    - [SonarQube Plans & Pricing | Static Code Analysis Tool | Sonar](https://www.sonarsource.com/plans-and-pricing/)
  - **Qodana** Static Analysis & CI/CD:
    - [Qodana: Static Code Analysis Tool by JetBrains](https://www.jetbrains.com/qodana/)
+
+## Planning, delegation and token budget
+
+Use the [planning prompt with a dependency matrix](Prompt%20examples/Plan-SubAgents-matrix-dependency-map.md) for one approved vertical slice. Save plans under docs/plans, link the PRD/ADR sources and prefer ad hoc workers for one-off tasks. After reviewing a plan, turn the reusable procedure into a planning skill with the group and test it on another feature. The [public planning-skill proposal](https://github.com/EdukeyTeam/agent-toolbox/pull/28) is an optional example pending review.
+
+[Agents, permissions and token budget](Research/agent-workflows-and-token-budget-2026-10-24.md) covers /config, concise output, the statusline with jq, usage views, optional token-saving skills, headless delegation and the documented login-code fallback. Short output does not replace tests or review. [Polish dictation findings](Research/speech-to-text-models-polish-handy.md) distinguish model-card measurements from local observations and explain how to compare recordings.

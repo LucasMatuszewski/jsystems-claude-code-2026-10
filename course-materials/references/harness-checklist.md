@@ -120,8 +120,7 @@ pliki, logi) NIE zaśmieca kontekstu głównego.
 - [ ] Ograniczenia roli: reviewer bez prawa edycji, researcher bez Bash
 
 **Czego NIE robić:**
-- Nie dawaj dwóm agentom równoległej edycji tych samych plików bez izolacji
-  (konflikt; używaj git worktree per agent)
+- Przydziel agentom rozłączne pliki i pokaż zależności. Zmiany wspólnych plików wykonuj kolejno; worktree wymaga konkretnej potrzeby izolacji i zgody właściciela.
 - Nie deleguj zadań wymagających pełnego kontekstu rozmowy (sub-agent go
   nie ma - dostaje tylko to, co napiszesz w zleceniu)
 
@@ -290,14 +289,14 @@ OpenAI-compatible (Ollama, vLLM itp.) - kompletny przykład z komentarzami:
 | "Jak robimy security review" | stała, wiele repo | skill |
 | "Review robi osobny agent bez edycji" | stała, rola | sub-agent |
 | "Lint po każdej edycji" | stała, automat | hook |
-| "Wolę pnpm, odpowiadaj po polsku" | stała, osobista | memory / ~/.claude/CLAUDE.md |
-| "Budujemy eksport do JSON, bo..." | do końca feature'a | PRD |
+| "Wolę pnpm, odpowiadaj po polsku" | stała, osobista | memory / ~/.claude/CLAUDE.md / CLAUDE.local.md; prywatne zasoby w .claude.local/ wymagają jawnego wskazania |
+| "Operator pobiera zgłoszenia z wybranego miesiąca do CSV, bez danych kontaktowych" | do zmiany wymagań produktu | PRD |
 | "Pieniądze w decimal cents, nie float" | stała decyzja | ADR |
 | "Kolory, typografia, zasady komponentów" | stała, całe UI | Design Guidelines |
-| "Krok 1: test, krok 2: implementacja" | jedno zadanie | plan / plan mode |
+| "T1: kontrakt CSV i test pustego miesiąca; T2: endpoint (po T1); T3: przycisk (po T1); T4: test przepływu (po T2 i T3)" | jedno zadanie | plan w docs/plans/ / plan mode |
 | "Odrzucam sugestię X w tym diffie" | jeden PR | komentarz PR |
 | "Aktualna dokumentacja biblioteki Y" | na żądanie | MCP (np. Context7) |
-| "Szablon promptu z parametrami" | stała, powtarzalna | skill (Claude Code) / custom command (OpenCode) |
+| "Szablon promptu z parametrami" | stała, powtarzalna | skill lub custom command (Claude Code / OpenCode) |
 
 ---
 
@@ -310,8 +309,8 @@ OpenAI-compatible (Ollama, vLLM itp.) - kompletny przykład z komentarzami:
 5. **Skill na wszystko** - 40 skilli o zbyt podobnych opisach; agent
    wybiera zły albo żaden. Skill ma mieć ostry trigger.
 6. **Instrukcja markdown zamiast permissions** - "nie kasuj bazy" musi być
-   regułą harnessu, nie prośbą.
-7. **Sub-agenci na wspólnych plikach** - konflikty edycji; izoluj worktree.
+   blokadą narzędzia lub hookiem oraz uprawnieniami bazy tylko do odczytu; sama instrukcja nie wystarczy.
+7. **Sub-agenci na wspólnych plikach** - przydziel rozłączne pliki, poinformuj o pracy równoległej i zintegruj wspólne zmiany kolejno. Worktree tylko przy konkretnej potrzebie izolacji i zgodzie właściciela.
 8. **Wszystkie serwery MCP włączone na stałe** - opisy narzędzi zjadają
    kontekst każdej sesji; ciężkie serwery trzymaj z `"enabled": false`.
 

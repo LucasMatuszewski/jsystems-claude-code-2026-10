@@ -1,3 +1,11 @@
+## Aktualizacja 24.10.2026
+
+- Poprawione odnośniki do sekcji checklist i działanie bez zapisu ustawień w przeglądarce.
+- Wyszukiwanie w słowniku rozwija pasujące pojęcia; karty mają niezależną wysokość.
+- Ściąga do pracy z agentem ma czytelniejsze odnośniki i wersję do druku.
+- Doprecyzowane planowanie, podział plików, dobór modeli i sprawdzanie zużycia.
+- [Materiały szkoleniowe i prezentacje](https://devpowers.com/szkolenia/jsystems/claude-code-2026-10/).
+
 # Claude Code - od zera do zespołu agentów AI (JSystems)
 
 **Materiały szkoleniowe: [devpowers.com/szkolenia/jsystems/claude-code-2026-10](https://devpowers.com/szkolenia/jsystems/claude-code-2026-10/)**
