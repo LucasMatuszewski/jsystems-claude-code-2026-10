@@ -58,6 +58,8 @@ Worktree twórz tylko wtedy, gdy agenci muszą równolegle zmieniać te same pli
 
 W AGENTS.md zapisz regułę: agent nie tworzy worktree domyślnie. Osobne instalacje zależności zużywają dysk i CPU, a agenci często zapominają je posprzątać.
 
+Stan Git (gałąź, indeks i commity) zmienia tylko jeden koordynator; pozostali agenci edytują przydzielone pliki. Worktree nie usuwa konfliktów zmian tych samych plików - rozwiąż je przy scalaniu.
+
 ## Permissions, hooks i rules
 
 Instrukcja opisuje zasadę; uprawnienie ogranicza narzędzie, a hook może deterministycznie sprawdzić zdarzenie i zatrzymać niedozwoloną operację. Zakaz "nie kasuj bazy" zacznij od konta bez prawa usuwania i blokady narzędzia, a następnie dodaj krótką zasadę w AGENTS.md. Sprawdź próbę niedozwolonej operacji na danych syntetycznych. Żaden prosty wzorzec polecenia nie rozpoznaje wszystkich aliasów i obejść.

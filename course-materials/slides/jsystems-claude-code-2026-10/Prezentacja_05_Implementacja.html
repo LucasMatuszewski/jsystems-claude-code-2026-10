@@ -522,7 +522,7 @@ memory: project
   <div class="slide-body">
     <div class="kicker">3.1 - narzędzie</div>
     <h2>Git worktrees - równoległe środowiska</h2>
-    <p>Worktree twórz tylko wtedy, gdy agenci muszą równolegle zmieniać te same pliki, np. przy różnych zadaniach w tym samym kodzie. W pozostałych przypadkach rozdziel zadania według plików lub folderów, poinformuj agentów o równoległej pracy i zapisz plan zależności; wspólne zmiany scalaj kolejno.</p><p>W AGENTS.md zapisz regułę: agent nie tworzy worktree domyślnie. Osobne instalacje zależności zużywają dysk i CPU, a agenci często zapominają je posprzątać.</p>
+    <p>Worktree twórz tylko wtedy, gdy agenci muszą równolegle zmieniać te same pliki, np. przy różnych zadaniach w tym samym kodzie. W pozostałych przypadkach rozdziel zadania według plików lub folderów, poinformuj agentów o równoległej pracy i zapisz plan zależności; wspólne zmiany scalaj kolejno.</p><p>W AGENTS.md zapisz regułę: agent nie tworzy worktree domyślnie. Osobne instalacje zależności zużywają dysk i CPU, a agenci często zapominają je posprzątać.</p><p>Stan Git (gałąź, indeks i commity) zmienia tylko jeden koordynator; pozostali agenci edytują przydzielone pliki. Worktree nie usuwa konfliktów zmian tych samych plików - rozwiąż je przy scalaniu.</p>
     <div class="code-block"># Równoległe zadanie 1: refaktoryzacja parsera
 git worktree add -b feature/parser-refactor ../parser-refactor</div>
     <div class="code-block"># Równoległe zadanie 2: optymalizacja tego samego parsera

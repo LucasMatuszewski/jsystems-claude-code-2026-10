@@ -518,6 +518,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
     <ul class="plain-list">
       <li>Worktree twórz tylko wtedy, gdy agenci muszą równolegle zmieniać te same pliki, np. przy różnych zadaniach w tym samym kodzie. W pozostałych przypadkach rozdziel zadania według plików lub folderów, poinformuj agentów o równoległej pracy i zapisz plan zależności; wspólne zmiany scalaj kolejno.</li>
       <li>W <code>AGENTS.md</code> zapisz regułę: agent nie tworzy worktree domyślnie. Osobne instalacje zależności zużywają dysk i CPU, a agenci często zapominają je posprzątać.</li>
+      <li>Stan Git (gałąź, indeks i commity) zmienia tylko jeden koordynator; pozostali agenci edytują przydzielone pliki. Worktree nie usuwa konfliktów zmian tych samych plików - rozwiąż je przy scalaniu.</li>
       <li>Nie deleguj zadań wymagających pełnego kontekstu rozmowy (sub-agent go nie ma - dostaje tylko to, co napiszesz w zleceniu)</li>
     </ul>
     <p><strong>Reguła:</strong> sub-agent = "wynajmij konsultanta, przeczytaj raport". Jeśli potrzebujesz dialogu i wspólnej pamięci - zostań w jednej sesji.</p>

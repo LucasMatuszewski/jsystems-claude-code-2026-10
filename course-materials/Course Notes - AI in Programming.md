@@ -689,6 +689,7 @@ Main agent can delegate tasks to sub-agents (often specialized), to focus on orc
 - **Git Worktrees** for Parallel Agents in same repository:
   - Default: split tasks by files/folders and record dependencies in one checkout. Use a worktree only when agents must change the same files in parallel.
   - Put a no-default-worktrees rule in AGENTS.md: dependency installs consume disk and CPU, and agents often forget cleanup.
+  - Only the coordinator changes Git branch/index state or commits; workers edit only their assigned files. Worktrees do not eliminate same-file merge conflicts.
   - What is a Git Worktree? [Git Worktree Docs](https://git-scm.com/docs/git-worktree)
   - Claude: [Run parallel Claude code sessions with Git worktrees | Claude Docs](https://code.claude.com/docs/en/common-workflows#run-parallel-claude-code-sessions-with-git-worktrees)
   - Codex: [Worktrees | OpenAI Codex Docs](https://developers.openai.com/codex/app/worktrees/)
