@@ -1246,8 +1246,18 @@ body[data-page-type="slides"] .slide-body{padding-bottom:130px}
 
 .course-trainer-credit .course-brand-logo--footer{width:auto;max-width:120px;max-height:44px;object-fit:contain;flex:0 0 auto;margin:0;padding:5px 8px}
 
+/* The glossary has one clear action; native search decoration is suppressed in its page. */
+body[data-page-type="glossary"] .control-wrap .clear-search,
+body[data-page-type="glossary"][data-theme="dark"] .control-wrap .clear-search{
+  background:transparent;border:0;box-shadow:none;color:var(--text);padding:4px 8px;
+}
+body[data-page-type="glossary"] .clear-search[hidden]{display:none}
+
 /* Course header: the full title remains in h1; compact labels fit the phone. */
 .hub-top-in:has(.course-brand-logo--header) .hub-brand{flex-direction:column;align-items:flex-start;gap:2px;overflow-wrap:normal}
 .hub-brand-sub{white-space:nowrap}
 .hub-path-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
 @media(max-width:600px){.hub-path-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Long source links remain readable on narrow exercise pages. */
+body[data-page-type="exercises"] a,body[data-page-type="exercises"] code,body[data-page-type="exercises"] h1,body[data-page-type="exercises"] h2,body[data-page-type="exercises"] h3{overflow-wrap:anywhere}

@@ -5,7 +5,7 @@
   const bodies = nodes.length ? nodes : [...document.querySelectorAll('.pbox')];
   if (!bodies.length) return;
   const entries = bodies.map((node, i) => {
-    const card = node.closest('.pcard, .ex, .tcard, .pl, .pbox') || node;
+    const card = node.closest('.pcard, .ex, .tcard, .pl') || node.closest('.pbox') || node;
     const clone = node.cloneNode(true);
     clone.querySelectorAll('button').forEach(button => button.remove());
     const category = node.closest('.panel')?.id || audience;
@@ -19,7 +19,7 @@
       title: node.dataset.title || card.querySelector('h3,h2')?.textContent.trim() || id,
       prerequisites: node.dataset.prerequisites || 'Repozytorium warsztatowe i dane wskazane w pełnej treści promptu.',
       tool: node.dataset.tool || 'Agent programistyczny z dostępem do repozytorium; umiejętność wskazana w treści zadania.',
-      provenance: node.dataset.provenance || 'Biblioteka Claude Code i AI Chat; materiały opcjonalne zachowują własny kontekst.',
+      provenance: node.dataset.provenance || 'Zaadaptowane ogólne prompty z kursów programistycznych; syntetyczny przypadek Hardware Service Decision Copilot.',
       body: clone.textContent,
       source: node.dataset.source || card.querySelector('a[href$=".md"]')?.getAttribute('href') || `${location.pathname.split('/').pop()}#${node.id}`
     }};

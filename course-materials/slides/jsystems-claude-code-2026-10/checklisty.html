@@ -67,6 +67,7 @@ code {
   border-radius: 4px;
   font-size: 0.9em;
 }
+[id] { scroll-margin-top: 150px; }
 h1, h2, h3 { color: var(--heading); line-height: 1.25; }
 h1 { font-size: 2rem; margin: 0 0 12px; }
 h2 { font-size: 1.35rem; margin: 0 0 10px; }
@@ -373,7 +374,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
   .chip { border-color: #aaa; background: #f8f8f8; color: #333; }
   .progress-badge { display: none; }
 }
-</style><style>.course-tools{position:fixed;z-index:1000;right:16px;top:12px;display:flex;gap:8px;align-items:center}.course-tools a,.course-tools button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 12px;border:1px solid #7890ac;border-radius:9px;background:#182334;color:#fff;text-decoration:none;font:600 14px system-ui;cursor:pointer}.course-tools button svg{width:20px;height:20px}.course-tools .icon-sun{display:none}[data-theme-toggle] .icon-sun,[data-theme-toggle] .icon-moon{width:20px;height:20px}body[data-theme="dark"] [data-theme-toggle] .icon-sun{display:block}body[data-theme="dark"] [data-theme-toggle] .icon-moon{display:none}body[data-theme="light"] [data-theme-toggle] .icon-sun{display:none}body[data-theme="light"] [data-theme-toggle] .icon-moon{display:block}.course-tools button:focus-visible,.course-tools a:focus-visible{outline:3px solid #f7c26d}body[data-course-audience="developer"] pre[data-prompt-id]{white-space:pre-wrap;overflow:auto;max-height:56vh;line-height:1.5;font-size:clamp(12px,1.1vw,15px);padding:1rem;background:#101827;color:#eff5ff;border:1px solid #61799b;border-radius:10px;text-align:left}.copy-prompt{padding:.55rem .9rem;border:1px solid #a9c8ee;border-radius:8px;background:#183252;color:white;font:700 14px system-ui;cursor:pointer}@media print{.course-tools,.copy-prompt{display:none!important}pre[data-prompt-id]{max-height:none!important}}</style><link rel="stylesheet" href="course.css?v=20261017-brand-slots-2">
+</style><style>.course-tools{position:fixed;z-index:1000;right:16px;top:12px;display:flex;gap:8px;align-items:center}.course-tools a,.course-tools button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 12px;border:1px solid #7890ac;border-radius:9px;background:#182334;color:#fff;text-decoration:none;font:600 14px system-ui;cursor:pointer}.course-tools button svg{width:20px;height:20px}.course-tools .icon-sun{display:none}[data-theme-toggle] .icon-sun,[data-theme-toggle] .icon-moon{width:20px;height:20px}body[data-theme="dark"] [data-theme-toggle] .icon-sun{display:block}body[data-theme="dark"] [data-theme-toggle] .icon-moon{display:none}body[data-theme="light"] [data-theme-toggle] .icon-sun{display:none}body[data-theme="light"] [data-theme-toggle] .icon-moon{display:block}.course-tools button:focus-visible,.course-tools a:focus-visible{outline:3px solid #f7c26d}body[data-course-audience="developer"] pre[data-prompt-id]{white-space:pre-wrap;overflow:auto;max-height:56vh;line-height:1.5;font-size:clamp(12px,1.1vw,15px);padding:1rem;background:#101827;color:#eff5ff;border:1px solid #61799b;border-radius:10px;text-align:left}.copy-prompt{padding:.55rem .9rem;border:1px solid #a9c8ee;border-radius:8px;background:#183252;color:white;font:700 14px system-ui;cursor:pointer}@media print{.course-tools,.copy-prompt{display:none!important}pre[data-prompt-id]{max-height:none!important}}</style><link rel="stylesheet" href="course.css?v=20261024-C1">
 
 <link rel="icon" type="image/png" href="assets/favicon-32x32.png"></head>
 <body data-course-audience="developer" data-page-type="checklist" data-theme="dark"><div class="course-tools"><a href="index.html">Strona główna</a></div>
@@ -515,7 +516,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
     </ul>
     <p><strong>Czego NIE robić:</strong></p>
     <ul class="plain-list">
-      <li>Nie dawaj dwóm agentom równoległej edycji tych samych plików bez izolacji (konflikt; używaj git worktree per agent)</li>
+      <li>Przydziel agentom rozłączne pliki i pokaż zależności. Zmiany wspólnych plików wykonuj kolejno; worktree wymaga konkretnej potrzeby izolacji i zgody właściciela.</li>
       <li>Nie deleguj zadań wymagających pełnego kontekstu rozmowy (sub-agent go nie ma - dostaje tylko to, co napiszesz w zleceniu)</li>
     </ul>
     <p><strong>Reguła:</strong> sub-agent = "wynajmij konsultanta, przeczytaj raport". Jeśli potrzebujesz dialogu i wspólnej pamięci - zostań w jednej sesji.</p>
@@ -536,7 +537,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
 
   <div class="card">
     <h2 id="harness-6">6) Memory - fakty o osobie i sposobie pracy</h2>
-    <p><strong>Co to jest:</strong> trwała pamięć agenta między sesjami (w Claude Code: katalog memory + MEMORY.md), zapisywana przez samego agenta lub skrótem <code>#</code>.</p>
+    <p><strong>Co to jest:</strong> trwała pamięć agenta między sesjami (w Claude Code: katalog memory + MEMORY.md), zapisywana przez samego agenta lub skrótem <code>#</code>.</p><p><code>~/.claude/CLAUDE.md</code> to instrukcje użytkownika; <code>CLAUDE.local.md</code> to prywatne instrukcje tego projektu (dodaj do .gitignore), a <code>.claude/settings.local.json</code> to lokalne ustawienia. Folder <code>.claude.local/</code> nie jest standardową lokalizacją automatycznie wczytywaną przez Claude Code: możesz go jawnie podłączyć z instrukcji, bez sekretów. <a href="https://code.claude.com/docs/en/memory">Dokumentacja pamięci</a>.</p>
     <p><strong>Co tu umieszczać (checklist):</strong></p>
     <ul class="task-list">
       <li class="task"><label><input type="checkbox" data-id="harness-memory-0"><span>Preferencje osoby: package manager, styl odpowiedzi, godziny pracy</span></label></li>
@@ -562,7 +563,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
 
   <div class="card">
     <h2 id="harness-8">8) Plan - mapa jednego zadania</h2>
-    <p><strong>Co to jest:</strong> plan konkretnego zadania: kolejność kroków, pliki do zmiany, testy, checkpointy. W Claude Code: plan mode (agent najpierw bada i proponuje plan, dopiero po akceptacji edytuje). Może być też plikiem <code>plan.md</code> / todo. W odróżnieniu od PRD/ADR (dla ludzi i agentów, trwałe) plan jest <strong>tylko dla agentów i jednorazowy</strong> - dokładne rozpisanie zadań na jedno wykonanie.</p>
+    <p><strong>Co to jest:</strong> plan konkretnego zadania: kolejność kroków, pliki do zmiany, testy, checkpointy. W Claude Code: plan mode (agent najpierw bada i proponuje plan, dopiero po akceptacji edytuje). Zapisz uzgodniony plan w <code>docs/plans/</code>, z linkami do PRD i ADR oraz jedną macierzą zależności. W odróżnieniu od PRD/ADR (dla ludzi i agentów, trwałe) plan jest <strong>dla wykonawców i osoby zatwierdzającej zakres</strong> - dokładne rozpisanie zadań na jedno wykonanie.</p>
     <p><strong>Co tu umieszczać (checklist):</strong></p>
     <ul class="task-list">
       <li class="task"><label><input type="checkbox" data-id="harness-plan-0"><span>Kroki w kolejności, z plikami i testami per krok</span></label></li>
@@ -570,7 +571,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
       <li class="task"><label><input type="checkbox" data-id="harness-plan-2"><span>Ryzyka i decyzje do potwierdzenia z człowiekiem</span></label></li>
       <li class="task"><label><input type="checkbox" data-id="harness-plan-3"><span>Kryterium końca ("done = testy + lint + demo działa")</span></label></li>
     </ul>
-    <p><strong>Cykl życia:</strong> plan ŻYJE KRÓTKO. Po wykonaniu: wartościowe decyzje -> ADR, zmiany zasad repo -> AGENTS.md, procedura do powtórzenia -> skill, a sam plan można skasować. Plan, który został "dokumentacją", to dług.</p>
+    <p><strong>Cykl życia:</strong> plan ŻYJE KRÓTKO. Po wykonaniu: wartościowe decyzje -> ADR, zmiany zasad repo -> AGENTS.md, procedura do powtórzenia -> skill, plan zachowaj w historii jako dowód uzgodnionego zakresu. Stan wykonania prowadź w jednym używanym trackerze.</p>
     <p><strong>Reguła:</strong> im większe zadanie, tym więcej wart plan. Zmiana 1 pliku nie potrzebuje planu; refactoring 40 plików bez planu to hazard.</p>
   </div>
 
@@ -652,14 +653,14 @@ td code { font-size: 0.82em; padding: 1px 4px; }
           <tr><td>"Jak robimy security review"</td><td>stała, wiele repo</td><td>skill</td></tr>
           <tr><td>"Review robi osobny agent bez edycji"</td><td>stała, rola</td><td>sub-agent</td></tr>
           <tr><td>"Lint po każdej edycji"</td><td>stała, automat</td><td>hook</td></tr>
-          <tr><td>"Wolę pnpm, odpowiadaj po polsku"</td><td>stała, osobista</td><td>memory / ~/.claude/CLAUDE.md</td></tr>
-          <tr><td>"Budujemy eksport do JSON, bo..."</td><td>do końca feature'a</td><td>PRD</td></tr>
+          <tr><td>"Wolę pnpm, odpowiadaj po polsku"</td><td>stała, osobista</td><td>memory / <code>~/.claude/CLAUDE.md</code> / <code>CLAUDE.local.md</code></td></tr>
+          <tr><td>"Operator pobiera zgłoszenia z wybranego miesiąca do CSV; plik zawiera datę, status i kwotę, bez danych kontaktowych"</td><td>do zmiany wymagań produktu</td><td>PRD</td></tr>
           <tr><td>"Pieniądze w decimal cents, nie float"</td><td>stała decyzja</td><td>ADR</td></tr>
           <tr><td>"Kolory, typografia, zasady komponentów"</td><td>stała, całe UI</td><td>Design Guidelines</td></tr>
-          <tr><td>"Krok 1: test, krok 2: implementacja"</td><td>jeden zadanie</td><td>plan / plan mode</td></tr>
+          <tr><td>"T1: kontrakt CSV i test pustego miesiąca; T2: endpoint eksportu (po T1); T3: przycisk pobrania (po T1); T4: wspólny test przepływu (po T2 i T3)"</td><td>jedno zadanie</td><td><code>docs/plans/</code> / plan mode</td></tr>
           <tr><td>"Odrzucam sugestię X w tym diffie"</td><td>jeden PR</td><td>komentarz PR</td></tr>
           <tr><td>"Aktualna dokumentacja biblioteki Y"</td><td>na żądanie</td><td>MCP (np. Context7)</td></tr>
-          <tr><td>"Szablon promptu z parametrami"</td><td>stała, powtarzalna</td><td>skill (Claude Code) / custom command (OpenCode)</td></tr>
+          <tr><td>"Szablon promptu z parametrami"</td><td>stała, powtarzalna</td><td>skill lub custom command (Claude Code / OpenCode)</td></tr>
         </tbody>
       </table>
     </div>
@@ -673,8 +674,8 @@ td code { font-size: 0.82em; padding: 1px 4px; }
       <li class="antipattern"><strong>Plan jako dokumentacja</strong> - nieaktualny plan myli kolejne sesje.</li>
       <li class="antipattern"><strong>Memory zamiast ADR</strong> - decyzje projektowe znikają z repo.</li>
       <li class="antipattern"><strong>Skill na wszystko</strong> - 40 skilli o zbyt podobnych opisach; agent wybiera zły albo żaden. Skill ma mieć ostry trigger.</li>
-      <li class="antipattern"><strong>Instrukcja markdown zamiast permissions</strong> - "nie kasuj bazy" musi być regułą harnessu, nie prośbą.</li>
-      <li class="antipattern"><strong>Sub-agenci na wspólnych plikach</strong> - konflikty edycji; izoluj worktree.</li>
+      <li class="antipattern"><strong>Instrukcja markdown zamiast permissions</strong> - "nie kasuj bazy" wymaga odebrania uprawnień do usuwania oraz blokady narzędzia (permission lub hook), z krótką zasadą w AGENTS.md. Sprawdź blokadę na syntetycznej bazie.</li>
+      <li class="antipattern"><strong>Sub-agenci na wspólnych plikach</strong> - przydziel rozłączne pliki i foldery, pokaż macierz zależności oraz poinformuj agentów o równoległej pracy. Zmiany wspólnego pliku wykonuj kolejno. Worktree twórz dopiero, gdy potrzebujesz osobnej gałęzi i środowiska, za zgodą właściciela.</li>
       <li class="antipattern"><strong>Wszystkie serwery MCP włączone na stałe</strong> - opisy narzędzi zjadają kontekst każdej sesji; ciężkie serwery trzymaj z <code>"enabled": false</code>.</li>
     </ol>
   </div>
@@ -1016,6 +1017,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
 
 <footer class="footer"><div class="wrap">Praktyczna biblioteka pracy z agentem · <a href="index.html">Strona główna</a></div></footer>
 
+<script src="materialy/reference-tools.js?v=20261024-C1"></script>
 <script>
 (function() {
   'use strict';
@@ -1030,7 +1032,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
   function toggleTheme() {
     var isLight = document.body.classList.contains('light');
     var next = isLight ? 'dark' : 'light';
-    localStorage.setItem(THEME_KEY, next);
+    safeStorage.setItem(THEME_KEY, next);
     applyTheme(next);
     updateToggleIcon();
   }
@@ -1046,7 +1048,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
   }
 
   function initTheme() {
-    var theme = localStorage.getItem(THEME_KEY);
+    var theme = safeStorage.getItem(THEME_KEY);
     if (!theme) {
       theme = 'dark';
     }
@@ -1054,9 +1056,13 @@ td code { font-size: 0.82em; padding: 1px 4px; }
     updateToggleIcon();
   }
 
+  var safeStorage = {
+    getItem: function(key) { try { return localStorage.getItem(key); } catch (_) { return null; } },
+    setItem: function(key, value) { try { localStorage.setItem(key, value); } catch (_) {} }
+  };
   var currentTab = 'harness';
 
-  function showTab(tab) {
+  function showTab(tab, updateHash) {
     currentTab = tab;
     var panes = document.querySelectorAll('.tab-pane');
     for (var i = 0; i < panes.length; i++) {
@@ -1069,8 +1075,8 @@ td code { font-size: 0.82em; padding: 1px 4px; }
     for (var j = 0; j < buttons.length; j++) {
       buttons[j].classList.toggle('active', buttons[j].dataset.tab === tab);
     }
-    if (location.hash !== '#' + tab) {
-      history.replaceState(null, '', '#' + tab);
+    if (updateHash && location.hash !== '#' + tab) {
+      location.hash = tab;
     }
   }
 
@@ -1080,18 +1086,17 @@ td code { font-size: 0.82em; padding: 1px 4px; }
       (function(btn) {
         btn.addEventListener('click', function() {
           var t = btn.dataset.tab;
-          showTab(t);
+          showTab(t, true);
         });
       })(buttons[i]);
     }
 
     function fromHash() {
-      var h = location.hash.replace('#', '');
-      if (h === 'harness' || h === 'greenfield' || h === 'brownfield') {
-        showTab(h);
-      } else {
-        showTab('harness');
-      }
+      showTab(CourseReferenceTools.checklistTab(location.hash, document), false);
+      var id;
+      try { id = decodeURIComponent(location.hash.slice(1)); } catch (_) { return; }
+      var target = document.getElementById(id);
+      if (target) requestAnimationFrame(function() { target.scrollIntoView({block: 'start'}); });
     }
     window.addEventListener('hashchange', fromHash);
 
@@ -1136,7 +1141,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
     for (var i = 0; i < cbs.length; i++) {
       (function(cb) {
         var id = cb.dataset.id;
-        var saved = localStorage.getItem(CHECK_KEY + id);
+        var saved = safeStorage.getItem(CHECK_KEY + id);
         if (saved === '1') {
           cb.checked = true;
           var li = cb.closest('li.task');
@@ -1144,7 +1149,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
         }
         cb.addEventListener('change', function() {
           var checked = cb.checked;
-          localStorage.setItem(CHECK_KEY + id, checked ? '1' : '0');
+          safeStorage.setItem(CHECK_KEY + id, checked ? '1' : '0');
           var li = cb.closest('li.task');
           if (li) li.classList.toggle('done', checked);
           var tab = getTabForId(id);
@@ -1166,7 +1171,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
           var cbs = pane.querySelectorAll('input[type="checkbox"][data-id]');
           for (var k = 0; k < cbs.length; k++) {
             cbs[k].checked = false;
-            localStorage.setItem(CHECK_KEY + cbs[k].dataset.id, '0');
+            safeStorage.setItem(CHECK_KEY + cbs[k].dataset.id, '0');
             var li = cbs[k].closest('li.task');
             if (li) li.classList.remove('done');
           }
