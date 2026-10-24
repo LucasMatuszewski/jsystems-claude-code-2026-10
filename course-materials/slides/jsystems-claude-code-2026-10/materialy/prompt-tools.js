@@ -19,7 +19,7 @@
       title: node.dataset.title || card.querySelector('h3,h2')?.textContent.trim() || id,
       prerequisites: node.dataset.prerequisites || 'Repozytorium warsztatowe i dane wskazane w pełnej treści promptu.',
       tool: node.dataset.tool || 'Agent programistyczny z dostępem do repozytorium; umiejętność wskazana w treści zadania.',
-      provenance: node.dataset.provenance || 'Zaadaptowane ogólne prompty z kursów programistycznych; syntetyczny przypadek Hardware Service Decision Copilot.',
+      provenance: node.dataset.provenance || 'Biblioteka promptów warsztatowych; kontekst aplikacji określa treść promptu i aktualny PRD.',
       body: clone.textContent,
       source: node.dataset.source || card.querySelector('a[href$=".md"]')?.getAttribute('href') || `${location.pathname.split('/').pop()}#${node.id}`
     }};
