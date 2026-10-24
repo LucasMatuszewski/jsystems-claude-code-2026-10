@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checklisty agentowe - harness, greenfield, brownfield | DevPowers</title>
+<title>Checklisty pracy z agentem</title>
 <meta name="description" content="Praktyczne checklisty &quot;co gdzie umieszczać&quot; w konfiguracji agentów - Claude Code i OpenCode - oraz start w projektach nowych i legacy. Postęp zapisywany lokalnie w przeglądarce.">
 <style>
 :root {
@@ -67,6 +67,7 @@ code {
   border-radius: 4px;
   font-size: 0.9em;
 }
+[id] { scroll-margin-top: 150px; }
 h1, h2, h3 { color: var(--heading); line-height: 1.25; }
 h1 { font-size: 2rem; margin: 0 0 12px; }
 h2 { font-size: 1.35rem; margin: 0 0 10px; }
@@ -373,17 +374,18 @@ td code { font-size: 0.82em; padding: 1px 4px; }
   .chip { border-color: #aaa; background: #f8f8f8; color: #333; }
   .progress-badge { display: none; }
 }
-</style>
-</head>
-<body>
+</style><style>.course-tools{position:fixed;z-index:1000;right:16px;top:12px;display:flex;gap:8px;align-items:center}.course-tools a,.course-tools button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 12px;border:1px solid #7890ac;border-radius:9px;background:#182334;color:#fff;text-decoration:none;font:600 14px system-ui;cursor:pointer}.course-tools button svg{width:20px;height:20px}.course-tools .icon-sun{display:none}[data-theme-toggle] .icon-sun,[data-theme-toggle] .icon-moon{width:20px;height:20px}body[data-theme="dark"] [data-theme-toggle] .icon-sun{display:block}body[data-theme="dark"] [data-theme-toggle] .icon-moon{display:none}body[data-theme="light"] [data-theme-toggle] .icon-sun{display:none}body[data-theme="light"] [data-theme-toggle] .icon-moon{display:block}.course-tools button:focus-visible,.course-tools a:focus-visible{outline:3px solid #f7c26d}body[data-course-audience="developer"] pre[data-prompt-id]{white-space:pre-wrap;overflow:auto;max-height:56vh;line-height:1.5;font-size:clamp(12px,1.1vw,15px);padding:1rem;background:#101827;color:#eff5ff;border:1px solid #61799b;border-radius:10px;text-align:left}.copy-prompt{padding:.55rem .9rem;border:1px solid #a9c8ee;border-radius:8px;background:#183252;color:white;font:700 14px system-ui;cursor:pointer}@media print{.course-tools,.copy-prompt{display:none!important}pre[data-prompt-id]{max-height:none!important}}</style><link rel="stylesheet" href="../slides/jsystems-claude-code-2026-10/course.css?v=20261024-C1">
+
+<link rel="icon" type="image/png" href="../slides/jsystems-claude-code-2026-10/assets/favicon-32x32.png"></head>
+<body data-course-audience="developer" data-page-type="checklist" data-theme="dark"><div class="course-tools"><a href="../slides/jsystems-claude-code-2026-10/index.html">Strona główna</a></div>
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Materiały szkoleniowe - AI dla programistów</div>
-    <h1>Checklisty agentowe: <span class="glow">harness, greenfield, brownfield</span></h1>
+    <div class="eyebrow">JSystems - Claude Code i AI Chat</div>
+    <p>Główna ścieżka kursu: przygotowana VM Ubuntu, CLAUDE.md importujący AGENTS.md, PRD/ADR AI Chat, TDD, integracja, E2E i review. Sekcje OpenCode i brownfield są materiałem dodatkowym.</p><h1>Checklisty agentowe: <span class="glow">harness, greenfield, brownfield</span></h1>
     <p class="intro">Praktyczne checklisty "co gdzie umieszczać" w konfiguracji agentów - Claude Code i OpenCode - oraz start w projektach nowych i legacy.</p>
     <div class="meta">
       <span class="chip">Claude Code + OpenCode</span>
-      <span class="chip">wersja MD w repo kursu</span>
+      <span class="chip">wersja interaktywna offline</span>
       <span class="chip">postęp zapisywany lokalnie w przeglądarce</span>
     </div>
   </div>
@@ -404,7 +406,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
           Brownfield <span class="progress-badge" data-for="brownfield">0/0</span>
         </button>
       </div>
-      <button id="theme-toggle" class="theme-btn" aria-label="Przełącz motyw" title="Przełącz ciemny/jasny (klawisz d)">🌙</button>
+      <button id="theme-toggle" class="theme-btn" data-theme-toggle aria-label="Przełącz na jasny motyw"><svg aria-hidden="true" class="icon-sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><line x1="12" x2="12" y1="2" y2="4"></line><line x1="12" x2="12" y1="20" y2="22"></line><line x1="2" x2="4" y1="12" y2="12"></line><line x1="20" x2="22" y1="12" y2="12"></line><line x1="4.93" x2="6.34" y1="4.93" y2="6.34"></line><line x1="17.66" x2="19.07" y1="17.66" y2="19.07"></line><line x1="4.93" x2="6.34" y1="19.07" y2="17.66"></line><line x1="17.66" x2="19.07" y1="6.34" y2="4.93"></line></svg><svg aria-hidden="true" class="icon-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
     </div>
   </div>
 </nav>
@@ -431,7 +433,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
     <a href="#harness-10">10) OpenCode - mapa odpowiedników</a>
     <a href="#harness-decyzje">Tabela decyzyjna (ściąga)</a>
     <a href="#harness-antywzorce">Top 8 antywzorców</a>
-    <a href="#harness-minimal">Minimalny zestaw startowy</a>
+    <a href="#harness-minimal">Minimalny zestaw startowy</a><a href="#harness-ac">AC i testy</a><a href="#harness-review">Dowody i decyzja</a>
   </nav>
 
   <div class="card">
@@ -471,7 +473,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
       <li>Długich opisów architektury (link do docs/, nie treść)</li>
       <li>Instrukcji specyficznych dla jednego narzędzia w pliku wspólnym (delegacja między modelami, preferencje osobiste -> do ~/.claude/CLAUDE.md)</li>
     </ul>
-    <p><strong>Zagnieżdżanie:</strong> trzymaj główny AGENTS.md KRÓTKI i uniwersalny; szczegóły modułów umieszczaj w zagnieżdżonych AGENTS.md w podkatalogach (np. <code>frontend/AGENTS.md</code> z konwencjami komponentów). Agent czyta zagnieżdżony plik dopiero gdy pracuje w tym katalogu - to naturalne "lazy loading".</p>
+    <p><strong>Claude Code: sam AGENTS.md nie jest natywnym plikiem pamięci. Importuj go przez @AGENTS.md w CLAUDE.md; lokalnie stosuj nested CLAUDE.md lub .claude/rules z paths. Zagnieżdżanie:</strong> trzymaj główny AGENTS.md KRÓTKI i uniwersalny; szczegóły modułów umieszczaj w zagnieżdżonych AGENTS.md w podkatalogach (np. <code>frontend/AGENTS.md</code> z konwencjami komponentów). Agent czyta zagnieżdżony plik dopiero gdy pracuje w tym katalogu - to naturalne "lazy loading".</p>
     <p><strong>Antywzorzec:</strong> AGENTS.md liczący 500+ linii. Model gubi środek długiego pliku, a Ty płacisz kontekstem w każdej sesji. Ponad ~150 linii = sygnał, że część treści powinna być skillem, zagnieżdżonym plikiem albo docs.</p>
   </div>
 
@@ -514,7 +516,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
     </ul>
     <p><strong>Czego NIE robić:</strong></p>
     <ul class="plain-list">
-      <li>Nie dawaj dwóm agentom równoległej edycji tych samych plików bez izolacji (konflikt; używaj git worktree per agent)</li>
+      <li>Przydziel agentom rozłączne pliki i pokaż zależności. Zmiany wspólnych plików wykonuj kolejno; worktree wymaga konkretnej potrzeby izolacji i zgody właściciela.</li>
       <li>Nie deleguj zadań wymagających pełnego kontekstu rozmowy (sub-agent go nie ma - dostaje tylko to, co napiszesz w zleceniu)</li>
     </ul>
     <p><strong>Reguła:</strong> sub-agent = "wynajmij konsultanta, przeczytaj raport". Jeśli potrzebujesz dialogu i wspólnej pamięci - zostań w jednej sesji.</p>
@@ -535,7 +537,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
 
   <div class="card">
     <h2 id="harness-6">6) Memory - fakty o osobie i sposobie pracy</h2>
-    <p><strong>Co to jest:</strong> trwała pamięć agenta między sesjami (w Claude Code: katalog memory + MEMORY.md), zapisywana przez samego agenta lub skrótem <code>#</code>.</p>
+    <p><strong>Co to jest:</strong> trwała pamięć agenta między sesjami (w Claude Code: katalog memory + MEMORY.md), zapisywana przez samego agenta lub skrótem <code>#</code>.</p><p><code>~/.claude/CLAUDE.md</code> to instrukcje użytkownika; <code>CLAUDE.local.md</code> to prywatne instrukcje tego projektu (dodaj do .gitignore), a <code>.claude/settings.local.json</code> to lokalne ustawienia. Folder <code>.claude.local/</code> nie jest standardową lokalizacją automatycznie wczytywaną przez Claude Code: możesz go jawnie podłączyć z instrukcji, bez sekretów. <a href="https://code.claude.com/docs/en/memory">Dokumentacja pamięci</a>.</p>
     <p><strong>Co tu umieszczać (checklist):</strong></p>
     <ul class="task-list">
       <li class="task"><label><input type="checkbox" data-id="harness-memory-0"><span>Preferencje osoby: package manager, styl odpowiedzi, godziny pracy</span></label></li>
@@ -561,7 +563,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
 
   <div class="card">
     <h2 id="harness-8">8) Plan - mapa jednego zadania</h2>
-    <p><strong>Co to jest:</strong> plan konkretnego zadania: kolejność kroków, pliki do zmiany, testy, checkpointy. W Claude Code: plan mode (agent najpierw bada i proponuje plan, dopiero po akceptacji edytuje). Może być też plikiem <code>plan.md</code> / todo. W odróżnieniu od PRD/ADR (dla ludzi i agentów, trwałe) plan jest <strong>tylko dla agentów i jednorazowy</strong> - dokładne rozpisanie zadań na jedno wykonanie.</p>
+    <p><strong>Co to jest:</strong> plan konkretnego zadania: kolejność kroków, pliki do zmiany, testy, checkpointy. W Claude Code: plan mode (agent najpierw bada i proponuje plan, dopiero po akceptacji edytuje). Zapisz uzgodniony plan w <code>docs/plans/</code>, z linkami do PRD i ADR oraz jedną macierzą zależności. W odróżnieniu od PRD/ADR (dla ludzi i agentów, trwałe) plan jest <strong>dla wykonawców i osoby zatwierdzającej zakres</strong> - dokładne rozpisanie zadań na jedno wykonanie.</p>
     <p><strong>Co tu umieszczać (checklist):</strong></p>
     <ul class="task-list">
       <li class="task"><label><input type="checkbox" data-id="harness-plan-0"><span>Kroki w kolejności, z plikami i testami per krok</span></label></li>
@@ -569,7 +571,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
       <li class="task"><label><input type="checkbox" data-id="harness-plan-2"><span>Ryzyka i decyzje do potwierdzenia z człowiekiem</span></label></li>
       <li class="task"><label><input type="checkbox" data-id="harness-plan-3"><span>Kryterium końca ("done = testy + lint + demo działa")</span></label></li>
     </ul>
-    <p><strong>Cykl życia:</strong> plan ŻYJE KRÓTKO. Po wykonaniu: wartościowe decyzje -> ADR, zmiany zasad repo -> AGENTS.md, procedura do powtórzenia -> skill, a sam plan można skasować. Plan, który został "dokumentacją", to dług.</p>
+    <p><strong>Cykl życia:</strong> plan ŻYJE KRÓTKO. Po wykonaniu: wartościowe decyzje -> ADR, zmiany zasad repo -> AGENTS.md, procedura do powtórzenia -> skill, plan zachowaj w historii jako dowód uzgodnionego zakresu. Stan wykonania prowadź w jednym używanym trackerze.</p>
     <p><strong>Reguła:</strong> im większe zadanie, tym więcej wart plan. Zmiana 1 pliku nie potrzebuje planu; refactoring 40 plików bez planu to hazard.</p>
   </div>
 
@@ -651,14 +653,14 @@ td code { font-size: 0.82em; padding: 1px 4px; }
           <tr><td>"Jak robimy security review"</td><td>stała, wiele repo</td><td>skill</td></tr>
           <tr><td>"Review robi osobny agent bez edycji"</td><td>stała, rola</td><td>sub-agent</td></tr>
           <tr><td>"Lint po każdej edycji"</td><td>stała, automat</td><td>hook</td></tr>
-          <tr><td>"Wolę pnpm, odpowiadaj po polsku"</td><td>stała, osobista</td><td>memory / ~/.claude/CLAUDE.md</td></tr>
-          <tr><td>"Budujemy eksport do JSON, bo..."</td><td>do końca feature'a</td><td>PRD</td></tr>
+          <tr><td>"Wolę pnpm, odpowiadaj po polsku"</td><td>stała, osobista</td><td>memory / <code>~/.claude/CLAUDE.md</code> / <code>CLAUDE.local.md</code></td></tr>
+          <tr><td>"Operator pobiera zgłoszenia z wybranego miesiąca do CSV; plik zawiera datę, status i kwotę, bez danych kontaktowych"</td><td>do zmiany wymagań produktu</td><td>PRD</td></tr>
           <tr><td>"Pieniądze w decimal cents, nie float"</td><td>stała decyzja</td><td>ADR</td></tr>
           <tr><td>"Kolory, typografia, zasady komponentów"</td><td>stała, całe UI</td><td>Design Guidelines</td></tr>
-          <tr><td>"Krok 1: test, krok 2: implementacja"</td><td>jeden zadanie</td><td>plan / plan mode</td></tr>
+          <tr><td>"T1: kontrakt CSV i test pustego miesiąca; T2: endpoint eksportu (po T1); T3: przycisk pobrania (po T1); T4: wspólny test przepływu (po T2 i T3)"</td><td>jedno zadanie</td><td><code>docs/plans/</code> / plan mode</td></tr>
           <tr><td>"Odrzucam sugestię X w tym diffie"</td><td>jeden PR</td><td>komentarz PR</td></tr>
           <tr><td>"Aktualna dokumentacja biblioteki Y"</td><td>na żądanie</td><td>MCP (np. Context7)</td></tr>
-          <tr><td>"Szablon promptu z parametrami"</td><td>stała, powtarzalna</td><td>skill (Claude Code) / custom command (OpenCode)</td></tr>
+          <tr><td>"Szablon promptu z parametrami"</td><td>stała, powtarzalna</td><td>skill lub custom command (Claude Code / OpenCode)</td></tr>
         </tbody>
       </table>
     </div>
@@ -672,8 +674,8 @@ td code { font-size: 0.82em; padding: 1px 4px; }
       <li class="antipattern"><strong>Plan jako dokumentacja</strong> - nieaktualny plan myli kolejne sesje.</li>
       <li class="antipattern"><strong>Memory zamiast ADR</strong> - decyzje projektowe znikają z repo.</li>
       <li class="antipattern"><strong>Skill na wszystko</strong> - 40 skilli o zbyt podobnych opisach; agent wybiera zły albo żaden. Skill ma mieć ostry trigger.</li>
-      <li class="antipattern"><strong>Instrukcja markdown zamiast permissions</strong> - "nie kasuj bazy" musi być regułą harnessu, nie prośbą.</li>
-      <li class="antipattern"><strong>Sub-agenci na wspólnych plikach</strong> - konflikty edycji; izoluj worktree.</li>
+      <li class="antipattern"><strong>Instrukcja markdown zamiast permissions</strong> - "nie kasuj bazy" wymaga odebrania uprawnień do usuwania oraz blokady narzędzia (permission lub hook), z krótką zasadą w AGENTS.md. Sprawdź blokadę na syntetycznej bazie.</li>
+      <li class="antipattern"><strong>Sub-agenci na wspólnych plikach</strong> - przydziel rozłączne pliki i foldery, pokaż macierz zależności oraz poinformuj agentów o równoległej pracy. Zmiany wspólnego pliku wykonuj kolejno. Worktree twórz dopiero, gdy potrzebujesz osobnej gałęzi i środowiska, za zgodą właściciela.</li>
       <li class="antipattern"><strong>Wszystkie serwery MCP włączone na stałe</strong> - opisy narzędzi zjadają kontekst każdej sesji; ciężkie serwery trzymaj z <code>"enabled": false</code>.</li>
     </ol>
   </div>
@@ -697,8 +699,22 @@ td code { font-size: 0.82em; padding: 1px 4px; }
       <li>Sub-agent researcher do mapowania modułów przed pierwszą zmianą</li>
       <li>Pierwsze zmiany wyłącznie przez plan mode + małe PR-y</li>
     </ol>
-    <p>Pełne wersje krok po kroku (z odpowiednikami OpenCode): <a href="#greenfield">greenfield-checklist.md</a> i <a href="#brownfield">brownfield-checklist.md</a> w tym katalogu.</p>
+    <p>Pełne wersje krok po kroku (z odpowiednikami OpenCode): <a href="#pane-greenfield">greenfield-checklist.md</a> i <a href="#pane-brownfield">brownfield-checklist.md</a> w tym katalogu.</p>
   </div>
+<div class="card"><h2 id="harness-ac">AC i testy: ślad od wymagania do dowodu</h2><ul class="task-list">
+<li class="task"><label><input type="checkbox" data-id="harness-ac-1"><span>Każde istotne kryterium akceptacji ma numer, przykład wejścia, oczekiwany wynik i przypadek graniczny.</span></label></li>
+<li class="task"><label><input type="checkbox" data-id="harness-ac-2"><span>Mapa AC - test - plik zmiany jest w repo lub w opisie PR; puste pole oznacza jawną lukę.</span></label></li>
+<li class="task"><label><input type="checkbox" data-id="harness-ac-3"><span>Test zachowania był czerwony z właściwego powodu przed implementacją, a po niej jest zielony.</span></label></li>
+<li class="task"><label><input type="checkbox" data-id="harness-ac-4"><span>Osobno przeczytano diff testów: żadnej słabszej asercji, pominięcia ani danych dopasowanych do kodu bez decyzji.</span></label></li>
+<li class="task"><label><input type="checkbox" data-id="harness-ac-5"><span>Granica między modułami ma uzgodniony kontrakt; zmiana schematu nie służy ukryciu błędu implementacji.</span></label></li>
+</ul></div>
+<div class="card"><h2 id="harness-review">Dowody z review i decyzja człowieka</h2><ul class="task-list">
+<li class="task"><label><input type="checkbox" data-id="harness-review-1"><span>Przegląd zgodności ze specyfikacją, kodu i bezpieczeństwa są rozdzielone; każda uwaga ma wagę, plik:linia i odtwarzalny skutek.</span></label></li>
+<li class="task"><label><input type="checkbox" data-id="harness-review-2"><span>Sekcja bez uwag ma jawne "brak uwag"; ograniczenia kontroli są wymienione, zamiast przemilczane.</span></label></li>
+<li class="task"><label><input type="checkbox" data-id="harness-review-3"><span>Każde znalezisko ma decyzję: napraw, odrzuć z powodem albo odnotuj poza zakresem.</span></label></li>
+<li class="task"><label><input type="checkbox" data-id="harness-review-4"><span>Opis zmiany podaje numery AC, powiązane ADR, wynik testów, sprawdzony przepływ, świadomie pominięty zakres i ryzyka.</span></label></li>
+<li class="task"><label><input type="checkbox" data-id="harness-review-5"><span>Człowiek przeczytał diff i jawnie ocenił zakres względem planu; zielone testy nie są jedyną bramką.</span></label></li>
+</ul></div>
 </section>
 
 <!-- GREENFIELD -->
@@ -723,7 +739,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
   </nav>
 
   <div class="card">
-    <p>Kolejność kroków przy starcie nowego projektu, w którym od początku pracują agenci (Claude Code, OpenCode - z modelami chmurowymi lub self-hosted). Skrócona wersja i wyjaśnienie "co gdzie": <a href="#harness">harness-checklist.md</a>.</p>
+    <p>Kolejność kroków przy starcie nowego projektu, w którym od początku pracują agenci (Claude Code, OpenCode - z modelami chmurowymi lub self-hosted). Skrócona wersja i wyjaśnienie "co gdzie": <a href="#pane-harness">harness-checklist.md</a>.</p>
     <p>Zasada: <strong>najpierw dokumenty i granice, potem kod</strong>. Każda godzina włożona w PRD, ADR i AGENTS.md zwraca się w każdej kolejnej sesji agenta.</p>
   </div>
 
@@ -874,7 +890,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
   </nav>
 
   <div class="card">
-    <p>Kolejność kroków przy wdrażaniu agentów (Claude Code, OpenCode - z modelami chmurowymi lub self-hosted) do istniejącego kodu. Skrócona wersja i wyjaśnienie "co gdzie": <a href="#harness">harness-checklist.md</a>.</p>
+    <p>Kolejność kroków przy wdrażaniu agentów (Claude Code, OpenCode - z modelami chmurowymi lub self-hosted) do istniejącego kodu. Skrócona wersja i wyjaśnienie "co gdzie": <a href="#pane-harness">harness-checklist.md</a>.</p>
     <p>Różnica vs greenfield: tu agent NIE zna decyzji, które ukształtowały kod, a kod pełen jest niespodzianek. Dlatego kolejność jest odwrócona: <strong>najpierw granice i eksploracja, dopiero potem zmiany</strong>.</p>
   </div>
 
@@ -999,31 +1015,24 @@ td code { font-size: 0.82em; padding: 1px 4px; }
 
 </main>
 
-<footer class="footer">
-  <div class="wrap">
-    Łukasz Matuszewski - <a href="https://devpowers.com" target="_blank" rel="noopener">devpowers.com</a><br>
-    <a href="#" target="_blank" rel="noopener">Przykładowe repozytorium kursowe</a>
-  </div>
-</footer>
+<footer class="footer"><div class="wrap">Praktyczna biblioteka pracy z agentem · <a href="../slides/jsystems-claude-code-2026-10/index.html">Strona główna</a></div></footer>
 
+<script src="../slides/jsystems-claude-code-2026-10/materialy/reference-tools.js?v=20261024-C1"></script>
 <script>
 (function() {
   'use strict';
-  var THEME_KEY = 'theme';
+  var THEME_KEY = 'developer-course-theme';
   var CHECK_KEY = 'cl-';
 
   function applyTheme(theme) {
-    if (theme === 'light') {
-      document.body.classList.add('light');
-    } else {
-      document.body.classList.remove('light');
-    }
+    document.body.dataset.theme = theme === 'light' ? 'light' : 'dark';
+    document.body.classList.toggle('light', theme === 'light');
   }
 
   function toggleTheme() {
     var isLight = document.body.classList.contains('light');
     var next = isLight ? 'dark' : 'light';
-    localStorage.setItem(THEME_KEY, next);
+    safeStorage.setItem(THEME_KEY, next);
     applyTheme(next);
     updateToggleIcon();
   }
@@ -1032,12 +1041,14 @@ td code { font-size: 0.82em; padding: 1px 4px; }
     var btn = document.getElementById('theme-toggle');
     if (!btn) return;
     var isLight = document.body.classList.contains('light');
-    btn.textContent = isLight ? '☀️' : '🌙';
-    btn.setAttribute('aria-label', isLight ? 'Przełącz na ciemny motyw' : 'Przełącz na jasny motyw');
+
+    var label = isLight ? 'Przełącz na ciemny motyw' : 'Przełącz na jasny motyw';
+    btn.setAttribute('aria-label', label);
+    btn.setAttribute('title', label);
   }
 
   function initTheme() {
-    var theme = localStorage.getItem(THEME_KEY);
+    var theme = safeStorage.getItem(THEME_KEY);
     if (!theme) {
       theme = 'dark';
     }
@@ -1045,9 +1056,13 @@ td code { font-size: 0.82em; padding: 1px 4px; }
     updateToggleIcon();
   }
 
+  var safeStorage = {
+    getItem: function(key) { try { return localStorage.getItem(key); } catch (_) { return null; } },
+    setItem: function(key, value) { try { localStorage.setItem(key, value); } catch (_) {} }
+  };
   var currentTab = 'harness';
 
-  function showTab(tab) {
+  function showTab(tab, updateHash) {
     currentTab = tab;
     var panes = document.querySelectorAll('.tab-pane');
     for (var i = 0; i < panes.length; i++) {
@@ -1060,8 +1075,8 @@ td code { font-size: 0.82em; padding: 1px 4px; }
     for (var j = 0; j < buttons.length; j++) {
       buttons[j].classList.toggle('active', buttons[j].dataset.tab === tab);
     }
-    if (location.hash !== '#' + tab) {
-      history.replaceState(null, '', '#' + tab);
+    if (updateHash && location.hash !== '#' + tab) {
+      location.hash = tab;
     }
   }
 
@@ -1071,18 +1086,17 @@ td code { font-size: 0.82em; padding: 1px 4px; }
       (function(btn) {
         btn.addEventListener('click', function() {
           var t = btn.dataset.tab;
-          showTab(t);
+          showTab(t, true);
         });
       })(buttons[i]);
     }
 
     function fromHash() {
-      var h = location.hash.replace('#', '');
-      if (h === 'harness' || h === 'greenfield' || h === 'brownfield') {
-        showTab(h);
-      } else {
-        showTab('harness');
-      }
+      showTab(CourseReferenceTools.checklistTab(location.hash, document), false);
+      var id;
+      try { id = decodeURIComponent(location.hash.slice(1)); } catch (_) { return; }
+      var target = document.getElementById(id);
+      if (target) requestAnimationFrame(function() { target.scrollIntoView({block: 'start'}); });
     }
     window.addEventListener('hashchange', fromHash);
 
@@ -1127,7 +1141,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
     for (var i = 0; i < cbs.length; i++) {
       (function(cb) {
         var id = cb.dataset.id;
-        var saved = localStorage.getItem(CHECK_KEY + id);
+        var saved = safeStorage.getItem(CHECK_KEY + id);
         if (saved === '1') {
           cb.checked = true;
           var li = cb.closest('li.task');
@@ -1135,7 +1149,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
         }
         cb.addEventListener('change', function() {
           var checked = cb.checked;
-          localStorage.setItem(CHECK_KEY + id, checked ? '1' : '0');
+          safeStorage.setItem(CHECK_KEY + id, checked ? '1' : '0');
           var li = cb.closest('li.task');
           if (li) li.classList.toggle('done', checked);
           var tab = getTabForId(id);
@@ -1157,7 +1171,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
           var cbs = pane.querySelectorAll('input[type="checkbox"][data-id]');
           for (var k = 0; k < cbs.length; k++) {
             cbs[k].checked = false;
-            localStorage.setItem(CHECK_KEY + cbs[k].dataset.id, '0');
+            safeStorage.setItem(CHECK_KEY + cbs[k].dataset.id, '0');
             var li = cbs[k].closest('li.task');
             if (li) li.classList.remove('done');
           }
@@ -1186,6 +1200,7 @@ td code { font-size: 0.82em; padding: 1px 4px; }
 
   function init() {
     initTheme();
+    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
     initTabs();
     initCheckboxes();
     initKeyboard();
@@ -1198,5 +1213,6 @@ td code { font-size: 0.82em; padding: 1px 4px; }
   }
 })();
 </script>
+<footer class="course-trainer-credit" aria-label="Trener i profile"><img class="course-brand-logo course-brand-logo--light-surface course-brand-logo--footer" src="../slides/jsystems-claude-code-2026-10/assets/course-organizer.svg" alt="JSystems"><span>JSystems</span><span>Trener: Łukasz Matuszewski</span><span class="trainer-socials"><a href="https://www.linkedin.com/in/lukaszmatuszewski/" aria-label="Łukasz Matuszewski na LinkedIn">LinkedIn</a> · <a href="https://x.com/mrLumatic" aria-label="Łukasz Matuszewski na X">X</a></span></footer>
 </body>
 </html>

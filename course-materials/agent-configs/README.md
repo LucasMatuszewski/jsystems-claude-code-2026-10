@@ -84,3 +84,8 @@ Mode aliases, checked against local `codex --help` and `codex resume --help` on 
 - Code review in Copilot: `copilot/agents/CodeReview.agent.md`.
 
 To use one, copy it into your project (`.claude/agents/`, `.codex/agents/` or `.github/agents/`), replace the stack-specific parts (build tool, test runner, framework) with yours, and adjust the list of skills to the ones you have installed.
+
+
+## Statusline and concise output
+
+The shipped [statusline.sh](claude/statusline.sh) already supports the main-conversation prompt-cache hit rate. Keep this version rather than replacing it with an older course copy. It requires Bash and jq; start with `jq --version`, then use `/statusline` to request a reviewed setup based on that script. Run the synthetic-JSON example in [token-budget exercises](../Research/agent-workflows-and-token-budget-2026-10-24.md) before enabling it. That note also covers `/config`, usage aliases, code-login limitations and optional analytics.
