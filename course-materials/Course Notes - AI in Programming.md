@@ -687,6 +687,8 @@ Main agent can delegate tasks to sub-agents (often specialized), to focus on orc
   - **`/subagents`** - the Subagents picker **inside the current session**: switch between and inspect the agent threads the current root agent spawned (internally named `MultiAgents` in source - the old docs name "Multi-agents" maps to the user-facing command **`/subagents`**; current docs say `/agent` singular, docs slightly ahead of stable - UNCONFIRMED)
   - Mental model for teaching: **Agent Command Center manages jobs, `/subagents` inspects the workers inside a job**
 - **Git Worktrees** for Parallel Agents in same repository:
+  - Default: split tasks by files/folders and record dependencies in one checkout. Use a worktree only when agents must change the same files in parallel.
+  - Put a no-default-worktrees rule in AGENTS.md: dependency installs consume disk and CPU, and agents often forget cleanup.
   - What is a Git Worktree? [Git Worktree Docs](https://git-scm.com/docs/git-worktree)
   - Claude: [Run parallel Claude code sessions with Git worktrees | Claude Docs](https://code.claude.com/docs/en/common-workflows#run-parallel-claude-code-sessions-with-git-worktrees)
   - Codex: [Worktrees | OpenAI Codex Docs](https://developers.openai.com/codex/app/worktrees/)

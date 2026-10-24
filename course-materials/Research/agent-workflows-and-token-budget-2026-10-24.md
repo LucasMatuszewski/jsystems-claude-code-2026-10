@@ -54,7 +54,9 @@ Propozycja narzędzia do analizy lokalnych sesji: [agent-usage-analytics, SKILL.
 
 Nazwy i dostępność różnią się między narzędziami. Goal nie daje dodatkowych uprawnień ani prawa do publikacji. Do małego zadania wybierz jednego agenta; do jednorazowej delegacji zwykle wystarczy agent doraźny. Własne definicje twórz dopiero, gdy rola wraca. Domyślny tani wykonawca kodu i testów to Haiku w Claude lub Luna w Codex; w Copilocie wybierz najtańszy odpowiedni model dostępny w aktualnym planie. Orkiestrator rozstrzyga decyzje i sprawdza wyniki. [Przykład skilla do delegowania](../skills-examples/headless-task/SKILL.md).
 
-Najpierw rozdziel pliki i ustal macierz zależności. Poinformuj agentów o pracy równoległej; wspólne pliki integruj kolejno. Worktree ma sens przy potrzebie oddzielnej gałęzi lub środowiska, nie jako automatyczny krok każdej sesji.
+Worktree twórz tylko wtedy, gdy agenci muszą równolegle zmieniać te same pliki, np. przy różnych zadaniach w tym samym kodzie. W pozostałych przypadkach rozdziel zadania według plików lub folderów, poinformuj agentów o równoległej pracy i zapisz plan zależności; wspólne zmiany scalaj kolejno.
+
+W AGENTS.md zapisz regułę: agent nie tworzy worktree domyślnie. Osobne instalacje zależności zużywają dysk i CPU, a agenci często zapominają je posprzątać.
 
 ## Permissions, hooks i rules
 

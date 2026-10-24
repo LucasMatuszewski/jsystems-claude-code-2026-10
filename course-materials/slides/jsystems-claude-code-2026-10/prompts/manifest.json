@@ -91,7 +91,7 @@
     },
     {
       "id": "P19-plan-matryca",
-      "version": "6",
+      "version": "7",
       "source": "P19-plan-matryca.md",
       "targets": [
         "prompty.html",

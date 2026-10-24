@@ -8,7 +8,7 @@
 <title>Ściąga Claude Code i porównania | Claude Code - od zera do zespołu agentów AI</title>
 <meta name="description" content="Sprawdzone odpowiedzi o przywracaniu zmian, uprawnieniach, skills, instrukcjach i historii sesji GitHub Copilot.">
 <script>(function(){try{var t=localStorage.getItem('developer-course-theme');if(t==='light')document.documentElement.dataset.theme='light'}catch(_){}})();</script>
-<link rel="stylesheet" href="course.css?v=20261024-C1">
+<link rel="stylesheet" href="course.css?v=20261024-D1">
 <style>
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:78px}body{margin:0;line-height:1.65}a{color:var(--accent)}a:hover{text-decoration:underline}
 .qa-hero{padding:68px 0 38px;border-bottom:1px solid var(--line);background:radial-gradient(700px 360px at 85% 0%,var(--accent-soft),transparent 75%)}
@@ -71,8 +71,8 @@
 <p>Agent Host działa tam, gdzie workspace. Połącz VS Code z WSL (przycisk w lewym dolnym rogu, rozszerzenie WSL): agent i jego polecenia działają wtedy w Linuksie, nie w Windows. Tak samo przy SSH; w Dev Containers to wciąż funkcja eksperymentalna.</p>
 <p class="qa-sources">Źródła: <a href="https://code.visualstudio.com/docs/agents/concepts/agent-host">VS Code: Agent Host</a>, <a href="https://code.visualstudio.com/docs/agents/run/agent-harnesses">VS Code: harnesses</a>.</p></article>
 
-<article class="qa-card" id="worktrees"><p class="tag">Porównanie narzędzi / materiał dodatkowy</p><h2>Git worktrees bez instalowania wszystkiego od nowa</h2>
-<p>Każdy worktree potrzebuje własnego <code>node_modules</code>. Z pnpm prawie nic to nie kosztuje: pakiety leżą w jednym magazynie na dysku, a <code>node_modules</code> w worktree zawiera tylko linki. Włącz globalny wirtualny magazyn w <code>pnpm-workspace.yaml</code>:</p>
+<article class="qa-card" id="worktrees"><p class="tag">Porównanie narzędzi / materiał dodatkowy</p><h2>Kiedy używać Git worktrees</h2><p>Worktree twórz tylko wtedy, gdy agenci muszą równolegle zmieniać te same pliki, np. przy różnych zadaniach w tym samym kodzie. W pozostałych przypadkach rozdziel zadania według plików lub folderów, poinformuj agentów o równoległej pracy i zapisz plan zależności; wspólne zmiany scalaj kolejno.</p><p>W AGENTS.md zapisz regułę: agent nie tworzy worktree domyślnie. Osobne instalacje zależności zużywają dysk i CPU, a agenci często zapominają je posprzątać.</p>
+<p>Każdy worktree potrzebuje własnego <code>node_modules</code>. pnpm ogranicza koszt dysku, ale instalacja nadal wymaga pracy CPU: pakiety leżą w jednym magazynie na dysku, a <code>node_modules</code> w worktree zawiera tylko linki. Włącz globalny wirtualny magazyn w <code>pnpm-workspace.yaml</code>:</p>
 <pre><code>virtualStoreType: global</code></pre>
 <p>W pnpm starszym niż 11.23 to <code>enableGlobalVirtualStore: true</code>. Pierwsze <code>pnpm install</code> pobiera pakiety, w kolejnych worktree instalacja trwa chwilę. npm i Yarn nie mają takiego mechanizmu: każdy worktree to pełna instalacja.</p>
 <div class="qa-note">Jeden zapisywalny magazyn tylko dla agentów, którym ufasz w równym stopniu. Pozostałe koszty worktree zostają: osobne porty serwerów, kopia <code>.env</code> i sprzątanie przez <code>git worktree remove</code>.</div>

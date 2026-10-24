@@ -120,7 +120,8 @@ pliki, logi) NIE zaśmieca kontekstu głównego.
 - [ ] Ograniczenia roli: reviewer bez prawa edycji, researcher bez Bash
 
 **Czego NIE robić:**
-- Przydziel agentom rozłączne pliki i pokaż zależności. Zmiany wspólnych plików wykonuj kolejno; worktree wymaga konkretnej potrzeby izolacji i zgody właściciela.
+- Worktree twórz tylko wtedy, gdy agenci muszą równolegle zmieniać te same pliki, np. przy różnych zadaniach w tym samym kodzie. W pozostałych przypadkach rozdziel zadania według plików lub folderów, poinformuj agentów o równoległej pracy i zapisz plan zależności; wspólne zmiany scalaj kolejno.
+- W AGENTS.md zapisz regułę: agent nie tworzy worktree domyślnie. Osobne instalacje zależności zużywają dysk i CPU, a agenci często zapominają je posprzątać.
 - Nie deleguj zadań wymagających pełnego kontekstu rozmowy (sub-agent go
   nie ma - dostaje tylko to, co napiszesz w zleceniu)
 
@@ -310,7 +311,7 @@ OpenAI-compatible (Ollama, vLLM itp.) - kompletny przykład z komentarzami:
    wybiera zły albo żaden. Skill ma mieć ostry trigger.
 6. **Instrukcja markdown zamiast permissions** - "nie kasuj bazy" musi być
    blokadą narzędzia lub hookiem oraz uprawnieniami bazy tylko do odczytu; sama instrukcja nie wystarczy.
-7. **Sub-agenci na wspólnych plikach** - przydziel rozłączne pliki, poinformuj o pracy równoległej i zintegruj wspólne zmiany kolejno. Worktree tylko przy konkretnej potrzebie izolacji i zgodzie właściciela.
+7. **Sub-agenci na wspólnych plikach** - Worktree twórz tylko wtedy, gdy agenci muszą równolegle zmieniać te same pliki, np. przy różnych zadaniach w tym samym kodzie. W pozostałych przypadkach rozdziel zadania według plików lub folderów, poinformuj agentów o równoległej pracy i zapisz plan zależności; wspólne zmiany scalaj kolejno.
 8. **Wszystkie serwery MCP włączone na stałe** - opisy narzędzi zjadają
    kontekst każdej sesji; ciężkie serwery trzymaj z `"enabled": false`.
 
