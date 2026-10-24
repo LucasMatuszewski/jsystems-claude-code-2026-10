@@ -145,7 +145,7 @@
 - Od sub-agentów do zespołów
 - Git worktrees (równoległe gałęzie pracy)
 - Task Plan Matrix: zależności, fazy, briefing
-- **Praktyka:** 3 agentów równolegle (BE feature, FE feature, testy E2E – każdy w worktree); merge i rozwiązywanie konfliktów
+- **Praktyka:** rozłączne pliki lub foldery, plan zależności i wspólne testy. Worktree tylko przy koniecznych równoległych zmianach tych samych plików, np. refaktoryzacji i optymalizacji parsera; potem scalenie i sprzątanie
 
 > **Dodatkowo (zatwierdzone):** Workflows – skrypty JS orkiestrujące subagentów + goal command (20–30 min).
 
