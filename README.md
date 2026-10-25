@@ -1,3 +1,8 @@
+## Aktualizacja 25.10.2026
+
+- Nowy [statusline.sh](course-materials/agent-configs/claude/statusline.sh) dla Claude Code: wersja modelu i znacznik `1M`, kolorowany poziom effort, odliczanie do wygaśnięcia cache (`Cache: 96%(✕52m)`) i szybsze działanie.
+- Żeby odliczanie działało też w bezczynności, dodaj w `~/.claude/settings.json` w sekcji `statusLine`: `"refreshInterval": 30`.
+
 ## Aktualizacja 24.10.2026
 
 - Poprawione odnośniki do sekcji checklist i działanie bez zapisu ustawień w przeglądarce.
